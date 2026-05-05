@@ -1,129 +1,55 @@
 """
-SafeHybridPAFT (M11) — full S matrices plus all bias terms.
+hybrid_paft: train full S_V and S_O matrices (unconstrained d_head x d_head).
 
-Trainable parameters:
-    S_V    [n_heads, d_head, d_head]  per layer
-    S_O    [n_heads, d_head, d_head]  per layer
-    b_qkv  [3*n_embd]                 per layer
-    b_o    [n_embd]                   per layer
-    + all MLP biases and LayerNorm biases in the base model
+Parameterization:
+  W_V_h = Q_V_h @ S_V_h   (Q frozen, S directly trainable — no symmetry constraint)
+  W_O_h = S_O_h @ Q_O_h
 
-This is the most expressive PAFT variant.  It combines:
-    - Full geometric freedom (S is unconstrained, unlike pure where only lam moves)
-    - Residual stream flexibility (biases allow per-position offsets)
+S is initialized from the polar decomposition (symmetric PSD) but is free
+to evolve during training. The rotation constraint is preserved (Q frozen),
+but S can break symmetry as adaptation proceeds.
 
-Expected use:
-    Primary PAFT result for large-shift domains (biomedical, code) where both
-    geometric and residual adaptation are needed.  If safe_hybrid_paft does not
-    outperform hybrid_paft, it suggests the residual stream is already stable
-    under hybrid adaptation — a finding worth reporting.
-
-Parameter count (GPT-2 small):
-    1,179,648  (S matrices, same as hybrid_paft)
-  + ~102,400   (biases)
-  ≈ 1,282,048 total
-
-The bias configuration is identical to safe_pure_paft — see that module for
-the detailed justification of which biases are unfrozen and why.
+Parameter count:
+  GPT-2 small:  12 * 12 * 2 * 64 * 64 = 1,179,648
+  GPT-2 medium: 24 * 16 * 2 * 64 * 64 = 3,145,728
 """
 
-from __future__ import annotations
-
-from typing import Dict, List
-
-import torch
-from transformers import GPT2LMHeadModel
-
-from paft.methods.base import BaseMethod, PAFTSnapshot, freeze_all
+from typing import Any, Dict
+from paft.methods.base import BaseMethod
 from paft.model.paft_model import PAFTModel
-from paft.methods.safe_pure_paft import _is_non_attention_bias
+from paft.model.parameter_groups import configure_hybrid_paft
+from paft.decomposition.geometry import effective_rank
 
 
-class SafeHybridPAFT(BaseMethod):
+class HybridPAFT(BaseMethod):
 
-    def _build_model(self, hf_name: str) -> PAFTModel:
-        base = GPT2LMHeadModel.from_pretrained(hf_name)
-        base.eval()
-        model = PAFTModel(base)
-        model.set_mode("hybrid")
-        return model
+    def _build_model(self, base_model) -> PAFTModel:
+        return PAFTModel(base_model)
 
     def _configure_parameters(self) -> None:
+        configure_hybrid_paft(self.model)
+
+    def compute_adaptation_metrics(self) -> Dict[str, Any]:
         """
-        Freeze everything, then unfreeze S_V/S_O and all bias terms.
-        Logic is the union of hybrid_paft and safe_pure_paft configurations.
+        Tracks S matrix statistics per layer.
+        Rotation drift is 0 (Q is frozen); S can change in any direction.
         """
-        freeze_all(self.model)
+        metrics: Dict[str, Any] = {}
+        for l, layer in enumerate(self.model.paft_layers()):
+            S_V = layer.S_V.detach()   # [n_heads, d_head, d_head]
+            S_O = layer.S_O.detach()
 
-        for _, attn in self.model.iter_paft_attentions():
-            # Geometric: full S matrices
-            attn.S_V.requires_grad_(True)
-            attn.S_O.requires_grad_(True)
-            # Residual stream: attention biases
-            attn.b_qkv.requires_grad_(True)
-            attn.b_o.requires_grad_(True)
+            # Mean effective rank across heads
+            rank_V = sum(effective_rank(S_V[h]) for h in range(layer.n_heads)) / layer.n_heads
+            rank_O = sum(effective_rank(S_O[h]) for h in range(layer.n_heads)) / layer.n_heads
 
-        # MLP, LayerNorm, and other non-attention biases in the base model
-        for name, param in self.model.base.named_parameters():
-            if _is_non_attention_bias(name):
-                param.requires_grad_(True)
-
-    # ------------------------------------------------------------------
-    # Live weights
-    # ------------------------------------------------------------------
-
-    def get_live_WV_WO(self) -> Dict[str, List[torch.Tensor]]:
-        W_V_layers: List[torch.Tensor] = []
-        W_O_layers: List[torch.Tensor] = []
-        with torch.no_grad():
-            for _, attn in self.model.iter_paft_attentions():
-                W_V_layers.append(attn.get_W_V_per_head())
-                W_O_layers.append(attn.get_W_O_per_head())
-        return {"W_V": W_V_layers, "W_O": W_O_layers}
-
-    # ------------------------------------------------------------------
-    # PAFT snapshot  (same logic as hybrid_paft — eigendecompose current S)
-    # ------------------------------------------------------------------
-
-    def paft_snapshot(self) -> PAFTSnapshot:
-        """
-        Computes lam/EV by eigendecomposing the current S at snapshot time.
-        Symmetrizes S before eigh to guard against asymmetric drift during training.
-        """
-        snap = PAFTSnapshot()
-
-        with torch.no_grad():
-            for _, attn in self.model.iter_paft_attentions():
-                snap.Q_V.append(attn.Q_V.cpu())
-                snap.Q_O.append(attn.Q_O.cpu())
-
-                S_V = attn.S_V.detach().cpu()
-                S_O = attn.S_O.detach().cpu()
-                snap.S_V.append(S_V)
-                snap.S_O.append(S_O)
-
-                snap.EV_V.append(attn.EV_V.cpu())
-                snap.EV_O.append(attn.EV_O.cpu())
-
-                n_heads = S_V.shape[0]
-                lam_V_list, lam_O_list = [], []
-                for h in range(n_heads):
-                    S_V_sym = (S_V[h] + S_V[h].T) / 2.0
-                    S_O_sym = (S_O[h] + S_O[h].T) / 2.0
-                    """Hybrid training can sometimes lead to very large or small values in S.
-                    For the snapshot, ensure you use .double() for the eigh call even if
-                    training is in half-precision."""
-                    lv, _ = torch.linalg.eigh(S_V_sym.double())
-                    lo, _ = torch.linalg.eigh(S_O_sym)
-                    lam_V_list.append(lv.flip(0).float())
-                    lam_O_list.append(lo.flip(0))
-
-                snap.lam_V.append(torch.stack(lam_V_list))
-                snap.lam_O.append(torch.stack(lam_O_list))
-
-        return snap
-
-    def state_dict(self) -> dict:
-        d = super().state_dict()
-        d["paft_snapshot"] = self.paft_snapshot()
-        return d
+            metrics[f"layer_{l}"] = {
+                "S_V_frobenius_mean": S_V.norm(p='fro', dim=(-2, -1)).mean().item(),
+                "S_O_frobenius_mean": S_O.norm(p='fro', dim=(-2, -1)).mean().item(),
+                "effective_rank_V_mean": rank_V,
+                "effective_rank_O_mean": rank_O,
+                # Q is frozen — rotation drift is identically zero
+                "rotation_drift_V":  0.0,
+                "rotation_drift_O":  0.0,
+            }
+        return metrics
