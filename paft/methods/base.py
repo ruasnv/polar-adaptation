@@ -89,8 +89,6 @@ class GeometricHealthMetrics:
         """
         Compute all six metrics from a 1-D tensor of singular values.
         sigma: descending order, all non-negative.
-        This prevents the code from crashing if
-        the model "collapses" and produces a zero singular value (since $log(0)$ is impossible)
         """
         sigma = sigma.detach().float()   # fp32 for numerical stability
         sigma = sigma.clamp(min=0.0)     # guard tiny negatives from SVD
@@ -105,10 +103,13 @@ class GeometricHealthMetrics:
         sr = s2.sum().item() / (smax ** 2 + eps)
 
         # sv entropy & effective rank
+        # clamp p *before* the log so log(0) is impossible even if a singular
+        # value is exactly zero (collapsed weight matrix / dead head).
+        # Using (p + eps).log() instead would underestimate entropy because the
+        # eps shifts every probability up — clamping only the zeros is cleaner.
         p = sigma / (snuc + eps)
-        # THE TWEAK: clamp p so it's never exactly zero before the log
         p = p.clamp(min=eps)
-        entropy = -(p * (p + eps).log()).sum().item()
+        entropy = -(p * p.log()).sum().item()
         eff_rank = math.exp(entropy)
 
         # condition number & isotropy
@@ -245,6 +246,10 @@ class BaseMethod(ABC):
         # Freeze / unfreeze *after* move so requires_grad is set on device tensors
         self._configure_parameters()
 
+        # _built must be True before calling any method that invokes _assert_built(),
+        # including num_trainable_params() used in the log line below.
+        self._built = True
+
         n_train = self.num_trainable_params()
         n_total = sum(p.numel() for p in self.model.parameters())
         logger.info(
@@ -252,7 +257,6 @@ class BaseMethod(ABC):
             f"{n_train:,} / {n_total:,} trainable "
             f"({100 * n_train / n_total:.3f}%)"
         )
-        self._built = True
 
     @abstractmethod
     def _build_model(self, hf_name: str) -> nn.Module:
@@ -542,6 +546,39 @@ class BaseMethod(ABC):
     # Internal
     # ------------------------------------------------------------------
 
+    def cleanup(self) -> None:
+        """
+        Force-release VRAM and system RAM.  Call after every experiment run.
+
+        Essential for the 8 GB VRAM constraint — without this, the next
+        method's build() will OOM because the previous model is still resident.
+
+        Sequence:
+          1. Move model back to CPU before deletion so CUDA doesn't hold live
+             references through the Python GC cycle.
+          2. Delete the Python reference — triggers __del__ on the nn.Module
+             and its Parameter tensors.
+          3. gc.collect() to break any reference cycles CPython missed.
+          4. torch.cuda.empty_cache() to return the now-freed CUDA blocks to
+             the allocator pool (does NOT free memory the OS can reclaim, but
+             makes it available for the next model).
+
+        After cleanup(), _built is False.  build() must be called again before
+        the method can be used.
+        """
+        if self.model is not None:
+            self.model.to("cpu")   # cut CUDA references before del
+            del self.model
+            self.model = None
+
+        import gc
+        gc.collect()
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+
+        self._built = False
+        logger.info(f"[{self.method_name}] Cleanup complete. VRAM released.")
+
     def _assert_built(self) -> None:
         if not self._built:
             raise RuntimeError(
@@ -558,23 +595,6 @@ class BaseMethod(ABC):
             )
         return f"{self.__class__.__name__}({self.method_name!r}, not built)"
 
-    def cleanup(self) -> None:
-        """
-        Force-release VRAM and system memory.
-        Essential for your 8GB VRAM constraint.
-        """
-        if self.model is not None:
-            # Move back to CPU to be safe before deletion
-            self.model.to("cpu")
-            del self.model
-
-        import gc
-        gc.collect()  # Clear system RAM (your 64GB pool)
-        if torch.cuda.is_available():
-            torch.cuda.empty_cache()  # Clear GPU VRAM (your 8GB pool)
-
-        self._built = False
-        logger.info(f"[{self.method_name}] Cleanup complete. VRAM released.")
 
 # ---------------------------------------------------------------------------
 # Module-level utilities used by every subclass

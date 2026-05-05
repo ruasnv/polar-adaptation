@@ -362,13 +362,13 @@ class PAFTModel(nn.Module):
         """Replace all GPT2Attention layers.  Runs entirely on CPU."""
         dims = get_gpt2_dims(self.base)
         logger.info(
-            f"PAFTModel: decomposing {dims['n_layers']} layers x "
-            f"{dims['n_heads']} heads on CPU ..."
+            f"PAFTModel: decomposing {dims.n_layers} layers x "
+            f"{dims.n_heads} heads on CPU ..."
         )
-        for l in range(dims["n_layers"]):
+        for l in range(dims.n_layers):
             self.base.transformer.h[l].attn = self._build_paft_attention(l, dims)
-            if (l + 1) % 4 == 0 or l == dims["n_layers"] - 1:
-                logger.info(f"  layer {l + 1}/{dims['n_layers']} done")
+            if (l + 1) % 4 == 0 or l == dims.n_layers - 1:
+                logger.info(f"  layer {l + 1}/{dims.n_layers} done")
 
     def _build_paft_attention(self, layer_idx: int, dims: dict) -> PAFTAttention:
         """
@@ -389,7 +389,7 @@ class PAFTModel(nn.Module):
 
         All tensors are fp32 on CPU.
         """
-        H   = dims["n_heads"]
+        H   = dims.n_heads
         cfg = self.base.config
 
         Q_V_l,  S_V_l,  EV_V_l,  lam_V_l  = [], [], [], []

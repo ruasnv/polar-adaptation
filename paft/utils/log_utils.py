@@ -1,39 +1,58 @@
+"""
+Structured logging setup.
+
+Named log_utils (not logging) to avoid shadowing Python's stdlib logging module.
+
+Each experiment gets its own .log file so sweep runs can be analysed
+individually after the fact.  The root logger is configured so that all
+module-level `logging.getLogger(__name__)` calls in the codebase are
+automatically captured.
+"""
+
 from __future__ import annotations
+
 import logging
 import sys
 from pathlib import Path
 
 
-def setup_logging(method_name: str, log_dir: str = "logs"):
+def setup_logging(experiment_name: str, log_dir: str | Path = "logs") -> None:
     """
-    Configures logging to both the console and a file.
-    Each experiment gets its own .log file for post-run analysis.
+    Configure the root logger with a console handler and a per-experiment
+    file handler.  Call once per experiment run before any other code runs.
+
+    Clearing existing handlers prevents duplicate log lines when multiple
+    experiments are run in the same Python process (sweep mode).
+
+    Args:
+        experiment_name: Used as the log filename stem.  Typically the full
+                         experiment ID: "{model}_{domain}_{method}".
+        log_dir:         Directory for .log files.  Created if absent.
     """
-    # Create the logs directory if it doesn't exist
     log_path = Path(log_dir)
     log_path.mkdir(parents=True, exist_ok=True)
 
-    # Format: 2026-05-05 19:30:00 - INFO - [pure_paft] Message
-    log_format = "%(asctime)s - %(levelname)s - [%(name)s] %(message)s"
-    date_format = "%Y-%m-%d %H:%M:%S"
+    fmt      = "%(asctime)s  %(levelname)-8s  [%(name)s]  %(message)s"
+    datefmt  = "%Y-%m-%d %H:%M:%S"
+    formatter = logging.Formatter(fmt, datefmt)
 
-    # Configure the root logger
-    logger = logging.getLogger()
-    logger.setLevel(logging.INFO)
+    root = logging.getLogger()
+    root.setLevel(logging.INFO)
 
-    # Clear any existing handlers (prevents duplicate logs in a sweep)
-    if logger.hasHandlers():
-        logger.handlers.clear()
+    # Clear existing handlers — prevents duplicate lines in sweep mode
+    if root.hasHandlers():
+        root.handlers.clear()
 
-    # 1. Console Handler
-    console_handler = logging.StreamHandler(sys.stdout)
-    console_handler.setFormatter(logging.Formatter(log_format, date_format))
-    logger.addHandler(console_handler)
+    # Console handler
+    ch = logging.StreamHandler(sys.stdout)
+    ch.setFormatter(formatter)
+    root.addHandler(ch)
 
-    # 2. File Handler (Persistent record for your thesis data)
-    file_handler = logging.FileHandler(log_path / f"{method_name}.log")
-    file_handler.setFormatter(logging.Formatter(log_format, date_format))
-    logger.addHandler(file_handler)
+    # Per-experiment file handler
+    log_file = log_path / f"{experiment_name}.log"
+    fh = logging.FileHandler(log_file, mode="a", encoding="utf-8")
+    fh.setFormatter(formatter)
+    root.addHandler(fh)
 
-    logging.info(f"Logging initialized for experiment: {method_name}")
-    logging.info(f"Log file: {log_path / f'{method_name}.log'}")
+    logging.info(f"Logging initialised — experiment: {experiment_name}")
+    logging.info(f"Log file: {log_file}")

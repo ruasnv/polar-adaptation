@@ -1,8 +1,7 @@
 from paft.utils.config import get_config
 
 # Load the flagship variant
-cfg = get_config("safe_hybrid_paft")
-
+cfg = get_config("gpt2_small", "news", "safe_hybrid_paft")
 print(f"Method Name: {cfg['method']['name']}")
 print(f"Tune Biases: {cfg['method']['tune']['biases']}")
 

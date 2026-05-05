@@ -1,48 +1,64 @@
+"""
+Device management and VRAM monitoring.
+
+Kept deliberately minimal — just hardware detection and the memory heartbeat
+used by the trainer to monitor VRAM pressure across the 100-run sweep.
+"""
+
 from __future__ import annotations
 
 import logging
+
 import torch
-import log_utils
-import os
 
 logger = logging.getLogger(__name__)
 
+# 90% of 8 GB expressed in MB.  Adjust if running on a different GPU.
+_VRAM_WARN_MB: float = 7_300.0
+
+
 def get_device() -> torch.device:
-    """Detect the best available hardware."""
+    """Return the best available device: CUDA if present, else CPU."""
     if torch.cuda.is_available():
-        return torch.device("cuda")
+        device = torch.device("cuda")
+        name  = torch.cuda.get_device_name(0)
+        total = torch.cuda.get_device_properties(0).total_memory / (1024 ** 2)
+        logger.info(f"Using GPU: {name} ({total:.0f} MB total VRAM)")
+        return device
+    logger.info("CUDA unavailable — running on CPU")
     return torch.device("cpu")
 
 
-def log_vram_usage(prefix: str = ""):
+def log_vram_usage(prefix: str = "") -> None:
     """
-    The Memory Heartbeat.
-    Essential for tracking the VRAM limits.
+    Log current VRAM allocation.  Called by the trainer at key checkpoints:
+    before/after decomposition, start/end of each epoch.
+
+    Does NOT call empty_cache() — that would distort the reserved-memory
+    reading and belongs only at experiment boundaries (BaseMethod.cleanup).
+
+    Logs a warning if peak allocation exceeds _VRAM_WARN_MB.
     """
     if not torch.cuda.is_available():
         return
 
-    # Flush memory before checking
-    torch.cuda.empty_cache()
-
-    allocated = torch.cuda.memory_allocated() / (1024 ** 2)
-    reserved = torch.cuda.memory_reserved() / (1024 ** 2)
-    max_used = torch.cuda.max_memory_allocated() / (1024 ** 2)
+    allocated = torch.cuda.memory_allocated()  / (1024 ** 2)
+    reserved  = torch.cuda.memory_reserved()   / (1024 ** 2)
+    peak      = torch.cuda.max_memory_allocated() / (1024 ** 2)
 
     logger.info(
-        f"[{prefix}] VRAM: {allocated:.1f}MB allocated, "
-        f"{reserved:.1f}MB reserved, "
-        f"Peak: {max_used:.1f}MB / 8192MB"
+        f"[{prefix}] VRAM — allocated: {allocated:.1f} MB  "
+        f"reserved: {reserved:.1f} MB  peak: {peak:.1f} MB"
     )
 
-    # Safety Check: If we exceed 90% of your 8GB, log a warning
-    if max_used > 7300:
-        logger.warning("VRAM CRITICAL: Vram approaching its limit!")
+    if peak > _VRAM_WARN_MB:
+        logger.warning(
+            f"[{prefix}] VRAM CRITICAL: peak {peak:.1f} MB exceeds "
+            f"{_VRAM_WARN_MB:.0f} MB threshold — OOM risk"
+        )
 
 
-def set_seed(seed: int):
-    """Ensure reproducibility across your 204 runs."""
-    torch.manual_seed(seed)
+def reset_peak_vram() -> None:
+    """Reset peak VRAM counter.  Call at the start of each experiment."""
     if torch.cuda.is_available():
-        torch.cuda.manual_seed_all(seed)
-    os.environ["PYTHONHASHSEED"] = str(seed)
+        torch.cuda.reset_peak_memory_stats()

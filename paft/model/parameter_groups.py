@@ -1,104 +1,119 @@
 """
-Configure which parameters are trainable for each PAFT method variant.
+parameter_groups.py — shim that re-exports configure_* functions.
 
-Each function:
-  1. Calls model.set_mode() to set the forward-pass parameterization
-  2. Sets requires_grad=True on exactly the correct parameter subset
-  3. Returns the list of trainable parameters for the optimizer
+Historical note: early versions of PAFT had parameter configuration logic
+here.  It has since moved into each method's _configure_parameters() method
+(see paft/methods/{pure_paft,hybrid_paft,safe_pure_paft,safe_hybrid_paft}.py).
 
-Call exactly one of these functions after constructing PAFTModel.
+This file now exists only so that any older method files that still import
+    from paft.model.parameter_groups import configure_hybrid_paft
+continue to work without modification.  The implementations here delegate
+to the correct new PAFTModel API.
+
+New code should NOT import from this module — call _configure_parameters()
+through the method class instead.
 """
 
+from __future__ import annotations
+
+import logging
 from typing import List
+
 import torch.nn as nn
 
-from paft.model.paft_model import PAFTModel, PAFTAttentionLayer
+from paft.model.paft_model import PAFTModel, PAFTAttention
+
+# Alias so any stale import of PAFTAttentionLayer still resolves
+PAFTAttentionLayer = PAFTAttention
+
+logger = logging.getLogger(__name__)
 
 
-# ── PAFT variants ────────────────────────────────────────────────────────────
+# ──────────────────────────────────────────────────────────────────────────────
+# Internal helper — freeze all, then unfreeze the given attr names on every
+# PAFTAttention layer and optionally non-attention biases in base model.
+# ──────────────────────────────────────────────────────────────────────────────
+
+def _configure(
+    model:           PAFTModel,
+    mode:            str,
+    attn_param_names: List[str],
+    include_base_biases: bool = False,
+) -> List[nn.Parameter]:
+    """
+    Generic configuration helper used by all four configure_* functions.
+
+    Args:
+        model:              PAFTModel instance (already built, on device).
+        mode:               'pure' or 'hybrid' — sets PAFTAttention.mode.
+        attn_param_names:   Attribute names on PAFTAttention to unfreeze
+                            (e.g. ['lam_V', 'lam_O']).
+        include_base_biases: If True, also unfreeze non-attention bias params
+                            in the base GPT-2 model (MLP, LayerNorm biases).
+    """
+    # 1. Freeze everything
+    for p in model.parameters():
+        p.requires_grad_(False)
+
+    # 2. Set mode on all attention layers
+    model.set_mode(mode)
+
+    # 3. Unfreeze the requested PAFTAttention parameters
+    for _, attn in model.iter_paft_attentions():
+        for attr in attn_param_names:
+            param = getattr(attn, attr, None)
+            if param is None:
+                raise AttributeError(
+                    f"PAFTAttention has no attribute '{attr}'. "
+                    f"Available params: lam_V, lam_O, S_V, S_O, b_qkv, b_o"
+                )
+            param.requires_grad_(True)
+
+    # 4. Optionally unfreeze non-attention biases in the base model
+    if include_base_biases:
+        for name, param in model.base.named_parameters():
+            if "bias" in name and "attn.c_attn" not in name and "attn.c_proj" not in name:
+                param.requires_grad_(True)
+
+    return [p for p in model.parameters() if p.requires_grad]
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Public API — kept for backward compatibility with older method files
+# ──────────────────────────────────────────────────────────────────────────────
 
 def configure_pure_paft(model: PAFTModel) -> List[nn.Parameter]:
-    """
-    pure_paft: train only lambda_V and lambda_O (eigenvalues of S).
-    Most constrained variant: n_layers * n_heads * 2 * d_head parameters.
-    GPT-2 small: 12 * 12 * 2 * 64 = 18,432 trainable parameters.
-    """
-    model.set_mode("pure")
-    for layer in model.paft_layers():
-        layer.lambda_V.requires_grad = True
-        layer.lambda_O.requires_grad = True
-    return [p for p in model.parameters() if p.requires_grad]
+    """Train only lam_V and lam_O (eigenvalues of S). Mode: pure."""
+    return _configure(model, "pure", ["lam_V", "lam_O"])
 
 
 def configure_hybrid_paft(model: PAFTModel) -> List[nn.Parameter]:
-    """
-    hybrid_paft: train full S_V and S_O matrices.
-    GPT-2 small: 12 * 12 * 2 * 64 * 64 = 1,179,648 trainable parameters.
-    """
-    model.set_mode("hybrid")
-    for layer in model.paft_layers():
-        layer.S_V.requires_grad = True
-        layer.S_O.requires_grad = True
-    return [p for p in model.parameters() if p.requires_grad]
+    """Train full S_V and S_O matrices. Mode: hybrid."""
+    return _configure(model, "hybrid", ["S_V", "S_O"])
 
 
 def configure_safe_pure_paft(model: PAFTModel) -> List[nn.Parameter]:
-    """
-    safe_pure_paft: lambda_V, lambda_O + all bias terms.
-    Bias terms stabilize the residual stream (Analysis 6).
-    """
-    model.set_mode("pure")
-    # PAFT eigenvalues
-    for layer in model.paft_layers():
-        layer.lambda_V.requires_grad = True
-        layer.lambda_O.requires_grad = True
-        # Attention biases
-        layer.c_attn_qk_bias.requires_grad = True
-        layer.c_attn_v_bias.requires_grad  = True
-        layer.c_proj_bias.requires_grad    = True
-    # MLP and LayerNorm biases throughout the model
-    for name, param in model.base_model.named_parameters():
-        if "bias" in name:
-            param.requires_grad = True
-    return [p for p in model.parameters() if p.requires_grad]
+    """Train lam_V, lam_O + all bias terms. Mode: pure."""
+    return _configure(model, "pure", ["lam_V", "lam_O", "b_qkv", "b_o"],
+                      include_base_biases=True)
 
 
 def configure_safe_hybrid_paft(model: PAFTModel) -> List[nn.Parameter]:
-    """
-    safe_hybrid_paft: S_V, S_O + all bias terms.
-    Most expressive PAFT variant.
-    """
-    model.set_mode("hybrid")
-    for layer in model.paft_layers():
-        layer.S_V.requires_grad = True
-        layer.S_O.requires_grad = True
-        layer.c_attn_qk_bias.requires_grad = True
-        layer.c_attn_v_bias.requires_grad  = True
-        layer.c_proj_bias.requires_grad    = True
-    for name, param in model.base_model.named_parameters():
-        if "bias" in name:
-            param.requires_grad = True
-    return [p for p in model.parameters() if p.requires_grad]
-
-
-# ── Dispatch ─────────────────────────────────────────────────────────────────
-
-_CONFIGURATORS = {
-    "pure_paft":        configure_pure_paft,
-    "hybrid_paft":      configure_hybrid_paft,
-    "safe_pure_paft":   configure_safe_pure_paft,
-    "safe_hybrid_paft": configure_safe_hybrid_paft,
-}
+    """Train S_V, S_O + all bias terms. Mode: hybrid."""
+    return _configure(model, "hybrid", ["S_V", "S_O", "b_qkv", "b_o"],
+                      include_base_biases=True)
 
 
 def configure_parameters(model: PAFTModel, method_name: str) -> List[nn.Parameter]:
-    """
-    Configure trainable parameters for a PAFT method.
-    Raises ValueError for unknown method names.
-    """
-    if method_name not in _CONFIGURATORS:
+    """Dispatch by method name string."""
+    dispatch = {
+        "pure_paft":        configure_pure_paft,
+        "hybrid_paft":      configure_hybrid_paft,
+        "safe_pure_paft":   configure_safe_pure_paft,
+        "safe_hybrid_paft": configure_safe_hybrid_paft,
+    }
+    if method_name not in dispatch:
         raise ValueError(
-            f"Unknown PAFT method '{method_name}'. "
-            f"Available: {list(_CONFIGURATORS)}"
+            f"Unknown PAFT method '{method_name}'. Available: {list(dispatch)}"
         )
-    return _CONFIGURATORS[method_name](model)
+    return dispatch[method_name](model)
