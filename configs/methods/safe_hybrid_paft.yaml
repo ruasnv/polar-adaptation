@@ -1,0 +1,7 @@
+extends: hybrid_paft
+method:
+  name: safe_hybrid_paft
+  tune:
+    S_V: true
+    S_O: true
+    biases: true      # the only addition

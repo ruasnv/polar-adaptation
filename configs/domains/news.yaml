@@ -1,0 +1,23 @@
+domain:
+  name: news
+  shift: small
+  tasks:
+    summarization:
+      dataset: cnn_dailymail
+      dataset_version: "3.0.0"
+      split_train: train
+      split_val: validation
+      split_test: test
+      metrics: [rouge1, rouge2, rougeL]
+      type: generative
+      input_col: article
+      target_col: highlights
+    sentiment:
+      dataset: sst2
+      split_train: train
+      split_val: validation
+      split_test: validation   # SST-2 test labels not public
+      metrics: [accuracy]
+      type: discriminative
+      input_col: sentence
+      target_col: label

@@ -1,0 +1,22 @@
+domain:
+  name: legal
+  shift: medium
+  tasks:
+    contract_nli:
+      dataset: contract_nli
+      split_train: train
+      split_val: dev
+      split_test: test
+      metrics: [accuracy, f1_macro]
+      type: discriminative
+      input_col: premise
+      target_col: label
+    clause_extraction:
+      dataset: cuad
+      split_train: train
+      split_val: test          # CUAD has no dev split
+      split_test: test
+      metrics: [f1]
+      type: generative
+      input_col: context
+      target_col: answers

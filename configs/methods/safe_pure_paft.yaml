@@ -1,0 +1,7 @@
+extends: pure_paft
+method:
+  name: safe_pure_paft
+  tune:
+    lambda_V: true
+    lambda_O: true
+    biases: true      # the only addition — residual stream stabilization

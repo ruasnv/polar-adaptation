@@ -89,6 +89,8 @@ class GeometricHealthMetrics:
         """
         Compute all six metrics from a 1-D tensor of singular values.
         sigma: descending order, all non-negative.
+        This prevents the code from crashing if
+        the model "collapses" and produces a zero singular value (since $log(0)$ is impossible)
         """
         sigma = sigma.detach().float()   # fp32 for numerical stability
         sigma = sigma.clamp(min=0.0)     # guard tiny negatives from SVD
@@ -104,6 +106,8 @@ class GeometricHealthMetrics:
 
         # sv entropy & effective rank
         p = sigma / (snuc + eps)
+        # THE TWEAK: clamp p so it's never exactly zero before the log
+        p = p.clamp(min=eps)
         entropy = -(p * (p + eps).log()).sum().item()
         eff_rank = math.exp(entropy)
 
@@ -554,6 +558,23 @@ class BaseMethod(ABC):
             )
         return f"{self.__class__.__name__}({self.method_name!r}, not built)"
 
+    def cleanup(self) -> None:
+        """
+        Force-release VRAM and system memory.
+        Essential for your 8GB VRAM constraint.
+        """
+        if self.model is not None:
+            # Move back to CPU to be safe before deletion
+            self.model.to("cpu")
+            del self.model
+
+        import gc
+        gc.collect()  # Clear system RAM (your 64GB pool)
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()  # Clear GPU VRAM (your 8GB pool)
+
+        self._built = False
+        logger.info(f"[{self.method_name}] Cleanup complete. VRAM released.")
 
 # ---------------------------------------------------------------------------
 # Module-level utilities used by every subclass
