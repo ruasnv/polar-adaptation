@@ -10,13 +10,55 @@ training:
   warmup_ratio: 0.06          # 6% of total steps
   lr_schedule: linear_decay   # linear decay after warmup
   gradient_clip: 1.0
-  gradient_checkpointing: true # <--- Essential for GPT-2 Large
+  gradient_checkpointing: true
   eval_every_n_steps: 500
   save_every_epoch: true
   seed: 42
 
 logging:
   log_every_n_steps: 10
-  rotation_drift_every_n_steps: 100   # hybrid variants only
-  eigenvalue_variance_every_n_steps: 100
-  effective_rank_every_n_steps: 100
+
+  # PAFT-specific geometric logging (no-op for baselines)
+  rotation_drift_every_n_steps: 100       # ||Q_t - Q_0||_F per head per layer
+  eigenvalue_variance_every_n_steps: 100  # var(lambda) across heads per layer
+  effective_rank_every_n_steps: 100       # effective rank of S per head
+
+  # Geometric health — logged for ALL methods, including baselines.
+  # Computed on full weight matrices W_V and W_O after each epoch.
+  # Provides the cross-method comparison of structural integrity.
+  geometric_health_every_epoch: true
+
+geometric_health:
+  # Stable rank: sr(W) = ||W||_F^2 / ||W||_2^2
+  # Measures how many singular values carry meaningful energy.
+  # Additive methods (LoRA, PoLAR) can reduce this; PAFT preserves it by construction.
+  stable_rank: true
+
+  # Singular value entropy: H = -sum(p_i * log(p_i)), p_i = sigma_i / sum(sigma)
+  # Measures diversity of the singular value spectrum — low entropy = dominated by few directions.
+  # The information-theoretic analogue of stable rank.
+  sv_entropy: true
+
+  # Effective rank (Roy & Vetterli 2007): exp(H) where H is sv_entropy above.
+  # More interpretable than entropy — gives an "equivalent number of active dimensions".
+  effective_rank: true
+
+  # Condition number: sigma_max / sigma_min
+  # High condition number = ill-conditioned weight — sensitivity to input perturbations.
+  # Additive updates can inflate this; PAFT's S stays PSD so condition number is bounded
+  # by max(lambda) / min(lambda).
+  condition_number: true
+
+  # Weight matrix nuclear norm: sum(sigma_i)
+  # Tracks total "magnitude" of the weight — useful for detecting norm inflation.
+  nuclear_norm: true
+
+  # Isotropy: ratio of smallest to largest singular value cluster (complementary to condition).
+  # High isotropy = directions treated more uniformly — desirable for generalization.
+  isotropy: true
+
+  # Where to compute — always W_V and W_O (the OV circuit), optionally others
+  target_matrices: [W_V, W_O]
+  include_W_Q_W_K: false      # QK circuit — not adapted in any PAFT variant
+  per_head: true              # log per head, then aggregate (mean/std across heads)
+  aggregate_across_layers: true

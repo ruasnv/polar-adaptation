@@ -96,20 +96,34 @@ class Trainer:
         self.grad_clip    = tcfg.get("gradient_clip", 1.0)
         self.eval_every   = tcfg.get("eval_every_n_steps", 500)
         self.log_every    = tcfg.get("log_every_n_steps", 10)
+        # Gradient accumulation: optimizer steps every N micro-batches.
+        # effective_batch = micro_batch_size × grad_accum_steps.
+        self.grad_accum   = tcfg.get("gradient_accumulation_steps", 1)
 
         self.device       = method.device
         self.method_name  = method.method_name
 
-        # Optimizer and scheduler — built here so they're available to the saver
-        self.optimizer = method.get_optimizer(
-            lr           = tcfg["learning_rate"],
-            weight_decay = tcfg.get("weight_decay", 0.01),
-        )
-        self.scheduler = build_scheduler(
-            self.optimizer,
-            cfg,
-            steps_per_epoch = len(train_loader),
-        )
+        # Optimizer and scheduler — skipped for frozen (0 trainable params).
+        # Calling AdamW([]) raises ValueError; loss.backward() with all-frozen
+        # params raises RuntimeError (loss has no grad_fn).
+        n_trainable = method.num_trainable_params()
+        if n_trainable > 0:
+            self.optimizer = method.get_optimizer(
+                lr           = tcfg["learning_rate"],
+                weight_decay = tcfg.get("weight_decay", 0.01),
+            )
+            self.scheduler = build_scheduler(
+                self.optimizer,
+                cfg,
+                steps_per_epoch = len(train_loader),
+            )
+        else:
+            self.optimizer = None
+            self.scheduler = None
+            logger.info(
+                f"[{self.method_name}] 0 trainable params — "
+                "optimizer skipped, running in eval-only mode"
+            )
 
         self.saver = CheckpointSaver(run_dir, self.method_name)
         self._global_step = 0
@@ -157,8 +171,8 @@ class Trainer:
                 metrics          = eval_metrics,
                 geometric_health = _serialise_health(health),
                 model_state      = self.method.state_dict()["model"],
-                optimizer_state  = self.optimizer.state_dict(),
-                scheduler_state  = self.scheduler.state_dict(),
+                optimizer_state  = self.optimizer.state_dict() if self.optimizer else {},
+                scheduler_state  = self.scheduler.state_dict() if self.scheduler else {},
                 paft_snapshot    = self.method.paft_snapshot(),
             )
             self.saver.save_epoch(epoch_schema)
@@ -194,41 +208,78 @@ class Trainer:
     # ── epoch loops ──────────────────────────────────────────────────────────
 
     def _train_epoch(self, epoch: int) -> float:
-        """One full pass over the training set.  Returns mean train loss."""
-        self.method.model.train()
-        total_loss   = 0.0
-        n_batches    = 0
+        """
+        One full pass over the training set.  Returns mean train loss.
 
-        for batch in self.train_loader:
+        Gradient accumulation:
+            loss.backward() is called every micro-batch.
+            optimizer.step() is called every grad_accum micro-batches.
+            Loss is scaled by 1/grad_accum so the effective gradient magnitude
+            matches what a true batch of grad_accum × micro_batch_size would give.
+
+            effective_batch_size = micro_batch_size × grad_accum_steps
+            e.g.  1 × 32 = 32  (your current config)
+        """
+        self.method.model.train()
+        total_loss      = 0.0
+        n_micro_batches = 0
+        accum_loss      = 0.0
+
+        if self.optimizer is not None:
+            self.optimizer.zero_grad(set_to_none=True)
+
+        for micro_step, batch in enumerate(self.train_loader):
             batch = _to_device(batch, self.device)
             loss  = self.method.forward(**batch)
 
-            loss.backward()
-            self.method.pre_optimizer_step()   # no-op for all 11 methods
+            # Frozen baseline has no trainable params — loss has no grad_fn
+            # so backward() would raise.  Skip the entire gradient path.
+            if self.optimizer is not None:
+                scaled_loss = loss / self.grad_accum
+                scaled_loss.backward()
 
-            # Gradient clipping — applied to trainable params only
-            if self.grad_clip > 0:
-                nn.utils.clip_grad_norm_(
-                    [p for p in self.method.model.parameters() if p.requires_grad],
-                    max_norm=self.grad_clip,
-                )
+            accum_loss      += loss.item()
+            total_loss      += loss.item()
+            n_micro_batches += 1
 
-            self.optimizer.step()
-            self.scheduler.step()
-            self.optimizer.zero_grad(set_to_none=True)
+            is_accum_step = ((micro_step + 1) % self.grad_accum == 0)
+            is_last_batch = (micro_step + 1 == len(self.train_loader))
 
-            total_loss       += loss.item()
-            n_batches        += 1
-            self._global_step += 1
+            if is_accum_step or is_last_batch:
+                if self.optimizer is not None:
+                    self.method.pre_optimizer_step()
 
-            if self._global_step % self.log_every == 0:
-                lr = self.scheduler.get_last_lr()[0]
-                logger.debug(
-                    f"step={self._global_step}  "
-                    f"loss={loss.item():.4f}  lr={lr:.2e}"
-                )
+                    if self.grad_clip > 0:
+                        nn.utils.clip_grad_norm_(
+                            [p for p in self.method.model.parameters()
+                             if p.requires_grad],
+                            max_norm=self.grad_clip,
+                        )
 
-        return total_loss / max(n_batches, 1)
+                    self.optimizer.step()
+                    self.scheduler.step()
+                    self.optimizer.zero_grad(set_to_none=True)
+
+                self._global_step += 1
+
+                if self._global_step % self.log_every == 0:
+                    avg = accum_loss / self.grad_accum
+                    lr_str = (
+                        f"  lr={self.scheduler.get_last_lr()[0]:.2e}"
+                        if self.scheduler else ""
+                    )
+                    logger.debug(
+                        f"step={self._global_step}  loss={avg:.4f}{lr_str}"
+                    )
+
+                accum_loss = 0.0
+
+                max_steps = self.cfg.get("training", {}).get("max_steps")
+                if max_steps and self._global_step >= max_steps:
+                    logger.info(f"max_steps={max_steps} reached — stopping epoch early")
+                    break
+
+        return total_loss / max(n_micro_batches, 1)
 
     def _eval_epoch(self, epoch: int) -> Dict[str, float]:
         """

@@ -73,8 +73,31 @@ class BaseDataModule(ABC):
         """
         self.cfg        = cfg
         self.hf_name    = hf_name
-        self.max_length = max_length or cfg["training"]["max_seq_len"]
-        self.batch_size = cfg["training"]["batch_size"]
+
+        tcfg = cfg.get("training", {})
+
+        if "max_seq_len" not in tcfg:
+            raise KeyError(
+                "cfg['training']['max_seq_len'] is missing. "
+                "Check that configs/base.yaml contains 'max_seq_len' under 'training'."
+            )
+
+        # Support both naming conventions:
+        #   micro_batch_size  — new name (with gradient accumulation)
+        #   batch_size        — old name (direct batch, no accumulation)
+        # The DataLoader always uses the micro batch size — the effective batch
+        # size is micro_batch_size × gradient_accumulation_steps.
+        if "micro_batch_size" in tcfg:
+            self.batch_size = tcfg["micro_batch_size"]
+        elif "batch_size" in tcfg:
+            self.batch_size = tcfg["batch_size"]
+        else:
+            raise KeyError(
+                "cfg['training'] must contain either 'micro_batch_size' or "
+                "'batch_size'. Check configs/base.yaml."
+            )
+
+        self.max_length = max_length or tcfg["max_seq_len"]
 
         self.tokenizer: PreTrainedTokenizer = get_tokenizer(hf_name)
 
