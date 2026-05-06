@@ -70,7 +70,10 @@ def parse_args():
     p.add_argument("--log_dir",    default="results/logs",
                    help="Directory for .log files (default: results/logs)")
     p.add_argument("--max_steps",  type=int, default=None,
-                   help="Truncate training to N steps — for smoke-testing only")
+                   help="Truncate training to N optimizer steps — for smoke-testing only")
+    p.add_argument("--smoke_test", action="store_true",
+                   help="Override gradient_accumulation_steps=1 and max_steps=3 "
+                        "for a fast end-to-end pipeline check (~10 seconds on GPU)")
     p.add_argument("--skip_if_complete", action="store_true",
                    help="Exit 0 silently if this run already has a sentinel file")
     return p.parse_args()
@@ -115,9 +118,13 @@ def main():
     )
 
     # Inject CLI overrides that aren't in YAML
-    if args.max_steps is not None:
+    if args.smoke_test:
+        cfg["training"]["max_steps"]                  = 3
+        cfg["training"]["gradient_accumulation_steps"] = 1
+        logger.info("Smoke-test mode: max_steps=3  gradient_accumulation_steps=1")
+    elif args.max_steps is not None:
         cfg["training"]["max_steps"] = args.max_steps
-        logger.info(f"Smoke-test mode: max_steps={args.max_steps}")
+        logger.info(f"max_steps={args.max_steps}")
 
     # HuggingFace model name
     hf_name = cfg["model"]["hf_name"]   # e.g. "gpt2" or "gpt2-medium"

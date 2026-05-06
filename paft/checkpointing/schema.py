@@ -213,11 +213,12 @@ def validate_init_schema(schema: InitSchema, method_name: str) -> None:
 def validate_epoch_schema(schema: EpochSchema, method_name: str) -> None:
     """Assert EpochSchema completeness before writing to disk."""
     assert isinstance(schema.epoch, int) and schema.epoch >= 0
-    assert schema.metrics,          "EpochSchema.metrics is empty"
-    assert schema.geometric_health, "EpochSchema.geometric_health is empty"
-    assert schema.model_state,      "EpochSchema.model_state is empty"
-    assert schema.optimizer_state,  "EpochSchema.optimizer_state is empty"
-    assert schema.scheduler_state,  "EpochSchema.scheduler_state is empty"
+    assert schema.metrics,                   "EpochSchema.metrics is empty"
+    assert schema.geometric_health,          "EpochSchema.geometric_health is empty"
+    assert schema.model_state,               "EpochSchema.model_state is empty"
+    # optimizer_state and scheduler_state are {} for frozen (0 trainable params) — allow it
+    assert schema.optimizer_state is not None, "EpochSchema.optimizer_state is None"
+    assert schema.scheduler_state is not None, "EpochSchema.scheduler_state is None"
 
     _PAFT_METHODS = {"pure_paft", "hybrid_paft", "safe_pure_paft", "safe_hybrid_paft"}
     if method_name in _PAFT_METHODS:

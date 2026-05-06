@@ -26,7 +26,11 @@ pytest tests/
 python scripts/extract_decomposition.py --model gpt2_small
 
 # Single experiment run
+#config → data → build → 3 steps → checkpoint → cleanup
+python scripts/run_experiment.py --model gpt2_small --domain news --method frozen --max_steps 10
 python scripts/run_experiment.py --model gpt2_small --domain news --method hybrid_paft
+#fast smoke test (3 forward passes, no accumulation, ~10s on GPU)
+python scripts/run_experiment.py --model gpt2_small --domain news --method frozen --smoke_test
 
 # Full sweep
 python scripts/run_sweep.py --models gpt2_small gpt2_medium --domains news legal biomedical
