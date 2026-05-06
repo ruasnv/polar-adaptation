@@ -30,7 +30,7 @@ from __future__ import annotations
 
 import logging
 import math
-from typing import Optional, Tuple
+from typing import Any, Optional, Tuple
 
 import torch
 import torch.nn as nn
@@ -157,7 +157,13 @@ class SVFAttention(nn.Module):
         head_mask:         Optional[torch.Tensor] = None,
         use_cache:         bool = False,
         output_attentions: bool = False,
+        past_key_values:   Optional[Any] = None,   # new-style HF cache (≥4.38)
+        **kwargs,                                   # absorb any other new HF args
     ) -> Tuple:
+        # Normalise cache argument
+        if layer_past is None and past_key_values is not None:
+            if isinstance(past_key_values, tuple):
+                layer_past = past_key_values
         W_V = self.reconstruct_W_V()
         W_O = self.reconstruct_W_O()
 

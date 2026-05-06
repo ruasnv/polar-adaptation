@@ -32,6 +32,9 @@ python scripts/run_experiment.py --model gpt2_small --domain news --method hybri
 #fast smoke test (3 forward passes, no accumulation, ~10s on GPU)
 python scripts/run_experiment.py --model gpt2_small --domain news --method frozen --smoke_test
 
+#Saves can be validated using:
+python scripts/validate_saves.py --model gpt2_small --domain news --method frozen
+
 # Full sweep
 python scripts/run_sweep.py --models gpt2_small gpt2_medium --domains news legal biomedical
 

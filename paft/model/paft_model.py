@@ -64,7 +64,7 @@ from __future__ import annotations
 
 import math
 import logging
-from typing import Optional, Tuple
+from typing import Any, Optional, Tuple
 
 import torch
 import torch.nn as nn
@@ -253,21 +253,24 @@ class PAFTAttention(nn.Module):
         head_mask:         Optional[torch.Tensor] = None,
         use_cache:         bool = False,
         output_attentions: bool = False,
+        past_key_values:   Optional[Any] = None,   # new-style HF cache (≥4.38)
+        **kwargs,                                   # absorb any other new HF args
     ) -> Tuple:
         """
         Forward compatible with GPT2Attention's output signature.
         Returns (attn_output [B, T, n_embd], present | None [, attn_weights]).
 
-        Reconstruction happens here on every forward call.  With gradient
-        checkpointing, reconstruction is recomputed during backward rather than
-        stored — this is the desired behaviour (saves VRAM, trades compute).
-
-        GPT-2 Conv1D projection convention (weight is [in, out]):
-            q = hidden_states @ W_Q + b_q
-            k = hidden_states @ W_K + b_k
-            v = hidden_states @ W_V + b_v       ← gradient via S_V or lam_V
-            output = context @ W_O + b_o        ← gradient via S_O or lam_O
+        past_key_values is the new HuggingFace KV cache argument (transformers ≥4.38).
+        During training with gradient checkpointing use_cache=False is set by HF,
+        so both layer_past and past_key_values will be None in practice.
+        We accept the argument to avoid TypeError from **kwargs propagation.
         """
+        # Normalise cache: if new-style past_key_values provided, treat as layer_past
+        if layer_past is None and past_key_values is not None:
+            if isinstance(past_key_values, tuple):
+                layer_past = past_key_values   # old-style tuple: (k, v)
+            # New Cache objects are not supported in PAFTAttention — ignore
+
         # Reconstruct — gradient entry point for trainable S / lam
         W_V = self.reconstruct_W_V()   # [n_embd, n_embd]
         W_O = self.reconstruct_W_O()   # [n_embd, n_embd]

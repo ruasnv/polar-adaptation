@@ -225,6 +225,12 @@ class Trainer:
         n_micro_batches = 0
         accum_loss      = 0.0
 
+        # Guard: if global_step already reached max_steps from a previous epoch,
+        # skip training entirely for this epoch (eval still runs normally).
+        max_steps = self.cfg.get("training", {}).get("max_steps")
+        if max_steps and self._global_step >= max_steps:
+            return 0.0
+
         if self.optimizer is not None:
             self.optimizer.zero_grad(set_to_none=True)
 
@@ -268,7 +274,7 @@ class Trainer:
                         f"  lr={self.scheduler.get_last_lr()[0]:.2e}"
                         if self.scheduler else ""
                     )
-                    logger.debug(
+                    logger.info(
                         f"step={self._global_step}  loss={avg:.4f}{lr_str}"
                     )
 
