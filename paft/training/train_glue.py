@@ -86,8 +86,11 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--output_dir",  default="results/glue/{task}/{method}")
 
     # Training hyperparameters (matched to PoLAR / DeBERTa paper recommendations)
-    p.add_argument("--epochs",      type=int,   default=5)
-    p.add_argument("--lr",          type=float, default=2e-4)
+    p.add_argument("--epochs",      type=int,   default=None,
+                   help="Training epochs. If omitted, uses TASK_EPOCHS defaults.")
+    p.add_argument("--lr",          type=float, default=None,
+                   help="Learning rate. If omitted, uses per-method default from METHOD_DEFAULT_LR."
+                        " ALWAYS set this explicitly after running run_lr_sweep.sh.")
     p.add_argument("--batch_size",  type=int,   default=32,  help="Per-device train batch")
     p.add_argument("--grad_accum",  type=int,   default=1)
     p.add_argument("--max_length",  type=int,   default=512)
@@ -173,28 +176,39 @@ def main() -> None:
     )
 
     # ── 5. HuggingFace TrainingArguments ─────────────────────────────────────
-    # Task-specific hyperparameters (following DeBERTa-v3 paper recommendations)
-    # Epoch counts: more for small tasks (RTE: 10, CoLA: 10), fewer for large (MNLI: 3, QQP: 3)
+    # Task-specific epoch counts (following DeBERTa-v3 paper recommendations)
     TASK_EPOCHS = {
         "cola": 10, "mnli": 3,  "mrpc": 10, "qnli": 5,
         "qqp":  3,  "rte":  10, "sst2": 5,  "stsb": 10,
     }
-    TASK_LR = {
-        "cola": 2e-5, "mnli": 1.5e-5, "mrpc": 2e-5, "qnli": 2e-5,
-        "qqp":  1e-5, "rte":  2e-5,   "sst2": 2e-5, "stsb": 2e-5,
+
+    # Per-method default LRs — used only when --lr is NOT passed explicitly.
+    # These are reasonable starting points derived from the LR sweep on SST-2.
+    # Always override with --lr after running run_lr_sweep.sh.
+    METHOD_DEFAULT_LR = {
+        "full_ft":     2e-5,   # full-FT scale
+        "frozen":      1e-4,   # irrelevant; no trainable params
+        "lora_r8":     4e-4,   # standard PEFT scale
+        "lora_r64":    2e-4,   # more params → slightly lower LR
+        "polar_r8":    4e-4,   # same scale as LoRA
+        "bitfit":      1e-3,   # few params, needs higher LR
+        "svf":         5e-3,   # very few params
+        "pure_paft":   5e-3,   # 18K params only — geometric amplification
+        "hybrid_paft": 2e-4,   # ~1.2M params, similar to LoRA scale
+        "paft_v_only": 2e-4,
+        "paft_o_only": 2e-4,
+        "paft_qv":     2e-4,
+        "paft_vo":     2e-4,
     }
-    # Use command-line lr if explicitly set, otherwise use task defaults
-    if args.lr != 2e-4:
-        # If the user explicitly passed an LR (which we will do in the sweep), USE IT.
+
+    # If --lr was explicitly passed (not None), use it unconditionally.
+    # This is how the sweep results feed back into the main runs.
+    if args.lr is not None:
         effective_lr = args.lr
     else:
-        # Fallback to standard task-specific defaults for the main runs
-        effective_lr = TASK_LR.get(args.task, args.lr)
-        # Only apply the "safe floor" if we aren't explicitly sweeping
-        if args.method in ("pure_paft", "hybrid_paft"):
-            effective_lr = max(effective_lr, 1e-3)
+        effective_lr = METHOD_DEFAULT_LR.get(args.method, 2e-4)
 
-    effective_epochs = args.epochs if args.epochs != 5 else TASK_EPOCHS.get(args.task, args.epochs)
+    effective_epochs = args.epochs if args.epochs is not None else TASK_EPOCHS.get(args.task, 5)
 
     training_args = TrainingArguments(
         output_dir                   = str(output_dir / "hf_checkpoints"),
@@ -269,10 +283,6 @@ def main() -> None:
         trainer_optimizers = (optimizer, None)
     else:
         trainer_optimizers = (None, None)  # Let Trainer handle it standardly
-
-    # Update Trainer call:
-    num_train_steps = len(dm._train_dataset) * effective_epochs // args.grad_accum
-    warmup_steps = int(num_train_steps * args.warmup_ratio)
 
     # ── 7. Trainer ───────────────────────────────────────────────────────────
     trainer = Trainer(

@@ -388,7 +388,7 @@ def main() -> None:
 
     final_metrics = trainer.train()
 
-    # ── 4. Final evaluation (full dataset) ────────────────────────────────────
+    # ── 5. Final evaluation (full dataset) ────────────────────────────────────
     logger.info("Running final full evaluation ...")
     model.eval()
     if is_gsm8k:
@@ -408,7 +408,7 @@ def main() -> None:
 
     logger.info(f"Final accuracy on {args.task}: {final_acc:.4f}")
 
-    # ── 5. Save results ───────────────────────────────────────────────────────
+    # ── 6. Save results ───────────────────────────────────────────────────────
     with open(output_dir / "metrics.json", "w") as f:
         json.dump(final_metrics, f, indent=2)
 
@@ -430,7 +430,7 @@ def main() -> None:
         model_type  = "llama",
     )
 
-    # ── 6. Geometric analysis ─────────────────────────────────────────────────
+    # ── 7. Geometric analysis ─────────────────────────────────────────────────
     if args.run_analysis and not args.skip_analysis and args.method in ("pure_paft", "hybrid_paft"):
         _run_llama_analysis(model, args.method, output_dir)
 
@@ -445,7 +445,7 @@ def main() -> None:
 def _run_llama_analysis(model, method_name: str, output_dir: Path) -> None:
     """Stable rank analysis on LLaMA PAFT v_proj weights."""
     from paft.model.llama_paft_model import LLaMAPAFTModel
-    from paft.analysis.stable_rank import analyze_all_layers, summarize_stable_rank
+    from analysis.stable_rank import analyze_all_layers, summarize_stable_rank
 
     if not isinstance(model, LLaMAPAFTModel):
         return

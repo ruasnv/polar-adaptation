@@ -14,8 +14,13 @@ export PYTHONPATH="$PROJECT_ROOT:$PYTHONPATH"
 
 RESULTS_DIR="results/lr_sweep"
 TASK="sst2"
-METHODS="pure_paft hybrid_paft lora_r8 polar_r8 bitfit svf"
-LR_CANDIDATES="1e-5 5e-5 1e-4 3e-4 1e-3 3e-3"
+# All methods that need LR tuning. full_ft and frozen excluded:
+#   full_ft: well-established range (1e-5 to 5e-5), not worth sweeping
+#   frozen:  no trainable params — LR irrelevant
+METHODS="pure_paft hybrid_paft lora_r8 lora_r64 polar_r8 bitfit svf"
+
+# Extended range: pure_paft and svf have very few params and often need 5e-3 to 1e-2
+LR_CANDIDATES="1e-5 5e-5 1e-4 3e-4 1e-3 3e-3 5e-3 1e-2"
 
 mkdir -p "$RESULTS_DIR"
 
