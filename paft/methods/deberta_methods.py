@@ -320,3 +320,157 @@ def get_deberta_paft_layers(model: nn.Module) -> List[Tuple[int, PAFTLinear, PAF
     if not isinstance(model, DeBERTaPAFTModel):
         return []
     return list(model._iter_paft_layers())
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Method: PoLAR (Stiefel manifold adaptation) — required baseline for Analysis 2
+# ──────────────────────────────────────────────────────────────────────────────
+
+from paft.model.polar_linear import PoLARLinear
+from transformers import TrainerCallback
+
+class _StiefelRetractCallback(TrainerCallback):
+    """Retracts all PoLARLinear.X back to Stiefel after each optimizer step."""
+    def __init__(self, model: nn.Module):
+        self._layers = [
+            m for m in model.modules() if isinstance(m, PoLARLinear)
+        ]
+
+    def on_step_end(self, args, state, control, **kwargs):
+        for layer in self._layers:
+            layer.retract_to_stiefel()
+
+
+def build_deberta_polar(
+    num_labels: int,
+    rank: int = 8,
+) -> Tuple[nn.Module, AutoTokenizer]:
+    """
+    PoLAR on value_proj and output.dense (same target layers as PAFT).
+    Parameterisation: ΔW = (alpha/r) * X @ B^T, X on Stiefel manifold.
+    Retraction: QR after each optimizer step (via HF Trainer callback).
+    sr(ΔW) is high by construction; sr(W_eff) is what we measure in Analysis 2.
+
+    Returns (model, tokenizer, callback) — pass callback to HF Trainer.
+    The caller must add the StiefelRetractCallback to trainer callbacks.
+    """
+    base, tokenizer = load_deberta_base("", num_labels)
+
+    # Replace value_proj and output.dense with PoLARLinear
+    for l in range(_N_LAYERS):
+        attn_self   = base.deberta.encoder.layer[l].attention.self
+        attn_output = base.deberta.encoder.layer[l].attention.output
+
+        attn_self.value_proj = PoLARLinear.from_linear(
+            attn_self.value_proj, rank=rank, alpha=rank * 2
+        )
+        attn_output.dense = PoLARLinear.from_linear(
+            attn_output.dense, rank=rank, alpha=rank * 2
+        )
+
+    freeze_all(base)
+    # Unfreeze X and B in every PoLARLinear
+    for m in base.modules():
+        if isinstance(m, PoLARLinear):
+            m.X.requires_grad_(True)
+            m.B.requires_grad_(True)
+    unfreeze_classifier(base)
+
+    # Build the callback (must be added to HF Trainer by caller)
+    callback = _StiefelRetractCallback(base)
+
+    logger.info(f"DeBERTa PoLAR r={rank}: {count_trainable(base):,} trainable params")
+    return base, tokenizer, callback   # NOTE: returns 3-tuple
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Analysis 5: Which-weights ablation variants
+# ──────────────────────────────────────────────────────────────────────────────
+
+class _PartialPAFTModel(nn.Module):
+    """
+    DeBERTa with PAFT applied to a user-specified subset of attention projections.
+    Used for Analysis 5: which weights benefit most from PAFT?
+    """
+    def __init__(self, base, adapt_value: bool, adapt_output: bool,
+                 adapt_query: bool = False, train_mode: str = 'hybrid') -> None:
+        super().__init__()
+        self.base = base
+        self._adapted_layers = []   # list of PAFTLinear layers for geometric access
+
+        for l in range(_N_LAYERS):
+            attn_self   = base.deberta.encoder.layer[l].attention.self
+            attn_output = base.deberta.encoder.layer[l].attention.output
+
+            if adapt_value:
+                vp = attn_self.value_proj
+                attn_self.value_proj = PAFTLinear(
+                    vp.weight.detach().float(), vp.bias.detach().float() if vp.bias is not None else None,
+                    _N_HEADS, _HEAD_DIM, 'row', train_mode, torch.float32
+                )
+                self._adapted_layers.append(('V', l, attn_self.value_proj))
+
+            if adapt_output:
+                od = attn_output.dense
+                attn_output.dense = PAFTLinear(
+                    od.weight.detach().float(), od.bias.detach().float() if od.bias is not None else None,
+                    _N_HEADS, _HEAD_DIM, 'col', train_mode, torch.float32
+                )
+                self._adapted_layers.append(('O', l, attn_output.dense))
+
+            if adapt_query:
+                qp = attn_self.query_proj
+                attn_self.query_proj = PAFTLinear(
+                    qp.weight.detach().float(), qp.bias.detach().float() if qp.bias is not None else None,
+                    _N_HEADS, _HEAD_DIM, 'row', train_mode, torch.float32
+                )
+                self._adapted_layers.append(('Q', l, attn_self.query_proj))
+
+    def forward(self, *args, **kwargs):
+        return self.base(*args, **kwargs)
+
+    @property
+    def config(self):
+        return self.base.config
+
+
+def build_deberta_paft_ablation(
+    num_labels: int,
+    adapt_value: bool = True,
+    adapt_output: bool = True,
+    adapt_query: bool = False,
+    train_mode: str = 'hybrid',
+) -> Tuple[nn.Module, AutoTokenizer]:
+    """
+    Build DeBERTa with PAFT applied to a specific subset of projections.
+
+    Variants for Analysis 5:
+      paft_v_only:   adapt_value=True,  adapt_output=False  (value only)
+      paft_o_only:   adapt_value=False, adapt_output=True   (output only)
+      paft_vo:       adapt_value=True,  adapt_output=True   (both, standard)
+      paft_qv:       adapt_value=True,  adapt_query=True    (query + value)
+    """
+    base, tokenizer = load_deberta_base("", num_labels)
+    model = _PartialPAFTModel(base, adapt_value, adapt_output, adapt_query, train_mode)
+
+    freeze_all(model)
+    for _, _, layer in model._adapted_layers:
+        if train_mode == 'pure':
+            layer.lam.requires_grad_(True)
+        else:
+            layer.S.requires_grad_(True)
+    unfreeze_classifier(model)
+
+    tag = ('V' if adapt_value else '') + ('O' if adapt_output else '') + ('Q' if adapt_query else '')
+    logger.info(f"DeBERTa PAFT ablation [{tag}]: {count_trainable(model):,} trainable params")
+    return model, tokenizer
+
+
+# Add ablation variants to method registry
+DEBERTA_METHODS.update({
+    "polar_r8":     lambda n: build_deberta_polar(n, rank=8)[:2],  # drop callback (train_glue handles)
+    "paft_v_only":  lambda n: build_deberta_paft_ablation(n, adapt_value=True,  adapt_output=False),
+    "paft_o_only":  lambda n: build_deberta_paft_ablation(n, adapt_value=False, adapt_output=True),
+    "paft_qv":      lambda n: build_deberta_paft_ablation(n, adapt_value=True,  adapt_output=False, adapt_query=True),
+    "paft_vo":      lambda n: build_deberta_paft_ablation(n, adapt_value=True,  adapt_output=True),
+})

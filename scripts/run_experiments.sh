@@ -63,10 +63,10 @@ separator() { echo "────────────────────
 # ────────────────────────────────────────────────────────────────────────────
 
 GLUE_TASKS="cola mnli mrpc qnli qqp rte sst2 stsb"
-GLUE_METHODS="pure_paft hybrid_paft lora_r8 lora_r64 bitfit frozen full_ft svf"
+GLUE_METHODS="pure_paft hybrid_paft lora_r8 lora_r64 polar_r8 bitfit frozen full_ft svf"
 
 CS_TASKS="boolq piqa siqa hellaswag winogrande arc_easy arc_challenge openbookqa"
-LLM_METHODS="pure_paft hybrid_paft lora_r8 lora_r64 bitfit frozen"
+LLM_METHODS="pure_paft hybrid_paft polar_r8 lora_r8 lora_r64 bitfit frozen"
 
 GSM8K_TASK="gsm8k"
 

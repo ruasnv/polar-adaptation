@@ -289,3 +289,61 @@ def enable_gradient_checkpointing(model: nn.Module) -> None:
     elif hasattr(model, 'base') and hasattr(model.base, 'gradient_checkpointing_enable'):
         model.base.gradient_checkpointing_enable(gradient_checkpointing_kwargs={"use_reentrant": False})
     logger.info("Gradient checkpointing enabled.")
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Method: LLaMA PoLAR (Stiefel manifold on v_proj)
+# ──────────────────────────────────────────────────────────────────────────────
+
+def build_llama_polar(
+    model_name: str = DEFAULT_MODEL,
+    rank: int = 8,
+    device_map: str = "auto",
+) -> Tuple[nn.Module, Any]:
+    """
+    PoLAR on v_proj (same target as PAFT for fair comparison).
+    ΔW = (alpha/r) * X @ B^T, X Stiefel-constrained via QR retraction.
+
+    The retract_to_stiefel() must be called after each optimizer.step()
+    in the custom training loop (train_llm.py handles this for polar_r8).
+    """
+    from paft.model.polar_linear import PoLARLinear
+
+    base, tokenizer = load_llama_nf4(model_name, device_map)
+
+    # Replace v_proj in each attention layer with PoLARLinear
+    # v_proj weight [n_kv_heads*head_dim, hidden] — dequantize first
+    for l in range(base.config.num_hidden_layers):
+        attn  = base.model.layers[l].self_attn
+        vp    = attn.v_proj
+        w_fp32 = _dequantize_weight(vp)   # [1024, 3072] fp32
+        bias   = vp.bias.detach().float().cpu() if vp.bias is not None else None
+
+        polar_layer = PoLARLinear(
+            in_features  = w_fp32.shape[1],
+            out_features = w_fp32.shape[0],
+            weight       = w_fp32,
+            bias         = bias,
+            rank         = rank,
+            alpha        = rank * 2,
+        )
+        attn.v_proj = polar_layer
+        del vp, w_fp32
+
+    freeze_all(base)
+    for m in base.modules():
+        if isinstance(m, PoLARLinear):
+            m.X.requires_grad_(True)
+            m.B.requires_grad_(True)
+            # Ensure fp32
+            if m.X.dtype != torch.float32:
+                m.X.data = m.X.data.float()
+            if m.B.dtype != torch.float32:
+                m.B.data = m.B.data.float()
+
+    n_trainable = count_trainable(base)
+    logger.info(f"LLaMA PoLAR r={rank}: {n_trainable:,} trainable params")
+    return base, tokenizer
+
+
+LLAMA_METHODS["polar_r8"] = lambda m, dm: build_llama_polar(m, rank=8, device_map=dm)

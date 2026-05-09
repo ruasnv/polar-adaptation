@@ -177,8 +177,8 @@ class PAFTLinear(nn.Module):
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         W = self.reconstruct_weight()
-        # CAST weight and bias to x.dtype for the actual multiplication
-        # This avoids the "mat1 and mat2 must have the same dtype" error
+
+        # FIXED: Match weight and bias precision to input (e.g., Half for Colab T4)
         W = W.to(x.dtype)
         bias = self.bias.to(x.dtype) if self.bias is not None else None
 

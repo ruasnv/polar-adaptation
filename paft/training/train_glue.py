@@ -138,7 +138,14 @@ def main() -> None:
     # ── 1. Build model + tokenizer ───────────────────────────────────────────
     num_labels = NUM_LABELS[args.task]
     logger.info(f"Building {args.method} for {args.task} (num_labels={num_labels}) ...")
-    model, tokenizer = get_deberta_model(args.method, num_labels)
+
+    # PoLAR returns (model, tokenizer, stiefel_callback); all others return (model, tokenizer)
+    result = get_deberta_model(args.method, num_labels)
+    if len(result) == 3:
+        model, tokenizer, stiefel_callback = result
+    else:
+        model, tokenizer = result
+        stiefel_callback = None
     logger.info(
         f"Model ready — "
         f"{sum(p.numel() for p in model.parameters() if p.requires_grad):,} "
@@ -228,6 +235,10 @@ def main() -> None:
 
     args_ns = args  # capture outer args namespace for the callback
 
+    callbacks = [PAFTEpochCallback()]
+    if stiefel_callback is not None:
+        callbacks.append(stiefel_callback)
+
     # ── 7. Trainer ───────────────────────────────────────────────────────────
     trainer = Trainer(
         model            = model,
@@ -236,7 +247,7 @@ def main() -> None:
         eval_dataset     = dm._val_dataset,
         compute_metrics  = dm.get_metric_fn(),
         tokenizer        = tokenizer,
-        callbacks        = [PAFTEpochCallback()],
+        callbacks        = callbacks,
     )
 
     logger.info("Starting training ...")

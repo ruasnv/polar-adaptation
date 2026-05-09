@@ -274,6 +274,8 @@ class LLMTrainer:
                     max_norm = self.args.grad_clip,
                 )
                 self.optimizer.step()
+                # Stiefel retraction for PoLAR (no-op for all other methods)
+                _retract_stiefel(self.model)
                 self.scheduler.step()
                 self.optimizer.zero_grad(set_to_none=True)
                 global_step += 1
@@ -482,6 +484,14 @@ def _run_llama_analysis(model, method_name: str, output_dir: Path) -> None:
 # ──────────────────────────────────────────────────────────────────────────────
 # Utilities
 # ──────────────────────────────────────────────────────────────────────────────
+
+def _retract_stiefel(model: nn.Module) -> None:
+    """Call retract_to_stiefel() on any PoLARLinear layers (no-op for all other methods)."""
+    from paft.model.polar_linear import PoLARLinear
+    for m in model.modules():
+        if isinstance(m, PoLARLinear):
+            m.retract_to_stiefel()
+
 
 def _to_device(batch: Dict, device: torch.device) -> Dict:
     """Move tensor values in batch to device.  Skip non-tensors."""
