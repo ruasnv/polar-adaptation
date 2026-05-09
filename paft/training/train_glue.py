@@ -142,15 +142,22 @@ def main() -> None:
     num_labels = NUM_LABELS[args.task]
     logger.info(f"Building {args.method} for {args.task} (num_labels={num_labels}) ...")
 
-    # PoLAR returns (model, tokenizer, stiefel_callback); all others return (model, tokenizer)
+    # 1. Get result from registry
     result = get_deberta_model(args.method, num_labels)
-    if len(result) == 3:
+
+    # 2. Extract model, tokenizer, and callback correctly
+    if isinstance(result, tuple) and len(result) == 3:
         model, tokenizer, stiefel_callback = result
     else:
         model, tokenizer = result
         stiefel_callback = None
+
+    # 3. CRITICAL: Force the entire model to FP32 to solve NaN/Half-vs-Float errors
+    # This ensures every layer (Embedding, LayerNorm, etc.) is in the same precision as PAFT
+    model = model.float()
+
     logger.info(
-        f"Model ready — "
+        f"Model ready (FP32) — "
         f"{sum(p.numel() for p in model.parameters() if p.requires_grad):,} "
         "trainable params"
     )
@@ -220,7 +227,9 @@ def main() -> None:
         weight_decay                 = args.weight_decay,
         warmup_ratio                 = args.warmup_ratio,
         lr_scheduler_type            = "linear",
-        fp16                         = args.fp16 and torch.cuda.is_available(),
+        fp16                         = False,  # MUST be False
+        bf16                         = False,  # Ensure this is also False
+        torch_compile                = False,  # Disable for now to keep things simple
         eval_strategy                = "epoch",
         save_strategy                = "epoch",
         load_best_model_at_end       = True,

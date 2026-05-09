@@ -160,8 +160,8 @@ class PAFTLinear(nn.Module):
         Reconstruct the full weight matrix [out_features, in_features].
         Called on every forward pass — kept vectorised, no Python loops.
         """
-        S = self._get_S()  # [H, d, d] (Float)
-        Q = self.Q.to(dtype=S.dtype)  # Cast Q to Float for high-precision arithmetic
+        S = self._get_S()   # [H, d, d]
+        Q = self.Q.float()  # cast Q back to fp32 for arithmetic if stored in fp16
 
         if self.decomp_mode == 'row':
             # W_h = S_h @ Q_h  →  [H, d, n_in]  →  reshape to [H*d, n_in]
@@ -176,13 +176,29 @@ class PAFTLinear(nn.Module):
             return W_h.permute(1, 0, 2).reshape(n_out, H * d)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        W = self.reconstruct_weight()
+        """
+        Compute F.linear with PAFT-reconstructed weight.
 
-        # FIXED: Match weight and bias precision to input (e.g., Half for Colab T4)
-        W = W.to(x.dtype)
-        bias = self.bias.to(x.dtype) if self.bias is not None else None
+        FP16 AMP note (required for HF Trainer fp16=True compatibility):
+        ─────────────────────────────────────────────────────────────────
+        Under torch.autocast(fp16), torch.bmm(FP32, FP32) returns FP16.
+        Gradients flowing back through FP16 ops arrive at lam/S in FP16,
+        causing GradScaler.unscale_() to raise:
+            "ValueError: Attempting to unscale FP16 gradients."
 
-        return F.linear(x, W, bias)
+        Fix: cast x to FP32 before F.linear so the entire backward path
+        from W → S → lam remains in FP32.  Cast output back to x's dtype
+        so the rest of the model sees the expected dtype.
+
+        This is identical to how PEFT LoRA handles this situation.
+        """
+        # Force everything to Float and KEEP it Float
+        W = self.reconstruct_weight().float()
+        bias = self.bias.float() if self.bias is not None else None
+
+        # Compute in Float and return in Float
+        out = F.linear(x.float(), W, bias)
+        return out.float()
 
     # ── geometric accessors ───────────────────────────────────────────────────
 

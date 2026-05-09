@@ -34,14 +34,17 @@ import torch
 import torch.nn as nn
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
-from paft.model.deberta_paft_model import DeBERTaPAFTModel, _N_HEADS, _HEAD_DIM
+from paft.model.deberta_paft_model import DeBERTaPAFTModel
 from paft.model.paft_linear import PAFTLinear
 from paft.methods.base import freeze_all   # canonical implementation from base.py
 
 logger = logging.getLogger(__name__)
 
+# In deberta_methods.py
 HF_MODEL_NAME = "microsoft/deberta-v3-base"
 _N_LAYERS = 12
+_N_HEADS  = 12   # <--- Add this
+_HEAD_DIM = 64   # <--- Add this
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -69,14 +72,15 @@ def count_trainable(model: nn.Module) -> int:
 # ──────────────────────────────────────────────────────────────────────────────
 # Base builder
 # ──────────────────────────────────────────────────────────────────────────────
-
 def load_deberta_base(task_name: str, num_labels: int):
-    """Load pretrained DeBERTa-v3-base with classification head."""
+    """Load pretrained DeBERTa-v3-base strictly in FP32."""
     model = AutoModelForSequenceClassification.from_pretrained(
         HF_MODEL_NAME,
         num_labels = num_labels,
         ignore_mismatched_sizes = True,
+        torch_dtype = torch.float32,  # Explicitly force FP32 here
     )
+    model = model.float() # Double-ensure every parameter is Float
     tokenizer = AutoTokenizer.from_pretrained(HF_MODEL_NAME)
     return model, tokenizer
 
@@ -84,7 +88,6 @@ def load_deberta_base(task_name: str, num_labels: int):
 # ──────────────────────────────────────────────────────────────────────────────
 # Method 1: DeBERTa Pure PAFT
 # ──────────────────────────────────────────────────────────────────────────────
-
 def build_deberta_pure_paft(num_labels: int) -> Tuple[nn.Module, AutoTokenizer]:
     """
     Trainable: lam_V [H, d], lam_O [H, d] per layer + classifier.
@@ -243,11 +246,30 @@ class SVFLinear(nn.Module):
         else:
             self.bias = None
 
+    # In deberta_methods.py inside SVFLinear class
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        sigma = self.sigma_init + self.delta_sigma
-        W = self.U @ torch.diag(sigma) @ self.Vh
-        return torch.nn.functional.linear(x, W, self.bias)
+        """
+        FP32-guaranteed forward pass for SVF.
+        Uses (U * sigma) @ Vh for efficient reconstruction instead of full diagonal mats.
+        """
+        # 1. Disable autocast to prevent the Trainer from forcing math into FP16
+        with torch.amp.autocast('cuda', enabled=False):
+            # 2. Ensure all parameters are explicitly FP32 for the GradScaler
+            sigma = (self.sigma_init + self.delta_sigma).float()
 
+            # Efficient reconstruction: Scaling columns of U by sigma is math-equivalent to U @ diag(sigma)
+            # W = U Σ V^H
+            # This avoids O(N^3) diagonal matrix creation.
+            W = (self.U.float() * sigma) @ self.Vh.float()
+
+            bias = self.bias.float() if self.bias is not None else None
+
+            # 3. Execute the linear layer in full precision
+            out = torch.nn.functional.linear(x.float(), W, bias)
+
+        # 4. Cast back to the original input dtype (likely FP16) for DeBERTa's next layers
+        # Apply this change to both SVF and PoLAR return lines:
+        return out.float()
 
 def build_deberta_svf(num_labels: int) -> Tuple[nn.Module, AutoTokenizer]:
     """
@@ -468,7 +490,7 @@ def build_deberta_paft_ablation(
 
 # Add ablation variants to method registry
 DEBERTA_METHODS.update({
-    "polar_r8":     lambda n: build_deberta_polar(n, rank=8)[:2],  # drop callback (train_glue handles)
+    "polar_r8":     lambda n: build_deberta_polar(n, rank=8),  # drop callback (train_glue handles)
     "paft_v_only":  lambda n: build_deberta_paft_ablation(n, adapt_value=True,  adapt_output=False),
     "paft_o_only":  lambda n: build_deberta_paft_ablation(n, adapt_value=False, adapt_output=True),
     "paft_qv":      lambda n: build_deberta_paft_ablation(n, adapt_value=True,  adapt_output=False, adapt_query=True),

@@ -98,11 +98,22 @@ class PoLARLinear(nn.Module):
         )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        # ΔW = scale * X @ B^T   [out, in]
-        delta_W = self.scale * (self.X @ self.B.T)
-        W_eff   = self.weight_0 + delta_W
-        bias    = self.bias_0 if self.bias_0 is not None else None
-        return F.linear(x, W_eff, bias)
+        """
+        FP16 AMP note: X, B, and weight_0 are FP32. Under torch.autocast(fp16),
+        matrix multiplications would return FP16, making X.grad and B.grad FP16.
+        GradScaler.unscale_() would then raise "Attempting to unscale FP16 gradients."
+
+        Fix: compute entirely in FP32, cast output back to x.dtype.
+        Same pattern as PAFTLinear and PEFT LoRA.
+        """
+        with torch.amp.autocast('cuda', enabled=False):
+            delta_W = self.scale * (self.X @ self.B.T)
+            W_eff = self.weight_0.float() + delta_W.float()
+            bias = self.bias_0.float() if self.bias_0 is not None else None
+
+            out = F.linear(x.float(), W_eff, bias)
+        # Apply this change to both SVF and PoLAR return lines:
+        return out.float()
 
     @torch.no_grad()
     def retract_to_stiefel(self) -> None:

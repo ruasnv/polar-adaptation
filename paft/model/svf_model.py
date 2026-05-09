@@ -110,7 +110,9 @@ class SVFAttention(nn.Module):
             bmm(result,      Vh_V                [H,d,d]) = [H,n,d]
             permute(1,0,2) → [n,H,d] → reshape → [n_embd, n_embd]
         """
-        tmp = torch.bmm(self.U_V, torch.diag_embed(self.sigma_V))  # [H, n_embd, d_head]
+        #tmp = torch.bmm(self.U_V, torch.diag_embed(self.sigma_V))  # [H, n_embd, d_head]
+        # To this (much faster and memory efficient):
+        tmp = self.U_V * self.sigma_V.unsqueeze(1)
         W_h = torch.bmm(tmp, self.Vh_V)                            # [H, n_embd, d_head]
         return W_h.permute(1, 0, 2).reshape(self.n_embd, self.n_embd)
 
