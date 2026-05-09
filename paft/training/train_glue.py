@@ -58,7 +58,7 @@ from transformers import (
 from paft.data.glue_module import GLUEDataModule, NUM_LABELS, SUPPORTED_TASKS
 from paft.methods.deberta_methods import get_deberta_model, DEBERTA_METHODS
 from paft.utils.experiment_saver import save_checkpoint, is_complete
-from paft.analysis.stable_rank import (
+from analysis.stable_rank import (
     analyze_all_layers, compare_methods_stable_rank,
     plot_stable_rank_comparison, plot_layer_profile,
 )
@@ -184,7 +184,16 @@ def main() -> None:
         "qqp":  1e-5, "rte":  2e-5,   "sst2": 2e-5, "stsb": 2e-5,
     }
     # Use command-line lr if explicitly set, otherwise use task defaults
-    effective_lr     = args.lr if args.lr != 2e-4 else TASK_LR.get(args.task, args.lr)
+    if args.lr != 2e-4:
+        # If the user explicitly passed an LR (which we will do in the sweep), USE IT.
+        effective_lr = args.lr
+    else:
+        # Fallback to standard task-specific defaults for the main runs
+        effective_lr = TASK_LR.get(args.task, args.lr)
+        # Only apply the "safe floor" if we aren't explicitly sweeping
+        if args.method in ("pure_paft", "hybrid_paft"):
+            effective_lr = max(effective_lr, 1e-3)
+
     effective_epochs = args.epochs if args.epochs != 5 else TASK_EPOCHS.get(args.task, args.epochs)
 
     # For PAFT methods, use a higher learning rate on the S/lam parameters
@@ -239,12 +248,40 @@ def main() -> None:
     if stiefel_callback is not None:
         callbacks.append(stiefel_callback)
 
-    # ── 7. Trainer ───────────────────────────────────────────────────────────
+    # 7. Custom Optimizer for Parameter Groups
+    from torch.optim import AdamW
+    if "safe" in args.method:
+        # Separate PAFT parameters (S or lam) from Bias parameters
+        paft_params = []
+        bias_params = []
+
+        for name, param in model.named_parameters():
+            if not param.requires_grad: continue
+            if any(x in name for x in ['S', 'lam']):
+                paft_params.append(param)
+            elif 'bias' in name:
+                bias_params.append(param)
+            else:
+                paft_params.append(param)  # Default everything else to PAFT group
+
+        optimizer = AdamW([
+            {"params": paft_params, "lr": effective_lr},
+            {"params": bias_params, "lr": effective_lr * 2}  # Biases often benefit from higher LR
+        ], weight_decay=args.weight_decay)
+
+        # Pass this optimizer to the Trainer via the 'optimizers' tuple (optimizer, scheduler)
+        trainer_optimizers = (optimizer, None)
+    else:
+        trainer_optimizers = (None, None)  # Let Trainer handle it standardly
+
+    # Update Trainer call:
+    # ── Trainer ───────────────────────────────────────────────────────────
     trainer = Trainer(
         model            = model,
         args             = training_args,
         train_dataset    = dm._train_dataset,
         eval_dataset     = dm._val_dataset,
+        optimizer = trainer_optimizers,
         compute_metrics  = dm.get_metric_fn(),
         tokenizer        = tokenizer,
         callbacks        = callbacks,
@@ -305,7 +342,7 @@ def _run_geometric_analysis(model, method_name: str, output_dir: Path) -> None:
     Saves results to {output_dir}/analysis/.
     """
     from paft.model.deberta_paft_model import DeBERTaPAFTModel
-    from paft.analysis.stable_rank import analyze_all_layers, summarize_stable_rank
+    from analysis.stable_rank import analyze_all_layers, summarize_stable_rank
 
     analysis_dir = output_dir / "analysis"
 

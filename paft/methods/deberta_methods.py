@@ -34,7 +34,7 @@ import torch
 import torch.nn as nn
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
-from paft.model.deberta_paft_model import DeBERTaPAFTModel
+from paft.model.deberta_paft_model import DeBERTaPAFTModel, _N_HEADS, _HEAD_DIM
 from paft.model.paft_linear import PAFTLinear
 from paft.methods.base import freeze_all   # canonical implementation from base.py
 
