@@ -41,7 +41,9 @@ for method in $METHODS; do
             --lr "$lr" \
             --epochs 3 \
             --output_dir "$OUT_DIR" \
-            --batch_size 32 \
+            --batch_size 16 \
+            --grad_accum 2 \
+            --max_length 128 \
             --fp16
     done
 done
