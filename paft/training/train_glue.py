@@ -281,7 +281,7 @@ def main() -> None:
         args             = training_args,
         train_dataset    = dm._train_dataset,
         eval_dataset     = dm._val_dataset,
-        optimizer = trainer_optimizers,
+        optimizers = trainer_optimizers,
         compute_metrics  = dm.get_metric_fn(),
         tokenizer        = tokenizer,
         callbacks        = callbacks,
