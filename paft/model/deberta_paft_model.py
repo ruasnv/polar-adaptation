@@ -25,7 +25,6 @@ All decomposition runs on CPU before .to(device) call.
 from __future__ import annotations
 
 import logging
-from dataclasses import dataclass, field
 from typing import Any, Dict, Iterator, List, Optional, Tuple
 
 import torch
@@ -33,6 +32,7 @@ import torch.nn as nn
 from transformers import AutoModelForSequenceClassification, DebertaV2Config
 
 from paft.model.paft_linear import PAFTLinear
+from paft.methods.base import PAFTSnapshot, freeze_all  # reuse existing dataclass + utility
 
 logger = logging.getLogger(__name__)
 
@@ -43,30 +43,10 @@ _HEAD_DIM  = 64
 _HID_SIZE  = 768
 
 
-@dataclass
-class DeBERTaPAFTLayerSnapshot:
-    """Decomposition state for one DeBERTa attention layer."""
-    Q_V:   torch.Tensor   # [H, d, n]  frozen Q for value_proj (row mode)
-    Q_O:   torch.Tensor   # [H, n, d]  frozen Q for output.dense (col mode)
-    S_V:   torch.Tensor   # [H, d, d]  scaling for value_proj
-    S_O:   torch.Tensor   # [H, d, d]  scaling for output.dense
-    EV_V:  torch.Tensor   # [H, d, d]  eigenvectors of initial S_V
-    EV_O:  torch.Tensor   # [H, d, d]  eigenvectors of initial S_O
-    lam_V: torch.Tensor   # [H, d]     eigenvalues of initial S_V
-    lam_O: torch.Tensor   # [H, d]     eigenvalues of initial S_O
-
-
-@dataclass
-class DeBERTaPAFTSnapshot:
-    """Snapshot of all PAFT state across all layers. Mirrors PAFTSnapshot for GPT-2."""
-    Q_V:   List[torch.Tensor] = field(default_factory=list)
-    Q_O:   List[torch.Tensor] = field(default_factory=list)
-    S_V:   List[torch.Tensor] = field(default_factory=list)
-    S_O:   List[torch.Tensor] = field(default_factory=list)
-    EV_V:  List[torch.Tensor] = field(default_factory=list)
-    EV_O:  List[torch.Tensor] = field(default_factory=list)
-    lam_V: List[torch.Tensor] = field(default_factory=list)
-    lam_O: List[torch.Tensor] = field(default_factory=list)
+# DeBERTaPAFTSnapshot is the same contract as PAFTSnapshot (imported from base).
+# Using the shared dataclass keeps it compatible with the existing CheckpointSaver
+# which reads Q_V, Q_O, S_V, S_O, EV_V, EV_O, lam_V, lam_O field names.
+DeBERTaPAFTSnapshot = PAFTSnapshot
 
 
 class DeBERTaPAFTModel(nn.Module):
@@ -199,19 +179,36 @@ class DeBERTaPAFTModel(nn.Module):
 
     def get_live_WV_WO(self) -> Dict[str, List[torch.Tensor]]:
         """
-        Return effective W_V and W_O per layer (all heads combined).
-        W_V [H, n, d], W_O [H, d, n] — consistent with GPT-2 PAFT convention.
+        Return effective W_V and W_O per layer, shaped to match BaseMethod contract:
+          W_V: List[n_layers] of Tensor[n_heads, n_embd, d_head]   i.e. [H, n, d]
+          W_O: List[n_layers] of Tensor[n_heads, d_head, n_embd]   i.e. [H, d, n]
+
+        This matches the exact shapes produced by extractor.py for GPT-2, so that
+        geometric_health_snapshot() in BaseMethod works identically for both models.
+
+        Shape derivations (row mode for V, col mode for O):
+          vp.reconstruct_weight() → [H*d, n_in] (row mode: cat S_h @ Q_h along dim=0)
+            Reshape [H*d, n] → [H, d, n] → permute(0,2,1) → [H, n, d]  ✓
+          od.reconstruct_weight() → [n_out, H*d] (col mode: cat Q_h @ S_h along dim=1)
+            Reshape [n, H*d] → [n, H, d] → permute(1,2,0) → [H, d, n]  ✓
         """
         W_V_layers, W_O_layers = [], []
         with torch.no_grad():
             for _, vp, od in self._iter_paft_layers():
-                # vp reconstructs [H*d, n] → reshape to [H, d, n]
-                W_V = vp.reconstruct_weight().detach().reshape(_N_HEADS, _HEAD_DIM, _HID_SIZE)
-                # od reconstructs [n, H*d] → reshape/permute to [H, n, d] ... wait
-                # col mode: W_h = Q_h @ S_h, W [n_out, H*d]
-                # Per head: W[:, h*d:(h+1)*d] = [n, d]
-                W_O_full = od.reconstruct_weight().detach()   # [n, H*d]
-                W_O = W_O_full.reshape(_HID_SIZE, _N_HEADS, _HEAD_DIM).permute(1, 0, 2)  # [H, n, d]
+                # V projection: [H*d, n] → [H, n, d]
+                W_V_flat = vp.reconstruct_weight().detach()        # [H*d, n]
+                W_V = (W_V_flat
+                       .reshape(_N_HEADS, _HEAD_DIM, _HID_SIZE)   # [H, d, n]
+                       .permute(0, 2, 1)                           # [H, n, d] ✓
+                       .contiguous())
+
+                # O projection: [n, H*d] → [H, d, n]
+                W_O_flat = od.reconstruct_weight().detach()        # [n, H*d]
+                W_O = (W_O_flat
+                       .reshape(_HID_SIZE, _N_HEADS, _HEAD_DIM)   # [n, H, d]
+                       .permute(1, 2, 0)                           # [H, d, n] ✓
+                       .contiguous())
+
                 W_V_layers.append(W_V.cpu())
                 W_O_layers.append(W_O.cpu())
         return {"W_V": W_V_layers, "W_O": W_O_layers}

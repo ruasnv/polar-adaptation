@@ -47,13 +47,13 @@ Scientific disclosure text (paste into paper):
 from __future__ import annotations
 
 import logging
-from dataclasses import dataclass, field
 from typing import Any, Dict, Iterator, List, Optional, Tuple
 
 import torch
 import torch.nn as nn
 
 from paft.model.paft_linear import PAFTLinear
+from paft.methods.base import PAFTSnapshot  # reuse shared snapshot dataclass
 
 logger = logging.getLogger(__name__)
 
@@ -89,13 +89,10 @@ def _dequantize_weight(layer) -> torch.Tensor:
     return w.detach().float().cpu()
 
 
-@dataclass
-class LLaMAPAFTSnapshot:
-    """PAFT decomposition state across all layers."""
-    Q_V:   List[torch.Tensor] = field(default_factory=list)   # [H_kv, d, n]
-    S_V:   List[torch.Tensor] = field(default_factory=list)   # [H_kv, d, d]
-    EV_V:  List[torch.Tensor] = field(default_factory=list)   # [H_kv, d, d]
-    lam_V: List[torch.Tensor] = field(default_factory=list)   # [H_kv, d]
+# LLaMAPAFTSnapshot uses the shared PAFTSnapshot dataclass.
+# O-side fields (Q_O, S_O, EV_O, lam_O) are empty lists for LLaMA since
+# PAFT is applied to v_proj only — o_proj remains frozen NF4.
+LLaMAPAFTSnapshot = PAFTSnapshot
 
 
 class LLaMAPAFTModel(nn.Module):
@@ -204,14 +201,53 @@ class LLaMAPAFTModel(nn.Module):
         return snap
 
     def get_live_W_V(self) -> List[torch.Tensor]:
-        """Return effective v_proj weight [n_kv_heads, head_dim, hidden] per layer."""
+        """
+        Return effective v_proj weight per layer as [n_kv_heads, n_embd, head_dim].
+        Matches BaseMethod's W_V convention: [H, n_embd, d_head] = [H, n, d].
+
+        Row mode: vp.reconstruct_weight() → [H_kv*d, hidden] → reshape+permute → [H_kv, hidden, d]
+        """
         result = []
         with torch.no_grad():
             for _, vp in self._iter_paft_v_proj():
-                W = vp.reconstruct_weight().detach()  # [H_kv*d, hidden]
-                W = W.reshape(self.n_kv_heads, self.head_dim, self.hidden_size)
+                W_flat = vp.reconstruct_weight().detach()                        # [H_kv*d, hidden]
+                W = (W_flat
+                     .reshape(self.n_kv_heads, self.head_dim, self.hidden_size)  # [H, d, hidden]
+                     .permute(0, 2, 1)                                            # [H, hidden, d] ✓
+                     .contiguous())
                 result.append(W.cpu())
         return result
+
+    def get_live_WV_WO(self) -> Dict[str, List[torch.Tensor]]:
+        """
+        Return W_V (PAFT-adapted) and W_O (frozen o_proj) per layer.
+
+        Required by BaseMethod.geometric_health_snapshot():
+          W_V: List[n_layers] of Tensor[H_kv, n_embd, head_dim]    adapted v_proj
+          W_O: List[n_layers] of Tensor[H_q,  head_dim, n_embd]    frozen o_proj
+
+        For W_O: o_proj is a standard (or NF4-quantized) Linear [hidden, num_heads*d].
+        We dequantize it and reshape per Q-head to match the [H, d, n] convention.
+        This gives the frozen W_O geometric health baseline — it won't change across
+        methods, which is expected since PAFT only adapts v_proj.
+        """
+        W_V_layers = self.get_live_W_V()
+
+        n_q_heads = self.base.config.num_attention_heads
+        W_O_layers = []
+        with torch.no_grad():
+            for l in range(self.n_layers):
+                o_proj = self.base.model.layers[l].self_attn.o_proj
+                W_o_fp32 = _dequantize_weight(o_proj)    # [hidden, n_q_heads*d]
+                # Per Q-head: W_o_fp32[:, h*d:(h+1)*d] = [hidden, d] → [d, hidden] transposed
+                # Stack as [H_q, d, hidden] = [H, d, n] ✓
+                W_O = (W_o_fp32
+                       .reshape(self.hidden_size, n_q_heads, self.head_dim)  # [n, H, d]
+                       .permute(1, 2, 0)                                      # [H, d, n] ✓
+                       .contiguous())
+                W_O_layers.append(W_O)
+
+        return {"W_V": W_V_layers, "W_O": W_O_layers}
 
     def measure_orthogonality(self) -> float:
         """Mean ||Q_h Q_h^T - I||_F across all layers and KV heads."""

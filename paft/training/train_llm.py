@@ -412,21 +412,25 @@ def _run_llama_analysis(model, method_name: str, output_dir: Path) -> None:
     analysis_dir = output_dir / "analysis"
     analysis_dir.mkdir(exist_ok=True)
 
-    W_V_layers = model.get_live_W_V()  # [H_kv, d, hidden] per layer
+    # get_live_WV_WO returns W_V [H_kv, n_embd, head_dim] per layer
+    live = model.get_live_WV_WO()
+    W_V_layers = live["W_V"]
 
-    # Per-head 2D matrices for stable rank
-    def head_to_2d(W_list):
-        """W [H, d, n] → list of H×d matrices, averaged across heads per layer."""
-        return [W.reshape(-1, W.shape[-1]) for W in W_list]  # [H*d, n] per layer
-
-    W_V_2d = head_to_2d(W_V_layers)
+    # Flatten [H_kv, n_embd, d] → [H_kv * n_embd, d] per layer for stable rank
+    # (equivalent to treating the full v_proj weight as a single matrix)
+    W_V_2d = [
+        W.reshape(-1, W.shape[-1])   # [H_kv * n_embd, d_head]
+        for W in W_V_layers
+    ]
     layer_metrics = analyze_all_layers(W_V_2d)
     summary = summarize_stable_rank(W_V_2d)
 
     analysis = {
-        "method":  method_name,
-        "summary": summary,
+        "method":      method_name,
+        "summary":     summary,
         "ortho_error": model.measure_orthogonality(),
+        "note":        "Metrics computed on v_proj only (PAFT target). "
+                       "o_proj is frozen NF4 (same for all methods).",
     }
     with open(analysis_dir / "stable_rank.json", "w") as f:
         json.dump(analysis, f, indent=2)

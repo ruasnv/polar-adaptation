@@ -42,6 +42,7 @@ import torch.nn as nn
 
 from paft.model.llama_paft_model import LLaMAPAFTModel, load_llama_nf4
 from paft.model.paft_linear import PAFTLinear
+from paft.methods.base import freeze_all   # canonical implementation from base.py
 
 logger = logging.getLogger(__name__)
 
@@ -52,11 +53,6 @@ DEFAULT_MODEL = "meta-llama/Llama-3.2-3B"
 # ──────────────────────────────────────────────────────────────────────────────
 # Helper utilities
 # ──────────────────────────────────────────────────────────────────────────────
-
-def freeze_all(model: nn.Module) -> None:
-    for p in model.parameters():
-        p.requires_grad_(False)
-
 
 def count_trainable(model: nn.Module) -> int:
     return sum(p.numel() for p in model.parameters() if p.requires_grad)

@@ -258,13 +258,11 @@ def _run_geometric_analysis(model, method_name: str, output_dir: Path) -> None:
         W_V_layers   = live_weights["W_V"]  # [H, d, n] per layer
         W_O_layers   = live_weights["W_O"]  # [H, n, d] per layer
 
-        # Reshape to 2D per layer for stable rank: mean over heads
-        def layers_to_2d(W_list, h_dim=0):
-            """Average over head dimension and reshape to [m, n] per layer."""
-            return [W.mean(dim=h_dim) for W in W_list]
-
-        W_V_2d = layers_to_2d(W_V_layers)
-        W_O_2d = layers_to_2d(W_O_layers)
+        # W_V: [H, n_embd, d_head] per layer — reshape to [H*n_embd, d_head] for stable rank
+        # This treats the full value_proj matrix as a single [n_embd, d_head]-equivalent
+        # weight (averaged view), consistent with how o_proj is treated in the paper.
+        W_V_2d = [W.reshape(-1, W.shape[-1]) for W in W_V_layers]   # [H*n, d] per layer
+        W_O_2d = [W.reshape(W.shape[0], -1) for W in W_O_layers]    # [H, d*n] or reshape to [d, H*n]
 
         # Compute stable rank for V and O projections
         sr_V = analyze_all_layers(W_V_2d)

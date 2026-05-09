@@ -36,6 +36,7 @@ from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 from paft.model.deberta_paft_model import DeBERTaPAFTModel
 from paft.model.paft_linear import PAFTLinear
+from paft.methods.base import freeze_all   # canonical implementation from base.py
 
 logger = logging.getLogger(__name__)
 
@@ -46,12 +47,6 @@ _N_LAYERS = 12
 # ──────────────────────────────────────────────────────────────────────────────
 # Helper utilities
 # ──────────────────────────────────────────────────────────────────────────────
-
-def freeze_all(model: nn.Module) -> None:
-    """Set requires_grad=False for all parameters."""
-    for p in model.parameters():
-        p.requires_grad_(False)
-
 
 def unfreeze_classifier(model) -> None:
     """
