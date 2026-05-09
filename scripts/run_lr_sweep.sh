@@ -43,8 +43,7 @@ for method in $METHODS; do
             --output_dir "$OUT_DIR" \
             --batch_size 16 \
             --grad_accum 2 \
-            --max_length 128 \
-            --fp16
+            --max_length 128
     done
 done
 
