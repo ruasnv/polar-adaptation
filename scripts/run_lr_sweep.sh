@@ -30,8 +30,7 @@ for method in $METHODS; do
             continue
         fi
 
-        # Run the training
-        python -m paft.train_glue \
+        python3 -m paft.training.train_glue \
             --task "$TASK" \
             --method "$method" \
             --lr "$lr" \
