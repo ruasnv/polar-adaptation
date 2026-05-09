@@ -57,7 +57,8 @@ from transformers import (
 
 from paft.data.glue_module import GLUEDataModule, NUM_LABELS, SUPPORTED_TASKS
 from paft.methods.deberta_methods import get_deberta_model, DEBERTA_METHODS
-from analysis.stable_rank import (
+from paft.utils.experiment_saver import save_checkpoint, is_complete
+from paft.analysis.stable_rank import (
     analyze_all_layers, compare_methods_stable_rank,
     plot_stable_rank_comparison, plot_layer_profile,
 )
@@ -129,6 +130,11 @@ def main() -> None:
 
     logger.info(f"Task: {args.task}  Method: {args.method}  Output: {output_dir}")
 
+    # Resume: skip completed runs
+    if is_complete(output_dir):
+        logger.info(f"Run already complete (training_complete found). Skipping.")
+        return
+
     # ── 1. Build model + tokenizer ───────────────────────────────────────────
     num_labels = NUM_LABELS[args.task]
     logger.info(f"Building {args.method} for {args.task} (num_labels={num_labels}) ...")
@@ -148,7 +154,18 @@ def main() -> None:
     )
     logger.info(dm)
 
-    # ── 3. HuggingFace TrainingArguments ─────────────────────────────────────
+    # ── 4. Save INIT checkpoint (pretrained weights before any training) ─────
+    logger.info("Saving init checkpoint (pretrained weights, geometric health) ...")
+    save_checkpoint(
+        model       = model,
+        output_dir  = output_dir,
+        tag         = "init",
+        method_name = args.method,
+        metrics     = {"task": args.task, "method": args.method, "stage": "init"},
+        model_type  = "deberta",
+    )
+
+    # ── 5. HuggingFace TrainingArguments ─────────────────────────────────────
     # Task-specific hyperparameters (following DeBERTa-v3 paper recommendations)
     # Epoch counts: more for small tasks (RTE: 10, CoLA: 10), fewer for large (MNLI: 3, QQP: 3)
     TASK_EPOCHS = {
@@ -191,7 +208,27 @@ def main() -> None:
         dataloader_num_workers       = 4,
     )
 
-    # ── 4. Trainer ───────────────────────────────────────────────────────────
+    # ── 6. Per-epoch PAFT snapshot callback ──────────────────────────────────
+    # HF Trainer doesn't expose epoch-end hooks easily, so we save PAFT snapshots
+    # via a custom callback that fires after each evaluation pass.
+    from transformers import TrainerCallback
+
+    class PAFTEpochCallback(TrainerCallback):
+        """Save PAFT snapshot and geometric health after every eval epoch."""
+        def on_evaluate(self, args, state, control, **kwargs):
+            epoch = int(state.epoch) if state.epoch else 0
+            save_checkpoint(
+                model       = model,
+                output_dir  = output_dir,
+                tag         = f"epoch_{epoch}",
+                method_name = args_ns.method,
+                metrics     = {"epoch": epoch, "task": args_ns.task},
+                model_type  = "deberta",
+            )
+
+    args_ns = args  # capture outer args namespace for the callback
+
+    # ── 7. Trainer ───────────────────────────────────────────────────────────
     trainer = Trainer(
         model            = model,
         args             = training_args,
@@ -199,12 +236,13 @@ def main() -> None:
         eval_dataset     = dm._val_dataset,
         compute_metrics  = dm.get_metric_fn(),
         tokenizer        = tokenizer,
+        callbacks        = [PAFTEpochCallback()],
     )
 
     logger.info("Starting training ...")
     trainer.train()
 
-    # ── 5. Final evaluation ───────────────────────────────────────────────────
+    # ── 8. Final evaluation ───────────────────────────────────────────────────
     logger.info("Final evaluation ...")
     eval_results = trainer.evaluate()
     logger.info(f"Eval results: {eval_results}")
@@ -227,6 +265,17 @@ def main() -> None:
     with open(output_dir / "config.json", "w") as f:
         json.dump(config, f, indent=2)
 
+    # ── Save FINAL checkpoint (adapted weights + PAFT snapshot + sentinel) ───
+    logger.info("Saving final checkpoint ...")
+    save_checkpoint(
+        model       = model,
+        output_dir  = output_dir,
+        tag         = "final",
+        method_name = args.method,
+        metrics     = metrics,
+        model_type  = "deberta",
+    )
+
     # ── 6. Geometric analysis ─────────────────────────────────────────────────
     if args.run_analysis and not args.skip_analysis:
         _run_geometric_analysis(model, args.method, output_dir)
@@ -245,7 +294,7 @@ def _run_geometric_analysis(model, method_name: str, output_dir: Path) -> None:
     Saves results to {output_dir}/analysis/.
     """
     from paft.model.deberta_paft_model import DeBERTaPAFTModel
-    from analysis.stable_rank import analyze_all_layers, summarize_stable_rank
+    from paft.analysis.stable_rank import analyze_all_layers, summarize_stable_rank
 
     analysis_dir = output_dir / "analysis"
 

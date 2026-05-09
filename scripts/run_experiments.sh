@@ -41,6 +41,7 @@ DRY_RUN="${DRY_RUN:-0}"
 RESUME="${RESUME:-0}"
 TASK_SET="${TASK_SET:-all}"
 FILTER_METHOD="${FILTER_METHOD:-}"
+FILTER_TASK="${FILTER_TASK:-}"
 
 # Parse flags
 for arg in "$@"; do
@@ -49,6 +50,7 @@ for arg in "$@"; do
         --resume)       RESUME=1 ;;
         --task-set=*)   TASK_SET="${arg#*=}" ;;
         --method=*)     FILTER_METHOD="${arg#*=}" ;;
+        --task=*)       FILTER_TASK="${arg#*=}" ;;
         --results=*)    RESULTS_DIR="${arg#*=}" ;;
     esac
 done
@@ -120,6 +122,7 @@ run_glue_experiments() {
     local total=0 skipped=0 failed=0
 
     for task in $GLUE_TASKS; do
+        if [ -n "$FILTER_TASK" ] && [ "$task" != "$FILTER_TASK" ]; then continue; fi
         for method in $methods; do
             local out="$RESULTS_DIR/glue/$task/$method"
             total=$((total + 1))
@@ -175,6 +178,7 @@ run_commonsense_experiments() {
     local total=0 skipped=0 failed=0
 
     for task in $CS_TASKS; do
+        if [ -n "$FILTER_TASK" ] && [ "$task" != "$FILTER_TASK" ]; then continue; fi
         for method in $methods; do
             local out="$RESULTS_DIR/commonsense/$task/$method"
             local lr="${TASK_LR[$task]:-3e-4}"

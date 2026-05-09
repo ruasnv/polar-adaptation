@@ -56,6 +56,7 @@ from paft.methods.llama_methods import (
 )
 from paft.data.commonsense_module import CommonsenseDataModule, SUPPORTED_TASKS as CS_TASKS
 from paft.data.gsm8k_module import GSM8KDataModule
+from paft.utils.experiment_saver import save_checkpoint, is_complete
 
 logging.basicConfig(
     format  = '%(asctime)s  %(levelname)-8s  %(name)s  %(message)s',
@@ -217,6 +218,18 @@ class LLMTrainer:
             _save_trainable_params(self.model, epoch_dir / "adapter.pt")
             with open(epoch_dir / "metrics.json", "w") as f:
                 json.dump(record, f, indent=2)
+            # Optimizer + scheduler state (for resume)
+            torch.save(self.optimizer.state_dict(), epoch_dir / "optimizer.pt")
+            torch.save(self.scheduler.state_dict(), epoch_dir / "scheduler.pt")
+            # PAFT snapshot + geometric health per epoch
+            save_checkpoint(
+                model       = self.model,
+                output_dir  = self.output_dir,
+                tag         = f"epoch_{epoch}",
+                method_name = self.args.method,
+                metrics     = record,
+                model_type  = "llama",
+            )
 
         # Save training history
         with open(self.output_dir / "history.json", "w") as f:
@@ -293,6 +306,11 @@ def main() -> None:
     logger.info(f"Task: {args.task}  Method: {args.method}  Output: {output_dir}")
     logger.info(f"Model: {args.model_name}")
 
+    # Resume: skip completed runs
+    if is_complete(output_dir):
+        logger.info("Run already complete (training_complete found). Skipping.")
+        return
+
     # ── 1. Build model ───────────────────────────────────────────────────────
     logger.info(f"Building {args.method} ...")
     model, tokenizer = get_llama_model(args.method, args.model_name, args.device_map)
@@ -345,7 +363,18 @@ def main() -> None:
         def eval_fn(m):
             return dm.evaluate_log_likelihood(m, device)
 
-    # ── 3. Train ──────────────────────────────────────────────────────────────
+    # ── 3. Save INIT checkpoint ────────────────────────────────────────────────
+    logger.info("Saving init checkpoint ...")
+    save_checkpoint(
+        model       = model,
+        output_dir  = output_dir,
+        tag         = "init",
+        method_name = args.method,
+        metrics     = {"task": args.task, "method": args.method, "stage": "init"},
+        model_type  = "llama",
+    )
+
+    # ── 4. Train ──────────────────────────────────────────────────────────────
     trainer = LLMTrainer(
         model        = model,
         tokenizer    = tokenizer,
@@ -385,8 +414,19 @@ def main() -> None:
     with open(output_dir / "config.json", "w") as f:
         json.dump(config, f, indent=2)
 
-    # Save final adapter weights
+    # Save final adapter weights (fast, small)
     _save_trainable_params(model, output_dir / "adapter_final.pt")
+
+    # ── Save FINAL checkpoint (adapted weights + PAFT snapshot + sentinel) ───
+    logger.info("Saving final checkpoint ...")
+    save_checkpoint(
+        model       = model,
+        output_dir  = output_dir,
+        tag         = "final",
+        method_name = args.method,
+        metrics     = final_metrics,
+        model_type  = "llama",
+    )
 
     # ── 6. Geometric analysis ─────────────────────────────────────────────────
     if args.run_analysis and not args.skip_analysis and args.method in ("pure_paft", "hybrid_paft"):
@@ -403,7 +443,7 @@ def main() -> None:
 def _run_llama_analysis(model, method_name: str, output_dir: Path) -> None:
     """Stable rank analysis on LLaMA PAFT v_proj weights."""
     from paft.model.llama_paft_model import LLaMAPAFTModel
-    from analysis.stable_rank import analyze_all_layers, summarize_stable_rank
+    from paft.analysis.stable_rank import analyze_all_layers, summarize_stable_rank
 
     if not isinstance(model, LLaMAPAFTModel):
         return
