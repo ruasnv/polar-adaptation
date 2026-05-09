@@ -196,10 +196,6 @@ def main() -> None:
 
     effective_epochs = args.epochs if args.epochs != 5 else TASK_EPOCHS.get(args.task, args.epochs)
 
-    # For PAFT methods, use a higher learning rate on the S/lam parameters
-    if args.method in ("pure_paft", "hybrid_paft"):
-        effective_lr = max(effective_lr, 1e-3)
-
     training_args = TrainingArguments(
         output_dir                   = str(output_dir / "hf_checkpoints"),
         num_train_epochs             = effective_epochs,
@@ -275,16 +271,19 @@ def main() -> None:
         trainer_optimizers = (None, None)  # Let Trainer handle it standardly
 
     # Update Trainer call:
-    # ── Trainer ───────────────────────────────────────────────────────────
+    num_train_steps = len(dm._train_dataset) * effective_epochs // args.grad_accum
+    warmup_steps = int(num_train_steps * args.warmup_ratio)
+
+    # ── 7. Trainer ───────────────────────────────────────────────────────────
     trainer = Trainer(
-        model            = model,
-        args             = training_args,
-        train_dataset    = dm._train_dataset,
-        eval_dataset     = dm._val_dataset,
-        optimizers = trainer_optimizers,
-        compute_metrics  = dm.get_metric_fn(),
-        tokenizer        = tokenizer,
-        callbacks        = callbacks,
+        model=model,
+        args=training_args,
+        train_dataset=dm._train_dataset,
+        eval_dataset=dm._val_dataset,
+        compute_metrics=dm.get_metric_fn(),
+        processing_class=tokenizer,
+        callbacks=callbacks,
+        optimizers=trainer_optimizers,
     )
 
     logger.info("Starting training ...")
