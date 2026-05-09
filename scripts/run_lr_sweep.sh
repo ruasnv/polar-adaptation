@@ -1,6 +1,7 @@
 #!/bin/bash
 # /scripts/run_lr_sweep.sh
 
+# 1. PATH-PROOFING
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 cd "$PROJECT_ROOT"
@@ -13,50 +14,51 @@ METHODS="pure_paft hybrid_paft lora_r8 lora_r64 polar_r8 bitfit svf"
 mkdir -p "$RESULTS_DIR"
 
 for method in $METHODS; do
-    # 1. ASSIGN METHOD-SPECIFIC RANGES
-    # LoRA/PoLAR papers tune LRs separately because parameter density varies
+    # 2. ASSIGN METHOD-SPECIFIC FAST RANGES
+    # Focused on identifying the "basin of convergence" quickly.
     case $method in
         "pure_paft" | "svf")
-            # Ultra-light methods (~18k params) need high LRs to move the needle
-            LR_RANGE="5e-4 1e-3 3e-3 5e-3 1e-2"
+            # Ultra-light methods need high LRs.
+            LR_RANGE="1e-3 5e-3 1e-2"
             ;;
         "lora_r64" | "hybrid_paft")
-            # High-parameter methods (1M-4M params) explode if LR is too high
-            LR_RANGE="1e-5 5e-5 1e-4 3e-4"
+            # High-parameter methods need stability.
+            LR_RANGE="5e-5 1e-4 3e-4"
             ;;
         *)
-            # Standard PEFT range for lora_r8, polar_r8, and bitfit
-            LR_RANGE="5e-5 1e-4 3e-4 1e-3"
+            # Standard PEFT range for lora_r8, polar_r8, and bitfit.
+            LR_RANGE="1e-4 4e-4 1e-3"
             ;;
     esac
 
-    echo "--- Starting sweep for $method (Range: $LR_RANGE) ---"
+    echo "--- Starting FAST sweep for $method (Range: $LR_RANGE) ---"
 
     for lr in $LR_RANGE; do
         OUT_DIR="$RESULTS_DIR/$method/lr_$lr"
 
+        # Resume logic: skip if already complete
         if [ -f "$OUT_DIR/metrics.json" ]; then
             echo "Skipping $method at $lr (complete)"
             continue
         fi
 
-        # 2. RUN IN FULL FP32 PRECISION
-        # No FP16, no NaNs. 8GB VRAM is enough for DeBERTa-v3 in FP32
+        # 3. SPEED-RUN EXECUTION
+        # Using 1 epoch and larger batch size for maximum throughput on RTX 5070.
         python3 -m paft.training.train_glue \
             --task "$TASK" \
             --method "$method" \
             --lr "$lr" \
-            --epochs 3 \
+            --epochs 1 \
             --output_dir "$OUT_DIR" \
-            --batch_size 16 \
-            --grad_accum 2 \
+            --batch_size 32 \
+            --grad_accum 1 \
             --max_length 128 \
             --no_fp16
     done
 done
 
-# 3. IDENTIFY BEST LR (Remains the same)
-echo "--- Sweep Complete. Identifying Best Learning Rates ---"
+# 4. IDENTIFY BEST LR
+echo "--- Fast Sweep Complete. Identifying Best Learning Rates ---"
 python3 -c "
 import json, glob, os
 methods = '$METHODS'.split()
