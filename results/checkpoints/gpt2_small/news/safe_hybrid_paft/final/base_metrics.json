@@ -1,0 +1,17 @@
+{
+  "method": "safe_hybrid_paft",
+  "domain": "news",
+  "pretrained": {
+    "hellaswag": 0.3114,
+    "arc_easy": 0.3948,
+    "lambada_openai": 0.3256,
+    "wikitext": 37.3698
+  },
+  "adapted": {
+    "hellaswag": 0.3087,
+    "arc_easy": 0.3914,
+    "lambada_openai": 0.3431,
+    "wikitext": 39.691
+  },
+  "forgetting_score": 0.9937
+}

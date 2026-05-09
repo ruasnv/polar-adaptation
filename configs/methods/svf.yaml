@@ -1,0 +1,24 @@
+method:
+  name: svf
+  # Singular Value Fine-tuning (SVF) — closest structural competitor to pure_paft.
+  # Freezes U and Vh from SVD (W = U @ diag(sigma) @ Vh), tunes only sigma (diagonal).
+  # Key distinction from pure_paft:
+  #   - SVF tunes sigma in the SVD basis (asymmetric factorization, sigma > 0 diagonal)
+  #   - pure_paft tunes lambda in the polar basis (symmetric PSD S, eigenvalue basis)
+  #   - The polar S eigenbasis differs from Vh — the comparison isolates which basis is better
+  # Additive? NO — also operates on native weights, no ΔW term.
+  freeze:
+    U: true            # left singular vectors [m, k], frozen
+    Vh: true           # right singular vectors [k, n], frozen
+    W_Q: true
+    W_K: true
+    mlp: true
+    layernorm_weight: true
+    embeddings: true
+    lm_head: true
+    biases: true
+  tune:
+    sigma_V: true      # singular values of W_V per head — [n_heads, d_head] scalars
+    sigma_O: true      # singular values of W_O per head — [n_heads, d_head] scalars
+  # trainable params: same count as pure_paft — 12*12*2*64 = 18,432
+  # Baseline purpose: isolates polar decomposition vs SVD as the factorization choice

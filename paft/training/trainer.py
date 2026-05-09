@@ -91,17 +91,22 @@ class Trainer:
         self.cfg          = cfg
         self.run_dir      = Path(run_dir)
 
+        self.device       = method.device
+        self.method_name  = method.method_name
+
         tcfg = cfg["training"]
         self.n_epochs     = tcfg["epochs"]
         self.grad_clip    = tcfg.get("gradient_clip", 1.0)
         self.eval_every   = tcfg.get("eval_every_n_steps", 500)
         self.log_every    = tcfg.get("log_every_n_steps", 10)
-        # Gradient accumulation: optimizer steps every N micro-batches.
-        # effective_batch = micro_batch_size × grad_accum_steps.
         self.grad_accum   = tcfg.get("gradient_accumulation_steps", 1)
-
-        self.device       = method.device
-        self.method_name  = method.method_name
+        self.use_bf16 = (
+            tcfg.get("bf16", False)
+            and self.device.type == "cuda"
+            and torch.cuda.is_bf16_supported()
+        )
+        if self.use_bf16:
+            logger.info(f"[{self.method_name}] BF16 autocast enabled")
 
         # Optimizer and scheduler — skipped for frozen (0 trainable params).
         # Calling AdamW([]) raises ValueError; loss.backward() with all-frozen
@@ -156,7 +161,7 @@ class Trainer:
 
         for epoch in range(self.n_epochs):
             epoch_start = time.time()
-            logger.info(f"── Epoch {epoch}/{self.n_epochs - 1} ──")
+            logger.info(f"--- Epoch {epoch}/{self.n_epochs - 1} ---")
 
             train_loss = self._train_epoch(epoch)
             eval_metrics = self._eval_epoch(epoch)
@@ -236,7 +241,12 @@ class Trainer:
 
         for micro_step, batch in enumerate(self.train_loader):
             batch = _to_device(batch, self.device)
-            loss  = self.method.forward(**batch)
+
+            if self.use_bf16:
+                with torch.autocast(device_type="cuda", dtype=torch.bfloat16):
+                    loss = self.method.forward(**batch)
+            else:
+                loss = self.method.forward(**batch)
 
             # Frozen baseline has no trainable params — loss has no grad_fn
             # so backward() would raise.  Skip the entire gradient path.
@@ -282,7 +292,7 @@ class Trainer:
 
                 max_steps = self.cfg.get("training", {}).get("max_steps")
                 if max_steps and self._global_step >= max_steps:
-                    logger.info(f"max_steps={max_steps} reached — stopping epoch early")
+                    logger.info(f"max_steps={max_steps} reached -- stopping epoch early")
                     break
 
         return total_loss / max(n_micro_batches, 1)
@@ -300,8 +310,12 @@ class Trainer:
 
         with torch.no_grad():
             for batch in self.val_loader:
-                batch      = _to_device(batch, self.device)
-                loss       = self.method.forward(**batch)
+                batch = _to_device(batch, self.device)
+                if self.use_bf16:
+                    with torch.autocast(device_type="cuda", dtype=torch.bfloat16):
+                        loss = self.method.forward(**batch)
+                else:
+                    loss = self.method.forward(**batch)
                 total_loss += loss.item()
                 n_batches  += 1
 

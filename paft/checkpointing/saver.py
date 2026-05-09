@@ -69,7 +69,7 @@ class CheckpointSaver:
             cpu_decomp = _tensors_to_cpu(schema.decomp_init)
             _write_pt(d / F.DECOMP_INIT, cpu_decomp)
 
-        logger.info(f"Saved init checkpoint → {d}")
+        logger.info(f"Saved init checkpoint -> {d}")
 
     def save_epoch(self, schema: EpochSchema) -> None:
         """Save after each epoch.  Call after eval metrics are computed."""
@@ -87,7 +87,7 @@ class CheckpointSaver:
             _write_pt(d / F.PAFT_SNAPSHOT, _snapshot_to_cpu(schema.paft_snapshot))
 
         logger.info(
-            f"Saved epoch {schema.epoch} checkpoint → {d}  "
+            f"Saved epoch {schema.epoch} checkpoint -> {d}  "
             f"metrics={_fmt_metrics(schema.metrics)}"
         )
 
@@ -114,7 +114,7 @@ class CheckpointSaver:
         # Sentinel file — marks training as complete
         (d / F.SENTINEL).touch()
 
-        logger.info(f"Saved final checkpoint → {d}")
+        logger.info(f"Saved final checkpoint -> {d}")
 
     # ── introspection ────────────────────────────────────────────────────────
 

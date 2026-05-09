@@ -1,7 +1,17 @@
 extends: hybrid_paft
 method:
   name: safe_hybrid_paft
+  freeze:
+    Q_V: true
+    Q_O: true
+    W_Q: true
+    W_K: true
+    mlp: true
+    layernorm_weight: true
+    embeddings: true
+    lm_head: true
   tune:
     S_V: true
     S_O: true
-    biases: true      # the only addition
+    biases: true       # all attention + MLP + layernorm biases
+  # trainable params (GPT-2 small): ~1.18M (S) + ~100K (biases) = ~1.28M

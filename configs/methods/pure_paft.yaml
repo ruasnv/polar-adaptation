@@ -1,18 +1,19 @@
 method:
   name: pure_paft
   freeze:
-    Q_V: true          # frozen rotation — V projection
-    Q_O: true          # frozen rotation — O projection
-    W_Q: true          # frozen Q projection
-    W_K: true          # frozen K projection
+    Q_V: true          # frozen rotation — V projection (semi-orthogonal, from polar)
+    Q_O: true          # frozen rotation — O projection (semi-orthogonal, from polar)
+    EV_V: true         # frozen eigenvectors of S_V
+    EV_O: true         # frozen eigenvectors of S_O
+    W_Q: true
+    W_K: true
     mlp: true
     layernorm_weight: true
     embeddings: true
     lm_head: true
-    biases: true       # all biases frozen
+    biases: true
   tune:
-    S_V: true          # full [d_head, d_head] scaling matrix per head — OV circuit V side
-    S_O: true          # full [d_head, d_head] scaling matrix per head — OV circuit O side
-  constrain_S_symmetric: false
-  rotation_drift_penalty: 0.0
-  # trainable params (GPT-2 small): 12 layers * 12 heads * 2 * (64*64) = 1,179,648
+    lambda_V: true     # eigenvalues of S_V only — [n_heads, d_head] scalars
+    lambda_O: true     # eigenvalues of S_O only — [n_heads, d_head] scalars
+  # trainable params (GPT-2 small): 12 layers * 12 heads * 2 * 64 = 18,432
+  # S is reconstructed as: EV @ diag(lambda) @ EV^T — rotation frozen, only magnitudes move

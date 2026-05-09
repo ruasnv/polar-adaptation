@@ -1,0 +1,24 @@
+method:
+  name: polar
+  # PoLAR (Polar-decomposed Low-rank Adapter Representation).
+  # Additive method: W_new = W_0 + X @ Theta @ Y^T
+  # X in St(m,r), Y in St(n,r) — column-orthogonal direction matrices (Stiefel manifold)
+  # Theta in R^{r x r} — unconstrained scale matrix
+  # Trained with landing field optimizer (infeasible Riemannian optimization — no retraction).
+  # Key distinction from PAFT:
+  #   - ADDITIVE: ΔW is added to the frozen W_0 — geometric structure of W_0 not preserved
+  #   - X, Y initialized randomly on Stiefel — no relationship to W_0's original directions
+  #   - Requires custom optimizer (landing field); PAFT uses plain AdamW
+  # Why include: strongest geometric additive baseline; shares polar decomposition motivation
+  # but reveals that motivation alone isn't enough — non-additivity is the key property.
+  lora_rank: 8         # r — dimension of low-rank subspace
+  landing_lambda: 0.1  # infeasibility penalty weight (Alg. 2 λ in paper)
+  target_modules: [c_attn, c_proj]
+  freeze:
+    base_weights: true
+  tune:
+    X: true            # direction matrix — St(m, r)
+    Y: true            # direction matrix — St(n, r)
+    Theta: true        # scale matrix — R^{r x r}, unconstrained
+  # trainable params (r=8, GPT-2 small): 12 * 2 * (768*8 + 768*8 + 8*8) ≈ 300K
+  # optimizer: landing_field (custom, see paft/methods/baselines/polar.py)

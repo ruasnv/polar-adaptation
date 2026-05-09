@@ -25,7 +25,7 @@ def get_device() -> torch.device:
         total = torch.cuda.get_device_properties(0).total_memory / (1024 ** 2)
         logger.info(f"Using GPU: {name} ({total:.0f} MB total VRAM)")
         return device
-    logger.info("CUDA unavailable — running on CPU")
+    logger.info("CUDA unavailable -- running on CPU")
     return torch.device("cpu")
 
 

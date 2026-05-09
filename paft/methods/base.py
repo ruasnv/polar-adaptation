@@ -237,8 +237,11 @@ class BaseMethod(ABC):
 
         # Enable gradient checkpointing before moving to device
         if hasattr(self.model, "gradient_checkpointing_enable"):
-            self.model.gradient_checkpointing_enable()
-            logger.info(f"[{self.method_name}] Gradient checkpointing enabled.")
+            if self.cfg.get("training", {}).get("gradient_checkpointing", False):
+                self.model.gradient_checkpointing_enable()
+                logger.info(f"[{self.method_name}] Gradient checkpointing enabled.")
+            else:
+                logger.info(f"[{self.method_name}] Gradient checkpointing disabled -- using full activations.")
 
         logger.info(f"[{self.method_name}] Moving to {device} ...")
         self.model.to(device)

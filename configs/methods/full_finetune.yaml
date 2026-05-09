@@ -1,5 +1,15 @@
+# Full fine-tuning — all 124M parameters trained.
+# Override gradient_checkpointing back to true: without it, peak VRAM
+# at batch=8 would be ~5-6GB from gradient + optimizer state accumulation.
+extends: ~
+
 method:
   name: full_finetune
   freeze: {}
   tune:
     all: true
+
+training:
+  gradient_checkpointing: true   # required for full_finetune on 8GB GPU
+  micro_batch_size: 4            # extra safety margin for full grad accumulation
+  gradient_accumulation_steps: 8 # keeps effective batch = 32
