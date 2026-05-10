@@ -128,6 +128,97 @@ def build_deberta_hybrid_paft(num_labels: int) -> Tuple[nn.Module, AutoTokenizer
     logger.info(f"DeBERTa Hybrid PAFT: {count_trainable(model):,} trainable params")
     return model, tokenizer
 
+# ──────────────────────────────────────────────────────────────────────────────
+# Helper: unfreeze bias terms in any DeBERTaPAFTModel
+# ──────────────────────────────────────────────────────────────────────────────
+
+def _unfreeze_deberta_biases(model: nn.Module) -> None:
+    """
+    Unfreeze all bias parameters in a DeBERTaPAFTModel.
+
+    What gets unfrozen (per layer × 12 layers, plus embedding):
+        query_proj.bias          [768]   attention query bias
+        key_proj.bias            [768]   attention key bias
+        attention.output.LayerNorm.bias  [768]
+        intermediate.dense.bias  [3072]  MLP first layer bias
+        output.dense.bias        [768]   MLP second layer bias
+        output.LayerNorm.bias    [768]
+        embeddings.LayerNorm.bias [768]  (once, not per layer)
+
+    What is NOT unfrozen:
+        value_proj.bias and output.dense.bias — these are PAFTLinear
+        BUFFERS (not parameters), because PAFTLinear replaced those layers.
+        Buffers don't appear in named_parameters() so they are naturally
+        excluded. BitFit, which uses plain DeBERTa, trains those two
+        extra biases — making safe_pure_paft's bias count ~83,712 vs
+        bitfit's ~85,248. This is documented in the paper.
+
+    Total bias params unlocked: 83,712
+    """
+    for name, p in model.named_parameters():
+        if 'bias' in name:
+            p.requires_grad_(True)
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Method 2b: DeBERTa Safe Pure PAFT
+# ──────────────────────────────────────────────────────────────────────────────
+
+def build_deberta_safe_pure_paft(num_labels: int) -> Tuple[nn.Module, AutoTokenizer]:
+    """
+    Trainable: lam_V + lam_O (geometry) + all DeBERTa bias terms + classifier.
+
+    Parameter count:
+        PAFT lam:   18,432   (eigenvalue scaling per head)
+        Biases:     83,712   (query/key/LayerNorm/MLP across 12 layers)
+        Classifier: ~1,538
+        Total:     ~103,682
+
+    Scientific role — enables three precise comparisons in the paper:
+        safe_pure_paft vs pure_paft  → isolated bias contribution
+        safe_pure_paft vs bitfit     → isolated geometry contribution
+        safe_pure_paft vs safe_hybrid_paft → isolated eigenvalue vs full S
+
+    The geometry component (lam) controls WHICH directions are amplified.
+    The bias component controls WHERE the representation is shifted.
+    Together they cover both aspects of adaptation that full fine-tuning uses.
+    """
+    model, tokenizer = build_deberta_pure_paft(num_labels)
+    _unfreeze_deberta_biases(model)
+
+    logger.info(f"DeBERTa Safe Pure PAFT: {count_trainable(model):,} trainable params")
+    return model, tokenizer
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Method 2c: DeBERTa Safe Hybrid PAFT
+# ──────────────────────────────────────────────────────────────────────────────
+
+def build_deberta_safe_hybrid_paft(num_labels: int) -> Tuple[nn.Module, AutoTokenizer]:
+    """
+    Trainable: S_V + S_O (full geometry) + all DeBERTa bias terms + classifier.
+
+    Parameter count:
+        PAFT S:   1,179,648  (full scaling matrix per head, unconstrained)
+        Biases:      83,712
+        Classifier:   ~1,538
+        Total:    ~1,264,898
+
+    This is the most expressive PAFT variant. Expected to achieve the strongest
+    results on tasks where both geometric structure and residual stream shifts
+    are important (biomedical domain, long-range dependency tasks).
+
+    If safe_hybrid_paft outperforms hybrid_paft significantly, it confirms
+    that bias terms provide adaptation signal orthogonal to the geometry.
+    If the gap is small, the geometric component captures most of the signal.
+    Both outcomes are publishable findings.
+    """
+    model, tokenizer = build_deberta_hybrid_paft(num_labels)
+    _unfreeze_deberta_biases(model)
+
+    logger.info(f"DeBERTa Safe Hybrid PAFT: {count_trainable(model):,} trainable params")
+    return model, tokenizer
+
 
 # ──────────────────────────────────────────────────────────────────────────────
 # Method 3: DeBERTa LoRA
@@ -306,6 +397,8 @@ def build_deberta_svf(num_labels: int) -> Tuple[nn.Module, AutoTokenizer]:
 DEBERTA_METHODS = {
     "pure_paft":   build_deberta_pure_paft,
     "hybrid_paft": build_deberta_hybrid_paft,
+    "safe_pure_paft":   build_deberta_safe_pure_paft,    # ← add this
+    "safe_hybrid_paft": build_deberta_safe_hybrid_paft,
     "lora_r8":     lambda n: build_deberta_lora(n, rank=8),
     "lora_r64":    lambda n: build_deberta_lora(n, rank=64),
     "bitfit":      build_deberta_bitfit,

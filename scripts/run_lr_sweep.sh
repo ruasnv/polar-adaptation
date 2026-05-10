@@ -4,12 +4,13 @@
 # 1. PATH-PROOFING
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-cd "$PROJECT_ROOT"
+cd "$PROJECT_ROOT" || exit
 export PYTHONPATH="$PROJECT_ROOT:$PYTHONPATH"
 
 RESULTS_DIR="results/lr_sweep"
 TASK="sst2"
-METHODS="pure_paft hybrid_paft lora_r8 lora_r64 polar_r8 bitfit svf"
+METHODS="pure_paft hybrid_paft safe_pure_paft safe_hybrid_paft lora_r8 lora_r64 polar_r8 bitfit svf"
+
 
 mkdir -p "$RESULTS_DIR"
 
@@ -21,17 +22,28 @@ for method in $METHODS; do
             # Ultra-light methods need high LRs.
             LR_RANGE="1e-3 5e-3 1e-2"
             ;;
+        "safe_pure_paft")
+            # Biases (~84K) dominate over lam (18K) → closer to bitfit scale
+            LR_RANGE="3e-4 1e-3 3e-3"
+            ;;
+        "safe_hybrid_paft")
+            # S (~1.18M) dominates over biases (~84K) → closer to hybrid_paft scale
+            LR_RANGE="5e-5 1e-4 3e-4"
+            ;;
         "lora_r64" | "hybrid_paft")
             # High-parameter methods need stability.
             LR_RANGE="5e-5 1e-4 3e-4"
             ;;
+        "bitfit")
+            LR_RANGE="5e-4 1e-3 3e-3"
+            ;;
         *)
-            # Standard PEFT range for lora_r8, polar_r8, and bitfit.
+            # Standard PEFT range for lora_r8, polar_r8.
             LR_RANGE="1e-4 4e-4 1e-3"
             ;;
     esac
 
-    echo "--- Starting FAST sweep for $method (Range: $LR_RANGE) ---"
+    echo "--- Starting sweep for $method (Range: $LR_RANGE) ---"
 
     for lr in $LR_RANGE; do
         OUT_DIR="$RESULTS_DIR/$method/lr_$lr"
@@ -53,12 +65,12 @@ for method in $METHODS; do
             --batch_size 32 \
             --grad_accum 1 \
             --max_length 128 \
-            --no_fp16
+            --skip_analysis
     done
 done
 
 # 4. IDENTIFY BEST LR
-echo "--- Fast Sweep Complete. Identifying Best Learning Rates ---"
+echo "--- Sweep Complete. Identifying Best Learning Rates ---"
 python3 -c "
 import json, glob, os
 methods = '$METHODS'.split()

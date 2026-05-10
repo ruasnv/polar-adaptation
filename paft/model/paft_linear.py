@@ -198,7 +198,7 @@ class PAFTLinear(nn.Module):
 
         # Compute in Float and return in Float
         out = F.linear(x.float(), W, bias)
-        return out.float()
+        return out.to(x.dtype)
 
     # ── geometric accessors ───────────────────────────────────────────────────
 

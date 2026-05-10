@@ -39,12 +39,6 @@ def _get_data_module(domain: str, cfg: dict, hf_name: str):
     if domain == "news":
         from paft.data.news import NewsDataModule
         return NewsDataModule(cfg, hf_name)
-    elif domain == "legal":
-        from paft.data.legal import LegalDataModule
-        return LegalDataModule(cfg, hf_name)
-    elif domain == "biomedical":
-        from paft.data.biomedical import BiomedicalDataModule
-        return BiomedicalDataModule(cfg, hf_name)
     elif domain == "code":
         from paft.data.code import CodeDataModule
         return CodeDataModule(cfg, hf_name)

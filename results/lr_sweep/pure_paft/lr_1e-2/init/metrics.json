@@ -1,0 +1,5 @@
+{
+  "task": "sst2",
+  "method": "pure_paft",
+  "stage": "init"
+}

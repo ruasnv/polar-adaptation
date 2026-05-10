@@ -113,7 +113,7 @@ class PoLARLinear(nn.Module):
 
             out = F.linear(x.float(), W_eff, bias)
         # Apply this change to both SVF and PoLAR return lines:
-        return out.float()
+        return out.to(x.dtype)
 
     @torch.no_grad()
     def retract_to_stiefel(self) -> None:

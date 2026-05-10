@@ -228,7 +228,7 @@ def main() -> None:
         warmup_ratio                 = args.warmup_ratio,
         lr_scheduler_type            = "linear",
         fp16                         = False,  # MUST be False
-        bf16                         = False,  # Ensure this is also False
+        bf16                         = True,  # Ensure this is also False
         torch_compile                = False,  # Disable for now to keep things simple
         eval_strategy                = "epoch",
         save_strategy                = "epoch",
