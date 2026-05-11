@@ -1,0 +1,19 @@
+{
+  "task": "sst2",
+  "method": "lora_r64",
+  "output_dir": "results/lr_sweep/lora_r64/lr_1e-4",
+  "epochs": 1,
+  "lr": 0.0001,
+  "batch_size": 32,
+  "grad_accum": 1,
+  "max_length": 128,
+  "warmup_ratio": 0.06,
+  "weight_decay": 0.01,
+  "seed": 42,
+  "fp16": true,
+  "no_fp16": false,
+  "run_analysis": true,
+  "skip_analysis": true,
+  "effective_lr": 0.0001,
+  "effective_epochs": 1
+}
