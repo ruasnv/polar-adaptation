@@ -1,0 +1,12 @@
+{
+  "loss": 0.3853256106376648,
+  "pearson": 0.9191625118255615,
+  "spearmanr": 0.9173519258762912,
+  "runtime": 3.5958,
+  "samples_per_second": 417.15,
+  "steps_per_second": 6.674,
+  "epoch": 10.0,
+  "task": "stsb",
+  "method": "lora_r8",
+  "trainable_params": 1771009
+}

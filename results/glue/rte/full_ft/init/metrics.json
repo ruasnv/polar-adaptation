@@ -1,0 +1,5 @@
+{
+  "task": "rte",
+  "method": "full_ft",
+  "stage": "init"
+}

@@ -1,0 +1,12 @@
+{
+  "loss": 0.4937421381473541,
+  "accuracy": 0.8995098039215687,
+  "f1": 0.9284467713787086,
+  "runtime": 1.1183,
+  "samples_per_second": 364.84,
+  "steps_per_second": 6.26,
+  "epoch": 10.0,
+  "task": "mrpc",
+  "method": "full_ft",
+  "trainable_params": 184423682
+}

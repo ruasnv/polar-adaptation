@@ -1,0 +1,11 @@
+{
+  "loss": 0.5611004829406738,
+  "accuracy": 0.7617328519855595,
+  "runtime": 0.6106,
+  "samples_per_second": 453.643,
+  "steps_per_second": 8.188,
+  "epoch": 10.0,
+  "task": "rte",
+  "method": "pure_paft",
+  "trainable_params": 610562
+}

@@ -1,0 +1,12 @@
+{
+  "loss": 0.3481917381286621,
+  "accuracy": 0.8602941176470589,
+  "f1": 0.901213171577123,
+  "runtime": 1.1247,
+  "samples_per_second": 362.77,
+  "steps_per_second": 6.224,
+  "epoch": 10.0,
+  "task": "mrpc",
+  "method": "svf",
+  "trainable_params": 610562
+}

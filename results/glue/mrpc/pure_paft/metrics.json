@@ -1,0 +1,12 @@
+{
+  "loss": 0.36223891377449036,
+  "accuracy": 0.8553921568627451,
+  "f1": 0.8959435626102292,
+  "runtime": 1.01,
+  "samples_per_second": 403.977,
+  "steps_per_second": 6.931,
+  "epoch": 10.0,
+  "task": "mrpc",
+  "method": "pure_paft",
+  "trainable_params": 610562
+}

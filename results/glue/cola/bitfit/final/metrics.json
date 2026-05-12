@@ -1,0 +1,11 @@
+{
+  "loss": 0.38875600695610046,
+  "matthews_correlation": 0.6809978493235761,
+  "runtime": 2.7612,
+  "samples_per_second": 377.735,
+  "steps_per_second": 6.157,
+  "epoch": 10.0,
+  "task": "cola",
+  "method": "bitfit",
+  "trainable_params": 695042
+}

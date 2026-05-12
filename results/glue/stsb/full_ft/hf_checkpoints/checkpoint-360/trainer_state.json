@@ -1,0 +1,103 @@
+{
+  "best_global_step": 360,
+  "best_metric": 0.8971449732780457,
+  "best_model_checkpoint": "results/glue/stsb/full_ft/hf_checkpoints/checkpoint-360",
+  "epoch": 2.0,
+  "eval_steps": 500,
+  "global_step": 360,
+  "is_hyper_param_search": false,
+  "is_local_process_zero": true,
+  "is_world_process_zero": true,
+  "log_history": [
+    {
+      "epoch": 0.2777777777777778,
+      "grad_norm": 66.29782104492188,
+      "learning_rate": 9.074074074074075e-06,
+      "loss": 8.607153930664062,
+      "step": 50
+    },
+    {
+      "epoch": 0.5555555555555556,
+      "grad_norm": 32.04853439331055,
+      "learning_rate": 1.8333333333333333e-05,
+      "loss": 1.5941897583007814,
+      "step": 100
+    },
+    {
+      "epoch": 0.8333333333333334,
+      "grad_norm": 8.978575706481934,
+      "learning_rate": 1.951536643026005e-05,
+      "loss": 0.7685929107666015,
+      "step": 150
+    },
+    {
+      "epoch": 1.0,
+      "eval_loss": 0.710675835609436,
+      "eval_pearson": 0.8834268450737,
+      "eval_runtime": 8.5357,
+      "eval_samples_per_second": 175.734,
+      "eval_spearmanr": 0.8854783857004328,
+      "eval_steps_per_second": 2.812,
+      "step": 180
+    },
+    {
+      "epoch": 1.1111111111111112,
+      "grad_norm": 19.869277954101562,
+      "learning_rate": 1.8924349881796692e-05,
+      "loss": 0.5446507263183594,
+      "step": 200
+    },
+    {
+      "epoch": 1.3888888888888888,
+      "grad_norm": 4.994858741760254,
+      "learning_rate": 1.8333333333333333e-05,
+      "loss": 0.4889078140258789,
+      "step": 250
+    },
+    {
+      "epoch": 1.6666666666666665,
+      "grad_norm": 9.4363431930542,
+      "learning_rate": 1.7742316784869977e-05,
+      "loss": 0.42527122497558595,
+      "step": 300
+    },
+    {
+      "epoch": 1.9444444444444444,
+      "grad_norm": 8.419035911560059,
+      "learning_rate": 1.715130023640662e-05,
+      "loss": 0.4076201248168945,
+      "step": 350
+    },
+    {
+      "epoch": 2.0,
+      "eval_loss": 0.529941737651825,
+      "eval_pearson": 0.8971449732780457,
+      "eval_runtime": 8.5298,
+      "eval_samples_per_second": 175.854,
+      "eval_spearmanr": 0.8991595419322226,
+      "eval_steps_per_second": 2.814,
+      "step": 360
+    }
+  ],
+  "logging_steps": 50,
+  "max_steps": 1800,
+  "num_input_tokens_seen": 0,
+  "num_train_epochs": 10,
+  "save_steps": 500,
+  "stateful_callbacks": {
+    "TrainerControl": {
+      "args": {
+        "should_epoch_stop": false,
+        "should_evaluate": false,
+        "should_log": false,
+        "should_save": true,
+        "should_training_stop": false
+      },
+      "attributes": {}
+    }
+  },
+  "total_flos": 756319501598208.0,
+  "train_batch_size": 32,
+  "trial_name": null,
+  "trial_params": null
+}

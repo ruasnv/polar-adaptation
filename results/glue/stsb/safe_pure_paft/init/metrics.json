@@ -1,0 +1,5 @@
+{
+  "task": "stsb",
+  "method": "safe_pure_paft",
+  "stage": "init"
+}

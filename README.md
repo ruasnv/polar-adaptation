@@ -46,3 +46,16 @@ Run `pytest tests/` before any experiment. Key gates:
 - `test_polar.py` — verifies `W ≈ Q @ S` and `Q^T Q ≈ I`
 - `test_parameter_groups.py` — verifies exactly the right params have `requires_grad=True` per method
 - `test_saver.py` — verifies all schema tensors are present after a dummy 10-step run
+
+--- Best Learning Rates ---
+Method: pure_paft       | Best LR: 5e-3    | Accuracy: 0.9381
+Method: hybrid_paft     | Best LR: 3e-4    | Accuracy: 0.9438
+Method: safe_pure_paft  | Best LR: 1e-3    | Accuracy: 0.9518
+Method: safe_hybrid_paft | Best LR: 3e-4    | Accuracy: 0.9530
+Method: lora_r8         | Best LR: 4e-4    | Accuracy: 0.9518
+Method: lora_r64        | Best LR: 3e-4    | Accuracy: 0.9564
+Method: polar_r8        | Best LR: 1e-3    | Accuracy: 0.9541
+Method: bitfit          | Best LR: 1e-3    | Accuracy: 0.9461
+Method: svf             | Best LR: 1e-2    | Accuracy: 0.9450
+
+LR: 2e-5 is used for frozen and full fine tuning.

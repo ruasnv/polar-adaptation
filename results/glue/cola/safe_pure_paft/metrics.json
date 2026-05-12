@@ -1,0 +1,11 @@
+{
+  "loss": 0.37426114082336426,
+  "matthews_correlation": 0.6809673250835145,
+  "runtime": 2.5551,
+  "samples_per_second": 408.206,
+  "steps_per_second": 6.653,
+  "epoch": 10.0,
+  "task": "cola",
+  "method": "safe_pure_paft",
+  "trainable_params": 695042
+}

@@ -1,0 +1,5 @@
+{
+  "task": "rte",
+  "method": "polar_r8",
+  "stage": "init"
+}

@@ -1,0 +1,5 @@
+{
+  "task": "mrpc",
+  "method": "full_ft",
+  "stage": "init"
+}

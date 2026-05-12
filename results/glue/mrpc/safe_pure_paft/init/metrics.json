@@ -1,0 +1,5 @@
+{
+  "task": "mrpc",
+  "method": "safe_pure_paft",
+  "stage": "init"
+}

@@ -1,0 +1,19 @@
+{
+  "task": "mrpc",
+  "method": "full_ft",
+  "output_dir": "results/glue/mrpc/full_ft",
+  "epochs": null,
+  "lr": 2e-05,
+  "batch_size": 32,
+  "grad_accum": 1,
+  "max_length": 128,
+  "warmup_ratio": 0.06,
+  "weight_decay": 0.01,
+  "seed": 42,
+  "fp16": true,
+  "no_fp16": false,
+  "run_analysis": true,
+  "skip_analysis": false,
+  "effective_lr": 2e-05,
+  "effective_epochs": 10
+}

@@ -1,0 +1,12 @@
+{
+  "loss": 0.6209505796432495,
+  "accuracy": 0.6838235294117647,
+  "f1": 0.8122270742358079,
+  "runtime": 0.8842,
+  "samples_per_second": 461.448,
+  "steps_per_second": 7.917,
+  "epoch": 10.0,
+  "task": "mrpc",
+  "method": "frozen",
+  "trainable_params": 592130
+}

@@ -1,0 +1,12 @@
+{
+  "loss": 0.2943374812602997,
+  "accuracy": 0.8921568627450981,
+  "f1": 0.9238754325259516,
+  "runtime": 0.9274,
+  "samples_per_second": 439.919,
+  "steps_per_second": 7.548,
+  "epoch": 10.0,
+  "task": "mrpc",
+  "method": "bitfit",
+  "trainable_params": 695042
+}

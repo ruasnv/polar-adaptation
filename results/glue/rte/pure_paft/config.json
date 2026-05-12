@@ -1,0 +1,20 @@
+{
+  "task": "rte",
+  "method": "pure_paft",
+  "output_dir": "results/glue/rte/pure_paft",
+  "epochs": null,
+  "lr": 0.005,
+  "batch_size": 32,
+  "grad_accum": 1,
+  "max_length": 128,
+  "warmup_ratio": 0.06,
+  "weight_decay": 0.01,
+  "seed": 42,
+  "fp16": false,
+  "no_fp16": true,
+  "run_analysis": true,
+  "skip_analysis": false,
+  "bias_lr": 0.001,
+  "effective_lr": 0.005,
+  "effective_epochs": 10
+}

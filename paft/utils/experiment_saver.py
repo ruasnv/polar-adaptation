@@ -72,10 +72,13 @@ def extract_deberta_weights(model: nn.Module) -> Dict[str, List[torch.Tensor]]:
     if isinstance(model, DeBERTaPAFTModel):
         return model.get_live_WV_WO()
 
-    # Unwrap PEFT wrapper if present
+    # Unwrap PEFT wrapper if present.
+    # ALL HuggingFace models have a .base_model property (returns the backbone submodule),
+    # but only PeftModel wraps have .base_model.model (the full classification model).
+    # Check for .model explicitly so plain DeBERTa models are handled correctly.
     base_model = model
-    if hasattr(model, 'base_model'):          # PeftModel
-        base_model = model.base_model.model
+    if hasattr(model, 'base_model') and hasattr(model.base_model, 'model'):
+        base_model = model.base_model.model  # PeftModel → DebertaV2ForSequenceClassification
     deberta = getattr(base_model, 'deberta', None)
     if deberta is None:
         logger.warning("Cannot extract DeBERTa weights — unexpected model structure")
@@ -109,13 +112,38 @@ def extract_deberta_weights(model: nn.Module) -> Dict[str, List[torch.Tensor]]:
 
 
 def _get_weight(layer: nn.Module) -> torch.Tensor:
-    """Get weight from nn.Linear or PAFTLinear."""
+    """
+    Extract the effective weight tensor from any layer type used in the codebase.
+
+    Dispatch table:
+        PAFTLinear   → reconstruct Q @ S or S @ Q (polar decomposition)
+        PoLARLinear  → W_0 + (alpha/r) * X @ B^T  (Stiefel adaptation)
+        SVFLinear    → (U * sigma) @ Vh             (singular value adaptation)
+        PEFT layer   → base_layer.weight            (LoRA merged not yet — raw W_0)
+        nn.Linear    → .weight                      (standard)
+    """
     from paft.model.paft_linear import PAFTLinear
+    from paft.model.polar_linear import PoLARLinear
+
     if isinstance(layer, PAFTLinear):
         return layer.reconstruct_weight().detach().float()
-    # PEFT-wrapped layer
+
+    if isinstance(layer, PoLARLinear):
+        # W_eff = W_0 + scale * X @ B^T
+        return layer.get_effective_W().float()
+
+    # SVFLinear — identified by its unique buffers (no weight attribute)
+    if hasattr(layer, 'sigma_init') and hasattr(layer, 'U') and hasattr(layer, 'Vh'):
+        with torch.no_grad():
+            sigma = (layer.sigma_init + layer.delta_sigma).float()
+            return ((layer.U.float() * sigma) @ layer.Vh.float()).detach()
+
+    # PEFT LoRA-wrapped layer — return the frozen base weight (W_0 only, no adapter)
+    # This is correct for init/geometric snapshots; the adapter delta is small at init.
     if hasattr(layer, 'base_layer'):
         return layer.base_layer.weight.detach().float()
+
+    # Standard nn.Linear
     return layer.weight.detach().float()
 
 
@@ -133,7 +161,7 @@ def extract_llama_weights(model: nn.Module) -> Dict[str, List[torch.Tensor]]:
 
     # Unwrap base model
     base = getattr(model, 'model', model)
-    if hasattr(base, 'base_model'):   # PeftModel
+    if hasattr(base, 'base_model') and hasattr(base.base_model, 'model'):  # PeftModel
         base = base.base_model.model
     llama_layers = getattr(base, 'model', base)  # LlamaModel.layers
 

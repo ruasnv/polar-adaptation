@@ -1,38 +1,7 @@
 #!/bin/bash
 # run_experiments.sh
-# Orchestration for all PAFT benchmark experiments.
-#
-# USAGE:
-#   bash run_experiments.sh [--task-set glue|commonsense|gsm8k|all] \
-#                           [--method METHOD] \
-#                           [--dry-run] \
-#                           [--resume]
-#
-# TOTAL RUNS:
-#   GLUE:         8 tasks  × 8 methods = 64 runs  (~25 hours)
-#   Commonsense:  8 tasks  × 6 methods = 48 runs  (~80 hours)
-#   GSM8K:        1 task   × 6 methods =  6 runs  (~14 hours)
-#   Ablations:    which-weights ablation = 10 extra runs
-#   Total: ~128 runs + 10 ablations
-#
-# VRAM REQUIREMENTS:
-#   GLUE (DeBERTa-v3-base, fp16):  ~1.5 GB  — any GPU
-#   LLM  (LLaMA-3.2-3B, NF4):     ~4.0 GB  — 8 GB GPU minimum
-#
-# ENVIRONMENT:
-#   Set LLAMA_MODEL to your local LLaMA path if you have it cached:
-#   export LLAMA_MODEL=/path/to/llama-3.2-3b
-#   Otherwise defaults to HuggingFace download.
-#
-# RESUME:
-#   --resume flag skips any run where metrics.json already exists.
-#   Safe to re-run after interruption.
 
 set -euo pipefail
-
-# ────────────────────────────────────────────────────────────────────────────
-# Configuration
-# ────────────────────────────────────────────────────────────────────────────
 
 RESULTS_DIR="${RESULTS_DIR:-results}"
 LLAMA_MODEL="${LLAMA_MODEL:-meta-llama/Llama-3.2-3B}"
@@ -43,7 +12,6 @@ TASK_SET="${TASK_SET:-all}"
 FILTER_METHOD="${FILTER_METHOD:-}"
 FILTER_TASK="${FILTER_TASK:-}"
 
-# Parse flags
 for arg in "$@"; do
     case $arg in
         --dry-run)      DRY_RUN=1 ;;
@@ -58,26 +26,31 @@ done
 log() { echo "[$(date +%H:%M:%S)] $*"; }
 separator() { echo "────────────────────────────────────────────────────────"; }
 
-# ────────────────────────────────────────────────────────────────────────────
-# Task and method definitions
-# ────────────────────────────────────────────────────────────────────────────
-
 GLUE_TASKS="cola mnli mrpc qnli qqp rte sst2 stsb"
-GLUE_METHODS="pure_paft hybrid_paft lora_r8 lora_r64 polar_r8 bitfit frozen full_ft svf"
+GLUE_METHODS="pure_paft hybrid_paft safe_pure_paft safe_hybrid_paft lora_r8 lora_r64 polar_r8 bitfit svf full_ft frozen"
+
+declare -A GLUE_LR=(
+    [pure_paft]=5e-3
+    [hybrid_paft]=3e-4
+    [safe_pure_paft]=1e-3
+    [safe_hybrid_paft]=3e-4
+    [lora_r8]=4e-4
+    [lora_r64]=3e-4
+    [polar_r8]=1e-3
+    [bitfit]=1e-3
+    [svf]=1e-2
+    [full_ft]=2e-5
+    [frozen]=1e-4
+)
+
+# Bias LR for safe variants — used in the second AdamW parameter group.
+# Geometric params (S/lam) use GLUE_LR; bias/classifier params use BIAS_LR.
+BIAS_LR="1e-3"
 
 CS_TASKS="boolq piqa siqa hellaswag winogrande arc_easy arc_challenge openbookqa"
 LLM_METHODS="pure_paft hybrid_paft polar_r8 lora_r8 lora_r64 bitfit frozen"
-
 GSM8K_TASK="gsm8k"
-
-# Which-weights ablation (GLUE, DeBERTa)
-# Tests: value_only, output_only, value+output (standard), query+value, all_four
-ABLATION_METHODS="paft_value_only paft_output_only paft_query_value"
-ABLATION_TASKS="rte sst2"   # two representative GLUE tasks
-
-# ────────────────────────────────────────────────────────────────────────────
-# Run helpers
-# ────────────────────────────────────────────────────────────────────────────
+ABLATION_TASKS="rte sst2"
 
 should_skip() {
     local metrics_file="$1"
@@ -98,22 +71,18 @@ run_cmd() {
 }
 
 check_gpu() {
-    if ! python -c "import torch; assert torch.cuda.is_available(), 'No GPU'" 2>/dev/null; then
-        log "WARNING: No CUDA GPU detected. GLUE runs will be slow; LLM runs may fail."
+    if ! python3 -c "import torch; assert torch.cuda.is_available()" 2>/dev/null; then
+        log "WARNING: No CUDA GPU detected."
     else
         local vram
-        vram=$(python -c "import torch; print(f'{torch.cuda.get_device_properties(0).total_memory/1e9:.1f} GB')" 2>/dev/null || echo "unknown")
-        log "GPU available: $(python -c "import torch; print(torch.cuda.get_device_name(0))" 2>/dev/null || echo "unknown") — VRAM: $vram"
+        vram=$(python3 -c "import torch; print(f'{torch.cuda.get_device_properties(0).total_memory/1e9:.1f} GB')" 2>/dev/null || echo "unknown")
+        log "GPU: $(python3 -c "import torch; print(torch.cuda.get_device_name(0))" 2>/dev/null) — VRAM: $vram"
     fi
 }
 
-# ────────────────────────────────────────────────────────────────────────────
-# GLUE experiments (DeBERTa-v3-base, fp16)
-# ────────────────────────────────────────────────────────────────────────────
-
 run_glue_experiments() {
     separator
-    log "GLUE EXPERIMENTS: 8 tasks × 8 methods = 64 runs"
+    log "GLUE EXPERIMENTS: 8 tasks × 11 methods = 88 runs"
     separator
 
     local methods="$GLUE_METHODS"
@@ -132,13 +101,25 @@ run_glue_experiments() {
                 continue
             fi
 
-            log "GLUE: task=$task  method=$method"
-            local cmd="python -m paft.train_glue \
+            # Safe variants get a second LR for the bias parameter group.
+            # All other methods pass --bias_lr but it is ignored by train_glue.py.
+            local bias_lr_flag=""
+            if [[ "$method" == safe_* ]]; then
+                bias_lr_flag="--bias_lr $BIAS_LR"
+                log "GLUE: task=$task  method=$method  geometric_lr=${GLUE_LR[$method]}  bias_lr=$BIAS_LR"
+            else
+                log "GLUE: task=$task  method=$method  lr=${GLUE_LR[$method]}"
+            fi
+
+            local cmd="python3 -m paft.training.train_glue \
                 --task $task \
                 --method $method \
+                --lr ${GLUE_LR[$method]} \
+                --max_length 128 \
                 --output_dir $out \
                 --seed $SEED \
-                --fp16"
+                --no_fp16 \
+                $bias_lr_flag"
 
             if ! run_cmd "$cmd"; then
                 log "ERROR: $task/$method failed"
@@ -151,19 +132,14 @@ run_glue_experiments() {
     log "GLUE complete: total=$total  skipped=$skipped  failed=$failed"
 }
 
-# ────────────────────────────────────────────────────────────────────────────
-# Commonsense reasoning experiments (LLaMA-3.2-3B, NF4)
-# ────────────────────────────────────────────────────────────────────────────
-
 run_commonsense_experiments() {
     separator
-    log "COMMONSENSE EXPERIMENTS: 8 tasks × 6 methods = 48 runs"
+    log "COMMONSENSE EXPERIMENTS: 8 tasks × 7 methods = 56 runs"
     separator
 
     local methods="$LLM_METHODS"
     if [ -n "$FILTER_METHOD" ]; then methods="$FILTER_METHOD"; fi
 
-    # Task-specific hyperparameters (matching PoLAR paper settings)
     declare -A TASK_LR=(
         [boolq]=3e-4    [piqa]=3e-4     [siqa]=3e-4
         [hellaswag]=3e-4 [winogrande]=3e-4
@@ -191,7 +167,7 @@ run_commonsense_experiments() {
             fi
 
             log "Commonsense: task=$task  method=$method  lr=$lr"
-            local cmd="python -m paft.train_llm \
+            local cmd="python3 -m paft.training.train_llm \
                 --task $task \
                 --method $method \
                 --model_name $LLAMA_MODEL \
@@ -213,13 +189,9 @@ run_commonsense_experiments() {
     log "Commonsense complete: total=$total  skipped=$skipped  failed=$failed"
 }
 
-# ────────────────────────────────────────────────────────────────────────────
-# GSM8K experiments
-# ────────────────────────────────────────────────────────────────────────────
-
 run_gsm8k_experiments() {
     separator
-    log "GSM8K EXPERIMENTS: 1 task × 6 methods = 6 runs"
+    log "GSM8K EXPERIMENTS: 1 task × 7 methods = 7 runs"
     separator
 
     local methods="$LLM_METHODS"
@@ -237,7 +209,7 @@ run_gsm8k_experiments() {
         fi
 
         log "GSM8K: method=$method"
-        local cmd="python -m paft.train_llm \
+        local cmd="python3 -m paft.training.train_llm \
             --task gsm8k \
             --method $method \
             --model_name $LLAMA_MODEL \
@@ -260,21 +232,12 @@ run_gsm8k_experiments() {
     log "GSM8K complete: total=$total  skipped=$skipped  failed=$failed"
 }
 
-# ────────────────────────────────────────────────────────────────────────────
-# Which-weights ablation (Analysis 5 in the paper)
-# Equivalent to LoRA's Table 5 — fixed budget, vary which projections to adapt
-# ────────────────────────────────────────────────────────────────────────────
-
 run_ablation_experiments() {
     separator
-    log "ABLATION: which-weights × 2 tasks = 10 runs (DeBERTa hybrid_paft)"
+    log "ABLATION: which-weights × 2 tasks"
     separator
 
-    # The ablation tests which attention projections benefit from PAFT most.
-    # We run these as separate scripts with custom model configs.
-    # NOTE: Requires ablation variants implemented in deberta_methods.py:
-    #   paft_v_only, paft_o_only, paft_vo (standard), paft_qv, paft_all
-    local ABLATION_VARIANTS="paft_v_only paft_o_only paft_qv paft_vo_qk paft_all"
+    local ABLATION_VARIANTS="paft_v_only paft_o_only paft_qv paft_vo"
 
     for task in $ABLATION_TASKS; do
         for variant in $ABLATION_VARIANTS; do
@@ -282,9 +245,12 @@ run_ablation_experiments() {
             if should_skip "$out/metrics.json"; then continue; fi
 
             log "Ablation: task=$task  variant=$variant"
-            run_cmd "python -m paft.train_glue \
+            run_cmd "python3 -m paft.training.train_glue \
                 --task $task \
                 --method $variant \
+                --lr 3e-4 \
+                --max_length 128 \
+                --no_fp16 \
                 --output_dir $out \
                 --seed $SEED"
         done
@@ -294,50 +260,64 @@ run_ablation_experiments() {
     log "Ablation runs complete."
 }
 
-# ────────────────────────────────────────────────────────────────────────────
-# Aggregate results into a summary table
-# ────────────────────────────────────────────────────────────────────────────
-
 collect_results() {
     separator
-    log "Collecting results into summary tables ..."
-    python - <<'EOF'
+    log "Collecting results ..."
+    python3 - <<'EOF'
 import json, os
 from pathlib import Path
 
+# Primary metric per GLUE task — must match what train_glue.py reports
+TASK_PRIMARY = {
+    "cola":  "matthews_correlation",
+    "stsb":  "pearson",
+    "mrpc":  "f1",
+    "qqp":   "f1",
+    # All others: accuracy
+}
+
 results = {}
-root = Path(os.environ.get("RESULTS_DIR", "results"))
+VALID_BENCHMARKS = {"glue", "commonsense", "gsm8k", "ablation"}
+root = Path("results")
 
 for metrics_file in sorted(root.rglob("metrics.json")):
-    parts = metrics_file.parts
-    try:
-        benchmark = parts[-4]   # glue / commonsense / gsm8k
-        task      = parts[-3]
-        method    = parts[-2]
-        with open(metrics_file) as f:
-            m = json.load(f)
-        key = f"{benchmark}/{task}/{method}"
-        results[key] = m
-    except (IndexError, json.JSONDecodeError):
+    if "epoch_" in str(metrics_file) or "lr_sweep" in str(metrics_file):
         continue
+    parts = metrics_file.parts
+    if len(parts) >= 5:
+        benchmark, task, method = parts[-4], parts[-3], parts[-2]
+        if benchmark in VALID_BENCHMARKS:
+            try:
+                with open(metrics_file) as f:
+                    m = json.load(f)
+                # Use task-specific primary metric — avoids returning accuracy
+                # when f1/mcc/pearson is the correct reporting metric
+                primary = TASK_PRIMARY.get(task, "accuracy")
+                score = (m.get(primary)
+                         or m.get("accuracy")
+                         or m.get("f1")
+                         or m.get("matthews_correlation")
+                         or m.get("pearson"))
+                results[f"{benchmark}/{task}/{method}"] = {
+                    "score": score,
+                    "metric": primary,
+                    **m
+                }
+            except Exception:
+                continue
 
-# Print summary
 print(f"\nResults Summary ({len(results)} runs complete)")
 print("─" * 80)
 for key, m in results.items():
-    acc = m.get("accuracy") or m.get("matthews_correlation") or m.get("pearsonr") or m.get("f1")
-    print(f"  {key:<50}  {acc:.4f}" if acc is not None else f"  {key}")
+    score  = m.get("score")
+    metric = m.get("metric", "?")
+    print(f"  {key:<50}  {score:.4f}  [{metric}]" if score is not None else f"  {key}")
 
-# Save to JSON
 with open(root / "summary.json", "w") as f:
     json.dump(results, f, indent=2)
 print(f"\nSaved to {root}/summary.json")
 EOF
 }
-
-# ────────────────────────────────────────────────────────────────────────────
-# Main
-# ────────────────────────────────────────────────────────────────────────────
 
 separator
 log "PAFT Benchmark Experiments"
@@ -346,7 +326,6 @@ separator
 
 check_gpu
 mkdir -p "$RESULTS_DIR"
-
 START_TIME=$(date +%s)
 
 case "$TASK_SET" in
@@ -362,19 +341,13 @@ case "$TASK_SET" in
         ;;
     *)
         echo "Unknown task set: $TASK_SET"
-        echo "Choose from: glue commonsense gsm8k ablation all"
         exit 1
         ;;
 esac
 
 END_TIME=$(date +%s)
 ELAPSED=$((END_TIME - START_TIME))
-
-if [ "$DRY_RUN" = "0" ]; then
-    collect_results
-fi
-
+if [ "$DRY_RUN" = "0" ]; then collect_results; fi
 separator
-log "All experiments complete in $((ELAPSED / 3600))h $(((ELAPSED % 3600) / 60))m ${ELAPSED}s"
-log "Results directory: $RESULTS_DIR"
+log "All experiments complete in $((ELAPSED / 3600))h $(((ELAPSED % 3600) / 60))m"
 separator

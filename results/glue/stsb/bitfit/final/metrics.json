@@ -1,0 +1,12 @@
+{
+  "loss": 0.38514700531959534,
+  "pearson": 0.9164538979530334,
+  "spearmanr": 0.9164452404589082,
+  "runtime": 8.6124,
+  "samples_per_second": 174.167,
+  "steps_per_second": 2.787,
+  "epoch": 10.0,
+  "task": "stsb",
+  "method": "bitfit",
+  "trainable_params": 694273
+}

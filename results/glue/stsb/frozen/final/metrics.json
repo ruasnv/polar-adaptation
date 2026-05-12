@@ -1,0 +1,12 @@
+{
+  "loss": 1.4866925477981567,
+  "pearson": 0.7086992859840393,
+  "spearmanr": 0.7167507973888813,
+  "runtime": 8.6525,
+  "samples_per_second": 173.361,
+  "steps_per_second": 2.774,
+  "epoch": 10.0,
+  "task": "stsb",
+  "method": "frozen",
+  "trainable_params": 591361
+}

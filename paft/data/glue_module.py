@@ -54,7 +54,7 @@ TASK_TO_METRIC: Dict[str, str] = {
     "qqp":   "f1",
     "rte":   "accuracy",
     "sst2":  "accuracy",
-    "stsb":  "pearsonr",
+    "stsb":  "pearson",
 }
 
 # Maps task name → number of output labels

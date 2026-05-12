@@ -1,0 +1,12 @@
+{
+  "loss": 0.3057321608066559,
+  "accuracy": 0.9068627450980392,
+  "f1": 0.9314079422382672,
+  "runtime": 1.1207,
+  "samples_per_second": 364.048,
+  "steps_per_second": 6.246,
+  "epoch": 10.0,
+  "task": "mrpc",
+  "method": "polar_r8",
+  "trainable_params": 887042
+}

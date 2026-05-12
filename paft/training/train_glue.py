@@ -108,6 +108,10 @@ def parse_args() -> argparse.Namespace:
                    help="Run stable rank analysis after training")
     p.add_argument("--skip_analysis", action="store_true", default=False)
 
+    p.add_argument("--bias_lr", type=float, default=1e-3,
+                   help="LR for bias/classifier params in safe_* variants. "
+                        "Ignored for non-safe methods. Default is bitfit's sweep LR.")
+
     args = p.parse_args()
 
     # Expand {task} and {method} in output_dir
@@ -269,6 +273,7 @@ def main() -> None:
 
     # 7. Custom Optimizer for Parameter Groups
     from torch.optim import AdamW
+    trainer_optimizers = (None, None)
     if "safe" in args.method:
         # Separate PAFT parameters (S or lam) from Bias parameters
         paft_params = []
@@ -289,9 +294,52 @@ def main() -> None:
         ], weight_decay=args.weight_decay)
 
         # Pass this optimizer to the Trainer via the 'optimizers' tuple (optimizer, scheduler)
-        trainer_optimizers = (optimizer, None)
-    else:
-        trainer_optimizers = (None, None)  # Let Trainer handle it standardly
+        # ── Custom optimizer for safe variants ───────────────────────────────────────
+        # safe_* methods have two fundamentally different parameter types that need
+        # separate LRs and different weight decay treatment:
+        #   geometric params (lam/S): moderate LR, mild weight decay as regularizer
+        #   bias params:              higher LR, NO weight decay (wrong prior toward zero)
+        if "safe" in args.method:
+            geometric_params = [
+                p for n, p in model.named_parameters()
+                if p.requires_grad and (n.endswith('.lam') or n.endswith('.S'))
+            ]
+            bias_and_head_params = [
+                p for n, p in model.named_parameters()
+                if p.requires_grad and not (n.endswith('.lam') or n.endswith('.S'))
+            ]
+
+            # Verify no param is missing or double-counted
+            n_geo = sum(p.numel() for p in geometric_params)
+            n_bias = sum(p.numel() for p in bias_and_head_params)
+            n_total = sum(p.numel() for p in model.parameters() if p.requires_grad)
+            assert n_geo + n_bias == n_total, (
+                f"Parameter split mismatch: {n_geo} + {n_bias} ≠ {n_total}"
+            )
+
+            from torch.optim import AdamW as TorchAdamW
+            optimizer = TorchAdamW([
+                {
+                    "params": geometric_params,
+                    "lr": effective_lr,  # from --lr, sweep-tuned for geometry
+                    "weight_decay": args.weight_decay,  # mild regularizer on S/lam
+                },
+                {
+                    "params": bias_and_head_params,
+                    "lr": args.bias_lr,  # from --bias_lr, bitfit sweep = 1e-3
+                    "weight_decay": 0.0,  # never decay biases toward zero
+                },
+            ])
+            trainer_optimizers = (optimizer, None)
+            logger.info(
+                f"Safe variant optimizer: "
+                f"geometric params lr={effective_lr} wd={args.weight_decay} "
+                f"({n_geo:,} params) | "
+                f"bias+head params lr={args.bias_lr} wd=0.0 "
+                f"({n_bias:,} params)"
+            )
+        else:
+            trainer_optimizers = (None, None)
 
     # ── 7. Trainer ───────────────────────────────────────────────────────────
     trainer = Trainer(

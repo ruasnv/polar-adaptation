@@ -1,0 +1,5 @@
+{
+  "task": "mrpc",
+  "method": "hybrid_paft",
+  "stage": "init"
+}

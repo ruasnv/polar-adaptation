@@ -1,0 +1,5 @@
+{
+  "task": "mrpc",
+  "method": "polar_r8",
+  "stage": "init"
+}

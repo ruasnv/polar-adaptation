@@ -1,0 +1,12 @@
+{
+  "loss": 0.32061997056007385,
+  "accuracy": 0.9068627450980392,
+  "f1": 0.9330985915492958,
+  "runtime": 1.1449,
+  "samples_per_second": 356.352,
+  "steps_per_second": 6.114,
+  "epoch": 10.0,
+  "task": "mrpc",
+  "method": "lora_r8",
+  "trainable_params": 1771778
+}

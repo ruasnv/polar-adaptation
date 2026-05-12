@@ -1,0 +1,11 @@
+{
+  "loss": 0.518364429473877,
+  "accuracy": 0.8664259927797834,
+  "runtime": 0.7403,
+  "samples_per_second": 374.177,
+  "steps_per_second": 6.754,
+  "epoch": 10.0,
+  "task": "rte",
+  "method": "polar_r8",
+  "trainable_params": 887042
+}
