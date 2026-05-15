@@ -1,0 +1,11 @@
+{
+  "loss": 0.18135686218738556,
+  "accuracy": 0.9397766794801391,
+  "runtime": 10.3091,
+  "samples_per_second": 529.921,
+  "steps_per_second": 8.342,
+  "epoch": 5.0,
+  "task": "qnli",
+  "method": "safe_hybrid_paft",
+  "trainable_params": 1856258
+}

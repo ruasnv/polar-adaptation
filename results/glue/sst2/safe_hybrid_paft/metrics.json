@@ -1,0 +1,11 @@
+{
+  "loss": 0.16299107670783997,
+  "accuracy": 0.9564220183486238,
+  "runtime": 1.6319,
+  "samples_per_second": 534.332,
+  "steps_per_second": 8.579,
+  "epoch": 5.0,
+  "task": "sst2",
+  "method": "safe_hybrid_paft",
+  "trainable_params": 1856258
+}

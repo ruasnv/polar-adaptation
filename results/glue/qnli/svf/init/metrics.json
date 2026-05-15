@@ -1,0 +1,5 @@
+{
+  "task": "qnli",
+  "method": "svf",
+  "stage": "init"
+}

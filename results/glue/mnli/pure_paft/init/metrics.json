@@ -1,0 +1,5 @@
+{
+  "task": "mnli",
+  "method": "pure_paft",
+  "stage": "init"
+}

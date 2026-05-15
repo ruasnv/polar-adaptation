@@ -1,0 +1,11 @@
+{
+  "loss": 0.14605595171451569,
+  "accuracy": 0.9552752293577982,
+  "runtime": 4.3374,
+  "samples_per_second": 201.044,
+  "steps_per_second": 3.228,
+  "epoch": 5.0,
+  "task": "sst2",
+  "method": "bitfit",
+  "trainable_params": 695042
+}

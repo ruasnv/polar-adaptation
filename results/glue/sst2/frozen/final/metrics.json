@@ -1,0 +1,11 @@
+{
+  "loss": 0.4688884913921356,
+  "accuracy": 0.8211009174311926,
+  "runtime": 4.932,
+  "samples_per_second": 176.806,
+  "steps_per_second": 2.839,
+  "epoch": 5.0,
+  "task": "sst2",
+  "method": "frozen",
+  "trainable_params": 592130
+}

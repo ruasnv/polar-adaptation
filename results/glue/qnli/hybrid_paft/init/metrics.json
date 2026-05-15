@@ -1,0 +1,5 @@
+{
+  "task": "qnli",
+  "method": "hybrid_paft",
+  "stage": "init"
+}

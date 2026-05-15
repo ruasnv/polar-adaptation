@@ -1,0 +1,5 @@
+{
+  "task": "sst2",
+  "method": "svf",
+  "stage": "init"
+}

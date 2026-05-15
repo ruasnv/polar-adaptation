@@ -1,0 +1,11 @@
+{
+  "loss": 0.2817588746547699,
+  "accuracy": 0.8995415180845644,
+  "runtime": 17.8119,
+  "samples_per_second": 551.035,
+  "steps_per_second": 8.646,
+  "epoch": 3.0,
+  "task": "mnli",
+  "method": "hybrid_paft",
+  "trainable_params": 1772547
+}

@@ -1,0 +1,21 @@
+{
+  "method": "safe_hybrid_paft",
+  "V_projection": {
+    "stable_rank_Weff": 50.90622184998819,
+    "spectral_entropy_Weff": 4.152155518531799,
+    "effective_rank_Weff": 63.57095233782956,
+    "condition_number_Weff": 1.2576759457588196,
+    "directional_diversity": 1.4112476706504822
+  },
+  "O_projection": {
+    "stable_rank_Weff": 7.342443911875201,
+    "spectral_entropy_Weff": 2.420889417330424,
+    "effective_rank_Weff": 11.2617276666602,
+    "condition_number_Weff": 1.8874184389909108,
+    "directional_diversity": 1.4140189091364543
+  },
+  "orthogonality": {
+    "mean_ortho_error_V": 1.2553724060479806e-05,
+    "mean_ortho_error_O": 1.009004735250427e-05
+  }
+}

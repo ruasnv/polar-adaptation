@@ -1,0 +1,11 @@
+{
+  "loss": 0.18119502067565918,
+  "accuracy": 0.9412410763316859,
+  "runtime": 37.0945,
+  "samples_per_second": 147.272,
+  "steps_per_second": 2.318,
+  "epoch": 5.0,
+  "task": "qnli",
+  "method": "polar_r8",
+  "trainable_params": 887042
+}

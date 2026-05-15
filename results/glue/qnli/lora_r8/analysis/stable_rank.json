@@ -1,0 +1,4 @@
+{
+  "method": "lora_r8",
+  "note": "Non-PAFT model \u2014 per-head W_eff not directly accessible"
+}
