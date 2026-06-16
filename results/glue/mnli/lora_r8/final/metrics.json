@@ -1,0 +1,11 @@
+{
+  "loss": 0.2691998779773712,
+  "accuracy": 0.9039225674987265,
+  "runtime": 56.7573,
+  "samples_per_second": 172.929,
+  "steps_per_second": 2.713,
+  "epoch": 3.0,
+  "task": "mnli",
+  "method": "lora_r8",
+  "trainable_params": 887811
+}

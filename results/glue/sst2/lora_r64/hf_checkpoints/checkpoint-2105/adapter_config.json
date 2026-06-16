@@ -36,8 +36,7 @@
   "revision": null,
   "target_modules": [
     "query_proj",
-    "value_proj",
-    "dense"
+    "value_proj"
   ],
   "target_parameters": null,
   "task_type": "SEQ_CLS",

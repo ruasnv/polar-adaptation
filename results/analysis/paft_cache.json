@@ -1,0 +1,3826 @@
+{
+  "mrpc": {
+    "safe_hybrid_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.07760288673518291,
+      "S_O_asymmetry_mean": 0.07752155421420467,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.3000626862049103,
+          "delta_lam_O_magnitude": 0.3131159543991089,
+          "S_V_asymmetry_ratio": 0.10565055973227179,
+          "S_O_asymmetry_ratio": 0.10694296767416865
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.31891876459121704,
+          "delta_lam_O_magnitude": 0.32004496455192566,
+          "S_V_asymmetry_ratio": 0.09482682623114932,
+          "S_O_asymmetry_ratio": 0.09226517784624648
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.2805168032646179,
+          "delta_lam_O_magnitude": 0.3189367949962616,
+          "S_V_asymmetry_ratio": 0.08188628766873417,
+          "S_O_asymmetry_ratio": 0.0806686306159424
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.27116498351097107,
+          "delta_lam_O_magnitude": 0.3089140057563782,
+          "S_V_asymmetry_ratio": 0.07583624875930349,
+          "S_O_asymmetry_ratio": 0.07524242281300529
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.2529212534427643,
+          "delta_lam_O_magnitude": 0.27679482102394104,
+          "S_V_asymmetry_ratio": 0.0681752563766812,
+          "S_O_asymmetry_ratio": 0.0694797644753377
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.276730477809906,
+          "delta_lam_O_magnitude": 0.30734357237815857,
+          "S_V_asymmetry_ratio": 0.0769831841502076,
+          "S_O_asymmetry_ratio": 0.07510740678324278
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.3082742393016815,
+          "delta_lam_O_magnitude": 0.33421340584754944,
+          "S_V_asymmetry_ratio": 0.08094327489853408,
+          "S_O_asymmetry_ratio": 0.07970288047039167
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.29415687918663025,
+          "delta_lam_O_magnitude": 0.3024950325489044,
+          "S_V_asymmetry_ratio": 0.08682457065310713,
+          "S_O_asymmetry_ratio": 0.08322896037088577
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.2969757318496704,
+          "delta_lam_O_magnitude": 0.32399943470954895,
+          "S_V_asymmetry_ratio": 0.08725077342416523,
+          "S_O_asymmetry_ratio": 0.0820975847857112
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.23746448755264282,
+          "delta_lam_O_magnitude": 0.2615658938884735,
+          "S_V_asymmetry_ratio": 0.060167483056513926,
+          "S_O_asymmetry_ratio": 0.06220408149134098
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.22924572229385376,
+          "delta_lam_O_magnitude": 0.2576456665992737,
+          "S_V_asymmetry_ratio": 0.05782062678143461,
+          "S_O_asymmetry_ratio": 0.0645827153608401
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.26927831768989563,
+          "delta_lam_O_magnitude": 0.28436145186424255,
+          "S_V_asymmetry_ratio": 0.0548695490900924,
+          "S_O_asymmetry_ratio": 0.0587360578833431
+        }
+      ]
+    },
+    "pure_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.0,
+      "S_O_asymmetry_mean": 0.0,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 5.778928756713867,
+          "delta_lam_O_magnitude": 5.562891006469727,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 6.001543998718262,
+          "delta_lam_O_magnitude": 6.037684440612793,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 6.455046653747559,
+          "delta_lam_O_magnitude": 6.215270042419434,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 6.902535915374756,
+          "delta_lam_O_magnitude": 6.639260768890381,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.055659294128418,
+          "delta_lam_O_magnitude": 7.080428123474121,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 6.970341205596924,
+          "delta_lam_O_magnitude": 7.2700676918029785,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.794727802276611,
+          "delta_lam_O_magnitude": 7.345407485961914,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.8300347328186035,
+          "delta_lam_O_magnitude": 7.838328838348389,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 8.154579162597656,
+          "delta_lam_O_magnitude": 8.651508331298828,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.645626544952393,
+          "delta_lam_O_magnitude": 8.0943603515625,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 6.553516864776611,
+          "delta_lam_O_magnitude": 7.307626724243164,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.534748554229736,
+          "delta_lam_O_magnitude": 7.571261882781982,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        }
+      ]
+    },
+    "hybrid_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.09445816797712887,
+      "S_O_asymmetry_mean": 0.09471157268473569,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.3824812173843384,
+          "delta_lam_O_magnitude": 0.40203550457954407,
+          "S_V_asymmetry_ratio": 0.12252697694927782,
+          "S_O_asymmetry_ratio": 0.12245233290971165
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.36870065331459045,
+          "delta_lam_O_magnitude": 0.36304551362991333,
+          "S_V_asymmetry_ratio": 0.10911991512353227,
+          "S_O_asymmetry_ratio": 0.10577292811107457
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.3643963038921356,
+          "delta_lam_O_magnitude": 0.39534664154052734,
+          "S_V_asymmetry_ratio": 0.09839025114391989,
+          "S_O_asymmetry_ratio": 0.09629642650499516
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.35351070761680603,
+          "delta_lam_O_magnitude": 0.3867396414279938,
+          "S_V_asymmetry_ratio": 0.08985178194594497,
+          "S_O_asymmetry_ratio": 0.08893152152345427
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.33567145466804504,
+          "delta_lam_O_magnitude": 0.34528183937072754,
+          "S_V_asymmetry_ratio": 0.08349452426054127,
+          "S_O_asymmetry_ratio": 0.08494272517335238
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.36884692311286926,
+          "delta_lam_O_magnitude": 0.40918269753456116,
+          "S_V_asymmetry_ratio": 0.09351443723419453,
+          "S_O_asymmetry_ratio": 0.09172985021443106
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.40123996138572693,
+          "delta_lam_O_magnitude": 0.4500776529312134,
+          "S_V_asymmetry_ratio": 0.09829262036782856,
+          "S_O_asymmetry_ratio": 0.09637864291630974
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.39258745312690735,
+          "delta_lam_O_magnitude": 0.4039236307144165,
+          "S_V_asymmetry_ratio": 0.10746955992739998,
+          "S_O_asymmetry_ratio": 0.10202349199107986
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.45064452290534973,
+          "delta_lam_O_magnitude": 0.4896770119667053,
+          "S_V_asymmetry_ratio": 0.11108032439866475,
+          "S_O_asymmetry_ratio": 0.10555094271143578
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.3261781632900238,
+          "delta_lam_O_magnitude": 0.407764732837677,
+          "S_V_asymmetry_ratio": 0.07725894322679651,
+          "S_O_asymmetry_ratio": 0.0812690933028448
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.3067365288734436,
+          "delta_lam_O_magnitude": 0.39878904819488525,
+          "S_V_asymmetry_ratio": 0.06977451837869122,
+          "S_O_asymmetry_ratio": 0.08296140689484402
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.44148945808410645,
+          "delta_lam_O_magnitude": 0.48122766613960266,
+          "S_V_asymmetry_ratio": 0.07272416276875467,
+          "S_O_asymmetry_ratio": 0.07822950996329506
+        }
+      ]
+    },
+    "safe_pure_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.0,
+      "S_O_asymmetry_mean": 0.0,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.919883131980896,
+          "delta_lam_O_magnitude": 0.9449084997177124,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.9180788397789001,
+          "delta_lam_O_magnitude": 0.9747357368469238,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.0189406871795654,
+          "delta_lam_O_magnitude": 1.0054268836975098,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.0054436922073364,
+          "delta_lam_O_magnitude": 1.0212719440460205,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.9990106225013733,
+          "delta_lam_O_magnitude": 1.0189182758331299,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.0067063570022583,
+          "delta_lam_O_magnitude": 1.054567575454712,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.0923233032226562,
+          "delta_lam_O_magnitude": 1.0669361352920532,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.092572808265686,
+          "delta_lam_O_magnitude": 1.141923427581787,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.1414276361465454,
+          "delta_lam_O_magnitude": 1.1331011056900024,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.098359227180481,
+          "delta_lam_O_magnitude": 1.0836503505706787,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.0169609785079956,
+          "delta_lam_O_magnitude": 1.0893454551696777,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.0406161546707153,
+          "delta_lam_O_magnitude": 1.0526231527328491,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        }
+      ]
+    }
+  },
+  "cola": {
+    "safe_hybrid_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.09647255042041668,
+      "S_O_asymmetry_mean": 0.09670772059738149,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.42660027742385864,
+          "delta_lam_O_magnitude": 0.4355117082595825,
+          "S_V_asymmetry_ratio": 0.12662047104962632,
+          "S_O_asymmetry_ratio": 0.128649650476947
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.4272199273109436,
+          "delta_lam_O_magnitude": 0.4439621865749359,
+          "S_V_asymmetry_ratio": 0.1112471712673633,
+          "S_O_asymmetry_ratio": 0.10905130755819799
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.4069090187549591,
+          "delta_lam_O_magnitude": 0.4442475438117981,
+          "S_V_asymmetry_ratio": 0.10087194237703002,
+          "S_O_asymmetry_ratio": 0.09910014204979219
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.41322171688079834,
+          "delta_lam_O_magnitude": 0.4322976768016815,
+          "S_V_asymmetry_ratio": 0.09256620274796212,
+          "S_O_asymmetry_ratio": 0.09062329805667055
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.37017813324928284,
+          "delta_lam_O_magnitude": 0.4076533019542694,
+          "S_V_asymmetry_ratio": 0.08517638529910329,
+          "S_O_asymmetry_ratio": 0.08729442624294428
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.4202517569065094,
+          "delta_lam_O_magnitude": 0.449613094329834,
+          "S_V_asymmetry_ratio": 0.09785191230801889,
+          "S_O_asymmetry_ratio": 0.09656142702747263
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.41106462478637695,
+          "delta_lam_O_magnitude": 0.46925920248031616,
+          "S_V_asymmetry_ratio": 0.10140635265288914,
+          "S_O_asymmetry_ratio": 0.10013087533197577
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.3905215561389923,
+          "delta_lam_O_magnitude": 0.44800281524658203,
+          "S_V_asymmetry_ratio": 0.10653124309194083,
+          "S_O_asymmetry_ratio": 0.10312603174355632
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.3928188383579254,
+          "delta_lam_O_magnitude": 0.4398576617240906,
+          "S_V_asymmetry_ratio": 0.1069206850450091,
+          "S_O_asymmetry_ratio": 0.102612593700843
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.3505440056324005,
+          "delta_lam_O_magnitude": 0.38008782267570496,
+          "S_V_asymmetry_ratio": 0.08124804441258641,
+          "S_O_asymmetry_ratio": 0.08380480327010965
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.34379708766937256,
+          "delta_lam_O_magnitude": 0.4163481295108795,
+          "S_V_asymmetry_ratio": 0.07763588178412903,
+          "S_O_asymmetry_ratio": 0.08558900343980154
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.34809714555740356,
+          "delta_lam_O_magnitude": 0.4096566438674927,
+          "S_V_asymmetry_ratio": 0.06959431300934178,
+          "S_O_asymmetry_ratio": 0.07394908827026717
+        }
+      ]
+    },
+    "pure_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.0,
+      "S_O_asymmetry_mean": 0.0,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 6.967096328735352,
+          "delta_lam_O_magnitude": 6.9424357414245605,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.075135231018066,
+          "delta_lam_O_magnitude": 7.1579461097717285,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.342321395874023,
+          "delta_lam_O_magnitude": 7.511200428009033,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.735072135925293,
+          "delta_lam_O_magnitude": 7.598315238952637,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 8.018056869506836,
+          "delta_lam_O_magnitude": 7.693757057189941,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 8.07083511352539,
+          "delta_lam_O_magnitude": 8.069862365722656,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 8.259848594665527,
+          "delta_lam_O_magnitude": 7.784635066986084,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 8.223628044128418,
+          "delta_lam_O_magnitude": 8.215958595275879,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.796560287475586,
+          "delta_lam_O_magnitude": 7.900053024291992,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.98931360244751,
+          "delta_lam_O_magnitude": 8.195269584655762,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.6157145500183105,
+          "delta_lam_O_magnitude": 8.026609420776367,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.895206451416016,
+          "delta_lam_O_magnitude": 7.518264293670654,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        }
+      ]
+    },
+    "hybrid_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.12062082394786265,
+      "S_O_asymmetry_mean": 0.12156967087674274,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.5696030259132385,
+          "delta_lam_O_magnitude": 0.5921239256858826,
+          "S_V_asymmetry_ratio": 0.15652704553014676,
+          "S_O_asymmetry_ratio": 0.15738656176491547
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.592676043510437,
+          "delta_lam_O_magnitude": 0.5867559909820557,
+          "S_V_asymmetry_ratio": 0.14079538403159064,
+          "S_O_asymmetry_ratio": 0.13772262727688586
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.5463802814483643,
+          "delta_lam_O_magnitude": 0.5993191599845886,
+          "S_V_asymmetry_ratio": 0.12552628730194906,
+          "S_O_asymmetry_ratio": 0.12337139661918033
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.5806171894073486,
+          "delta_lam_O_magnitude": 0.6209222674369812,
+          "S_V_asymmetry_ratio": 0.11684266583236315,
+          "S_O_asymmetry_ratio": 0.11494608064262618
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.534156084060669,
+          "delta_lam_O_magnitude": 0.5965627431869507,
+          "S_V_asymmetry_ratio": 0.10929822442687773,
+          "S_O_asymmetry_ratio": 0.1116832549276782
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.5902226567268372,
+          "delta_lam_O_magnitude": 0.6549894213676453,
+          "S_V_asymmetry_ratio": 0.1227733791755488,
+          "S_O_asymmetry_ratio": 0.12201156781734748
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.5964780449867249,
+          "delta_lam_O_magnitude": 0.6503875851631165,
+          "S_V_asymmetry_ratio": 0.127174287418133,
+          "S_O_asymmetry_ratio": 0.12605701089313495
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.5502752065658569,
+          "delta_lam_O_magnitude": 0.6170017123222351,
+          "S_V_asymmetry_ratio": 0.13439737264550217,
+          "S_O_asymmetry_ratio": 0.1288414795449961
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.5514081716537476,
+          "delta_lam_O_magnitude": 0.6043727397918701,
+          "S_V_asymmetry_ratio": 0.13211987956790028,
+          "S_O_asymmetry_ratio": 0.12631160077285333
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.4813949167728424,
+          "delta_lam_O_magnitude": 0.561049222946167,
+          "S_V_asymmetry_ratio": 0.10079379183807868,
+          "S_O_asymmetry_ratio": 0.10507050746793474
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.48977187275886536,
+          "delta_lam_O_magnitude": 0.5932050347328186,
+          "S_V_asymmetry_ratio": 0.08583935183262278,
+          "S_O_asymmetry_ratio": 0.10128788455513602
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.6385635137557983,
+          "delta_lam_O_magnitude": 0.7588806748390198,
+          "S_V_asymmetry_ratio": 0.0953622177736388,
+          "S_O_asymmetry_ratio": 0.10414607823822415
+        }
+      ]
+    },
+    "safe_pure_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.0,
+      "S_O_asymmetry_mean": 0.0,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.2626911401748657,
+          "delta_lam_O_magnitude": 1.2502431869506836,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.2711513042449951,
+          "delta_lam_O_magnitude": 1.3263963460922241,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.316673994064331,
+          "delta_lam_O_magnitude": 1.3898181915283203,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.4036810398101807,
+          "delta_lam_O_magnitude": 1.3924822807312012,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.3947360515594482,
+          "delta_lam_O_magnitude": 1.3721904754638672,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.418372392654419,
+          "delta_lam_O_magnitude": 1.4278367757797241,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.3808567523956299,
+          "delta_lam_O_magnitude": 1.3668370246887207,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.379181146621704,
+          "delta_lam_O_magnitude": 1.340402364730835,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.3376377820968628,
+          "delta_lam_O_magnitude": 1.3805745840072632,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.3667645454406738,
+          "delta_lam_O_magnitude": 1.3999756574630737,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.2319763898849487,
+          "delta_lam_O_magnitude": 1.320907711982727,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.3160996437072754,
+          "delta_lam_O_magnitude": 1.2679195404052734,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        }
+      ]
+    }
+  },
+  "qqp": {
+    "safe_hybrid_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.30858327377756073,
+      "S_O_asymmetry_mean": 0.308357015337332,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.9014220237731934,
+          "delta_lam_O_magnitude": 3.1030538082122803,
+          "S_V_asymmetry_ratio": 0.41247893283930637,
+          "S_O_asymmetry_ratio": 0.42878444010419015
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.051374912261963,
+          "delta_lam_O_magnitude": 3.153198003768921,
+          "S_V_asymmetry_ratio": 0.3749821848790595,
+          "S_O_asymmetry_ratio": 0.36756983521382014
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.0835680961608887,
+          "delta_lam_O_magnitude": 3.3358206748962402,
+          "S_V_asymmetry_ratio": 0.33459199948921897,
+          "S_O_asymmetry_ratio": 0.33018316602680436
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.1828250885009766,
+          "delta_lam_O_magnitude": 3.372797727584839,
+          "S_V_asymmetry_ratio": 0.3025489071860243,
+          "S_O_asymmetry_ratio": 0.3007251718823085
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.0523698329925537,
+          "delta_lam_O_magnitude": 3.2902259826660156,
+          "S_V_asymmetry_ratio": 0.27963909112907737,
+          "S_O_asymmetry_ratio": 0.28171276114671495
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.0486667156219482,
+          "delta_lam_O_magnitude": 3.274868965148926,
+          "S_V_asymmetry_ratio": 0.29879636403456966,
+          "S_O_asymmetry_ratio": 0.295784614442212
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.0202202796936035,
+          "delta_lam_O_magnitude": 3.2936956882476807,
+          "S_V_asymmetry_ratio": 0.3106358670741557,
+          "S_O_asymmetry_ratio": 0.30612973297602775
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.8545053005218506,
+          "delta_lam_O_magnitude": 2.9744842052459717,
+          "S_V_asymmetry_ratio": 0.3263131626197867,
+          "S_O_asymmetry_ratio": 0.31459981537521425
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.722450017929077,
+          "delta_lam_O_magnitude": 2.9192121028900146,
+          "S_V_asymmetry_ratio": 0.32139681266916936,
+          "S_O_asymmetry_ratio": 0.30498734362577423
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.918165445327759,
+          "delta_lam_O_magnitude": 3.1043882369995117,
+          "S_V_asymmetry_ratio": 0.25369851732519144,
+          "S_O_asymmetry_ratio": 0.25693248407332653
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.680699348449707,
+          "delta_lam_O_magnitude": 2.93652081489563,
+          "S_V_asymmetry_ratio": 0.2650166401193572,
+          "S_O_asymmetry_ratio": 0.2779878428075289
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.021085023880005,
+          "delta_lam_O_magnitude": 2.869940757751465,
+          "S_V_asymmetry_ratio": 0.2229008059658119,
+          "S_O_asymmetry_ratio": 0.2348869763740624
+        }
+      ]
+    },
+    "pure_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.0,
+      "S_O_asymmetry_mean": 0.0,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 13.749517440795898,
+          "delta_lam_O_magnitude": 14.565937995910645,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 16.28327751159668,
+          "delta_lam_O_magnitude": 16.402616500854492,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 17.227062225341797,
+          "delta_lam_O_magnitude": 18.16978645324707,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 19.363588333129883,
+          "delta_lam_O_magnitude": 20.331716537475586,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 21.073741912841797,
+          "delta_lam_O_magnitude": 21.16708755493164,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 19.076162338256836,
+          "delta_lam_O_magnitude": 20.14322280883789,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 18.298185348510742,
+          "delta_lam_O_magnitude": 19.42029571533203,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 18.94805908203125,
+          "delta_lam_O_magnitude": 19.075557708740234,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 18.48786735534668,
+          "delta_lam_O_magnitude": 19.192405700683594,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 23.537485122680664,
+          "delta_lam_O_magnitude": 23.98532485961914,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 22.2536563873291,
+          "delta_lam_O_magnitude": 22.984516143798828,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 24.48023223876953,
+          "delta_lam_O_magnitude": 23.346601486206055,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        }
+      ]
+    },
+    "hybrid_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.3226483227632931,
+      "S_O_asymmetry_mean": 0.3262316378703095,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.876185178756714,
+          "delta_lam_O_magnitude": 3.125723361968994,
+          "S_V_asymmetry_ratio": 0.4142857069035766,
+          "S_O_asymmetry_ratio": 0.4368799703465727
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.0660417079925537,
+          "delta_lam_O_magnitude": 3.1332907676696777,
+          "S_V_asymmetry_ratio": 0.38675992731690584,
+          "S_O_asymmetry_ratio": 0.379763776234752
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.11372709274292,
+          "delta_lam_O_magnitude": 3.4251246452331543,
+          "S_V_asymmetry_ratio": 0.34739998172885683,
+          "S_O_asymmetry_ratio": 0.34380418601073187
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.177557945251465,
+          "delta_lam_O_magnitude": 3.372311592102051,
+          "S_V_asymmetry_ratio": 0.3162533698929861,
+          "S_O_asymmetry_ratio": 0.3145487430642491
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.0696213245391846,
+          "delta_lam_O_magnitude": 3.3272814750671387,
+          "S_V_asymmetry_ratio": 0.2935270504289235,
+          "S_O_asymmetry_ratio": 0.298164845313315
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.1025233268737793,
+          "delta_lam_O_magnitude": 3.326998710632324,
+          "S_V_asymmetry_ratio": 0.31750375730171865,
+          "S_O_asymmetry_ratio": 0.31434139664141514
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.0596325397491455,
+          "delta_lam_O_magnitude": 3.364403486251831,
+          "S_V_asymmetry_ratio": 0.3252158967179629,
+          "S_O_asymmetry_ratio": 0.32248202840323975
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.850874662399292,
+          "delta_lam_O_magnitude": 3.050017833709717,
+          "S_V_asymmetry_ratio": 0.33861860350551665,
+          "S_O_asymmetry_ratio": 0.32627582536402294
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.8098208904266357,
+          "delta_lam_O_magnitude": 3.0162758827209473,
+          "S_V_asymmetry_ratio": 0.3344136662778629,
+          "S_O_asymmetry_ratio": 0.31865966934289686
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.9084994792938232,
+          "delta_lam_O_magnitude": 3.184859037399292,
+          "S_V_asymmetry_ratio": 0.27295125624682853,
+          "S_O_asymmetry_ratio": 0.28149253562385795
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.764824867248535,
+          "delta_lam_O_magnitude": 3.1437573432922363,
+          "S_V_asymmetry_ratio": 0.2795328610720574,
+          "S_O_asymmetry_ratio": 0.30449193047432466
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.3609418869018555,
+          "delta_lam_O_magnitude": 3.320312023162842,
+          "S_V_asymmetry_ratio": 0.24531779576632148,
+          "S_O_asymmetry_ratio": 0.2738747476243359
+        }
+      ]
+    },
+    "safe_pure_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.0,
+      "S_O_asymmetry_mean": 0.0,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 5.152651309967041,
+          "delta_lam_O_magnitude": 5.420109748840332,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 6.0568084716796875,
+          "delta_lam_O_magnitude": 6.248565196990967,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 6.960760593414307,
+          "delta_lam_O_magnitude": 7.005420684814453,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.8211870193481445,
+          "delta_lam_O_magnitude": 7.680197715759277,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.842637538909912,
+          "delta_lam_O_magnitude": 7.784448623657227,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.400676727294922,
+          "delta_lam_O_magnitude": 7.514895915985107,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.230217456817627,
+          "delta_lam_O_magnitude": 7.327887058258057,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 6.739591598510742,
+          "delta_lam_O_magnitude": 7.026566028594971,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 6.4874162673950195,
+          "delta_lam_O_magnitude": 6.495185375213623,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.786325454711914,
+          "delta_lam_O_magnitude": 8.014416694641113,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.351337432861328,
+          "delta_lam_O_magnitude": 7.4246745109558105,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.752767562866211,
+          "delta_lam_O_magnitude": 7.501303195953369,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        }
+      ]
+    }
+  },
+  "stsb": {
+    "safe_hybrid_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.07966316580801566,
+      "S_O_asymmetry_mean": 0.07975079566454998,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.3273051977157593,
+          "delta_lam_O_magnitude": 0.3547738492488861,
+          "S_V_asymmetry_ratio": 0.10773826852247871,
+          "S_O_asymmetry_ratio": 0.10989685809131605
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.3560052812099457,
+          "delta_lam_O_magnitude": 0.3480304181575775,
+          "S_V_asymmetry_ratio": 0.09935890805836643,
+          "S_O_asymmetry_ratio": 0.09669426947704873
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.3233429193496704,
+          "delta_lam_O_magnitude": 0.34193482995033264,
+          "S_V_asymmetry_ratio": 0.0867752614869236,
+          "S_O_asymmetry_ratio": 0.08506299850100327
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.31783151626586914,
+          "delta_lam_O_magnitude": 0.32644757628440857,
+          "S_V_asymmetry_ratio": 0.07554057670941738,
+          "S_O_asymmetry_ratio": 0.07453975179504399
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.28230157494544983,
+          "delta_lam_O_magnitude": 0.31593403220176697,
+          "S_V_asymmetry_ratio": 0.07051874528075183,
+          "S_O_asymmetry_ratio": 0.07092601626105118
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.2803908884525299,
+          "delta_lam_O_magnitude": 0.3091544210910797,
+          "S_V_asymmetry_ratio": 0.07388858444557393,
+          "S_O_asymmetry_ratio": 0.07260516528152314
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.3011738061904907,
+          "delta_lam_O_magnitude": 0.3322157859802246,
+          "S_V_asymmetry_ratio": 0.0793257847198596,
+          "S_O_asymmetry_ratio": 0.07806731393838423
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.3000117540359497,
+          "delta_lam_O_magnitude": 0.3024807274341583,
+          "S_V_asymmetry_ratio": 0.08682284196291273,
+          "S_O_asymmetry_ratio": 0.08323959079200562
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.2810537815093994,
+          "delta_lam_O_magnitude": 0.3220402002334595,
+          "S_V_asymmetry_ratio": 0.08919760346415143,
+          "S_O_asymmetry_ratio": 0.08445714337535565
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.2560160160064697,
+          "delta_lam_O_magnitude": 0.2826947569847107,
+          "S_V_asymmetry_ratio": 0.0629693083566863,
+          "S_O_asymmetry_ratio": 0.06504898828803483
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.23342566192150116,
+          "delta_lam_O_magnitude": 0.2915693521499634,
+          "S_V_asymmetry_ratio": 0.06279281018756515,
+          "S_O_asymmetry_ratio": 0.06999545341240108
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.29011788964271545,
+          "delta_lam_O_magnitude": 0.3553457260131836,
+          "S_V_asymmetry_ratio": 0.06102929650150087,
+          "S_O_asymmetry_ratio": 0.06647599876143191
+        }
+      ]
+    },
+    "pure_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.0,
+      "S_O_asymmetry_mean": 0.0,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 5.996996879577637,
+          "delta_lam_O_magnitude": 5.718904495239258,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 6.170079708099365,
+          "delta_lam_O_magnitude": 6.220882415771484,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 6.35433292388916,
+          "delta_lam_O_magnitude": 6.228230953216553,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 6.602425575256348,
+          "delta_lam_O_magnitude": 6.75514554977417,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 6.848293304443359,
+          "delta_lam_O_magnitude": 6.9233245849609375,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.074551582336426,
+          "delta_lam_O_magnitude": 7.023141860961914,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.520913124084473,
+          "delta_lam_O_magnitude": 7.055558204650879,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.9922380447387695,
+          "delta_lam_O_magnitude": 7.573747158050537,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 8.38871955871582,
+          "delta_lam_O_magnitude": 8.4611177444458,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 8.83797550201416,
+          "delta_lam_O_magnitude": 8.497803688049316,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 8.050311088562012,
+          "delta_lam_O_magnitude": 8.482386589050293,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.2628703117370605,
+          "delta_lam_O_magnitude": 7.362478256225586,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        }
+      ]
+    },
+    "hybrid_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.10225552129906705,
+      "S_O_asymmetry_mean": 0.10243047068417678,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.4420791566371918,
+          "delta_lam_O_magnitude": 0.47502124309539795,
+          "S_V_asymmetry_ratio": 0.13048346732304208,
+          "S_O_asymmetry_ratio": 0.1298594997963373
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.4601233899593353,
+          "delta_lam_O_magnitude": 0.4473373591899872,
+          "S_V_asymmetry_ratio": 0.12007035975590817,
+          "S_O_asymmetry_ratio": 0.11686833470174161
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.439283549785614,
+          "delta_lam_O_magnitude": 0.4688228964805603,
+          "S_V_asymmetry_ratio": 0.10706085430463914,
+          "S_O_asymmetry_ratio": 0.10539319608141563
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.41608303785324097,
+          "delta_lam_O_magnitude": 0.4365176260471344,
+          "S_V_asymmetry_ratio": 0.09418461923020312,
+          "S_O_asymmetry_ratio": 0.09267156482107916
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.3905991017818451,
+          "delta_lam_O_magnitude": 0.41106000542640686,
+          "S_V_asymmetry_ratio": 0.08950887867544956,
+          "S_O_asymmetry_ratio": 0.09074389384108622
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.4503379166126251,
+          "delta_lam_O_magnitude": 0.447536438703537,
+          "S_V_asymmetry_ratio": 0.09917388747615526,
+          "S_O_asymmetry_ratio": 0.09722365686859126
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.43883660435676575,
+          "delta_lam_O_magnitude": 0.491321861743927,
+          "S_V_asymmetry_ratio": 0.10292666701713078,
+          "S_O_asymmetry_ratio": 0.10179350027258172
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.42637574672698975,
+          "delta_lam_O_magnitude": 0.43401333689689636,
+          "S_V_asymmetry_ratio": 0.11098081950435656,
+          "S_O_asymmetry_ratio": 0.10583072812966376
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.4489603340625763,
+          "delta_lam_O_magnitude": 0.5031602382659912,
+          "S_V_asymmetry_ratio": 0.11766565604617372,
+          "S_O_asymmetry_ratio": 0.11189822458469266
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.4061167538166046,
+          "delta_lam_O_magnitude": 0.4662896692752838,
+          "S_V_asymmetry_ratio": 0.08775021789346005,
+          "S_O_asymmetry_ratio": 0.09150591418791014
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.3564471900463104,
+          "delta_lam_O_magnitude": 0.4665509760379791,
+          "S_V_asymmetry_ratio": 0.08686495784796748,
+          "S_O_asymmetry_ratio": 0.09811432518297673
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.48781463503837585,
+          "delta_lam_O_magnitude": 0.6242789626121521,
+          "S_V_asymmetry_ratio": 0.08039587051431873,
+          "S_O_asymmetry_ratio": 0.0872628097420451
+        }
+      ]
+    },
+    "safe_pure_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.0,
+      "S_O_asymmetry_mean": 0.0,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.0309900045394897,
+          "delta_lam_O_magnitude": 1.0471562147140503,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.0317004919052124,
+          "delta_lam_O_magnitude": 1.0113179683685303,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.972403883934021,
+          "delta_lam_O_magnitude": 0.9771031737327576,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.0379652976989746,
+          "delta_lam_O_magnitude": 1.022961974143982,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.0594983100891113,
+          "delta_lam_O_magnitude": 1.0536326169967651,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.9789329767227173,
+          "delta_lam_O_magnitude": 1.054832100868225,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.071481466293335,
+          "delta_lam_O_magnitude": 1.0578988790512085,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.1514747142791748,
+          "delta_lam_O_magnitude": 1.148858904838562,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.1781630516052246,
+          "delta_lam_O_magnitude": 1.214596152305603,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.1485497951507568,
+          "delta_lam_O_magnitude": 1.1613378524780273,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.1093579530715942,
+          "delta_lam_O_magnitude": 1.1116634607315063,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.1561684608459473,
+          "delta_lam_O_magnitude": 1.2347848415374756,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        }
+      ]
+    }
+  },
+  "rte": {
+    "safe_hybrid_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.06879661572139147,
+      "S_O_asymmetry_mean": 0.0686740524288794,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.24437817931175232,
+          "delta_lam_O_magnitude": 0.28261542320251465,
+          "S_V_asymmetry_ratio": 0.09043319928980184,
+          "S_O_asymmetry_ratio": 0.09165737425469268
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.24944594502449036,
+          "delta_lam_O_magnitude": 0.2561056315898895,
+          "S_V_asymmetry_ratio": 0.08079262620740851,
+          "S_O_asymmetry_ratio": 0.0794425678927267
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.2295295149087906,
+          "delta_lam_O_magnitude": 0.24520185589790344,
+          "S_V_asymmetry_ratio": 0.07070648402585775,
+          "S_O_asymmetry_ratio": 0.07010423531646674
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.22180910408496857,
+          "delta_lam_O_magnitude": 0.2435404360294342,
+          "S_V_asymmetry_ratio": 0.06276759136906487,
+          "S_O_asymmetry_ratio": 0.06189849701471528
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.209121972322464,
+          "delta_lam_O_magnitude": 0.22277016937732697,
+          "S_V_asymmetry_ratio": 0.059853012769022745,
+          "S_O_asymmetry_ratio": 0.06084574954780552
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.23104557394981384,
+          "delta_lam_O_magnitude": 0.2469218373298645,
+          "S_V_asymmetry_ratio": 0.06656098896819508,
+          "S_O_asymmetry_ratio": 0.06517145370549332
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.24561676383018494,
+          "delta_lam_O_magnitude": 0.2531619668006897,
+          "S_V_asymmetry_ratio": 0.06948355145038164,
+          "S_O_asymmetry_ratio": 0.06821292482856038
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.23371009528636932,
+          "delta_lam_O_magnitude": 0.24124322831630707,
+          "S_V_asymmetry_ratio": 0.07412771442479267,
+          "S_O_asymmetry_ratio": 0.07063485060419997
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.23880527913570404,
+          "delta_lam_O_magnitude": 0.24304606020450592,
+          "S_V_asymmetry_ratio": 0.0771365351526808,
+          "S_O_asymmetry_ratio": 0.07260995353853505
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.22560091316699982,
+          "delta_lam_O_magnitude": 0.265440434217453,
+          "S_V_asymmetry_ratio": 0.060577778746668545,
+          "S_O_asymmetry_ratio": 0.061050710561587236
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.21967926621437073,
+          "delta_lam_O_magnitude": 0.2683629095554352,
+          "S_V_asymmetry_ratio": 0.06355699188718442,
+          "S_O_asymmetry_ratio": 0.06709507611339591
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.22649253904819489,
+          "delta_lam_O_magnitude": 0.26016953587532043,
+          "S_V_asymmetry_ratio": 0.049562914365638484,
+          "S_O_asymmetry_ratio": 0.055365235768374044
+        }
+      ]
+    },
+    "pure_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.0,
+      "S_O_asymmetry_mean": 0.0,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 5.725043296813965,
+          "delta_lam_O_magnitude": 5.824261665344238,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 5.945218086242676,
+          "delta_lam_O_magnitude": 5.871580123901367,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 5.7914719581604,
+          "delta_lam_O_magnitude": 6.073624134063721,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 6.219131946563721,
+          "delta_lam_O_magnitude": 6.3199310302734375,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 6.788949012756348,
+          "delta_lam_O_magnitude": 6.866686820983887,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.03447151184082,
+          "delta_lam_O_magnitude": 7.070703983306885,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.355975151062012,
+          "delta_lam_O_magnitude": 7.141665935516357,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.284694194793701,
+          "delta_lam_O_magnitude": 7.509161949157715,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.7017292976379395,
+          "delta_lam_O_magnitude": 7.5662665367126465,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 8.066247940063477,
+          "delta_lam_O_magnitude": 8.344865798950195,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 6.960123062133789,
+          "delta_lam_O_magnitude": 7.889077663421631,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.611612319946289,
+          "delta_lam_O_magnitude": 8.592829704284668,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        }
+      ]
+    },
+    "hybrid_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.09183213114009815,
+      "S_O_asymmetry_mean": 0.09191643806632811,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.3363775312900543,
+          "delta_lam_O_magnitude": 0.37541663646698,
+          "S_V_asymmetry_ratio": 0.11150131009745097,
+          "S_O_asymmetry_ratio": 0.11244944139974157
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.35062506794929504,
+          "delta_lam_O_magnitude": 0.35676902532577515,
+          "S_V_asymmetry_ratio": 0.10184319069505052,
+          "S_O_asymmetry_ratio": 0.09967566689100689
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.36821886897087097,
+          "delta_lam_O_magnitude": 0.33629685640335083,
+          "S_V_asymmetry_ratio": 0.08936702264557576,
+          "S_O_asymmetry_ratio": 0.0877696841268368
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.3431801497936249,
+          "delta_lam_O_magnitude": 0.3549982011318207,
+          "S_V_asymmetry_ratio": 0.08126672659392782,
+          "S_O_asymmetry_ratio": 0.08037746595667729
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.32057082653045654,
+          "delta_lam_O_magnitude": 0.32206621766090393,
+          "S_V_asymmetry_ratio": 0.07830413266376487,
+          "S_O_asymmetry_ratio": 0.07908325495942979
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.34307536482810974,
+          "delta_lam_O_magnitude": 0.37791886925697327,
+          "S_V_asymmetry_ratio": 0.08649181727599854,
+          "S_O_asymmetry_ratio": 0.08425666413361028
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.35918980836868286,
+          "delta_lam_O_magnitude": 0.39199361205101013,
+          "S_V_asymmetry_ratio": 0.08989493885148497,
+          "S_O_asymmetry_ratio": 0.08799614674434916
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.3481731116771698,
+          "delta_lam_O_magnitude": 0.3505340814590454,
+          "S_V_asymmetry_ratio": 0.09683592581517922,
+          "S_O_asymmetry_ratio": 0.09206723844519092
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.38145995140075684,
+          "delta_lam_O_magnitude": 0.40245720744132996,
+          "S_V_asymmetry_ratio": 0.10327811384023124,
+          "S_O_asymmetry_ratio": 0.09739264404997439
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.3756803274154663,
+          "delta_lam_O_magnitude": 0.47027161717414856,
+          "S_V_asymmetry_ratio": 0.08437750896603213,
+          "S_O_asymmetry_ratio": 0.08716613330041792
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.4463737905025482,
+          "delta_lam_O_magnitude": 0.5405018925666809,
+          "S_V_asymmetry_ratio": 0.09579097240649706,
+          "S_O_asymmetry_ratio": 0.10248997758169455
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.6369142532348633,
+          "delta_lam_O_magnitude": 0.8491625189781189,
+          "S_V_asymmetry_ratio": 0.08303391382998461,
+          "S_O_asymmetry_ratio": 0.09227293920700776
+        }
+      ]
+    },
+    "safe_pure_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.0,
+      "S_O_asymmetry_mean": 0.0,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.7396731376647949,
+          "delta_lam_O_magnitude": 0.7490184307098389,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.7770482897758484,
+          "delta_lam_O_magnitude": 0.7642938494682312,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.8092371821403503,
+          "delta_lam_O_magnitude": 0.8256778120994568,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.7992877960205078,
+          "delta_lam_O_magnitude": 0.809756875038147,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.8480955958366394,
+          "delta_lam_O_magnitude": 0.8387784957885742,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.898160457611084,
+          "delta_lam_O_magnitude": 0.8403941988945007,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.9026570916175842,
+          "delta_lam_O_magnitude": 0.8614925146102905,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.9129551649093628,
+          "delta_lam_O_magnitude": 0.9047026634216309,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.9396683573722839,
+          "delta_lam_O_magnitude": 0.8576179146766663,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.9673380851745605,
+          "delta_lam_O_magnitude": 1.0163174867630005,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.9886122941970825,
+          "delta_lam_O_magnitude": 1.0035524368286133,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.8615242838859558,
+          "delta_lam_O_magnitude": 0.9079568386077881,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        }
+      ]
+    }
+  },
+  "qnli": {
+    "safe_hybrid_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.22124770098287885,
+      "S_O_asymmetry_mean": 0.2218324043834661,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.6699659824371338,
+          "delta_lam_O_magnitude": 1.813735842704773,
+          "S_V_asymmetry_ratio": 0.2889218496621267,
+          "S_O_asymmetry_ratio": 0.2998676698405943
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.7860777378082275,
+          "delta_lam_O_magnitude": 1.8114135265350342,
+          "S_V_asymmetry_ratio": 0.2672549160033793,
+          "S_O_asymmetry_ratio": 0.26260092010369945
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.6477389335632324,
+          "delta_lam_O_magnitude": 1.85608971118927,
+          "S_V_asymmetry_ratio": 0.22826542169718483,
+          "S_O_asymmetry_ratio": 0.22580653402360515
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.6954559087753296,
+          "delta_lam_O_magnitude": 1.848092794418335,
+          "S_V_asymmetry_ratio": 0.20847152883966494,
+          "S_O_asymmetry_ratio": 0.2065506902194389
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.5705918073654175,
+          "delta_lam_O_magnitude": 1.7165751457214355,
+          "S_V_asymmetry_ratio": 0.19326479035469932,
+          "S_O_asymmetry_ratio": 0.1952956943405223
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.6302995681762695,
+          "delta_lam_O_magnitude": 1.819177508354187,
+          "S_V_asymmetry_ratio": 0.2140471942812923,
+          "S_O_asymmetry_ratio": 0.20946391422263055
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.66725492477417,
+          "delta_lam_O_magnitude": 1.8413498401641846,
+          "S_V_asymmetry_ratio": 0.22526768122840318,
+          "S_O_asymmetry_ratio": 0.22293853209207803
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.6119071245193481,
+          "delta_lam_O_magnitude": 1.7592289447784424,
+          "S_V_asymmetry_ratio": 0.2399573386342994,
+          "S_O_asymmetry_ratio": 0.2308035906671909
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.6443259716033936,
+          "delta_lam_O_magnitude": 1.7862149477005005,
+          "S_V_asymmetry_ratio": 0.24308979194507954,
+          "S_O_asymmetry_ratio": 0.23291321383093305
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.734552025794983,
+          "delta_lam_O_magnitude": 1.876965045928955,
+          "S_V_asymmetry_ratio": 0.1952067454332171,
+          "S_O_asymmetry_ratio": 0.19850520713365652
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.531715989112854,
+          "delta_lam_O_magnitude": 1.781260371208191,
+          "S_V_asymmetry_ratio": 0.20380275643125084,
+          "S_O_asymmetry_ratio": 0.21362862569971747
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.6873126029968262,
+          "delta_lam_O_magnitude": 1.6331932544708252,
+          "S_V_asymmetry_ratio": 0.1474223972839484,
+          "S_O_asymmetry_ratio": 0.16361426042752703
+        }
+      ]
+    },
+    "pure_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.0,
+      "S_O_asymmetry_mean": 0.0,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 11.373590469360352,
+          "delta_lam_O_magnitude": 11.351028442382812,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 12.73194408416748,
+          "delta_lam_O_magnitude": 13.069697380065918,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 13.859417915344238,
+          "delta_lam_O_magnitude": 14.206831932067871,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 15.157281875610352,
+          "delta_lam_O_magnitude": 15.215934753417969,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 15.954248428344727,
+          "delta_lam_O_magnitude": 16.415903091430664,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 15.785197257995605,
+          "delta_lam_O_magnitude": 15.56191635131836,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 14.209294319152832,
+          "delta_lam_O_magnitude": 14.072834968566895,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 14.726526260375977,
+          "delta_lam_O_magnitude": 15.381853103637695,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 16.581470489501953,
+          "delta_lam_O_magnitude": 16.55459976196289,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 19.551618576049805,
+          "delta_lam_O_magnitude": 19.790523529052734,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 18.55751609802246,
+          "delta_lam_O_magnitude": 19.167400360107422,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 17.003190994262695,
+          "delta_lam_O_magnitude": 17.909128189086914,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        }
+      ]
+    },
+    "hybrid_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.2274584449851088,
+      "S_O_asymmetry_mean": 0.2292946107239269,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.5519706010818481,
+          "delta_lam_O_magnitude": 1.7076901197433472,
+          "S_V_asymmetry_ratio": 0.28235136340488365,
+          "S_O_asymmetry_ratio": 0.2932374009126263
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.700057029724121,
+          "delta_lam_O_magnitude": 1.6962087154388428,
+          "S_V_asymmetry_ratio": 0.26369789869701366,
+          "S_O_asymmetry_ratio": 0.25789883493597887
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.5739539861679077,
+          "delta_lam_O_magnitude": 1.769446611404419,
+          "S_V_asymmetry_ratio": 0.2321305903694391,
+          "S_O_asymmetry_ratio": 0.23035952970686588
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.6413205862045288,
+          "delta_lam_O_magnitude": 1.747063398361206,
+          "S_V_asymmetry_ratio": 0.21267271493984316,
+          "S_O_asymmetry_ratio": 0.2105390077811659
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.4784250259399414,
+          "delta_lam_O_magnitude": 1.6592601537704468,
+          "S_V_asymmetry_ratio": 0.1979831547910602,
+          "S_O_asymmetry_ratio": 0.20181578435421135
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.6397281885147095,
+          "delta_lam_O_magnitude": 1.7975213527679443,
+          "S_V_asymmetry_ratio": 0.2182141246353173,
+          "S_O_asymmetry_ratio": 0.21459536652739947
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.6157124042510986,
+          "delta_lam_O_magnitude": 1.803303599357605,
+          "S_V_asymmetry_ratio": 0.2265826011961603,
+          "S_O_asymmetry_ratio": 0.224623933594662
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.5849841833114624,
+          "delta_lam_O_magnitude": 1.7207353115081787,
+          "S_V_asymmetry_ratio": 0.24219574160709262,
+          "S_O_asymmetry_ratio": 0.23434797341868074
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.7302855253219604,
+          "delta_lam_O_magnitude": 1.869860053062439,
+          "S_V_asymmetry_ratio": 0.25185353275929545,
+          "S_O_asymmetry_ratio": 0.24238816596136087
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.7272104024887085,
+          "delta_lam_O_magnitude": 2.0122835636138916,
+          "S_V_asymmetry_ratio": 0.20961515047574936,
+          "S_O_asymmetry_ratio": 0.21602218200640683
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.672031283378601,
+          "delta_lam_O_magnitude": 2.0665907859802246,
+          "S_V_asymmetry_ratio": 0.2255304968167571,
+          "S_O_asymmetry_ratio": 0.24303129940198875
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.9639010429382324,
+          "delta_lam_O_magnitude": 1.9472285509109497,
+          "S_V_asymmetry_ratio": 0.1666739701286936,
+          "S_O_asymmetry_ratio": 0.18267585008577555
+        }
+      ]
+    },
+    "safe_pure_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.0,
+      "S_O_asymmetry_mean": 0.0,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.010350465774536,
+          "delta_lam_O_magnitude": 3.116877317428589,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.2984724044799805,
+          "delta_lam_O_magnitude": 3.4378631114959717,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.7132606506347656,
+          "delta_lam_O_magnitude": 3.795112371444702,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 4.118254661560059,
+          "delta_lam_O_magnitude": 4.027486324310303,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 4.152966022491455,
+          "delta_lam_O_magnitude": 4.128641605377197,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 4.004036903381348,
+          "delta_lam_O_magnitude": 4.102752208709717,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.789559841156006,
+          "delta_lam_O_magnitude": 3.9338388442993164,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.8621299266815186,
+          "delta_lam_O_magnitude": 3.947089672088623,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.9322891235351562,
+          "delta_lam_O_magnitude": 3.9735796451568604,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 4.762967109680176,
+          "delta_lam_O_magnitude": 4.791208267211914,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 4.408723831176758,
+          "delta_lam_O_magnitude": 4.305513381958008,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 4.0812859535217285,
+          "delta_lam_O_magnitude": 4.010128021240234,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        }
+      ]
+    }
+  },
+  "sst2": {
+    "safe_hybrid_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.17169253867403056,
+      "S_O_asymmetry_mean": 0.17279132872824676,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.190048336982727,
+          "delta_lam_O_magnitude": 1.2950667142868042,
+          "S_V_asymmetry_ratio": 0.22631304701992744,
+          "S_O_asymmetry_ratio": 0.23550859588126824
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.2690292596817017,
+          "delta_lam_O_magnitude": 1.2872047424316406,
+          "S_V_asymmetry_ratio": 0.20844504049524198,
+          "S_O_asymmetry_ratio": 0.20426837100608064
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.1759523153305054,
+          "delta_lam_O_magnitude": 1.310731053352356,
+          "S_V_asymmetry_ratio": 0.1858204028964539,
+          "S_O_asymmetry_ratio": 0.18169148243452654
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.1576805114746094,
+          "delta_lam_O_magnitude": 1.230704426765442,
+          "S_V_asymmetry_ratio": 0.16367949557981043,
+          "S_O_asymmetry_ratio": 0.16064939266739936
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.0817317962646484,
+          "delta_lam_O_magnitude": 1.21852445602417,
+          "S_V_asymmetry_ratio": 0.15237783779035122,
+          "S_O_asymmetry_ratio": 0.15611988676411395
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.2030431032180786,
+          "delta_lam_O_magnitude": 1.307310700416565,
+          "S_V_asymmetry_ratio": 0.17261992251679042,
+          "S_O_asymmetry_ratio": 0.17179089743932888
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.1844382286071777,
+          "delta_lam_O_magnitude": 1.2997158765792847,
+          "S_V_asymmetry_ratio": 0.17980230122195365,
+          "S_O_asymmetry_ratio": 0.1792960301662663
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.0809550285339355,
+          "delta_lam_O_magnitude": 1.202127456665039,
+          "S_V_asymmetry_ratio": 0.18379782124248012,
+          "S_O_asymmetry_ratio": 0.17804889373728527
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.0661624670028687,
+          "delta_lam_O_magnitude": 1.173158884048462,
+          "S_V_asymmetry_ratio": 0.18208810953524387,
+          "S_O_asymmetry_ratio": 0.17575934256096767
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.0326793193817139,
+          "delta_lam_O_magnitude": 1.1024236679077148,
+          "S_V_asymmetry_ratio": 0.1365793403548218,
+          "S_O_asymmetry_ratio": 0.14139264585065325
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 0.8695741295814514,
+          "delta_lam_O_magnitude": 1.0924052000045776,
+          "S_V_asymmetry_ratio": 0.13855143269908926,
+          "S_O_asymmetry_ratio": 0.14993557164996085
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.1162471771240234,
+          "delta_lam_O_magnitude": 1.1776256561279297,
+          "S_V_asymmetry_ratio": 0.1302357127362025,
+          "S_O_asymmetry_ratio": 0.1390348345811103
+        }
+      ]
+    },
+    "pure_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.0,
+      "S_O_asymmetry_mean": 0.0,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 10.809270858764648,
+          "delta_lam_O_magnitude": 10.789695739746094,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 11.747684478759766,
+          "delta_lam_O_magnitude": 11.607993125915527,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 11.006786346435547,
+          "delta_lam_O_magnitude": 11.691967964172363,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 13.283185958862305,
+          "delta_lam_O_magnitude": 13.093743324279785,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 14.240617752075195,
+          "delta_lam_O_magnitude": 13.991762161254883,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 13.778258323669434,
+          "delta_lam_O_magnitude": 13.968147277832031,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 14.035171508789062,
+          "delta_lam_O_magnitude": 13.265219688415527,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 14.829216957092285,
+          "delta_lam_O_magnitude": 14.276679039001465,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 15.452884674072266,
+          "delta_lam_O_magnitude": 15.035562515258789,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 16.523977279663086,
+          "delta_lam_O_magnitude": 16.50729751586914,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 15.407015800476074,
+          "delta_lam_O_magnitude": 16.088842391967773,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 13.174357414245605,
+          "delta_lam_O_magnitude": 12.923762321472168,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        }
+      ]
+    },
+    "hybrid_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.17757377421718937,
+      "S_O_asymmetry_mean": 0.17956945581414893,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.130247950553894,
+          "delta_lam_O_magnitude": 1.2073386907577515,
+          "S_V_asymmetry_ratio": 0.2264223519236405,
+          "S_O_asymmetry_ratio": 0.23257495620726903
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.123623013496399,
+          "delta_lam_O_magnitude": 1.1564834117889404,
+          "S_V_asymmetry_ratio": 0.2044761883032893,
+          "S_O_asymmetry_ratio": 0.1999494454313003
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.087746024131775,
+          "delta_lam_O_magnitude": 1.2137069702148438,
+          "S_V_asymmetry_ratio": 0.18432420880883812,
+          "S_O_asymmetry_ratio": 0.1795075309741558
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.11371648311615,
+          "delta_lam_O_magnitude": 1.1716660261154175,
+          "S_V_asymmetry_ratio": 0.16465969805962988,
+          "S_O_asymmetry_ratio": 0.1625611888617806
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.0109622478485107,
+          "delta_lam_O_magnitude": 1.1108194589614868,
+          "S_V_asymmetry_ratio": 0.1587826770246525,
+          "S_O_asymmetry_ratio": 0.1618564908462981
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.1482642889022827,
+          "delta_lam_O_magnitude": 1.224428415298462,
+          "S_V_asymmetry_ratio": 0.1706577895205292,
+          "S_O_asymmetry_ratio": 0.16877590659572134
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.1513547897338867,
+          "delta_lam_O_magnitude": 1.2460663318634033,
+          "S_V_asymmetry_ratio": 0.1804450676834772,
+          "S_O_asymmetry_ratio": 0.1786827756891155
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.0703986883163452,
+          "delta_lam_O_magnitude": 1.1744298934936523,
+          "S_V_asymmetry_ratio": 0.18817252166622708,
+          "S_O_asymmetry_ratio": 0.18187018339091168
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.1589409112930298,
+          "delta_lam_O_magnitude": 1.2457075119018555,
+          "S_V_asymmetry_ratio": 0.2024626958481505,
+          "S_O_asymmetry_ratio": 0.1943183555988281
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.1652506589889526,
+          "delta_lam_O_magnitude": 1.2701441049575806,
+          "S_V_asymmetry_ratio": 0.15650981562124405,
+          "S_O_asymmetry_ratio": 0.16510638753514
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.0439927577972412,
+          "delta_lam_O_magnitude": 1.3076262474060059,
+          "S_V_asymmetry_ratio": 0.15295933833213898,
+          "S_O_asymmetry_ratio": 0.17396933835700495
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 1.355459213256836,
+          "delta_lam_O_magnitude": 1.4274826049804688,
+          "S_V_asymmetry_ratio": 0.1410129378144547,
+          "S_O_asymmetry_ratio": 0.15566091028226184
+        }
+      ]
+    },
+    "safe_pure_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.0,
+      "S_O_asymmetry_mean": 0.0,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.5507869720458984,
+          "delta_lam_O_magnitude": 2.6577229499816895,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.85086989402771,
+          "delta_lam_O_magnitude": 2.8452467918395996,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.8193016052246094,
+          "delta_lam_O_magnitude": 2.915062189102173,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.011643886566162,
+          "delta_lam_O_magnitude": 3.0747995376586914,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.15466046333313,
+          "delta_lam_O_magnitude": 3.0750303268432617,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.00168776512146,
+          "delta_lam_O_magnitude": 3.0394461154937744,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.003929376602173,
+          "delta_lam_O_magnitude": 3.073721408843994,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.889432907104492,
+          "delta_lam_O_magnitude": 2.9149224758148193,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.9879255294799805,
+          "delta_lam_O_magnitude": 3.0676846504211426,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.082280397415161,
+          "delta_lam_O_magnitude": 3.129143238067627,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.961305618286133,
+          "delta_lam_O_magnitude": 3.0195226669311523,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.136228084564209,
+          "delta_lam_O_magnitude": 2.989586353302002,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        }
+      ]
+    }
+  },
+  "mnli": {
+    "safe_hybrid_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.2985580611937148,
+      "S_O_asymmetry_mean": 0.2991625306529082,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.634333848953247,
+          "delta_lam_O_magnitude": 2.959364891052246,
+          "S_V_asymmetry_ratio": 0.3785139227159422,
+          "S_O_asymmetry_ratio": 0.3944503867271615
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.908252000808716,
+          "delta_lam_O_magnitude": 3.0638318061828613,
+          "S_V_asymmetry_ratio": 0.34958901707143775,
+          "S_O_asymmetry_ratio": 0.34492644412303297
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.8141582012176514,
+          "delta_lam_O_magnitude": 3.1482863426208496,
+          "S_V_asymmetry_ratio": 0.3100583243070645,
+          "S_O_asymmetry_ratio": 0.30723982621428586
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.078861713409424,
+          "delta_lam_O_magnitude": 3.2734508514404297,
+          "S_V_asymmetry_ratio": 0.28285516795428417,
+          "S_O_asymmetry_ratio": 0.281213149049052
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.967176914215088,
+          "delta_lam_O_magnitude": 3.229261636734009,
+          "S_V_asymmetry_ratio": 0.2561847575332535,
+          "S_O_asymmetry_ratio": 0.2607561937826611
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.9203248023986816,
+          "delta_lam_O_magnitude": 3.181063175201416,
+          "S_V_asymmetry_ratio": 0.28302488010646887,
+          "S_O_asymmetry_ratio": 0.2791136338232387
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.9382119178771973,
+          "delta_lam_O_magnitude": 3.182003974914551,
+          "S_V_asymmetry_ratio": 0.2935865693663791,
+          "S_O_asymmetry_ratio": 0.28967352772795574
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.765348434448242,
+          "delta_lam_O_magnitude": 3.0662190914154053,
+          "S_V_asymmetry_ratio": 0.3155279426665325,
+          "S_O_asymmetry_ratio": 0.30454662605005733
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.789241075515747,
+          "delta_lam_O_magnitude": 3.1032280921936035,
+          "S_V_asymmetry_ratio": 0.3223005557780068,
+          "S_O_asymmetry_ratio": 0.30789880989824325
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.148174524307251,
+          "delta_lam_O_magnitude": 3.3832061290740967,
+          "S_V_asymmetry_ratio": 0.269614930433338,
+          "S_O_asymmetry_ratio": 0.2726027395114453
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.9695487022399902,
+          "delta_lam_O_magnitude": 3.3699936866760254,
+          "S_V_asymmetry_ratio": 0.29972096042118984,
+          "S_O_asymmetry_ratio": 0.3085791441883166
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.052058696746826,
+          "delta_lam_O_magnitude": 3.0880844593048096,
+          "S_V_asymmetry_ratio": 0.22171970597068047,
+          "S_O_asymmetry_ratio": 0.23894988673944784
+        }
+      ]
+    },
+    "pure_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.0,
+      "S_O_asymmetry_mean": 0.0,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 12.002330780029297,
+          "delta_lam_O_magnitude": 11.03438663482666,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 13.745122909545898,
+          "delta_lam_O_magnitude": 13.834906578063965,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 14.98409366607666,
+          "delta_lam_O_magnitude": 15.080883026123047,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 16.751317977905273,
+          "delta_lam_O_magnitude": 17.869487762451172,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 18.440162658691406,
+          "delta_lam_O_magnitude": 18.15502166748047,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 15.938729286193848,
+          "delta_lam_O_magnitude": 16.427833557128906,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 15.472551345825195,
+          "delta_lam_O_magnitude": 16.29456901550293,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 16.269962310791016,
+          "delta_lam_O_magnitude": 17.17517852783203,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 16.993854522705078,
+          "delta_lam_O_magnitude": 18.071523666381836,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 23.412166595458984,
+          "delta_lam_O_magnitude": 24.794450759887695,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 25.119922637939453,
+          "delta_lam_O_magnitude": 24.264101028442383,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 25.037025451660156,
+          "delta_lam_O_magnitude": 25.492101669311523,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        }
+      ]
+    },
+    "hybrid_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.3217597058630141,
+      "S_O_asymmetry_mean": 0.3237678750052875,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.6333184242248535,
+          "delta_lam_O_magnitude": 2.9915404319763184,
+          "S_V_asymmetry_ratio": 0.38918553138686574,
+          "S_O_asymmetry_ratio": 0.4114031069358627
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.8535659313201904,
+          "delta_lam_O_magnitude": 3.005040168762207,
+          "S_V_asymmetry_ratio": 0.36090972229527496,
+          "S_O_asymmetry_ratio": 0.35673180169382934
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.8391146659851074,
+          "delta_lam_O_magnitude": 3.1911187171936035,
+          "S_V_asymmetry_ratio": 0.32576692008410585,
+          "S_O_asymmetry_ratio": 0.32396673226849504
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.044740915298462,
+          "delta_lam_O_magnitude": 3.287325859069824,
+          "S_V_asymmetry_ratio": 0.3037824035978624,
+          "S_O_asymmetry_ratio": 0.30152212359113884
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.970933198928833,
+          "delta_lam_O_magnitude": 3.223940372467041,
+          "S_V_asymmetry_ratio": 0.2758025758667057,
+          "S_O_asymmetry_ratio": 0.2823994982667552
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.083815574645996,
+          "delta_lam_O_magnitude": 3.3540596961975098,
+          "S_V_asymmetry_ratio": 0.3064943337772436,
+          "S_O_asymmetry_ratio": 0.30110023157022986
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.085690498352051,
+          "delta_lam_O_magnitude": 3.2766311168670654,
+          "S_V_asymmetry_ratio": 0.3207322570761487,
+          "S_O_asymmetry_ratio": 0.31550600319601857
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 2.946622610092163,
+          "delta_lam_O_magnitude": 3.198453187942505,
+          "S_V_asymmetry_ratio": 0.3406889646648137,
+          "S_O_asymmetry_ratio": 0.32973370961763443
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.0025038719177246,
+          "delta_lam_O_magnitude": 3.30659818649292,
+          "S_V_asymmetry_ratio": 0.3538425705076825,
+          "S_O_asymmetry_ratio": 0.33531941924158765
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.315845251083374,
+          "delta_lam_O_magnitude": 3.673527717590332,
+          "S_V_asymmetry_ratio": 0.29950688696627226,
+          "S_O_asymmetry_ratio": 0.3063573621947855
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.247401475906372,
+          "delta_lam_O_magnitude": 3.7772765159606934,
+          "S_V_asymmetry_ratio": 0.3338065321278258,
+          "S_O_asymmetry_ratio": 0.3434106738525951
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 3.3995044231414795,
+          "delta_lam_O_magnitude": 3.598829507827759,
+          "S_V_asymmetry_ratio": 0.25059777200536815,
+          "S_O_asymmetry_ratio": 0.2777638376345174
+        }
+      ]
+    },
+    "safe_pure_paft": {
+      "Q_V_drift_mean": 0.0,
+      "Q_V_drift_max": 0.0,
+      "Q_O_drift_mean": 0.0,
+      "Q_O_drift_max": 0.0,
+      "Q_any_drift_max": 0.0,
+      "S_V_asymmetry_mean": 0.0,
+      "S_O_asymmetry_mean": 0.0,
+      "per_layer": [
+        {
+          "layer": 0,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 4.915716171264648,
+          "delta_lam_O_magnitude": 5.0439934730529785,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 1,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 6.023032188415527,
+          "delta_lam_O_magnitude": 6.201643466949463,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 2,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 6.985986232757568,
+          "delta_lam_O_magnitude": 6.964544773101807,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 3,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.677951335906982,
+          "delta_lam_O_magnitude": 7.64680290222168,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 4,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 8.027684211730957,
+          "delta_lam_O_magnitude": 7.910251140594482,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 5,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.263028621673584,
+          "delta_lam_O_magnitude": 7.267341613769531,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 6,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.046241760253906,
+          "delta_lam_O_magnitude": 7.215731143951416,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 7,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 6.649546146392822,
+          "delta_lam_O_magnitude": 6.8106369972229,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 8,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 6.734833717346191,
+          "delta_lam_O_magnitude": 6.724919319152832,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 9,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 8.461404800415039,
+          "delta_lam_O_magnitude": 8.407973289489746,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 10,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 7.937228679656982,
+          "delta_lam_O_magnitude": 7.823521614074707,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        },
+        {
+          "layer": 11,
+          "Q_V_drift": 0.0,
+          "Q_O_drift": 0.0,
+          "delta_lam_V_magnitude": 8.140717506408691,
+          "delta_lam_O_magnitude": 7.973514556884766,
+          "S_V_asymmetry_ratio": 0.0,
+          "S_O_asymmetry_ratio": 0.0
+        }
+      ]
+    }
+  }
+}

@@ -1,6 +1,6 @@
 {
   "best_global_step": 78,
-  "best_metric": 0.7472924187725631,
+  "best_metric": 0.5270758122743683,
   "best_model_checkpoint": "results/glue/rte/lora_r8/hf_checkpoints/checkpoint-78",
   "epoch": 1.0,
   "eval_steps": 500,
@@ -11,18 +11,18 @@
   "log_history": [
     {
       "epoch": 0.6410256410256411,
-      "grad_norm": 1.176979422569275,
+      "grad_norm": 1.243260383605957,
       "learning_rate": 0.0003989085948158254,
-      "loss": 0.6983673095703125,
+      "loss": 0.6972029876708984,
       "step": 50
     },
     {
       "epoch": 1.0,
-      "eval_accuracy": 0.7472924187725631,
-      "eval_loss": 0.5688671469688416,
-      "eval_runtime": 2.0517,
-      "eval_samples_per_second": 135.008,
-      "eval_steps_per_second": 2.437,
+      "eval_accuracy": 0.5270758122743683,
+      "eval_loss": 0.6820900440216064,
+      "eval_runtime": 1.654,
+      "eval_samples_per_second": 167.469,
+      "eval_steps_per_second": 3.023,
       "step": 78
     }
   ],
@@ -43,7 +43,7 @@
       "attributes": {}
     }
   },
-  "total_flos": 167177775790080.0,
+  "total_flos": 165485877442560.0,
   "train_batch_size": 32,
   "trial_name": null,
   "trial_params": null

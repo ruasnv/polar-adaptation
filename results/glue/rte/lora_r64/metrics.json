@@ -1,11 +1,11 @@
 {
-  "loss": 0.9086758494377136,
-  "accuracy": 0.8700361010830325,
-  "runtime": 0.7953,
-  "samples_per_second": 348.316,
-  "steps_per_second": 6.287,
+  "loss": 0.8629467487335205,
+  "accuracy": 0.8664259927797834,
+  "runtime": 1.5474,
+  "samples_per_second": 179.007,
+  "steps_per_second": 3.231,
   "epoch": 10.0,
   "task": "rte",
   "method": "lora_r64",
-  "trainable_params": 10029314
+  "trainable_params": 2951426
 }

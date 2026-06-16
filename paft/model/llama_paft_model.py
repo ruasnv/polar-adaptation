@@ -250,9 +250,10 @@ class LLaMAPAFTModel(nn.Module):
         return {"W_V": W_V_layers, "W_O": W_O_layers}
 
     def measure_orthogonality(self) -> float:
-        """Mean ||Q_h Q_h^T - I||_F across all layers and KV heads."""
+        """Mean ||Q_h Q_h^T - I||_F. Compare in native storage dtype to avoid upcast drift."""
         errs = []
         for _, vp in self._iter_paft_v_proj():
+            # Ensure we measure the drift of the stored buffer itself
             errs.append(vp.orthogonality_error())
         return sum(errs) / len(errs)
 

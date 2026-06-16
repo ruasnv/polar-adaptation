@@ -1,0 +1,17 @@
+{
+  "method": "pure_paft",
+  "n_matrices": 224,
+  "matrix_shape": [
+    3072,
+    128
+  ],
+  "summary": {
+    "stable_rank": 51.32694288460431,
+    "spectral_entropy": 4.7400733189923425,
+    "effective_rank": 114.70192984215878,
+    "condition_number": 15.262829527258873,
+    "isotropy": 0.2512269026550972,
+    "participation_ratio": 105.23724151739984
+  },
+  "ortho_error": 1.8528164454372537e-05
+}

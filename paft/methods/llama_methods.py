@@ -40,7 +40,7 @@ from typing import Any, Dict, List, Optional, Tuple
 import torch
 import torch.nn as nn
 
-from paft.model.llama_paft_model import LLaMAPAFTModel, load_llama_nf4
+from paft.model.llama_paft_model import LLaMAPAFTModel, load_llama_nf4, _dequantize_weight
 from paft.model.paft_linear import PAFTLinear
 from paft.methods.base import freeze_all   # canonical implementation from base.py
 
@@ -92,7 +92,7 @@ def build_llama_pure_paft(
     well-positioned by pretraining.
     """
     base, tokenizer = load_llama_nf4(model_name, device_map)
-    model = LLaMAPAFTModel(base, train_mode='pure', q_dtype=torch.float16)
+    model = LLaMAPAFTModel(base, train_mode='pure', q_dtype=torch.float32)   # was float16
 
     freeze_all(model)
     for _, vp in model._iter_paft_v_proj():
@@ -123,7 +123,7 @@ def build_llama_hybrid_paft(
     S starts at the pretrained polar S (correct geometric initialisation).
     """
     base, tokenizer = load_llama_nf4(model_name, device_map)
-    model = LLaMAPAFTModel(base, train_mode='hybrid', q_dtype=torch.float16)
+    model = LLaMAPAFTModel(base, train_mode='hybrid', q_dtype=torch.float32)  # was float16
 
     freeze_all(model)
     for _, vp in model._iter_paft_v_proj():
@@ -170,7 +170,7 @@ def build_llama_lora(
         r             = rank,
         lora_alpha    = rank * 2,
         lora_dropout  = 0.05,
-        target_modules = ["q_proj", "v_proj", "o_proj", "gate_proj", "up_proj"],
+        target_modules = ["v_proj", "o_proj"],
         bias           = "none",
         task_type      = "CAUSAL_LM",
     )

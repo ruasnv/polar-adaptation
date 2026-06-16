@@ -1,9 +1,0 @@
-model:
-  name: gpt2
-  hf_name: gpt2
-  params: 117M
-  n_layers: 12
-  n_heads: 12
-  d_model: 768
-  d_head: 64
-  vocab_size: 50257

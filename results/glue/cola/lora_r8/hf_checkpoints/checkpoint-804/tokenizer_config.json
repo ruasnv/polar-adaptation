@@ -11,7 +11,7 @@
     "[SEP]"
   ],
   "is_local": false,
-  "local_files_only": false,
+  "local_files_only": true,
   "mask_token": "[MASK]",
   "model_max_length": 1000000000000000019884624838656,
   "pad_token": "[PAD]",

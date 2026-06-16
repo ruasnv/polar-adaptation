@@ -1,0 +1,5 @@
+{
+  "task": "mnli",
+  "method": "polar_r8",
+  "stage": "init"
+}

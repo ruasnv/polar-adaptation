@@ -1,11 +1,11 @@
 {
-  "loss": 0.15444061160087585,
-  "accuracy": 0.9610091743119266,
-  "runtime": 6.0394,
-  "samples_per_second": 144.386,
-  "steps_per_second": 2.318,
+  "loss": 0.15548649430274963,
+  "accuracy": 0.9598623853211009,
+  "runtime": 4.9647,
+  "samples_per_second": 175.638,
+  "steps_per_second": 2.82,
   "epoch": 5.0,
   "task": "sst2",
   "method": "lora_r8",
-  "trainable_params": 1771778
+  "trainable_params": 887042
 }

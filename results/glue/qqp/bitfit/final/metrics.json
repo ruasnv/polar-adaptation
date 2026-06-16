@@ -1,0 +1,12 @@
+{
+  "loss": 0.2452373057603836,
+  "accuracy": 0.8963888201830325,
+  "f1": 0.862795191772297,
+  "runtime": 220.3486,
+  "samples_per_second": 183.482,
+  "steps_per_second": 2.868,
+  "epoch": 3.0,
+  "task": "qqp",
+  "method": "bitfit",
+  "trainable_params": 695042
+}

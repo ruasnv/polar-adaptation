@@ -1,0 +1,11 @@
+{
+  "loss": 0.31386038661003113,
+  "accuracy": 0.8855832908813042,
+  "runtime": 67.6023,
+  "samples_per_second": 145.187,
+  "steps_per_second": 2.278,
+  "epoch": 3.0,
+  "task": "mnli",
+  "method": "svf",
+  "trainable_params": 611331
+}

@@ -42,7 +42,7 @@ import logging
 import random
 import time
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict
 
 import numpy as np
 import torch
@@ -140,10 +140,9 @@ class LLMTrainer:
         self.output_dir   = output_dir
 
         # Device — LLaMA with device_map="auto" distributes across available GPUs
-        self.device = next(
-            (p.device for p in model.parameters() if p.requires_grad),
-            torch.device("cuda" if torch.cuda.is_available() else "cpu"),
-        )
+        # Use cuda:0 directly if available — device_map="auto" means
+        # the embedding layer is on cuda:0 and input_ids must match
+        self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         logger.info(f"Primary device for trainable params: {self.device}")
 
         # Optimizer — only trainable params
@@ -335,10 +334,7 @@ def main() -> None:
         train_loader = dm.get_train_loader()
 
         # Evaluation function: greedy generation exact match
-        device = next(
-            (p.device for p in model.parameters() if p.requires_grad),
-            torch.device("cuda" if torch.cuda.is_available() else "cpu"),
-        )
+        device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
         def eval_fn(m):
             return dm.evaluate_generation(
@@ -357,10 +353,7 @@ def main() -> None:
         train_loader = dm.get_train_loader()
 
         # Evaluation function: log-likelihood multiple choice (PoLAR protocol)
-        device = next(
-            (p.device for p in model.parameters() if p.requires_grad),
-            torch.device("cuda" if torch.cuda.is_available() else "cpu"),
-        )
+        device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
         def eval_fn(m):
             return dm.evaluate_log_likelihood(m, device)
@@ -441,9 +434,7 @@ def main() -> None:
 # ──────────────────────────────────────────────────────────────────────────────
 # Analysis
 # ──────────────────────────────────────────────────────────────────────────────
-
 def _run_llama_analysis(model, method_name: str, output_dir: Path) -> None:
-    """Stable rank analysis on LLaMA PAFT v_proj weights."""
     from paft.model.llama_paft_model import LLaMAPAFTModel
     from analysis.stable_rank import analyze_all_layers, summarize_stable_rank
 
@@ -454,31 +445,36 @@ def _run_llama_analysis(model, method_name: str, output_dir: Path) -> None:
     analysis_dir = output_dir / "analysis"
     analysis_dir.mkdir(exist_ok=True)
 
-    # get_live_WV_WO returns W_V [H_kv, n_embd, head_dim] per layer
     live = model.get_live_WV_WO()
-    W_V_layers = live["W_V"]
+    W_V_layers = live["W_V"]   # List[28] of Tensor[8, 3072, 128]
 
-    # Flatten [H_kv, n_embd, d] → [H_kv * n_embd, d] per layer for stable rank
-    # (equivalent to treating the full v_proj weight as a single matrix)
-    W_V_2d = [
-        W.reshape(-1, W.shape[-1])   # [H_kv * n_embd, d_head]
-        for W in W_V_layers
-    ]
-    layer_metrics = analyze_all_layers(W_V_2d)
-    summary = summarize_stable_rank(W_V_2d)
+    # Per-head matrices [3072, 128] — matches DeBERTa per-head convention
+    n_kv_heads = model.n_kv_heads
+    W_V_per_head = [
+        W_V_layers[layer][h].cpu()          # [3072, 128]
+        for layer in range(model.n_layers)
+        for h in range(n_kv_heads)
+    ]   # 28 × 8 = 224 matrices
+
+    layer_metrics = analyze_all_layers(W_V_per_head)
+    summary = summarize_stable_rank(W_V_per_head)
 
     analysis = {
         "method":      method_name,
+        "n_matrices":  len(W_V_per_head),
+        "matrix_shape": list(W_V_per_head[0].shape),
         "summary":     summary,
         "ortho_error": model.measure_orthogonality(),
-        "note":        "Metrics computed on v_proj only (PAFT target). "
-                       "o_proj is frozen NF4 (same for all methods).",
     }
     with open(analysis_dir / "stable_rank.json", "w") as f:
         json.dump(analysis, f, indent=2)
 
-    logger.info(f"sr(W_eff) mean: {summary.get('stable_rank_Weff', 'N/A'):.3f}")
-    logger.info(f"Orthogonality error: {analysis['ortho_error']:.4f}")
+    sr_val = summary.get("stable_rank")
+    if sr_val is not None:
+        logger.info(f"sr(W_eff) mean: {sr_val:.3f}")
+    else:
+        logger.info(f"sr(W_eff) mean: N/A  (keys available: {list(summary.keys())})")
+        logger.info(f"Orthogonality error: {analysis['ortho_error']:.6f}")
 
 
 # ──────────────────────────────────────────────────────────────────────────────

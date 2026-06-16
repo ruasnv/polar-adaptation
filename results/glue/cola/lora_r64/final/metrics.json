@@ -1,11 +1,11 @@
 {
-  "loss": 0.40037891268730164,
-  "matthews_correlation": 0.6896186694734479,
-  "runtime": 2.9364,
-  "samples_per_second": 355.193,
-  "steps_per_second": 5.789,
+  "loss": 0.41444340348243713,
+  "matthews_correlation": 0.6930699771442483,
+  "runtime": 1.9833,
+  "samples_per_second": 525.903,
+  "steps_per_second": 8.572,
   "epoch": 10.0,
   "task": "cola",
   "method": "lora_r64",
-  "trainable_params": 10029314
+  "trainable_params": 2951426
 }

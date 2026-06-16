@@ -1,6 +1,6 @@
 {
   "best_global_step": 230,
-  "best_metric": 0.925531914893617,
+  "best_metric": 0.8979591836734694,
   "best_model_checkpoint": "results/glue/mrpc/lora_r8/hf_checkpoints/checkpoint-230",
   "epoch": 2.0,
   "eval_steps": 500,
@@ -11,50 +11,50 @@
   "log_history": [
     {
       "epoch": 0.43478260869565216,
-      "grad_norm": 0.8852274417877197,
+      "grad_norm": 0.8453089594841003,
       "learning_rate": 0.00028405797101449276,
-      "loss": 0.6369120025634766,
+      "loss": 0.6473508453369141,
       "step": 50
     },
     {
       "epoch": 0.8695652173913043,
-      "grad_norm": 4.921171188354492,
+      "grad_norm": 1.2247642278671265,
       "learning_rate": 0.00038889916743755786,
-      "loss": 0.49430728912353517,
+      "loss": 0.547158203125,
       "step": 100
     },
     {
       "epoch": 1.0,
-      "eval_accuracy": 0.8529411764705882,
-      "eval_f1": 0.8909090909090909,
-      "eval_loss": 0.3561694920063019,
-      "eval_runtime": 1.1645,
-      "eval_samples_per_second": 350.365,
-      "eval_steps_per_second": 6.011,
+      "eval_accuracy": 0.7916666666666666,
+      "eval_f1": 0.856175972927242,
+      "eval_loss": 0.46954241394996643,
+      "eval_runtime": 2.4097,
+      "eval_samples_per_second": 169.315,
+      "eval_steps_per_second": 2.905,
       "step": 115
     },
     {
       "epoch": 1.3043478260869565,
-      "grad_norm": 1.7169088125228882,
+      "grad_norm": 1.8751767873764038,
       "learning_rate": 0.0003703977798334875,
-      "loss": 0.3817019271850586,
+      "loss": 0.48640445709228514,
       "step": 150
     },
     {
       "epoch": 1.7391304347826086,
-      "grad_norm": 3.8415708541870117,
+      "grad_norm": 3.121203660964966,
       "learning_rate": 0.0003518963922294172,
-      "loss": 0.34169597625732423,
+      "loss": 0.3858573532104492,
       "step": 200
     },
     {
       "epoch": 2.0,
-      "eval_accuracy": 0.8970588235294118,
-      "eval_f1": 0.925531914893617,
-      "eval_loss": 0.2942182421684265,
-      "eval_runtime": 1.2735,
-      "eval_samples_per_second": 320.38,
-      "eval_steps_per_second": 5.497,
+      "eval_accuracy": 0.8529411764705882,
+      "eval_f1": 0.8979591836734694,
+      "eval_loss": 0.3398061692714691,
+      "eval_runtime": 2.4258,
+      "eval_samples_per_second": 168.193,
+      "eval_steps_per_second": 2.886,
       "step": 230
     }
   ],
@@ -75,7 +75,7 @@
       "attributes": {}
     }
   },
-  "total_flos": 492536611725312.0,
+  "total_flos": 487551966633984.0,
   "train_batch_size": 32,
   "trial_name": null,
   "trial_params": null

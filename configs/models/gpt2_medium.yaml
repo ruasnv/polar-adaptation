@@ -1,9 +1,0 @@
-model:
-  name: gpt2_medium
-  hf_name: gpt2-medium
-  params: 345M
-  n_layers: 24
-  n_heads: 16
-  d_model: 1024
-  d_head: 64
-  vocab_size: 50257

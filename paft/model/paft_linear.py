@@ -193,8 +193,8 @@ class PAFTLinear(nn.Module):
         This is identical to how PEFT LoRA handles this situation.
         """
         # Force everything to Float and KEEP it Float
-        W = self.reconstruct_weight().float()
-        bias = self.bias.float() if self.bias is not None else None
+        W = self.reconstruct_weight().float().to(x.device)
+        bias = self.bias.float().to(x.device) if self.bias is not None else None
 
         # Compute in Float and return in Float
         out = F.linear(x.float(), W, bias)

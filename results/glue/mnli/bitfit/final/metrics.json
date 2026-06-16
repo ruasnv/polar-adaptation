@@ -1,0 +1,11 @@
+{
+  "loss": 0.28848734498023987,
+  "accuracy": 0.8932246561385634,
+  "runtime": 53.2174,
+  "samples_per_second": 184.432,
+  "steps_per_second": 2.894,
+  "epoch": 3.0,
+  "task": "mnli",
+  "method": "bitfit",
+  "trainable_params": 695811
+}

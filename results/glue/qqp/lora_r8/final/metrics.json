@@ -1,0 +1,12 @@
+{
+  "loss": 0.2264660745859146,
+  "accuracy": 0.9070492208755875,
+  "f1": 0.876730302433904,
+  "runtime": 234.4878,
+  "samples_per_second": 172.418,
+  "steps_per_second": 2.695,
+  "epoch": 3.0,
+  "task": "qqp",
+  "method": "lora_r8",
+  "trainable_params": 887042
+}

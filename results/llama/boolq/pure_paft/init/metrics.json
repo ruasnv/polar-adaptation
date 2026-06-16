@@ -1,0 +1,5 @@
+{
+  "task": "boolq",
+  "method": "pure_paft",
+  "stage": "init"
+}

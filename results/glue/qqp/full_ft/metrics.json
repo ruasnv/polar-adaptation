@@ -1,0 +1,12 @@
+{
+  "loss": 0.23882409930229187,
+  "accuracy": 0.9219638882018303,
+  "f1": 0.8959672898737099,
+  "runtime": 202.2578,
+  "samples_per_second": 199.893,
+  "steps_per_second": 3.125,
+  "epoch": 3.0,
+  "task": "qqp",
+  "method": "full_ft",
+  "trainable_params": 184423682
+}

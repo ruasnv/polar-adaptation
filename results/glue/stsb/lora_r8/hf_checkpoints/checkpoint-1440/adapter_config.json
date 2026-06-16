@@ -36,7 +36,6 @@
   "revision": null,
   "target_modules": [
     "query_proj",
-    "dense",
     "value_proj"
   ],
   "target_parameters": null,

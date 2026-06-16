@@ -118,7 +118,65 @@ def condition_number(W: torch.Tensor) -> float:
     if sv[-1].item() < 1e-12:
         return float('inf')
     return (sv[0] / sv[-1]).item()
+def isotropy(W: torch.Tensor) -> float:
+    """
+    Isotropy: σ_min / σ_max.
 
+    Range: (0, 1].
+      - 1.0 → all singular values equal (maximally isotropic)
+      - → 0 → one direction dominates (collapsed representation)
+
+    Equivalent to 1 / condition_number but more interpretable as a
+    preservation metric: high isotropy = geometry is spread across
+    many directions rather than concentrated in a few.
+    """
+    W_f = W.detach().float()
+    sv = torch.linalg.svdvals(W_f)
+    if sv[0].item() < 1e-12:
+        return 1.0
+    return (sv[-1] / sv[0]).item()
+
+
+def participation_ratio(W: torch.Tensor) -> float:
+    """
+    Participation ratio: (Σ σ_i²)² / Σ σ_i⁴
+
+    Range: [1, min(m, n)].
+    Measures the effective number of singular dimensions that carry
+    significant energy. Similar to stable rank but more sensitive to
+    the tail of the singular value distribution.
+    Higher = more dimensions are actively used.
+    """
+    W_f = W.detach().float()
+    sv  = torch.linalg.svdvals(W_f)
+    s2  = sv ** 2
+    s4  = sv ** 4
+    denom = s4.sum().item()
+    if denom < 1e-12:
+        return 1.0
+    return (s2.sum().item() ** 2) / denom
+
+
+def nuclear_norm_ratio(W_adapted: torch.Tensor, W_init: torch.Tensor) -> float:
+    """
+    Nuclear norm ratio: ‖W_adapted‖_* / ‖W_init‖_*
+
+    Where ‖W‖_* = Σ σ_i (sum of singular values).
+
+    Range: typically (0.9, 1.1) for well-regularised fine-tuning.
+      - > 1 → fine-tuning increased total spectral energy
+      - < 1 → fine-tuning reduced total spectral energy
+      - ≈ 1 → spectral energy conserved (PAFT prediction)
+
+    Requires W_init for normalisation — cannot be computed from W_adapted alone.
+    """
+    W_f = W_adapted.detach().float()
+    W_i = W_init.detach().float()
+    nuc_adapted = torch.linalg.svdvals(W_f).sum().item()
+    nuc_init    = torch.linalg.svdvals(W_i).sum().item()
+    if nuc_init < 1e-12:
+        return 1.0
+    return nuc_adapted / nuc_init
 
 def directional_diversity(W: torch.Tensor) -> float:
     """
@@ -149,30 +207,22 @@ def analyze_weight_matrix(
     W_eff:  torch.Tensor,
     W_init: Optional[torch.Tensor] = None,
 ) -> Dict[str, float]:
-    """
-    Full geometric health metrics for one weight matrix.
-
-    Args:
-        W_eff:  Effective weight after fine-tuning [m, n].
-        W_init: Initial pretrained weight [m, n].  If provided, also computes
-                ΔW metrics (sr(ΔW), sr(W_eff) vs sr(ΔW) gap).
-    """
     metrics = {
-        "stable_rank_Weff":       stable_rank(W_eff),
-        "spectral_entropy_Weff":  spectral_entropy(W_eff),
-        "effective_rank_Weff":    effective_rank(W_eff),
-        "condition_number_Weff":  condition_number(W_eff),
-        "directional_diversity":  directional_diversity(W_eff),
+        "stable_rank":          stable_rank(W_eff),
+        "spectral_entropy":     spectral_entropy(W_eff),
+        "effective_rank":       effective_rank(W_eff),
+        "condition_number":     condition_number(W_eff),
+        "isotropy":             isotropy(W_eff),
+        "participation_ratio":  participation_ratio(W_eff),
     }
 
     if W_init is not None:
         delta_W = W_eff - W_init
-        sr_delta = stable_rank(delta_W)
-        metrics["stable_rank_delta_W"]       = sr_delta
-        metrics["stable_rank_W_init"]        = stable_rank(W_init)
-        metrics["sr_Weff_minus_sr_deltaW"]   = metrics["stable_rank_Weff"] - sr_delta
-        metrics["frobenius_norm_delta_W"]    = delta_W.norm().item()
-        metrics["spectral_norm_delta_W"]     = torch.linalg.svdvals(delta_W.float())[0].item()
+        metrics["stable_rank_delta_W"]     = stable_rank(delta_W)
+        metrics["stable_rank_W_init"]      = stable_rank(W_init)
+        metrics["nuclear_norm_ratio"]      = nuclear_norm_ratio(W_eff, W_init)
+        metrics["frobenius_norm_delta_W"]  = delta_W.norm().item()
+        metrics["spectral_norm_delta_W"]   = torch.linalg.svdvals(delta_W.float())[0].item()
 
     return metrics
 

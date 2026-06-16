@@ -1,0 +1,12 @@
+{
+  "loss": 0.23900704085826874,
+  "accuracy": 0.8997279248083107,
+  "f1": 0.8676979309444554,
+  "runtime": 231.2809,
+  "samples_per_second": 174.809,
+  "steps_per_second": 2.733,
+  "epoch": 3.0,
+  "task": "qqp",
+  "method": "safe_pure_paft",
+  "trainable_params": 695042
+}

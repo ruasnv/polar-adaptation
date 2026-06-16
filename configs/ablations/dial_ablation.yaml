@@ -1,8 +1,0 @@
-# Sweeps rotation_drift_penalty — the continuous dial between pure and hybrid
-ablation:
-  name: dial_ablation
-  base_method: hybrid_paft
-  penalty_values: [0.0, 0.01, 0.1, 1.0, 10.0]
-  eval_domains: [news, legal, biomedical]
-  eval_task: first         # use the first task per domain
-  model: gpt2_small

@@ -50,20 +50,20 @@ logger = logging.getLogger(__name__)
 # ── Task configuration ────────────────────────────────────────────────────────
 
 SUPPORTED_TASKS = [
-    "boolq", "piqa", "siqa", "hellaswag",
+    "boolq", "hellaswag",
     "winogrande", "arc_easy", "arc_challenge", "openbookqa"
 ]
 
 # Maps task → HF dataset name/config
 HF_NAMES: Dict[str, Tuple[str, Optional[str]]] = {
-    "boolq":         ("boolq",           None),
+    "boolq":         ("google/boolq",   None),
     "piqa":          ("piqa",            None),
     "siqa":          ("social_i_qa",     None),
-    "hellaswag":     ("hellaswag",       None),
-    "winogrande":    ("winogrande",      "winogrande_xl"),
-    "arc_easy":      ("ai2_arc",         "ARC-Easy"),
-    "arc_challenge": ("ai2_arc",         "ARC-Challenge"),
-    "openbookqa":    ("openbookqa",      "main"),
+    "hellaswag":     ("Rowan/hellaswag",     None),
+    "winogrande":    ("allenai/winogrande",  "winogrande_xl"),
+    "arc_easy":      ("allenai/ai2_arc",     "ARC-Easy"),
+    "arc_challenge": ("allenai/ai2_arc",     "ARC-Challenge"),
+    "openbookqa":    ("allenai/openbookqa",  "main"),
 }
 
 

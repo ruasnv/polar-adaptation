@@ -1,0 +1,5 @@
+{
+  "task": "mnli",
+  "method": "full_ft",
+  "stage": "init"
+}

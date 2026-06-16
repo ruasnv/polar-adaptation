@@ -40,28 +40,19 @@ from __future__ import annotations
 import argparse
 import json
 import logging
-import os
 import random
 from pathlib import Path
-from typing import Any, Dict, Optional
 
 import numpy as np
-import torch
 from transformers import (
-    AutoTokenizer,
     TrainingArguments,
     Trainer,
-    EarlyStoppingCallback,
     set_seed,
 )
 
 from paft.data.glue_module import GLUEDataModule, NUM_LABELS, SUPPORTED_TASKS
 from paft.methods.deberta_methods import get_deberta_model, DEBERTA_METHODS
 from paft.utils.experiment_saver import save_checkpoint, is_complete
-from analysis.stable_rank import (
-    analyze_all_layers, compare_methods_stable_rank,
-    plot_stable_rank_comparison, plot_layer_profile,
-)
 
 logging.basicConfig(
     format  = '%(asctime)s  %(levelname)-8s  %(message)s',
@@ -408,7 +399,7 @@ def _run_geometric_analysis(model, method_name: str, output_dir: Path) -> None:
     Saves results to {output_dir}/analysis/.
     """
     from paft.model.deberta_paft_model import DeBERTaPAFTModel
-    from analysis.stable_rank import analyze_all_layers, summarize_stable_rank
+    from analysis.stable_rank import analyze_all_layers
 
     analysis_dir = output_dir / "analysis"
 

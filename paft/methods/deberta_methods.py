@@ -226,11 +226,12 @@ def build_deberta_safe_hybrid_paft(num_labels: int) -> Tuple[nn.Module, AutoToke
 
 def build_deberta_lora(num_labels: int, rank: int = 8) -> Tuple[nn.Module, AutoTokenizer]:
     """
-    Standard LoRA on query_proj, key_proj, value_proj, output.dense.
-    Uses PEFT library.  classifier always trainable.
+    Standard LoRA on query_proj and value_proj — matches Hu et al. 2022 GLUE setting.
 
-    r=8:  parameter count ≈ 12 × 4 × (768+768) × 8 × 2 ≈ 589,824
-    r=64: parameter count ≈ 4,718,592
+    r=8:  adapter params = 12 layers × 2 proj × 2 × 768 × 8 = 294,912
+          total trainable ≈ 294,912 + 592,130 (classifier) = 887,042
+    r=64: adapter params = 12 × 2 × 2 × 768 × 64 = 2,359,296
+          total trainable ≈ 2,359,296 + 592,130 = 2,951,426
     """
     try:
         from peft import LoraConfig, get_peft_model, TaskType
@@ -244,7 +245,7 @@ def build_deberta_lora(num_labels: int, rank: int = 8) -> Tuple[nn.Module, AutoT
         r             = rank,
         lora_alpha    = rank * 2,
         lora_dropout  = 0.1,
-        target_modules = ["query_proj", "value_proj", "dense"],
+        target_modules = ["query_proj", "value_proj"],
         bias           = "none",
         modules_to_save = ["classifier", "pooler"],
     )
@@ -583,7 +584,7 @@ def build_deberta_paft_ablation(
 
 # Add ablation variants to method registry
 DEBERTA_METHODS.update({
-    "polar_r8":     lambda n: build_deberta_polar(n, rank=8),  # drop callback (train_glue handles)
+    "polar_r8":     lambda n: build_deberta_polar(n, rank=8),  # 3-tuple; train_glue.py unpacks callback (train_glue handles)
     "paft_v_only":  lambda n: build_deberta_paft_ablation(n, adapt_value=True,  adapt_output=False),
     "paft_o_only":  lambda n: build_deberta_paft_ablation(n, adapt_value=False, adapt_output=True),
     "paft_qv":      lambda n: build_deberta_paft_ablation(n, adapt_value=True,  adapt_output=False, adapt_query=True),

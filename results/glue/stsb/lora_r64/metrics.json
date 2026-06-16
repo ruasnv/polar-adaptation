@@ -1,12 +1,12 @@
 {
-  "loss": 0.3923991620540619,
-  "pearson": 0.9154031276702881,
-  "spearmanr": 0.9151037089819455,
-  "runtime": 10.2605,
-  "samples_per_second": 146.192,
-  "steps_per_second": 2.339,
+  "loss": 0.385975182056427,
+  "pearson": 0.9165066480636597,
+  "spearmanr": 0.9156455352472932,
+  "runtime": 8.4985,
+  "samples_per_second": 176.502,
+  "steps_per_second": 2.824,
   "epoch": 10.0,
   "task": "stsb",
   "method": "lora_r64",
-  "trainable_params": 10028545
+  "trainable_params": 2950657
 }
