@@ -1,0 +1,9 @@
+{
+  "accuracy": 0.6803425612427804,
+  "epoch": 0,
+  "train_loss": null,
+  "final_accuracy": 0.6803425612427804,
+  "task": "hellaswag",
+  "method": "frozen",
+  "trainable_params": 0
+}

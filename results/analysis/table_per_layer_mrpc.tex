@@ -1,0 +1,18 @@
+\begin{table}[t]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\caption{Final $\operatorname{sr}(\mathbf{W}_{\text{eff}})$ at each encoder layer for \textsc{MRPC}. Layer 9 shows a consistent positive shift across all methods.}
+\label{tab:per_layer_mrpc}
+\begin{tabular}{lcccccccccccc}
+\toprule
+\textbf{Method} & \textbf{L00} & \textbf{L01} & \textbf{L02} & \textbf{L03} & \textbf{L04} & \textbf{L05} & \textbf{L06} & \textbf{L07} & \textbf{L08} & \textbf{L09} & \textbf{L10} & \textbf{L11} \\
+\midrule
+pure-PAFT (Ours) & 24.36 & 24.46 & 27.39 & 28.43 & 27.40 & 26.88 & 24.14 & 23.21 & 22.93 & 28.93 & 27.39 & 24.88 \\
+hybrid-PAFT (Ours) & 30.97 & 30.27 & 33.39 & 34.64 & 34.99 & 35.78 & 34.26 & 32.75 & 33.24 & 36.82 & 34.62 & 32.71 \\
+safe-hybrid-PAFT (Ours) & 31.32 & 30.27 & 34.02 & 34.68 & 35.10 & 36.34 & 34.50 & 33.37 & 34.55 & 37.68 & 35.23 & 34.46 \\
+PoLAR $r{=}8$ & 30.10 & 28.58 & 33.56 & 34.64 & 34.85 & 36.27 & 33.73 & 32.71 & 34.26 & 37.06 & 34.79 & 29.70 \\
+Full fine-tuning & 31.46 & 30.39 & 34.35 & 34.90 & 35.32 & 36.48 & 34.83 & 33.28 & 35.33 & 38.21 & 36.38 & 35.98 \\
+\bottomrule
+\end{tabular}
+\end{table}

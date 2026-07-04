@@ -1,0 +1,9 @@
+{
+  "accuracy": 0.5458715596330275,
+  "epoch": 0,
+  "train_loss": null,
+  "final_accuracy": 0.5458715596330275,
+  "task": "boolq",
+  "method": "frozen",
+  "trainable_params": 0
+}

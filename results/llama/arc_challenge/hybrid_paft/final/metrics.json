@@ -1,0 +1,8 @@
+{
+  "accuracy": 0.46153846153846156,
+  "final_loss": 1.4140740971480097,
+  "final_accuracy": 0.4414715719063545,
+  "task": "arc_challenge",
+  "method": "hybrid_paft",
+  "trainable_params": 3670016
+}

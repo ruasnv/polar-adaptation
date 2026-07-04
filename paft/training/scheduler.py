@@ -15,12 +15,8 @@ and a standard schedule eliminates scheduling as a confound.
   +-------------------> step
       warmup   decay
 """
-
 from __future__ import annotations
-
 import logging
-from typing import Union
-
 from torch.optim import Optimizer
 from torch.optim.lr_scheduler import LambdaLR
 

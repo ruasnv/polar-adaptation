@@ -1,5 +1,0 @@
-method:
-  name: frozen
-  freeze:
-    all: true
-  tune: {}

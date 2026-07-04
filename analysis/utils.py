@@ -14,56 +14,6 @@ from transformers import AutoTokenizer
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-# ──────────────────────────────────────────────────────────────────────────────
-# Method registry (import lazily to avoid circular import at top of every file)
-# ──────────────────────────────────────────────────────────────────────────────
-
-def _get_method(method_name: str, cfg: dict):
-    from paft.methods import get_method
-    return get_method(method_name, cfg)
-
-
-# ──────────────────────────────────────────────────────────────────────────────
-# Model loading
-# ──────────────────────────────────────────────────────────────────────────────
-
-def load_trained_model(
-    run_dir:     Path,
-    cfg:         dict,
-    device:      torch.device,
-    checkpoint:  str = "final",   # "final" | "epoch_N"
-):
-    """
-    Reconstruct a trained method from checkpoint.
-
-    Workflow:
-        1. Instantiate the method class (from method_name = run_dir.name)
-        2. Call method.build(hf_name, device)  — this runs polar/SVD decomposition
-           on the pretrained weights (CPU), then moves to device
-        3. Load model.pt state_dict on top  — overwrites decomposed values with
-           trained values from the checkpoint
-
-    This restores the model to its post-training state for any method type.
-
-    Returns the built method object with model on device, in eval mode.
-    """
-    method_name = run_dir.name
-    hf_name     = cfg["model"]["hf_name"]
-
-    method = _get_method(method_name, cfg)
-    method.build(hf_name, device)
-
-    ckpt_dir  = run_dir / checkpoint
-    model_pt  = ckpt_dir / "model.pt"
-    if not model_pt.exists():
-        raise FileNotFoundError(f"model.pt not found: {model_pt}")
-
-    state_dict = torch.load(model_pt, map_location=device, weights_only=False)
-    method.model.load_state_dict(state_dict, strict=False)
-    method.model.eval()
-    return method
-
-
 def get_hf_model(method):
     """
     Extract the underlying HuggingFace-compatible model from any method.
@@ -121,17 +71,17 @@ def load_init_config(run_dir: Path) -> Dict[str, Any]:
     with path.open() as f:
         return json.load(f)
 
-# Add this to the bottom of your analysis/utils.py
-
+# Long-form metric keys matching values written to metrics.json.
+# Must match build_cache.py's TASK_PRIMARY exactly.
 TASK_PRIMARY = {
-    "cola": "mcc",
-    "mrpc": "f1",
-    "stsb": "pearson",
-    "sst2": "accuracy",
-    "qnli": "accuracy",
-    "qqp": "accuracy",
+    "cola": "matthews_correlation",
     "mnli": "accuracy",
-    "rte": "accuracy"
+    "mrpc": "f1",
+    "qnli": "accuracy",
+    "qqp":  "f1",
+    "rte":  "accuracy",
+    "sst2": "accuracy",
+    "stsb": "pearson",
 }
 
 def load_adapted_weights(run_dir: Path | str, tag: str) -> tuple[list[torch.Tensor], list[torch.Tensor]]:

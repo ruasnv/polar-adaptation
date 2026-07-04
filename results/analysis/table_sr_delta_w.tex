@@ -1,0 +1,26 @@
+\begin{table}[t]
+\centering
+\small
+\caption{Stable rank of the weight update $\operatorname{sr}(\Delta\mathbf{W}_V)$ per GLUE task. High $\operatorname{sr}(\Delta\mathbf{W})$ alongside low $\operatorname{sr}(\mathbf{W}_{\text{eff}})$ (as in PoLAR) empirically confirms Proposition~\ref{prop:instability}. N/A: method does not produce an additive update.}
+\label{tab:sr_delta_w}
+\begin{tabular}{lcccccccc}
+\toprule
+\textbf{Method} & \textbf{CoLA} & \textbf{MRPC} & \textbf{RTE} & \textbf{STS-B} & \textbf{SST-2} & \textbf{QNLI} & \textbf{MNLI} & \textbf{QQP} \\
+\midrule
+Frozen & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A \\
+BitFit & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A \\
+\midrule
+SVF & 48.16 & 48.98 & 47.63 & 48.89 & 48.96 & 48.93 & 48.81 & 49.01 \\
+pure-PAFT (Ours) & 29.08 & 29.36 & 28.26 & 30.43 & 31.05 & 29.68 & 29.36 & 31.52 \\
+hybrid-PAFT (Ours) & 19.55 & 16.86 & 17.98 & 18.27 & 21.79 & 24.94 & 28.63 & 28.71 \\
+safe-pure-PAFT (Ours) & 30.41 & 28.67 & 29.37 & 30.11 & 32.61 & 33.71 & 36.29 & 36.45 \\
+safe-hybrid-PAFT (Ours) & 23.99 & 21.00 & 24.64 & 22.39 & 25.25 & 27.96 & 31.42 & 30.38 \\
+\midrule
+LoRA $r{=}8$ & 6.55 & 7.49 & 7.02 & 6.55 & 7.37 & 8.88 & 9.67 & 9.85 \\
+LoRA $r{=}64$ & 9.86 & 9.08 & 9.70 & 9.23 & 9.86 & 13.64 & 17.72 & 17.26 \\
+PoLAR $r{=}8$ & 16.51 & 13.78 & 15.16 & 13.72 & 15.81 & 16.97 & 17.94 & 16.64 \\
+\midrule
+Full fine-tuning & 26.22 & 21.30 & 22.99 & 18.81 & 25.77 & 30.06 & 35.17 & 30.65 \\
+\bottomrule
+\end{tabular}
+\end{table}

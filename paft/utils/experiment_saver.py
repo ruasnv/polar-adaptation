@@ -155,6 +155,7 @@ def extract_llama_weights(model: nn.Module) -> Dict[str, List[torch.Tensor]]:
     Delegates to model.get_live_WV_WO() for LLaMAPAFTModel, or reads weights directly.
     """
     from paft.model.llama_paft_model import LLaMAPAFTModel, _dequantize_weight
+    from paft.model.polar_linear import PoLARLinear
 
     if isinstance(model, LLaMAPAFTModel):
         return model.get_live_WV_WO()
@@ -176,8 +177,11 @@ def extract_llama_weights(model: nn.Module) -> Dict[str, List[torch.Tensor]]:
     with torch.no_grad():
         for l in range(n_layers):
             attn = llama_layers.layers[l].self_attn
-            v_w  = _dequantize_weight(attn.v_proj)   # [n_kv*d, hidden]
-            o_w  = _dequantize_weight(attn.o_proj)   # [hidden, n_q*d]
+            if isinstance(attn.v_proj, PoLARLinear):
+                v_w = attn.v_proj.get_effective_W()    # [n_kv*d, hidden]
+            else:
+                v_w = _dequantize_weight(attn.v_proj)  # [n_kv*d, hidden]
+            o_w  = _dequantize_weight(attn.o_proj)     # [hidden, n_q*d]
 
             W_V = (v_w.reshape(n_kv, d, n).permute(0, 2, 1).contiguous().cpu())  # [H_kv, n, d]
             W_O = (o_w.reshape(n, n_q, d).permute(1, 2, 0).contiguous().cpu())   # [H_q, d, n]

@@ -1,0 +1,8 @@
+{
+  "accuracy": 0.727217125382263,
+  "final_loss": 1.579102524696491,
+  "final_accuracy": 0.6963302752293578,
+  "task": "boolq",
+  "method": "polar_r8",
+  "trainable_params": 917504
+}

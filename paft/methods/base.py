@@ -39,7 +39,6 @@ Design contracts enforced here:
 """
 
 from __future__ import annotations
-
 import math
 import logging
 from abc import ABC, abstractmethod
@@ -49,7 +48,6 @@ from typing import Dict, Iterator, List, Optional
 import torch
 import torch.nn as nn
 from torch.optim import AdamW
-
 logger = logging.getLogger(__name__)
 
 

@@ -1,0 +1,24 @@
+\begin{table}[t]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\caption{Geometric health of $\mathbf{W}_{V,h}$ for LLaMA-3.2-3B after fine-tuning. $\operatorname{sr}$: stable rank. $\kappa$: condition number ($\sigma_{\max}/\sigma_{\min}$). Pretrained: $\operatorname{sr} \approx 68.9$, $\kappa \approx 2.43$. HellaSwag trained for 1 epoch; BoolQ for 2 epochs. LoRA values use merged $\mathbf{W}_{\text{eff}}$.}
+\label{tab:llama_geometric}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Method} & \multicolumn{2}{c}{\textbf{BoolQ}} & \multicolumn{2}{c}{\textbf{HellaSwag}} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5}
+ & $\operatorname{sr}$ & $\kappa$ & $\operatorname{sr}$ & $\kappa$ \\
+\midrule
+Pretrained & 68.92 & 2.43 & 68.92 & 2.43 \\
+\midrule
+Frozen & 68.92 & 2.43 & 68.92 & 2.43 \\
+\midrule
+pure-PAFT (Ours) & 51.33 & 15.26 & 40.89 & 143.86 \\
+hybrid-PAFT (Ours) & 46.86 & 8.61 & 37.85 & 16.48 \\
+\midrule
+LoRA $r{=}8$ & 38.36 & 3.25 & 39.55 & 3.22 \\
+PoLAR $r{=}8$ & 41.58 & 3.15 & 38.14 & 3.33 \\
+\bottomrule
+\end{tabular}
+\end{table}

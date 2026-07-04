@@ -85,6 +85,8 @@ coverage.xml
 .pytest_cache/
 pytestdebug.log
 
+/tests
+
 checkpoints/*
 !checkpoints/.gitkeep
 

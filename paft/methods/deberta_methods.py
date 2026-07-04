@@ -26,13 +26,12 @@ DeBERTa attention layer path:
 """
 
 from __future__ import annotations
-
 import logging
-from typing import Any, Dict, List, Optional, Tuple
-
+from typing import List, Optional, Tuple
 import torch
 import torch.nn as nn
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
+
 
 from paft.model.deberta_paft_model import DeBERTaPAFTModel
 from paft.model.paft_linear import PAFTLinear
@@ -43,8 +42,8 @@ logger = logging.getLogger(__name__)
 # In deberta_methods.py
 HF_MODEL_NAME = "microsoft/deberta-v3-base"
 _N_LAYERS = 12
-_N_HEADS  = 12   # <--- Add this
-_HEAD_DIM = 64   # <--- Add this
+_N_HEADS  = 12
+_HEAD_DIM = 64
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -452,7 +451,7 @@ class _StiefelRetractCallback(TrainerCallback):
             m for m in model.modules() if isinstance(m, PoLARLinear)
         ]
 
-    def on_step_end(self, args, state, control, **kwargs):
+    def on_step_end(self, args, state, **kwargs):
         for layer in self._layers:
             layer.retract_to_stiefel()
 

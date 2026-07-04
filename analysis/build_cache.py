@@ -36,15 +36,20 @@ def extract_stable_rank_list(health_dict: dict, prefix: str = "V") -> list:
         if prefix.lower() in k.lower() and "rank" in k.lower() and isinstance(v, (list, np.ndarray)):
             return [float(x) for x in v]
 
-    # Pattern C: Nested dictionary matching your custom LoRA/DeBERTa structure
+    # Pattern C: per_layer is a list of dicts, each with W_V/W_O sub-dicts.
+    # This is the actual structure written by the training code.
     if "per_layer" in health_dict:
         layer_data = health_dict["per_layer"]
+        sub_key  = "W_V" if prefix == "V" else "W_O"
+        rank_key = "V_stable_rank" if prefix == "V" else "O_stable_rank"
         try:
-            sorted_layers = sorted(layer_data.keys())
-            sub_key = "W_V" if prefix == "V" else "W_O"
-            rank_key = "V_stable_rank" if prefix == "V" else "O_stable_rank"
-            return [float(layer_data[l][sub_key][rank_key]) for l in sorted_layers]
-        except Exception:
+            if isinstance(layer_data, list):
+                return [float(entry[sub_key][rank_key]) for entry in layer_data]
+            # Fallback: dict keyed by layer index (older checkpoint format)
+            if isinstance(layer_data, dict):
+                return [float(layer_data[k][sub_key][rank_key])
+                        for k in sorted(layer_data.keys(), key=int)]
+        except (KeyError, TypeError):
             pass
 
     # Absolute structural backup if everything else is missing
@@ -73,8 +78,9 @@ def compute_metrics_from_weight(W: torch.Tensor):
         cond_num = float(s[0] / s[-1]) if s[-1] > 0 else 1.0
 
         return sr, spectral_entropy, eff_rank, cond_num
-    except Exception:
-        return 34.745, 3.8, 34.0, 1.0
+    except Exception as e:
+        log.warning(f"SVD failed on weight matrix shape {W.shape}: {e} — skipping this weight")
+        return None, None, None, None
 
 
 def main():
@@ -165,17 +171,17 @@ def main():
 
                         dW = W_final_flat - W_init_flat
                         sr_dw, ent, er, cond = compute_metrics_from_weight(dW)
-                        if sr_dw is None:
-                            # ΔW = 0: method does not adapt this weight (frozen/bitfit)
-                            delta_ranks.append(None)
-                        else:
-                            delta_ranks.append(sr_dw)
+                        # None = zero matrix (frozen/bitfit) OR SVD failure (logged above)
+                        delta_ranks.append(sr_dw)
 
-                        # Compute all secondary metrics on W_eff for this layer (not just the last)
-                        _, ent, er, cond = compute_metrics_from_weight(W_final_flat)
-                        entropies.append(ent)
-                        eff_ranks.append(er)
-                        cond_numbers.append(cond)
+                        # Secondary metrics on W_eff — use None-safe append
+                        _, ent_f, er_f, cond_f = compute_metrics_from_weight(W_final_flat)
+                        if ent_f is not None:
+                            entropies.append(ent_f)
+                        if er_f is not None:
+                            eff_ranks.append(er_f)
+                        if cond_f is not None:
+                            cond_numbers.append(cond_f)
 
                         layer_final_sr = list_final_v[layer] if layer < len(list_final_v) else sr_final_v
                         per_layer_records.append({

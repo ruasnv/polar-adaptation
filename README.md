@@ -11,7 +11,6 @@ analysis/       Post-training analyses — strictly read-only
 scripts/        Entry points — thin wrappers with no logic
 results/        All outputs — gitignored
 tests/          Unit tests for core math — run before any experiment
-notebooks/      Exploration only — never used in the pipeline
 ```
 
 ## Quick Start

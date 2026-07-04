@@ -1,0 +1,8 @@
+{
+  "accuracy": 0.8214067278287461,
+  "final_loss": 1.49854883767813,
+  "final_accuracy": 0.8214067278287461,
+  "task": "boolq",
+  "method": "lora_r8",
+  "trainable_params": 2293760
+}

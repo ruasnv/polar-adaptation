@@ -35,10 +35,7 @@ from __future__ import annotations
 
 import argparse
 import logging
-import shutil
 from pathlib import Path
-from typing import Optional
-
 import torch
 import torch.nn as nn
 

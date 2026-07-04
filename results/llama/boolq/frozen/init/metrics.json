@@ -1,0 +1,5 @@
+{
+  "task": "boolq",
+  "method": "frozen",
+  "stage": "init"
+}

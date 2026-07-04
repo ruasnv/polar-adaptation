@@ -1,0 +1,8 @@
+{
+  "accuracy": 0.46153846153846156,
+  "final_loss": 1.6929123163223267,
+  "final_accuracy": 0.46153846153846156,
+  "task": "arc_challenge",
+  "method": "polar_r8",
+  "trainable_params": 917504
+}

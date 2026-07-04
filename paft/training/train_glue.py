@@ -245,7 +245,7 @@ def main() -> None:
 
     class PAFTEpochCallback(TrainerCallback):
         """Save PAFT snapshot and geometric health after every eval epoch."""
-        def on_evaluate(self, args, state, control, **kwargs):
+        def on_evaluate(self, args, state, **kwargs):
             epoch = int(state.epoch) if state.epoch else 0
             save_checkpoint(
                 model       = model,

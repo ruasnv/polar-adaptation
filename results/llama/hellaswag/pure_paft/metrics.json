@@ -1,0 +1,8 @@
+{
+  "accuracy": 0.7149970125473013,
+  "final_loss": 1.950532278138052,
+  "final_accuracy": 0.7149970125473013,
+  "task": "hellaswag",
+  "method": "pure_paft",
+  "trainable_params": 28672
+}

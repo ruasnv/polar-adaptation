@@ -1,0 +1,27 @@
+\begin{table}[t]
+\centering
+\small
+\caption{GLUE benchmark results on DeBERTa-v3-base. Primary metrics: Matthews correlation (CoLA), Pearson correlation (STS-B), F1 (MRPC, QQP), accuracy elsewhere. \textbf{Bold}: best overall per column. \underline{Underline}: best PAFT variant. All scores reported on the development set.}
+\label{tab:glue_performance}
+\begin{tabular}{lccccccccc}
+\toprule
+\textbf{Method} & \textbf{CoLA} & \textbf{MRPC} & \textbf{RTE} & \textbf{STS-B} & \textbf{SST-2} & \textbf{QNLI} & \textbf{MNLI} & \textbf{QQP} & \textbf{Mean} \\
+\midrule
+Frozen & 0.5103 & 0.8122 & 0.6751 & 0.7087 & 0.8211 & 0.7481 & 0.6486 & 0.7498 & 0.7092 \\
+\midrule
+BitFit & 0.6810 & 0.9239 & 0.8303 & 0.9165 & 0.9553 & 0.9374 & 0.8932 & 0.8628 & 0.8750 \\
+SVF & 0.6949 & 0.9012 & 0.8231 & 0.9105 & 0.9484 & 0.9271 & 0.8856 & 0.8529 & 0.8680 \\
+\midrule
+pure-PAFT (Ours) & 0.6508 & 0.8959 & 0.7617 & 0.9068 & 0.9404 & 0.9235 & 0.8698 & 0.8517 & 0.8501 \\
+hybrid-PAFT (Ours) & \underline{0.6995} & 0.9127 & 0.8159 & 0.9103 & 0.9518 & 0.9376 & 0.8995 & 0.8807 & 0.8760 \\
+safe-pure-PAFT (Ours) & 0.6810 & 0.9300 & \underline{0.8448} & 0.9161 & 0.9553 & 0.9372 & 0.8963 & 0.8677 & 0.8785 \\
+safe-hybrid-PAFT (Ours) & 0.6967 & \underline{0.9322} & 0.8375 & \textbf{\underline{0.9171}} & \underline{0.9564} & \underline{0.9398} & \underline{0.9006} & \underline{0.8848} & 0.8831 \\
+\midrule
+LoRA $r{=}8$ & 0.6783 & \textbf{0.9376} & 0.8375 & 0.9152 & 0.9599 & \textbf{0.9425} & \textbf{0.9039} & 0.8767 & 0.8815 \\
+LoRA $r{=}64$ & 0.6931 & 0.9345 & \textbf{0.8664} & 0.9165 & 0.9587 & 0.9420 & 0.9019 & 0.8902 & 0.8879 \\
+PoLAR $r{=}8$ & 0.6965 & 0.9314 & 0.8664 & 0.9140 & 0.9587 & 0.9412 & 0.9021 & 0.8808 & 0.8864 \\
+\midrule
+Full fine-tuning & \textbf{0.7069} & 0.9284 & 0.8520 & 0.9117 & \textbf{0.9633} & 0.9389 & 0.9030 & \textbf{0.8960} & 0.8875 \\
+\bottomrule
+\end{tabular}
+\end{table}

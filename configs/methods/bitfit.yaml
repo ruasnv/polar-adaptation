@@ -1,6 +1,0 @@
-method:
-  name: bitfit
-  freeze:
-    weights: true
-  tune:
-    biases: true

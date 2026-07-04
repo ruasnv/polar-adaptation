@@ -1,0 +1,8 @@
+{
+  "accuracy": 0.4682274247491639,
+  "final_loss": 1.6065410554409028,
+  "final_accuracy": 0.4682274247491639,
+  "task": "arc_challenge",
+  "method": "lora_r8",
+  "trainable_params": 2293760
+}

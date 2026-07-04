@@ -381,17 +381,32 @@ def main() -> None:
 
     final_metrics = trainer.train()
 
-    # ── 5. Final evaluation (full dataset) ────────────────────────────────────
-    logger.info("Running final full evaluation ...")
-    model.eval()
+    # ── 5. Read final accuracy from last epoch — no redundant evaluation ──────
+    # trainer.train() already ran eval_fn (full validation set) at the end of
+    # every epoch including the last one. Running evaluate_log_likelihood again
+    # here would be an identical call on the same model with the same data,
+    # wasting ~2 hours on HellaSwag for zero new information.
+    # For GSM8K, which uses n_examples=200 quick eval during training, we DO
+    # run the full generative eval once here since training used a subset.
+    history_path = output_dir / "history.json"
     if is_gsm8k:
+        # GSM8K training eval used n_examples=200 subset — run full eval now
+        logger.info("Running final full GSM8K evaluation (generative, full set)...")
+        model.eval()
         final_acc = dm.evaluate_generation(
             model, device,
             max_new_tokens = args.gsm8k_gen_tokens,
         )
+    elif history_path.exists():
+        # Commonsense — last epoch already ran full eval, read from history
+        history = json.loads(history_path.read_text())
+        final_acc = history[-1]["accuracy"]
+        logger.info(f"Final accuracy (from last epoch eval): {final_acc:.4f}")
     else:
-        final_acc = dm.evaluate_log_likelihood(model, device)
+        # Frozen baseline — no history, trainer returned accuracy directly
+        final_acc = final_metrics.get("accuracy", 0.0)
 
+    model.eval()
     final_metrics["final_accuracy"] = final_acc
     final_metrics["task"]   = args.task
     final_metrics["method"] = args.method

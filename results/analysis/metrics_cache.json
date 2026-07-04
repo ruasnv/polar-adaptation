@@ -121,7 +121,7 @@
         "metric": "f1",
         "trainable_params": 887042,
         "sr_Weff_init": 34.745363902459935,
-        "sr_Weff_final": 34.04562210747053,
+        "sr_Weff_final": 34.04561733371333,
         "sr_deltaW_V": 7.48832752307256,
         "spectral_entropy_Weff_final": 4.153807520866394,
         "effective_rank_Weff_final": 63.67604989796152,
@@ -129,43 +129,43 @@
         "per_epoch": [
           {
             "epoch": 1,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.736313956852506
           },
           {
             "epoch": 2,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.660096464210234
           },
           {
             "epoch": 3,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.516069548900724
           },
           {
             "epoch": 4,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.414462028608035
           },
           {
             "epoch": 5,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.325569602304256
           },
           {
             "epoch": 6,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.24331426581746
           },
           {
             "epoch": 7,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.14620919703389
           },
           {
             "epoch": 8,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.09433587101426
           },
           {
             "epoch": 9,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.0564287647889
           },
           {
             "epoch": 10,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.04561733371333
           }
         ],
         "per_layer": [
@@ -581,7 +581,7 @@
         "metric": "f1",
         "trainable_params": 2951426,
         "sr_Weff_init": 34.745363902459935,
-        "sr_Weff_final": 32.40774812947382,
+        "sr_Weff_final": 32.40772563841329,
         "sr_deltaW_V": 9.07680501540502,
         "spectral_entropy_Weff_final": 4.153584520022075,
         "effective_rank_Weff_final": 63.66187064216424,
@@ -589,43 +589,43 @@
         "per_epoch": [
           {
             "epoch": 1,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.58547906550057
           },
           {
             "epoch": 2,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.194779930975734
           },
           {
             "epoch": 3,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 33.79266491159441
           },
           {
             "epoch": 4,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 33.381990570593196
           },
           {
             "epoch": 5,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 32.94281384147317
           },
           {
             "epoch": 6,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 32.74901400038394
           },
           {
             "epoch": 7,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 32.56985767545104
           },
           {
             "epoch": 8,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 32.46964300261466
           },
           {
             "epoch": 9,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 32.41557551990965
           },
           {
             "epoch": 10,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 32.40772563841329
           }
         ],
         "per_layer": [
@@ -1041,7 +1041,7 @@
         "metric": "f1",
         "trainable_params": 887042,
         "sr_Weff_init": 34.745363902459935,
-        "sr_Weff_final": 33.35492428667468,
+        "sr_Weff_final": 33.54092461553181,
         "sr_deltaW_V": 13.783522208531698,
         "spectral_entropy_Weff_final": 4.153719385464986,
         "effective_rank_Weff_final": 63.67044132550131,
@@ -1049,43 +1049,23 @@
         "per_epoch": [
           {
             "epoch": 1,
-            "sr_Weff": 34.64593497829865
+            "sr_Weff": 34.6459333767763
           },
           {
             "epoch": 2,
-            "sr_Weff": 34.334036254406335
+            "sr_Weff": 34.33403709071402
           },
           {
             "epoch": 3,
-            "sr_Weff": 34.099432126322256
+            "sr_Weff": 34.09943089780743
           },
           {
             "epoch": 4,
-            "sr_Weff": 33.80799986771097
+            "sr_Weff": 33.80799887149788
           },
           {
             "epoch": 5,
-            "sr_Weff": 33.54092411565528
-          },
-          {
-            "epoch": 6,
-            "sr_Weff": 33.35492428667468
-          },
-          {
-            "epoch": 7,
-            "sr_Weff": 33.246513449601046
-          },
-          {
-            "epoch": 8,
-            "sr_Weff": 33.19026920773534
-          },
-          {
-            "epoch": 9,
-            "sr_Weff": 33.18600165534986
-          },
-          {
-            "epoch": 10,
-            "sr_Weff": 33.35492428667468
+            "sr_Weff": 33.54092461553181
           }
         ],
         "per_layer": [
@@ -1388,7 +1368,7 @@
         "metric": "matthews_correlation",
         "trainable_params": 887042,
         "sr_Weff_init": 34.745363902459935,
-        "sr_Weff_final": 31.235100260915114,
+        "sr_Weff_final": 31.235079024602616,
         "sr_deltaW_V": 6.550233562787374,
         "spectral_entropy_Weff_final": 4.153607567151387,
         "effective_rank_Weff_final": 63.66332610532942,
@@ -1396,43 +1376,43 @@
         "per_epoch": [
           {
             "epoch": 1,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.71468093471946
           },
           {
             "epoch": 2,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.48708762160534
           },
           {
             "epoch": 3,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.04902719534157
           },
           {
             "epoch": 4,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 33.56230510368278
           },
           {
             "epoch": 5,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 32.82722981405473
           },
           {
             "epoch": 6,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 32.19948992782098
           },
           {
             "epoch": 7,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 31.70782929124719
           },
           {
             "epoch": 8,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 31.426804456471
           },
           {
             "epoch": 9,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 31.2686870982816
           },
           {
             "epoch": 10,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 31.235079024602616
           }
         ],
         "per_layer": [
@@ -1848,7 +1828,7 @@
         "metric": "matthews_correlation",
         "trainable_params": 2951426,
         "sr_Weff_init": 34.745363902459935,
-        "sr_Weff_final": 28.299479133710886,
+        "sr_Weff_final": 28.299486803625737,
         "sr_deltaW_V": 9.863112131754557,
         "spectral_entropy_Weff_final": 4.153066833813985,
         "effective_rank_Weff_final": 63.628954327592616,
@@ -1856,43 +1836,43 @@
         "per_epoch": [
           {
             "epoch": 1,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.41764556261264
           },
           {
             "epoch": 2,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 32.71078153422997
           },
           {
             "epoch": 3,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 31.238898987197288
           },
           {
             "epoch": 4,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 30.102254395087897
           },
           {
             "epoch": 5,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 29.35065636331521
           },
           {
             "epoch": 6,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 28.726662535930558
           },
           {
             "epoch": 7,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 28.47245008320171
           },
           {
             "epoch": 8,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 28.362414061518404
           },
           {
             "epoch": 9,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 28.31888575072377
           },
           {
             "epoch": 10,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 28.299486803625737
           }
         ],
         "per_layer": [
@@ -2308,7 +2288,7 @@
         "metric": "matthews_correlation",
         "trainable_params": 887042,
         "sr_Weff_init": 34.745363902459935,
-        "sr_Weff_final": 31.659855678735138,
+        "sr_Weff_final": 32.203187763102875,
         "sr_deltaW_V": 16.506545941034954,
         "spectral_entropy_Weff_final": 4.1535026629765825,
         "effective_rank_Weff_final": 63.65664719514618,
@@ -2316,43 +2296,23 @@
         "per_epoch": [
           {
             "epoch": 1,
-            "sr_Weff": 34.5965534578333
+            "sr_Weff": 34.59655296482185
           },
           {
             "epoch": 2,
-            "sr_Weff": 34.07705127781025
+            "sr_Weff": 34.077052042078805
           },
           {
             "epoch": 3,
-            "sr_Weff": 33.37172599305236
+            "sr_Weff": 33.37172643790513
           },
           {
             "epoch": 4,
-            "sr_Weff": 32.722828140328005
+            "sr_Weff": 32.72282835538288
           },
           {
             "epoch": 5,
-            "sr_Weff": 32.20318568527353
-          },
-          {
-            "epoch": 6,
-            "sr_Weff": 31.79858013884108
-          },
-          {
-            "epoch": 7,
-            "sr_Weff": 31.659855678735138
-          },
-          {
-            "epoch": 8,
-            "sr_Weff": 31.48907055749268
-          },
-          {
-            "epoch": 9,
-            "sr_Weff": 31.4297015336364
-          },
-          {
-            "epoch": 10,
-            "sr_Weff": 31.659855678735138
+            "sr_Weff": 32.203187763102875
           }
         ],
         "per_layer": [
@@ -2627,7 +2587,7 @@
         "metric": "f1",
         "trainable_params": 887042,
         "sr_Weff_init": 34.745363902459935,
-        "sr_Weff_final": 13.127445056486339,
+        "sr_Weff_final": 13.127447153819416,
         "sr_deltaW_V": 9.84895122051239,
         "spectral_entropy_Weff_final": 4.138724843660991,
         "effective_rank_Weff_final": 62.72745876924165,
@@ -2635,15 +2595,15 @@
         "per_epoch": [
           {
             "epoch": 1,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 15.934839918601009
           },
           {
             "epoch": 2,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 13.4573346571969
           },
           {
             "epoch": 3,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 13.127447153819416
           }
         ],
         "per_layer": [
@@ -2975,7 +2935,7 @@
         "metric": "f1",
         "trainable_params": 2951426,
         "sr_Weff_init": 34.745363902459935,
-        "sr_Weff_final": 13.349706122597638,
+        "sr_Weff_final": 13.349720960921557,
         "sr_deltaW_V": 17.260003288586933,
         "spectral_entropy_Weff_final": 4.126763761043549,
         "effective_rank_Weff_final": 62.030818479985214,
@@ -2983,15 +2943,15 @@
         "per_epoch": [
           {
             "epoch": 1,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 13.799474394581102
           },
           {
             "epoch": 2,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 13.246309648858464
           },
           {
             "epoch": 3,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 13.349720960921557
           }
         ],
         "per_layer": [
@@ -3323,7 +3283,7 @@
         "metric": "f1",
         "trainable_params": 887042,
         "sr_Weff_init": 34.745363902459935,
-        "sr_Weff_final": 19.93768056883998,
+        "sr_Weff_final": 19.937680570327196,
         "sr_deltaW_V": 16.637154897054035,
         "spectral_entropy_Weff_final": 4.14722998936971,
         "effective_rank_Weff_final": 63.25944365221168,
@@ -3331,15 +3291,15 @@
         "per_epoch": [
           {
             "epoch": 1,
-            "sr_Weff": 22.200167281218956
+            "sr_Weff": 22.200167625889012
           },
           {
             "epoch": 2,
-            "sr_Weff": 20.146672326318065
+            "sr_Weff": 20.14667189263878
           },
           {
             "epoch": 3,
-            "sr_Weff": 19.93768056883998
+            "sr_Weff": 19.937680570327196
           }
         ],
         "per_layer": [
@@ -3614,7 +3574,7 @@
         "metric": "pearson",
         "trainable_params": 886273,
         "sr_Weff_init": 34.745363902459935,
-        "sr_Weff_final": 33.56650709645327,
+        "sr_Weff_final": 33.566484841099374,
         "sr_deltaW_V": 6.551201740900676,
         "spectral_entropy_Weff_final": 4.153780261675517,
         "effective_rank_Weff_final": 63.67431310849242,
@@ -3622,43 +3582,43 @@
         "per_epoch": [
           {
             "epoch": 1,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.705954179146566
           },
           {
             "epoch": 2,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.63206452445379
           },
           {
             "epoch": 3,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.54928128985141
           },
           {
             "epoch": 4,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.35844249965697
           },
           {
             "epoch": 5,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.20468169792187
           },
           {
             "epoch": 6,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 33.97613312264007
           },
           {
             "epoch": 7,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 33.79060728394824
           },
           {
             "epoch": 8,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 33.66054248292763
           },
           {
             "epoch": 9,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 33.59782079813748
           },
           {
             "epoch": 10,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 33.566484841099374
           }
         ],
         "per_layer": [
@@ -4074,7 +4034,7 @@
         "metric": "pearson",
         "trainable_params": 2950657,
         "sr_Weff_init": 34.745363902459935,
-        "sr_Weff_final": 29.92346305753229,
+        "sr_Weff_final": 29.92356340549864,
         "sr_deltaW_V": 9.229326645533243,
         "spectral_entropy_Weff_final": 4.153392434120178,
         "effective_rank_Weff_final": 63.649628057118285,
@@ -4082,43 +4042,43 @@
         "per_epoch": [
           {
             "epoch": 1,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.66910237090071
           },
           {
             "epoch": 2,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.06998685574567
           },
           {
             "epoch": 3,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 32.83175880111839
           },
           {
             "epoch": 4,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 31.900824852056108
           },
           {
             "epoch": 5,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 31.029550955382984
           },
           {
             "epoch": 6,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 30.65371723720648
           },
           {
             "epoch": 7,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 30.317965678786624
           },
           {
             "epoch": 8,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 30.15173112229218
           },
           {
             "epoch": 9,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 29.993097481900246
           },
           {
             "epoch": 10,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 29.92356340549864
           }
         ],
         "per_layer": [
@@ -4534,7 +4494,7 @@
         "metric": "pearson",
         "trainable_params": 886273,
         "sr_Weff_init": 34.745363902459935,
-        "sr_Weff_final": 33.307244182937694,
+        "sr_Weff_final": 33.77856774458314,
         "sr_deltaW_V": 13.720898787180582,
         "spectral_entropy_Weff_final": 4.153675834337871,
         "effective_rank_Weff_final": 63.6676698914577,
@@ -4542,43 +4502,23 @@
         "per_epoch": [
           {
             "epoch": 1,
-            "sr_Weff": 34.710979749575436
+            "sr_Weff": 34.710979523497556
           },
           {
             "epoch": 2,
-            "sr_Weff": 34.599639233885256
+            "sr_Weff": 34.59963819703281
           },
           {
             "epoch": 3,
-            "sr_Weff": 34.387539927665834
+            "sr_Weff": 34.387541123035085
           },
           {
             "epoch": 4,
-            "sr_Weff": 34.11987769627921
+            "sr_Weff": 34.11987769764777
           },
           {
             "epoch": 5,
-            "sr_Weff": 33.77856702331383
-          },
-          {
-            "epoch": 6,
-            "sr_Weff": 33.501367773263475
-          },
-          {
-            "epoch": 7,
-            "sr_Weff": 33.307244182937694
-          },
-          {
-            "epoch": 8,
-            "sr_Weff": 33.152432842842565
-          },
-          {
-            "epoch": 9,
-            "sr_Weff": 33.081978239518605
-          },
-          {
-            "epoch": 10,
-            "sr_Weff": 33.307244182937694
+            "sr_Weff": 33.77856774458314
           }
         ],
         "per_layer": [
@@ -4881,7 +4821,7 @@
         "metric": "accuracy",
         "trainable_params": 887042,
         "sr_Weff_init": 34.745363902459935,
-        "sr_Weff_final": 33.96008921871736,
+        "sr_Weff_final": 33.96008922564149,
         "sr_deltaW_V": 7.017919023831685,
         "spectral_entropy_Weff_final": 4.15378216902415,
         "effective_rank_Weff_final": 63.67443745386452,
@@ -4889,43 +4829,43 @@
         "per_epoch": [
           {
             "epoch": 1,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.744189971779896
           },
           {
             "epoch": 2,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.559434697660166
           },
           {
             "epoch": 3,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.434704453919174
           },
           {
             "epoch": 4,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.30965296197008
           },
           {
             "epoch": 5,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.23473910799077
           },
           {
             "epoch": 6,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.150200072049834
           },
           {
             "epoch": 7,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.057085653699666
           },
           {
             "epoch": 8,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.01221329565584
           },
           {
             "epoch": 9,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 33.97793218932697
           },
           {
             "epoch": 10,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 33.96008922564149
           }
         ],
         "per_layer": [
@@ -5341,7 +5281,7 @@
         "metric": "accuracy",
         "trainable_params": 2951426,
         "sr_Weff_init": 34.745363902459935,
-        "sr_Weff_final": 32.91428345380877,
+        "sr_Weff_final": 32.91428984579553,
         "sr_deltaW_V": 9.69536062081655,
         "spectral_entropy_Weff_final": 4.153539697329204,
         "effective_rank_Weff_final": 63.65903698968862,
@@ -5349,43 +5289,43 @@
         "per_epoch": [
           {
             "epoch": 1,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.651861456097265
           },
           {
             "epoch": 2,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 34.08381393716084
           },
           {
             "epoch": 3,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 33.68293845794809
           },
           {
             "epoch": 4,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 33.44617859863867
           },
           {
             "epoch": 5,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 33.206545638816415
           },
           {
             "epoch": 6,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 33.0488402203182
           },
           {
             "epoch": 7,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 32.98873548297403
           },
           {
             "epoch": 8,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 32.957229188757786
           },
           {
             "epoch": 9,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 32.92274043748532
           },
           {
             "epoch": 10,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 32.91428984579553
           }
         ],
         "per_layer": [
@@ -5801,7 +5741,7 @@
         "metric": "accuracy",
         "trainable_params": 887042,
         "sr_Weff_init": 34.745363902459935,
-        "sr_Weff_final": 33.912942204406896,
+        "sr_Weff_final": 33.82424070570491,
         "sr_deltaW_V": 15.162538488705954,
         "spectral_entropy_Weff_final": 4.153780817985535,
         "effective_rank_Weff_final": 63.67434944868498,
@@ -5809,43 +5749,23 @@
         "per_epoch": [
           {
             "epoch": 1,
-            "sr_Weff": 34.73383932674114
+            "sr_Weff": 34.7338378881032
           },
           {
             "epoch": 2,
-            "sr_Weff": 34.415624989376184
+            "sr_Weff": 34.415624964655635
           },
           {
             "epoch": 3,
-            "sr_Weff": 34.17139876627754
+            "sr_Weff": 34.17139943398493
           },
           {
             "epoch": 4,
-            "sr_Weff": 33.912942204406896
+            "sr_Weff": 33.912940894629884
           },
           {
             "epoch": 5,
-            "sr_Weff": 33.82424125594954
-          },
-          {
-            "epoch": 6,
-            "sr_Weff": 33.73281163225254
-          },
-          {
-            "epoch": 7,
-            "sr_Weff": 33.69593603305593
-          },
-          {
-            "epoch": 8,
-            "sr_Weff": 33.63799541360452
-          },
-          {
-            "epoch": 9,
-            "sr_Weff": 33.59997477151447
-          },
-          {
-            "epoch": 10,
-            "sr_Weff": 33.912942204406896
+            "sr_Weff": 33.82424070570491
           }
         ],
         "per_layer": [
@@ -6128,7 +6048,7 @@
         "metric": "accuracy",
         "trainable_params": 887042,
         "sr_Weff_init": 34.745363902459935,
-        "sr_Weff_final": 19.958248849352888,
+        "sr_Weff_final": 19.958263648654192,
         "sr_deltaW_V": 8.878833293914795,
         "spectral_entropy_Weff_final": 4.150259892145793,
         "effective_rank_Weff_final": 63.450798139274305,
@@ -6136,23 +6056,23 @@
         "per_epoch": [
           {
             "epoch": 1,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 28.41177974138658
           },
           {
             "epoch": 2,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 23.657639115052444
           },
           {
             "epoch": 3,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 21.17958701731795
           },
           {
             "epoch": 4,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 20.219906687503613
           },
           {
             "epoch": 5,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 19.958263648654192
           }
         ],
         "per_layer": [
@@ -6508,7 +6428,7 @@
         "metric": "accuracy",
         "trainable_params": 2951426,
         "sr_Weff_init": 34.745363902459935,
-        "sr_Weff_final": 16.39787544974892,
+        "sr_Weff_final": 16.39783509696288,
         "sr_deltaW_V": 13.643914063771566,
         "spectral_entropy_Weff_final": 4.1435874700546265,
         "effective_rank_Weff_final": 63.03160421454297,
@@ -6516,23 +6436,23 @@
         "per_epoch": [
           {
             "epoch": 1,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 22.16975411534548
           },
           {
             "epoch": 2,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 18.306932675661862
           },
           {
             "epoch": 3,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 16.84571373481987
           },
           {
             "epoch": 4,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 16.450114703160647
           },
           {
             "epoch": 5,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 16.39783509696288
           }
         ],
         "per_layer": [
@@ -6888,7 +6808,7 @@
         "metric": "accuracy",
         "trainable_params": 887042,
         "sr_Weff_init": 34.745363902459935,
-        "sr_Weff_final": 24.518629856059036,
+        "sr_Weff_final": 24.51862911940903,
         "sr_deltaW_V": 16.972360690434773,
         "spectral_entropy_Weff_final": 4.151083866755168,
         "effective_rank_Weff_final": 63.502985481624194,
@@ -6896,23 +6816,23 @@
         "per_epoch": [
           {
             "epoch": 1,
-            "sr_Weff": 29.449824041338374
+            "sr_Weff": 29.44982465546174
           },
           {
             "epoch": 2,
-            "sr_Weff": 26.543742520587376
+            "sr_Weff": 26.543744088296762
           },
           {
             "epoch": 3,
-            "sr_Weff": 25.32361683810792
+            "sr_Weff": 25.323617675039085
           },
           {
             "epoch": 4,
-            "sr_Weff": 24.687027782150576
+            "sr_Weff": 24.687027430301725
           },
           {
             "epoch": 5,
-            "sr_Weff": 24.518629856059036
+            "sr_Weff": 24.51862911940903
           }
         ],
         "per_layer": [
@@ -7175,7 +7095,7 @@
         "metric": "accuracy",
         "trainable_params": 887042,
         "sr_Weff_init": 34.745363902459935,
-        "sr_Weff_final": 21.78607913098894,
+        "sr_Weff_final": 21.786117719938122,
         "sr_deltaW_V": 7.367144385973613,
         "spectral_entropy_Weff_final": 4.151490171750386,
         "effective_rank_Weff_final": 63.52881418953702,
@@ -7183,23 +7103,23 @@
         "per_epoch": [
           {
             "epoch": 1,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 31.225222398638152
           },
           {
             "epoch": 2,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 26.13144302212305
           },
           {
             "epoch": 3,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 23.266807420547746
           },
           {
             "epoch": 4,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 22.15228068629932
           },
           {
             "epoch": 5,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 21.786117719938122
           }
         ],
         "per_layer": [
@@ -7555,7 +7475,7 @@
         "metric": "accuracy",
         "trainable_params": 2951426,
         "sr_Weff_init": 34.745363902459935,
-        "sr_Weff_final": 14.688975314396414,
+        "sr_Weff_final": 14.688974808382433,
         "sr_deltaW_V": 9.85695723692576,
         "spectral_entropy_Weff_final": 4.145056962966919,
         "effective_rank_Weff_final": 63.122156694630235,
@@ -7563,23 +7483,23 @@
         "per_epoch": [
           {
             "epoch": 1,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 22.69953714641002
           },
           {
             "epoch": 2,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 17.202483188781784
           },
           {
             "epoch": 3,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 15.424761269636747
           },
           {
             "epoch": 4,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 14.803799875994747
           },
           {
             "epoch": 5,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 14.688974808382433
           }
         ],
         "per_layer": [
@@ -7935,7 +7855,7 @@
         "metric": "accuracy",
         "trainable_params": 887042,
         "sr_Weff_init": 34.745363902459935,
-        "sr_Weff_final": 26.307739608161835,
+        "sr_Weff_final": 26.307740051797673,
         "sr_deltaW_V": 15.809810002644857,
         "spectral_entropy_Weff_final": 4.152270078659058,
         "effective_rank_Weff_final": 63.5782786717468,
@@ -7943,23 +7863,23 @@
         "per_epoch": [
           {
             "epoch": 1,
-            "sr_Weff": 31.21244927142278
+            "sr_Weff": 31.21244821531951
           },
           {
             "epoch": 2,
-            "sr_Weff": 28.498055836358613
+            "sr_Weff": 28.498055393609302
           },
           {
             "epoch": 3,
-            "sr_Weff": 27.18280192637395
+            "sr_Weff": 27.182802008815884
           },
           {
             "epoch": 4,
-            "sr_Weff": 26.567171556822633
+            "sr_Weff": 26.567172165548662
           },
           {
             "epoch": 5,
-            "sr_Weff": 26.307739608161835
+            "sr_Weff": 26.307740051797673
           }
         ],
         "per_layer": [
@@ -8214,7 +8134,7 @@
         "metric": "accuracy",
         "trainable_params": 887811,
         "sr_Weff_init": 34.745363902459935,
-        "sr_Weff_final": 16.89761292097744,
+        "sr_Weff_final": 16.89762472227531,
         "sr_deltaW_V": 9.670505205790201,
         "spectral_entropy_Weff_final": 4.147615551948547,
         "effective_rank_Weff_final": 63.28322622914984,
@@ -8222,15 +8142,15 @@
         "per_epoch": [
           {
             "epoch": 1,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 18.18214063212097
           },
           {
             "epoch": 2,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 17.084940049985747
           },
           {
             "epoch": 3,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 16.89762472227531
           }
         ],
         "per_layer": [
@@ -8562,7 +8482,7 @@
         "metric": "accuracy",
         "trainable_params": 2952195,
         "sr_Weff_init": 34.745363902459935,
-        "sr_Weff_final": 16.325953578273133,
+        "sr_Weff_final": 16.325935970876028,
         "sr_deltaW_V": 17.716610511144,
         "spectral_entropy_Weff_final": 4.140139977137248,
         "effective_rank_Weff_final": 62.8199018194826,
@@ -8570,15 +8490,15 @@
         "per_epoch": [
           {
             "epoch": 1,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 15.701158544793707
           },
           {
             "epoch": 2,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 15.996274380188042
           },
           {
             "epoch": 3,
-            "sr_Weff": 34.745363902459935
+            "sr_Weff": 16.325935970876028
           }
         ],
         "per_layer": [
@@ -8910,7 +8830,7 @@
         "metric": "accuracy",
         "trainable_params": 887811,
         "sr_Weff_init": 34.745363902459935,
-        "sr_Weff_final": 23.20503325201528,
+        "sr_Weff_final": 23.205031939919998,
         "sr_deltaW_V": 17.94364333152771,
         "spectral_entropy_Weff_final": 4.149801572163899,
         "effective_rank_Weff_final": 63.42168325828272,
@@ -8918,15 +8838,15 @@
         "per_epoch": [
           {
             "epoch": 1,
-            "sr_Weff": 24.335259110549615
+            "sr_Weff": 24.3352578768878
           },
           {
             "epoch": 2,
-            "sr_Weff": 23.303468903402756
+            "sr_Weff": 23.30346853874072
           },
           {
             "epoch": 3,
-            "sr_Weff": 23.20503325201528
+            "sr_Weff": 23.205031939919998
           }
         ],
         "per_layer": [

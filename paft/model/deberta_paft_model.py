@@ -25,14 +25,12 @@ All decomposition runs on CPU before .to(device) call.
 from __future__ import annotations
 
 import logging
-from typing import Any, Dict, Iterator, List, Optional, Tuple
+from typing import Dict, Iterator, List, Tuple
 
 import torch
 import torch.nn as nn
-from transformers import AutoModelForSequenceClassification, DebertaV2Config
-
 from paft.model.paft_linear import PAFTLinear
-from paft.methods.base import PAFTSnapshot, freeze_all  # reuse existing dataclass + utility
+from paft.methods.base import PAFTSnapshot  # reuse existing dataclass + utility
 
 logger = logging.getLogger(__name__)
 

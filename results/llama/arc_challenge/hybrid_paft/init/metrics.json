@@ -1,0 +1,5 @@
+{
+  "task": "arc_challenge",
+  "method": "hybrid_paft",
+  "stage": "init"
+}

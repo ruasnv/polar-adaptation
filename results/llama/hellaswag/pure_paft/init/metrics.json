@@ -1,0 +1,5 @@
+{
+  "task": "hellaswag",
+  "method": "pure_paft",
+  "stage": "init"
+}

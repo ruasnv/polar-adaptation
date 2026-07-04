@@ -1,0 +1,8 @@
+{
+  "accuracy": 0.7363075084644494,
+  "final_loss": 1.885773679184223,
+  "final_accuracy": 0.7363075084644494,
+  "task": "hellaswag",
+  "method": "polar_r8",
+  "trainable_params": 917504
+}

@@ -1,0 +1,22 @@
+{
+  "task": "hellaswag",
+  "method": "polar_r8",
+  "model_name": "meta-llama/Llama-3.2-3B",
+  "output_dir": "results/llama/hellaswag/polar_r8",
+  "epochs": 1,
+  "lr": 0.001,
+  "batch_size": 4,
+  "grad_accum": 2,
+  "max_length": 256,
+  "warmup_ratio": 0.03,
+  "weight_decay": 0.001,
+  "grad_clip": 1.0,
+  "seed": 42,
+  "device_map": "auto",
+  "log_every": 50,
+  "use_metamath": true,
+  "metamath_size": 50000,
+  "gsm8k_gen_tokens": 256,
+  "run_analysis": true,
+  "skip_analysis": false
+}

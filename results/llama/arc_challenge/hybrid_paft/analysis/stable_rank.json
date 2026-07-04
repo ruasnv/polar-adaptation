@@ -1,0 +1,17 @@
+{
+  "method": "hybrid_paft",
+  "n_matrices": 224,
+  "matrix_shape": [
+    3072,
+    128
+  ],
+  "summary": {
+    "stable_rank": 61.18166161031862,
+    "spectral_entropy": 4.786754484687533,
+    "effective_rank": 119.96762028166634,
+    "condition_number": 3.1189749549542154,
+    "isotropy": 0.34981409516850753,
+    "participation_ratio": 113.3632152905698
+  },
+  "ortho_error": 1.7797630545958653e-05
+}

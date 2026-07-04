@@ -1,0 +1,18 @@
+\begin{table}[t]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\caption{Final $\operatorname{sr}(\mathbf{W}_{\text{eff}})$ at each encoder layer for \textsc{CoLA}. Layer 9 shows a consistent positive shift across all methods.}
+\label{tab:per_layer_cola}
+\begin{tabular}{lcccccccccccc}
+\toprule
+\textbf{Method} & \textbf{L00} & \textbf{L01} & \textbf{L02} & \textbf{L03} & \textbf{L04} & \textbf{L05} & \textbf{L06} & \textbf{L07} & \textbf{L08} & \textbf{L09} & \textbf{L10} & \textbf{L11} \\
+\midrule
+pure-PAFT (Ours) & 22.56 & 22.07 & 23.47 & 25.01 & 24.22 & 24.93 & 24.09 & 24.05 & 21.94 & 28.37 & 24.00 & 22.61 \\
+hybrid-PAFT (Ours) & 30.95 & 29.98 & 33.26 & 34.12 & 34.48 & 35.70 & 34.15 & 32.20 & 34.34 & 37.35 & 33.60 & 31.83 \\
+safe-hybrid-PAFT (Ours) & 31.15 & 30.28 & 33.77 & 34.44 & 35.05 & 35.98 & 34.32 & 32.70 & 34.85 & 37.65 & 34.96 & 34.73 \\
+PoLAR $r{=}8$ & 27.96 & 26.46 & 31.62 & 33.28 & 33.88 & 33.77 & 32.71 & 31.32 & 32.86 & 36.80 & 31.46 & 27.79 \\
+Full fine-tuning & 31.46 & 30.39 & 34.34 & 34.90 & 35.32 & 36.47 & 34.82 & 33.27 & 35.37 & 38.19 & 36.35 & 36.00 \\
+\bottomrule
+\end{tabular}
+\end{table}

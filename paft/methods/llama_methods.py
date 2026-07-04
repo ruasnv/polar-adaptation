@@ -314,8 +314,9 @@ def build_llama_polar(
     # Replace v_proj in each attention layer with PoLARLinear
     # v_proj weight [n_kv_heads*head_dim, hidden] — dequantize first
     for l in range(base.config.num_hidden_layers):
-        attn  = base.model.layers[l].self_attn
-        vp    = attn.v_proj
+        attn   = base.model.layers[l].self_attn
+        vp     = attn.v_proj
+        device = vp.weight.device if hasattr(vp, 'weight') else next(attn.parameters()).device
         w_fp32 = _dequantize_weight(vp)   # [1024, 3072] fp32
         bias   = vp.bias.detach().float().cpu() if vp.bias is not None else None
 
@@ -327,6 +328,7 @@ def build_llama_polar(
             rank         = rank,
             alpha        = rank * 2,
         )
+        polar_layer = polar_layer.to(device)
         attn.v_proj = polar_layer
         del vp, w_fp32
 

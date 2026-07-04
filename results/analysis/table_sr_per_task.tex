@@ -1,0 +1,26 @@
+\begin{table}[t]
+\centering
+\small
+\caption{Final $\operatorname{sr}(\mathbf{W}_{\text{eff}})$ for every method and GLUE task. Lower values indicate greater geometric damage. Pretrained baseline: $\operatorname{sr} = 34.745$ for all tasks.}
+\label{tab:sr_per_task}
+\begin{tabular}{lcccccccc}
+\toprule
+\textbf{Method} & \textbf{CoLA} & \textbf{MRPC} & \textbf{RTE} & \textbf{STS-B} & \textbf{SST-2} & \textbf{QNLI} & \textbf{MNLI} & \textbf{QQP} \\
+\midrule
+Frozen & 34.745 & 34.745 & 34.745 & 34.745 & 34.745 & 34.745 & 34.745 & 34.745 \\
+BitFit & 34.745 & 34.745 & 34.745 & 34.745 & 34.745 & 34.745 & 34.745 & 34.745 \\
+\midrule
+SVF & 33.572 & 33.606 & 33.253 & 33.912 & 32.418 & 31.992 & 31.307 & 32.129 \\
+pure-PAFT (Ours) & 23.942 & 25.866 & 25.943 & 25.466 & 18.356 & 16.835 & 15.583 & 14.315 \\
+hybrid-PAFT (Ours) & 33.496 & 33.704 & 33.691 & 33.799 & 31.238 & 29.604 & 27.112 & 26.591 \\
+safe-pure-PAFT (Ours) & 34.444 & 34.645 & 34.724 & 34.717 & 33.838 & 32.725 & 30.874 & 29.840 \\
+safe-hybrid-PAFT (Ours) & 34.156 & 34.296 & 34.478 & 34.382 & 32.329 & 30.525 & 28.723 & 27.620 \\
+\midrule
+LoRA $r{=}8$ & 31.235 & 34.046 & 33.960 & 33.566 & 21.786 & 19.958 & 16.898 & 13.127 \\
+LoRA $r{=}64$ & 28.299 & 32.408 & 32.914 & 29.924 & 14.689 & 16.398 & 16.326 & 13.350 \\
+PoLAR $r{=}8$ & 32.203 & 33.541 & 33.824 & 33.779 & 26.308 & 24.519 & 23.205 & 19.938 \\
+\midrule
+Full fine-tuning & 34.739 & 34.743 & 34.744 & 34.742 & 34.753 & 34.741 & 34.786 & 34.780 \\
+\bottomrule
+\end{tabular}
+\end{table}

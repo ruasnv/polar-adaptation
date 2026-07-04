@@ -1,0 +1,5 @@
+{
+  "task": "arc_challenge",
+  "method": "lora_r8",
+  "stage": "init"
+}
