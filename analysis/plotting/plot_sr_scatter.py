@@ -25,11 +25,15 @@ apply_style()
 # Read from cache in main() — do not hardcode
 OUT_DIR       = Path("results/analysis/figures")
 
-# Methods to include (exclude frozen — sr(ΔW) undefined)
+# Methods to include (exclude frozen — sr(ΔW) undefined, W never changes).
+# full_ft included: sr(deltaW_V) is a real, measured value for it too — but
+# note in any write-up that this one projection understates full_ft's true
+# footprint, since its update is spread across every weight in the model,
+# not concentrated in W_V the way PAFT/LoRA/SVF's updates are.
 METHODS = [
     "pure_paft", "hybrid_paft", "safe_pure_paft", "safe_hybrid_paft",
     "lora_r8", "lora_r64", "polar_r8",
-    "bitfit", "svf",
+    "bitfit", "svf", "full_ft",
 ]
 
 # Methods whose LoRA/additive sr(ΔW) sits in a very different range

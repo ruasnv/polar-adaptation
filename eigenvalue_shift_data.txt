@@ -1,0 +1,25 @@
+eigenvalue_shift.pdf verification data — task-averaged per layer, all 4 PAFT variants
+delta_lam_V_magnitude: mean |Δλ_V| per layer, averaged across every GLUE task present in paft_cache.json
+S_V_asymmetry_ratio: mean ||S-S^T||_F/||S||_F per layer, same averaging
+
+── safe_hybrid_paft ──
+  delta_lam_V_magnitude:
+    L00=1.21176(n=8)  L01=1.29579(n=8)  L02=1.24521(n=8)  L03=1.29236(n=8)  L04=1.22330(n=8)  L05=1.25134(n=8)  L06=1.25953(n=8)  L07=1.19139(n=8)  L08=1.17898(n=8)  L09=1.23790(n=8)  L10=1.13471(n=8)  L11=1.25134(n=8)
+  S_V_asymmetry_ratio:
+    L00=0.21708(n=8)  L01=0.19831(n=8)  L02=0.17487(n=8)  L03=0.15803(n=8)  L04=0.14565(n=8)  L05=0.16047(n=8)  L06=0.16756(n=8)  L07=0.17749(n=8)  L08=0.17867(n=8)  L09=0.14001(n=8)  L10=0.14611(n=8)  L11=0.11967(n=8)
+
+── hybrid_paft ──
+  delta_lam_V_magnitude:
+    L00=1.24028(n=8)  L01=1.31443(n=8)  L02=1.29160(n=8)  L03=1.33384(n=8)  L04=1.26387(n=8)  L05=1.34085(n=8)  L06=1.33852(n=8)  L07=1.27129(n=8)  L08=1.31675(n=8)  L09=1.33827(n=8)  L10=1.29095(n=8)  L11=1.53557(n=8)
+  S_V_asymmetry_ratio:
+    L00=0.22916(n=8)  L01=0.21096(n=8)  L02=0.18875(n=8)  L03=0.17244(n=8)  L04=0.16084(n=8)  L05=0.17685(n=8)  L06=0.18391(n=8)  L07=0.19492(n=8)  L08=0.20084(n=8)  L09=0.16110(n=8)  L10=0.16626(n=8)  L11=0.14189(n=8)
+
+── safe_pure_paft ──
+  delta_lam_V_magnitude:
+    L00=2.44784(n=8)  L01=2.77840(n=8)  L02=3.07457(n=8)  L03=3.35943(n=8)  L04=3.43491(n=8)  L05=3.24645(n=8)  L06=3.18966(n=8)  L07=3.08461(n=8)  L08=3.09242(n=8)  L09=3.58425(n=8)  L10=3.37569(n=8)  L11=3.43568(n=8)
+  S_V_asymmetry_ratio: NO DATA (field absent from every task/layer for this method)
+
+── pure_paft ──
+  delta_lam_V_magnitude:
+    L00=9.05035(n=8)  L01=9.96250(n=8)  L02=10.37757(n=8)  L03=11.50182(n=8)  L04=12.30247(n=8)  L05=11.71607(n=8)  L06=11.61833(n=8)  L07=12.01304(n=8)  L08=12.44471(n=8)  L09=14.44555(n=8)  L10=13.81472(n=8)  L11=13.74991(n=8)
+  S_V_asymmetry_ratio: NO DATA (field absent from every task/layer for this method)

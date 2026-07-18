@@ -162,10 +162,26 @@ def main():
     for task, steps in sorted(STEPS.items(), key=lambda x: x[1]):
         ax_left.axvline(steps, color="#e0e0e0", linewidth=0.4, zorder=0)
 
-    ax_left.legend(
-        loc="upper right", fontsize=6.5, frameon=True,
+    # Legend moved OUT of the plot area — with 8 methods, a boxed legend
+    # inside ax_left covered a large fraction of the curves it was meant
+    # to label. The bar chart on the right already self-labels its bars
+    # via set_yticklabels, so it doesn't need this legend at all — a
+    # single shared strip below both panels keeps the whole plot area
+    # clear on both sides.
+    #
+    # subplots_adjust(bottom=...) reserves real space below BOTH panels'
+    # own x-axis labels before placing the legend — the earlier version
+    # placed the legend at a fixed negative offset without reserving
+    # space for it, which collided with the x-axis labels since both
+    # panels' labels already sit close to the original bottom edge.
+    handles, labels = ax_left.get_legend_handles_labels()
+    fig.subplots_adjust(wspace=0.35, bottom=0.32)
+    fig.legend(
+        handles, labels,
+        loc="lower center", bbox_to_anchor=(0.5, 0.0),
+        ncol=3, fontsize=6.3, frameon=True,
         facecolor="white", edgecolor="#cccccc",
-        ncol=1, handletextpad=0.4,
+        handletextpad=0.4, columnspacing=1.0,
     )
 
     # ── Right panel: bar chart of decay rates ─────────────────────────────────

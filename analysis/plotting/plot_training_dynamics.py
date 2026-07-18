@@ -180,14 +180,30 @@ def main():
     ax.set_ylabel(r"$sr(W_\mathrm{eff})$", fontsize=9)
     ax.xaxis.set_major_locator(plt.MaxNLocator(integer=True))
 
-    ax.legend(
-        loc="upper right", fontsize=7, frameon=True,
+    # Legend moved below the plot — with up to 11 entries (10 methods +
+    # pretrained reference), a boxed legend inside the axes covered a
+    # large fraction of the curves, especially since several lines
+    # (safe-pure-PAFT, BitFit/Frozen) stay near the top of the plot for
+    # the whole epoch range, right where "upper right" would sit.
+    #
+    # subplots_adjust(bottom=...) RESERVES real space for the legend
+    # before placement, so the legend sits directly against the x-axis
+    # label with no dead gap — the earlier version placed the legend at
+    # an arbitrary negative figure-fraction offset without reserving
+    # space for it, which left an empty gap between the axis and the
+    # legend once bbox_inches='tight' expanded the canvas to fit both.
+    handles, labels = ax.get_legend_handles_labels()
+    fig.subplots_adjust(bottom=0.34)
+    fig.legend(
+        handles, labels,
+        loc="lower center", bbox_to_anchor=(0.5, 0.0),
+        ncol=4, fontsize=6.5, frameon=True,
         facecolor="white", edgecolor="#cccccc",
-        ncol=2, columnspacing=0.8, handletextpad=0.4,
+        columnspacing=0.8, handletextpad=0.4,
     )
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    fig.savefig(OUT_DIR / "training_dynamics.pdf")
+    fig.savefig(OUT_DIR / "training_dynamics.pdf", bbox_inches="tight")
     print(f"\nSaved: results/analysis/figures/training_dynamics.pdf")
     print(f"Methods plotted: {plotted}")
 

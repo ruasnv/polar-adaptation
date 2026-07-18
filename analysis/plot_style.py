@@ -130,31 +130,39 @@ def apply_style():
 # genuinely neutral on purpose since they're floor/ceiling reference
 # lines, not "just another method."
 
-ACCENT = "#CC785C"   # warm clay/terracotta — the one saturated color in
-                      # the whole palette, reserved for the headline result
-
 COLORS = {
-    # Headline method
-    "safe_hybrid_paft":   ACCENT,
+    # PAFT family — each variant gets a genuinely distinct hue, not a tint
+    # of one accent color. Same-hue tints looked fine in isolation but
+    # became indistinguishable wherever lines crossed or overlapped —
+    # exactly the failure mode being fixed here. safe_hybrid_paft (the
+    # headline "Ours" result) keeps the strongest, darkest color so it
+    # still reads as the important line, without the other three being
+    # washed-out versions of it.
+    "safe_hybrid_paft":   "#71187B",   # deep purple — headline method
+    "pure_paft":          "#EAA83D",   # gold/orange
+    "hybrid_paft":        "#E473B1",   # pink
+    "safe_pure_paft":     "#70CBCF",   # teal
 
-    # Other PAFT variants — tints of the accent hue, so they read as
-    # "part of the same family" without competing with the headline color
-    "hybrid_paft":         "#E3A98D",
-    "safe_pure_paft":      "#A85A3F",
-    "pure_paft":           "#F0CFBE",
+    # Additive baselines — blue family, as requested. LoRA r8 uses the
+    # provided blue directly; r64 and PoLAR are darker/lighter shades of
+    # the SAME blue (family grouping is fine here — the confusion problem
+    # was specifically the PAFT tints being too close to each other AND
+    # to the headline color; these three are far enough from the PAFT
+    # hues above to stay distinguishable even as a shaded family).
+    "lora_r8":            "#4E81F2",   # provided blue
+    "lora_r64":           "#2C4A8A",   # darker navy shade
+    "polar_r8":           "#8FB4F7",   # lighter sky-blue shade
 
-    # Additive baselines — clean blue family (not blue-grey)
-    "lora_r8":             "#4C72B0",
-    "lora_r64":             "#2E4F73",
-    "polar_r8":             "#8FB3DE",
-
-    # Non-additive baselines — clean, distinct hues, not grey-blended
-    "bitfit":              "#59A14F",   # clean green
-    "svf":                 "#8C6BB1",   # clean purple
+    # Non-additive baselines — vibrant, clean, distinct from everything above
+    "bitfit":             "#4FB87A",   # vibrant green
+    "svf":                "#E8C53F",   # vibrant yellow/gold — kept clearly
+                                         # apart from pure-PAFT's orange
 
     # Deliberately neutral — floor/ceiling reference methods, not "leftover"
     # colors. Full FT = upper bound (trains everything); Frozen = lower
-    # bound (trains nothing). Neutral ink is the correct signal here.
+    # bound (trains nothing). Neutral ink is the correct signal here, and
+    # staying neutral also keeps them from competing with the vivid
+    # palette above.
     "full_ft":             "#2B2B2B",
     "frozen":              "#ADABA5",   # warm light neutral, not cold grey
 

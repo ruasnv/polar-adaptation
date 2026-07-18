@@ -9,6 +9,14 @@ QQP shows whether gradient step accumulation amplifies Layer 0-1 damage.
 Methods (main figure): safe_hybrid_paft, hybrid_paft, polar_r8, full_ft
 pure_paft excluded — set SHOW_PURE_PAFT=True for appendix version.
 
+Layout: panels are stacked VERTICALLY (3 rows, 1 column), not side by
+side. With 12 x-axis tick labels per panel, a 1x3 horizontal layout
+squeezed each panel into ~1/3 of the page width, making the layer axis
+too cramped to read cleanly. Stacking gives every panel the full page
+width; sharex=True means only the bottom panel repeats the x-axis
+labels, so the figure doesn't waste space on three redundant copies of
+"Encoder layer".
+
 Reads: results/analysis/metrics_cache.json
 Output: results/analysis/figures/layer_profiles_delta.pdf
 """
@@ -19,7 +27,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from analysis.plot_style import (apply_style, COLORS, MARKERS, LINESTYLES,
+from plot_style import (apply_style, COLORS, MARKERS, LINESTYLES,
                         METHOD_LABELS_SHORT)
 
 apply_style()
@@ -44,7 +52,7 @@ TASK_LABELS = {
 }
 
 
-def plot_panel(ax, task_data, task, add_legend_labels=False):
+def plot_panel(ax, task_data, task, add_legend_labels=False, show_xlabel=True):
     """Plot one task panel. Returns True if any data was plotted."""
     init_sr = next(
         (v["sr_Weff_init"] for v in task_data.values() if "sr_Weff_init" in v),
@@ -81,8 +89,8 @@ def plot_panel(ax, task_data, task, add_legend_labels=False):
             color=COLORS.get(method, "#333"),
             linestyle=LINESTYLES.get(method, "-"),
             marker=MARKERS.get(method, "o"),
-            markersize=3.0,
-            linewidth=1.3,
+            markersize=3.5,
+            linewidth=1.4,
             label=METHOD_LABELS_SHORT.get(method, method) if add_legend_labels else "",
             zorder=3 if "paft" in method else 2,
         )
@@ -100,20 +108,25 @@ def plot_panel(ax, task_data, task, add_legend_labels=False):
             "L9",
             xy=(9, y_max),
             xytext=(9, y_max + abs(y_max) * 0.30 + 0.05),
-            fontsize=6.5, color="#555555", ha="center",
+            fontsize=7, color="#555555", ha="center",
             arrowprops=dict(arrowstyle="-|>", color="#888888",
                             lw=0.7, mutation_scale=6),
         )
 
-    ax.set_xlabel("Encoder layer", fontsize=9)
     ax.set_xticks(range(12))
-    ax.set_xticklabels(range(12), fontsize=7)
+    if show_xlabel:
+        ax.set_xlabel("Encoder layer", fontsize=9.5)
+        ax.set_xticklabels(range(12), fontsize=8)
+    else:
+        # Shared x-axis — hide the tick labels on non-bottom panels rather
+        # than repeating "Encoder layer" three times down the figure.
+        ax.tick_params(axis="x", labelbottom=False)
     ax.grid(True, axis="y", alpha=0.2)
 
     # Panel label in top-left corner (no title)
-    ax.text(0.03, 0.97, TASK_LABELS.get(task, task.upper()),
+    ax.text(0.02, 0.95, TASK_LABELS.get(task, task.upper()),
             transform=ax.transAxes,
-            fontsize=8, va="top", ha="left", color="#252525")
+            fontsize=9.5, va="top", ha="left", color="#252525")
 
     return True
 
@@ -132,33 +145,43 @@ def main():
     if n == 0:
         sys.exit("Error: none of the required tasks found in cache.")
 
-    fig, axes = plt.subplots(1, n, figsize=(6.5, 6.5 * 0.40), sharey=False)
+    # Vertical stack: n rows, 1 column, full page width per panel.
+    fig, axes = plt.subplots(
+        n, 1, figsize=(6.5, 2.15 * n), sharex=True,
+    )
     if n == 1:
         axes = [axes]
-    fig.subplots_adjust(wspace=0.30)
+    fig.subplots_adjust(hspace=0.18)
 
     for i, (ax, task) in enumerate(zip(axes, available_tasks)):
-        ok = plot_panel(ax, glue[task], task, add_legend_labels=(i == 0))
+        is_last = (i == n - 1)
+        ok = plot_panel(ax, glue[task], task, add_legend_labels=(i == 0),
+                         show_xlabel=is_last)
         if not ok:
             ax.set_visible(False)
+        ax.set_ylabel(
+            r"$\Delta \operatorname{sr}(W_{\mathrm{eff}})$",
+            fontsize=9.5,
+        )
 
-    axes[0].set_ylabel(
-        r"$\Delta \operatorname{sr}(W_{\mathrm{eff}})$",
-        fontsize=9,
-    )
-
-    # Legend above all panels — collected from first panel only
+    # Legend above all panels — collected from first panel only.
+    # subplots_adjust(top=...) reserves real space for the legend before
+    # placement, so it sits directly against the top panel with no dead
+    # gap — the earlier version computed an offset above y=1.0 without
+    # reserving space for it, leaving an empty gap once bbox_inches='tight'
+    # expanded the canvas to fit both the panels and the legend.
     handles, labels = axes[0].get_legend_handles_labels()
+    fig.subplots_adjust(top=0.88)
     fig.legend(
         handles, labels,
-        loc="upper center", bbox_to_anchor=(0.5, 1.06),
-        ncol=len(handles), fontsize=7.5,
+        loc="upper center", bbox_to_anchor=(0.5, 1.0),
+        ncol=len(handles), fontsize=8,
         frameon=True, edgecolor="#cccccc",
-        handletextpad=0.4, columnspacing=0.8,
+        handletextpad=0.4, columnspacing=0.9,
     )
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    fig.savefig(OUT_DIR / "layer_profiles_delta.pdf")
+    fig.savefig(OUT_DIR / "layer_profiles_delta.pdf", bbox_inches="tight")
     print("Saved: results/analysis/figures/layer_profiles_delta.pdf")
 
 

@@ -131,7 +131,20 @@ def main():
     for task, steps in sorted(TASK_STEPS.items(), key=lambda x: x[1]):
         ax_left.axvline(steps, color="#e0e0e0", linewidth=0.4, zorder=0)
 
-    ax_left.legend(loc="upper right", fontsize=6, ncol=1, handletextpad=0.4)
+    # Legend moved OUT of the plot area — same fix as plot_decay_law.py.
+    # The bar chart on the right already self-labels via set_yticklabels.
+    # subplots_adjust(bottom=...) reserves real space below both panels'
+    # x-axis labels before placing the legend, avoiding the collision the
+    # earlier fixed-offset version had.
+    handles, labels = ax_left.get_legend_handles_labels()
+    fig.subplots_adjust(bottom=0.32)
+    fig.legend(
+        handles, labels,
+        loc="lower center", bbox_to_anchor=(0.5, 0.0),
+        ncol=3, fontsize=6.3, frameon=True,
+        facecolor="white", edgecolor="#cccccc",
+        handletextpad=0.4, columnspacing=1.0,
+    )
 
     # Right panel: bar chart of decay rates
     bar_methods = [m for m in METHODS_BAR if m in method_fits and method_fits[m] is not None]
