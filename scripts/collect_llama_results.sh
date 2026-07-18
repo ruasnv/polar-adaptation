@@ -6,7 +6,17 @@
 #
 # Reads results/llama/<task>/<method>/final/metrics.json for every
 # task/method combination, prints a human-readable accuracy table,
-# writes a LaTeX table fragment, and saves a JSON summary.
+# and saves a JSON summary.
+#
+# NOTE: this script no longer writes a LaTeX table. table_llama_performance.tex
+# (written by `python3 -m analysis.generate_paper_outputs`) is the single
+# source of truth for the LLaMA accuracy table used in the paper —
+# this script previously wrote its own duplicate (llama_results_table.tex,
+# same numbers, no \begin{table} wrapper, plus two placeholder rows for
+# LoRA r=64/BitFit that don't apply to LLaMA — see llama_methods.py:
+# no bias terms on LLaMA-3.2, and r=64/PoLAR were compute-constrained).
+# That duplicate was removed to avoid two independently-maintained copies
+# of the same table silently drifting apart.
 #
 # Usage:
 #   bash scripts/collect_llama_results.sh
@@ -15,7 +25,6 @@
 #
 # Output files (in --output_dir):
 #   llama_results_summary.txt   Human-readable table
-#   llama_results_table.tex     LaTeX tabular fragment for the paper
 #   llama_results.json          Structured JSON for downstream scripts
 # ============================================================================
 
@@ -43,7 +52,7 @@ mkdir -p "$OUTPUT_DIR"
 
 # ── Delegate to inline Python ─────────────────────────────────────────────────
 # Bash cannot parse JSON natively — use a single self-contained Python block
-# that reads all results, prints the table, and writes all output files.
+# that reads all results, prints the table, and writes the text/JSON outputs.
 
 python3 - "$RESULTS_DIR" "$OUTPUT_DIR" << 'PYEOF'
 import json, sys
@@ -101,21 +110,6 @@ for task in TASKS:
         acc, source = load_acc(task, method)
         results[task][method] = {"accuracy": acc, "source": source} if acc else None
 
-# ── Best per column ───────────────────────────────────────────────────────────
-
-best_overall = {}
-best_paft    = {}
-for task in TASKS:
-    bv, bm, bpv, bpm = -1, "", -1, ""
-    for method in METHODS:
-        e = results[task].get(method)
-        if not e: continue
-        a = e["accuracy"]
-        if a > bv:  bv, bm = a, method
-        if method in PAFT_METHODS and a > bpv: bpv, bpm = a, method
-    best_overall[task] = (bm, bv)
-    best_paft[task]    = (bpm, bpv)
-
 # ── Text table ────────────────────────────────────────────────────────────────
 
 mw, cw = 24, 13
@@ -164,51 +158,6 @@ txt_path = output_dir / "llama_results_summary.txt"
 txt_path.write_text(text_table)
 print(f"Text summary  →  {txt_path}")
 
-# ── LaTeX table ───────────────────────────────────────────────────────────────
-
-def fmt_cell(task, method, acc):
-    s = f"{acc:.4f}"
-    is_best      = best_overall[task][0] == method
-    is_best_paft = best_paft[task][0]    == method
-    if is_best and is_best_paft: return rf"\textbf{{\underline{{{s}}}}}"
-    if is_best:                  return rf"\textbf{{{s}}}"
-    if is_best_paft:             return rf"\underline{{{s}}}"
-    return s
-
-tex_lines = []
-task_header = " & ".join(rf"\textbf{{{TASK_LABELS[t]}}}" for t in TASKS)
-tex_lines.append(rf"\textbf{{Method}} & {task_header} & \textbf{{Mean}} \\")
-tex_lines.append(r"\midrule")
-
-prev_group = None
-for method in METHODS:
-    group = ("paft" if method in PAFT_METHODS else
-             "frozen" if method == "frozen" else "additive")
-    if prev_group is not None and group != prev_group:
-        tex_lines.append(r"\midrule")
-    prev_group = group
-
-    cells    = []
-    row_accs = []
-    for task in TASKS:
-        e = results[task].get(method)
-        if e:
-            row_accs.append(e["accuracy"])
-            cells.append(fmt_cell(task, method, e["accuracy"]))
-        else:
-            row_accs.append(None)
-            cells.append("--")
-
-    valid    = [a for a in row_accs if a is not None]
-    mean_str = f"{sum(valid)/len(valid):.4f}" if valid else "--"
-    label    = METHOD_LABELS.get(method, method)
-    tex_lines.append(" & ".join([label] + cells + [mean_str]) + r" \\")
-
-latex = "\n".join(tex_lines)
-tex_path = output_dir / "llama_results_table.tex"
-tex_path.write_text(latex)
-print(f"LaTeX table   →  {tex_path}")
-
 # ── JSON summary ──────────────────────────────────────────────────────────────
 
 summary = {
@@ -245,4 +194,3 @@ PYEOF
 
 echo ""
 echo "Done. Output written to $OUTPUT_DIR"
-PYEOF

@@ -103,8 +103,9 @@ def main():
     lines.append(r"\centering")
     lines.append(
         r"\caption{GLUE task performance (\%). "
-        r"CoLA: Matthews correlation; STS-B: Pearson; MRPC/QQP: F1; others: accuracy. "
-        r"\textbf{Bold}: best overall. \underline{Underline}: best PAFT variant.}"
+        r"CoLA: Matthews correlation; STS-B: Pearson; MRPC/QQP: F1; "
+        r"others: accuracy. \textbf{Bold}: best overall. "
+        r"\underline{Underline}: best PAFT variant.}"
     )
     lines.append(r"\label{tab:glue_performance}")
     lines.append(r"\setlength{\tabcolsep}{5pt}")

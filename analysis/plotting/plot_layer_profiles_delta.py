@@ -19,7 +19,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from plot_style import (apply_style, COLORS, MARKERS, LINESTYLES,
+from analysis.plot_style import (apply_style, COLORS, MARKERS, LINESTYLES,
                         METHOD_LABELS_SHORT)
 
 apply_style()

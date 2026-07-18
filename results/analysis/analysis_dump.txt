@@ -32,7 +32,7 @@ safe-pure-PAFT (Ours)       34.745    33.226    -1.520    -4.37%
 safe-hybrid-PAFT (Ours)     34.745    32.064    -2.682    -7.72%
 LoRA $r{=}8$                34.745    25.572    -9.173   -26.40%
 LoRA $r{=}64$               34.745    23.038   -11.707   -33.69%
-PoLAR $r{=}8$               34.745    28.415    -6.331   -18.22%
+PoLAR $r{=}8$               34.745    28.276    -6.470   -18.62%
 Full fine-tuning            34.745    34.754    +0.008    +0.02%
 
 
@@ -41,16 +41,24 @@ TABLE 3: LLAMA COMMONSENSE RESULTS
 Method                       BoolQ   HellaSwag     ARC-C      Mean
 ────────────────────────────────────────────────────────────────────────────────
 Frozen                      0.5459    0.6803    0.3946    0.5403
-pure-PAFT (Ours)            0.6590    0.7143    0.4047    0.5927
-hybrid-PAFT (Ours)          0.8373    0.7051    0.4415    0.6613
+pure-PAFT (Ours)            0.6615    0.7143    0.4047    0.5935
+hybrid-PAFT (Ours)          0.8434    0.7051    0.4415    0.6633
 LoRA $r{=}8$                0.8214    0.7328    0.4682    0.6742
 PoLAR $r{=}8$               0.6963    0.7363    0.4615    0.6314
 
 
 KEY NUMBERS FOR PAPER
 ────────────────────────────────────────────────────────────────────────────────
-Q drift (all PAFT variants): 0.00e+00
-(Verified: frozen Q buffer receives no gradient by construction)
+Q drift (max over all PAFT variants, tasks, projections): 0.00e+00
+(Consistent with exact invariance: frozen Q buffer receives no gradient by construction)
 
-Pearson r between sr(W_eff) and task score:
-(Run correlation analysis separately — see paft_cache.json)
+Pearson r between sr(W_eff) and task score (per task, methods excluding frozen):
+  CoLA     r=+0.6947  p=2.58e-02  (n=10)
+  MRPC     r=+0.6302  p=5.08e-02  (n=10)
+  RTE      r=+0.7986  p=5.60e-03  (n=10)
+  STS-B    r=+0.5241  p=1.20e-01  (n=10)
+  SST-2    r=+0.1873  p=6.04e-01  (n=10)
+  QNLI     r=+0.0403  p=9.12e-01  (n=10)
+  MNLI     r=+0.1760  p=6.27e-01  (n=10)
+  QQP      r=-0.0441  p=9.04e-01  (n=10)
+  Mean across tasks: r=+0.3759

@@ -148,104 +148,15 @@ def apply_formatting(val_str, method, best_overall, best_paft):
         return uline(val_str)
     return val_str
 
-
 # ─────────────────────────────────────────────────────────────
 # Table 1: GLUE Performance
 # ─────────────────────────────────────────────────────────────
-
-def make_glue_table(cache):
-    """Generate table_glue_performance.tex"""
-
-    # Collect scores: scores[method][task]
-    scores = {}
-    for method in GLUE_METHODS_ORDERED:
-        scores[method] = {}
-        for task in GLUE_TASKS_ORDERED:
-            entry = cache.get(task, {}).get(method, {})
-            scores[method][task] = entry.get("task_score")
-
-    # Find best per task
-    best_overall = {}
-    best_paft = {}
-    for task in GLUE_TASKS_ORDERED:
-        task_scores = [scores[m][task] for m in GLUE_METHODS_ORDERED]
-        bo, bp = find_best(task_scores, GLUE_METHODS_ORDERED, PAFT_METHODS)
-        best_overall[task] = bo
-        best_paft[task] = bp
-
-    # Compute mean per method
-    means = {}
-    for method in GLUE_METHODS_ORDERED:
-        vals = [v for v in scores[method].values() if v is not None]
-        means[method] = np.mean(vals) if vals else None
-
-    # Column spec: method + 8 tasks + mean
-    col_spec = "l" + "c" * 8 + "c"
-
-    task_headers = " & ".join(
-        f"\\textbf{{{TASK_NAMES[t]}}}" for t in GLUE_TASKS_ORDERED
-    )
-
-    lines = []
-    lines.append(r"\begin{table}[t]")
-    lines.append(r"\centering")
-    lines.append(r"\small")
-    lines.append(
-        r"\caption{GLUE benchmark results on DeBERTa-v3-base. "
-        r"Primary metrics: Matthews correlation (CoLA), Pearson correlation (STS-B), "
-        r"F1 (MRPC, QQP), accuracy elsewhere. "
-        r"\textbf{Bold}: best overall per column. "
-        r"\underline{Underline}: best PAFT variant. "
-        r"All scores reported on the development set.}"
-    )
-    lines.append(r"\label{tab:glue_performance}")
-    lines.append(f"\\begin{{tabular}}{{{col_spec}}}")
-    lines.append(r"\toprule")
-    lines.append(
-        f"\\textbf{{Method}} & {task_headers} & \\textbf{{Mean}} \\\\"
-    )
-    lines.append(r"\midrule")
-
-    # Group separators
-    groups = [
-        ["frozen"],
-        ["bitfit", "svf"],
-        ["pure_paft", "hybrid_paft", "safe_pure_paft", "safe_hybrid_paft"],
-        ["lora_r8", "lora_r64", "polar_r8"],
-        ["full_ft"],
-    ]
-
-    for g_idx, group in enumerate(groups):
-        for method in group:
-            if method not in GLUE_METHODS_ORDERED:
-                continue
-            name = METHOD_NAMES[method]
-            cells = []
-            for task in GLUE_TASKS_ORDERED:
-                val = scores[method][task]
-                val_str = fmt(val, 4) if val is not None else "---"
-                val_str = apply_formatting(
-                    val_str, method, best_overall[task], best_paft[task]
-                )
-                cells.append(val_str)
-            # Mean cell
-            mean_val = means[method]
-            mean_str = fmt(mean_val, 4) if mean_val is not None else "---"
-            row = f"{name} & " + " & ".join(cells) + f" & {mean_str} \\\\"
-            lines.append(row)
-        if g_idx < len(groups) - 1:
-            lines.append(r"\midrule")
-
-    lines.append(r"\bottomrule")
-    lines.append(r"\end{tabular}")
-    lines.append(r"\end{table}")
-
-    out = "\n".join(lines)
-    path = RESULTS_DIR / "table_glue_performance.tex"
-    path.write_text(out)
-    print(f"Written: {path}")
-    return scores, means
-
+# REMOVED: make_glue_table() used to live here, duplicating
+# table_syntax_semantics.py under the same \label{tab:glue_performance}.
+# That duplication was the actual source of the "multiply defined labels"
+# problem found earlier. table_syntax_semantics.py is now the single
+# source of truth for this table — run it directly:
+#   python3 -m analysis.tables.table_syntax_semantics
 
 # ─────────────────────────────────────────────────────────────
 # Table 2: LLaMA Performance
@@ -347,186 +258,27 @@ def make_llama_table(llama):
 # ─────────────────────────────────────────────────────────────
 # Table 3: Stable Rank Init vs Final
 # ─────────────────────────────────────────────────────────────
-
-def make_stable_rank_table(cache):
-    """Generate table_stable_rank.tex"""
-
-    lines = []
-    lines.append(r"\begin{table}[t]")
-    lines.append(r"\centering")
-    lines.append(
-        r"\caption{Task-averaged stable rank of $\mathbf{W}_{\text{eff}}$ "
-        r"before and after fine-tuning. All methods share the same pretrained "
-        r"initialisation ($\operatorname{sr} = 34.745$). "
-        r"$\Delta\operatorname{sr}\%$: percentage change from pretrained baseline.}"
-    )
-    lines.append(r"\label{tab:stable_rank}")
-    lines.append(r"\begin{tabular}{lcccc}")
-    lines.append(r"\toprule")
-    lines.append(
-        r"\textbf{Method} & "
-        r"$\operatorname{sr}$ \textbf{Init} & "
-        r"$\operatorname{sr}$ \textbf{Final} & "
-        r"$\Delta\operatorname{sr}$ & "
-        r"$\Delta\operatorname{sr}\%$ \\"
-    )
-    lines.append(r"\midrule")
-
-    groups = [
-        ["frozen", "bitfit"],
-        ["svf", "pure_paft", "hybrid_paft", "safe_pure_paft", "safe_hybrid_paft"],
-        ["lora_r8", "lora_r64", "polar_r8"],
-        ["full_ft"],
-    ]
-
-    for g_idx, group in enumerate(groups):
-        for method in group:
-            vals = []
-            for task in GLUE_TASKS_ORDERED:
-                entry = cache.get(task, {}).get(method, {})
-                sr_i = entry.get("sr_Weff_init")
-                sr_f = entry.get("sr_Weff_final")
-                if sr_i is not None and sr_f is not None:
-                    vals.append((sr_i, sr_f))
-
-            if not vals:
-                continue
-
-            sr_init = np.mean([v[0] for v in vals])
-            sr_final = np.mean([v[1] for v in vals])
-            delta = sr_final - sr_init
-            delta_pct = (delta / sr_init) * 100
-
-            name = METHOD_NAMES[method]
-            sign = "+" if delta >= 0 else ""
-            row = (
-                f"{name} & "
-                f"{sr_init:.3f} & "
-                f"{sr_final:.3f} & "
-                f"{sign}{delta:.3f} & "
-                f"{sign}{delta_pct:.2f}\\% \\\\"
-            )
-            lines.append(row)
-
-        if g_idx < len(groups) - 1:
-            lines.append(r"\midrule")
-
-    lines.append(r"\bottomrule")
-    lines.append(r"\end{tabular}")
-    lines.append(r"\end{table}")
-
-    out = "\n".join(lines)
-    path = RESULTS_DIR / "table_stable_rank.tex"
-    path.write_text(out)
-    print(f"Written: {path}")
-
+# REMOVED: make_stable_rank_table() used to live here, duplicating
+# table_stable_rank.py under the same \label{tab:stable_rank}, but with a
+# DIFFERENT column layout (4 columns, %-based delta, hardcoded pretrained
+# value 34.745) — this was confirmed to be the actual source of the
+# confusing mismatched table_stable_rank.tex output seen earlier in this
+# project. table_stable_rank.py is now the single source of truth:
+#   python3 -m analysis.tables.table_stable_rank
 
 # ─────────────────────────────────────────────────────────────
 # Table 4: Multi-Metric Spectral Profile
 # ─────────────────────────────────────────────────────────────
-
-def make_all_metrics_table(cache):
-    """Generate table_all_metrics.tex"""
-
-    frozen_er = np.mean([
-        cache[task]["frozen"].get("effective_rank_Weff_final", 63.678)
-        for task in GLUE_TASKS_ORDERED
-        if "frozen" in cache.get(task, {})
-    ])
-    frozen_sr = 34.745
-
-    lines = []
-    lines.append(r"\begin{table}[t]")
-    lines.append(r"\centering")
-    lines.append(r"\small")
-    lines.append(
-        r"\caption{Multi-metric geometric profile of $\mathbf{W}_{\text{eff}}$ "
-        r"averaged across GLUE tasks. "
-        r"$\Delta\operatorname{sr}\%$: change in stable rank from pretrained baseline. "
-        r"$\Delta H$: change in spectral entropy. "
-        r"$\Delta\text{ER}\%$: change in effective rank. "
-        r"$\kappa$: condition number ($\sigma_{\max}/\sigma_{\min}$). "
-        r"Isotropy: $\sigma_{\min}/\sigma_{\max} \in [0,1]$.}"
-    )
-    lines.append(r"\label{tab:all_metrics}")
-    lines.append(r"\setlength{\tabcolsep}{5pt}")
-    lines.append(r"\begin{tabular}{lccccc}")
-    lines.append(r"\toprule")
-    lines.append(
-        r"\textbf{Method} & "
-        r"$\Delta\operatorname{sr}\%$ & "
-        r"$\Delta H$ & "
-        r"$\Delta\text{ER}\%$ & "
-        r"$\kappa$ & "
-        r"Isotropy \\"
-    )
-    lines.append(r"\midrule")
-
-    groups = [
-        ["frozen", "bitfit"],
-        ["svf", "pure_paft", "hybrid_paft",
-         "safe_pure_paft", "safe_hybrid_paft"],
-        ["lora_r8", "lora_r64", "polar_r8"],
-        ["full_ft"],
-    ]
-
-    for g_idx, group in enumerate(groups):
-        for method in group:
-            srs, hs, ers, conds = [], [], [], []
-            for task in GLUE_TASKS_ORDERED:
-                entry = cache.get(task, {}).get(method, {})
-                sr_f = entry.get("sr_Weff_final")
-                h_f = entry.get("spectral_entropy_Weff_final")
-                er_f = entry.get("effective_rank_Weff_final")
-                cond = entry.get("condition_number_final")
-                if sr_f:
-                    srs.append((sr_f - frozen_sr) / frozen_sr * 100)
-                if h_f:
-                    frozen_h = cache.get(task, {}).get(
-                        "frozen", {}
-                    ).get("spectral_entropy_Weff_final", 4.154)
-                    hs.append(h_f - frozen_h)
-                if er_f:
-                    ers.append((er_f - frozen_er) / frozen_er * 100)
-                if cond:
-                    conds.append(cond)
-
-            if not srs:
-                continue
-
-            dsr = np.mean(srs)
-            dh = np.mean(hs) if hs else 0.0
-            der = np.mean(ers) if ers else 0.0
-            kappa = np.mean(conds) if conds else 0.0
-            iso = 1.0 / kappa if kappa > 0 else 0.0
-
-            name = METHOD_NAMES[method]
-            sign_sr = "+" if dsr >= 0 else ""
-            sign_h = "+" if dh >= 0 else ""
-            sign_er = "+" if der >= 0 else ""
-
-            row = (
-                f"{name} & "
-                f"{sign_sr}{dsr:.2f}\\% & "
-                f"{sign_h}{dh:.3f} & "
-                f"{sign_er}{der:.2f}\\% & "
-                f"{kappa:.3f} & "
-                f"{iso:.4f} \\\\"
-            )
-            lines.append(row)
-
-        if g_idx < len(groups) - 1:
-            lines.append(r"\midrule")
-
-    lines.append(r"\bottomrule")
-    lines.append(r"\end{tabular}")
-    lines.append(r"\end{table}")
-
-    out = "\n".join(lines)
-    path = RESULTS_DIR / "table_all_metrics.tex"
-    path.write_text(out)
-    print(f"Written: {path}")
-
+# REMOVED: make_all_metrics_table() used to live here, duplicating
+# table_all_metrics.py under the same \label{tab:all_metrics}. This one was
+# worse than a benign duplicate: it had its own hardcoded fallback values
+# (effective_rank default 63.678, frozen_sr=34.745, spectral_entropy default
+# 4.154 — the exact anti-pattern eliminated from build_cache.py earlier in
+# this project) and computed Isotropy as a direct 1/kappa reciprocal, which
+# is no longer a valid identity once kappa and Isotropy are independently
+# per-head-averaged (kappa is an outlier-sensitive arithmetic mean; Isotropy
+# is not). table_all_metrics.py is now the single source of truth:
+#   python3 -m analysis.tables.table_all_metrics
 
 # ─────────────────────────────────────────────────────────────
 # Table 5: Training Dynamics
@@ -549,11 +301,10 @@ def make_training_dynamics_table(cache):
     lines.append(r"\begin{table}[t]")
     lines.append(r"\centering")
     lines.append(
-        r"\caption{$\operatorname{sr}(\mathbf{W}_{\text{eff}})$ per training "
-        r"epoch on SST-2. Epoch 0 is the pretrained initialisation "
-        r"($\operatorname{sr} = 34.745$). "
-        r"LoRA values computed by merging adapter weights with the frozen "
-        r"base model at each checkpoint.}"
+        r"\caption{$\operatorname{sr}(\mathbf{W}_{\text{eff}})$ per "
+        r"training epoch on SST-2. Epoch 0 is the pretrained "
+        r"initialisation. LoRA values computed by merging adapter "
+        r"weights with the frozen base model at each checkpoint.}"
     )
     lines.append(r"\label{tab:training_dynamics}")
     lines.append(r"\begin{tabular}{lccccc}")
@@ -636,10 +387,9 @@ def make_per_layer_tables(cache):
         lines.append(r"\small")
         lines.append(r"\setlength{\tabcolsep}{3pt}")
         lines.append(
-            f"\\caption{{Final $\\operatorname{{sr}}(\\mathbf{{W}}_{{\\text{{eff}}}})$ "
-            f"at each encoder layer for "
-            f"\\textsc{{{TASK_NAMES[task]}}}. "
-            f"Layer 9 shows a consistent positive shift across all methods.}}"
+            f"\\caption{{Final $\\operatorname{{sr}}(\\mathbf{{W}}_{{"
+            f"\\text{{eff}}}})$ at each encoder layer for "
+            f"\\textsc{{{TASK_NAMES[task]}}}.}}"
         )
         lines.append(f"\\label{{tab:per_layer_{task}}}")
         lines.append(r"\begin{tabular}{l" + "c" * 12 + "}")
@@ -705,7 +455,7 @@ def make_sr_per_task_table(cache):
         r"\caption{Final $\operatorname{sr}(\mathbf{W}_{\text{eff}})$ "
         r"for every method and GLUE task. "
         r"Lower values indicate greater geometric damage. "
-        r"Pretrained baseline: $\operatorname{sr} = 34.745$ for all tasks.}"
+        r"All methods share the same pretrained baseline.}"
     )
     lines.append(r"\label{tab:sr_per_task}")
 
@@ -761,9 +511,6 @@ def make_sr_delta_w_table(cache):
     lines.append(
         r"\caption{Stable rank of the weight update "
         r"$\operatorname{sr}(\Delta\mathbf{W}_V)$ per GLUE task. "
-        r"High $\operatorname{sr}(\Delta\mathbf{W})$ alongside low "
-        r"$\operatorname{sr}(\mathbf{W}_{\text{eff}})$ (as in PoLAR) "
-        r"empirically confirms Proposition~\ref{prop:instability}. "
         r"N/A: method does not produce an additive update.}"
     )
     lines.append(r"\label{tab:sr_delta_w}")
@@ -828,10 +575,7 @@ def make_q_drift_table(paft_cache):
     lines.append(
         r"\caption{Frobenius drift $\|\mathbf{Q}_{\text{final}} - "
         r"\mathbf{Q}_{\text{init}}\|_F$ for all PAFT variants across "
-        r"all GLUE tasks and both projections. A value of "
-        r"$0.00\text{e}{+}00$ confirms that the isometric factor is "
-        r"preserved to floating-point precision by construction, not "
-        r"by regularization.}"
+        r"all GLUE tasks and both projections.}"
     )
     lines.append(r"\label{tab:q_drift}")
     lines.append(r"\begin{tabular}{lcccc}")
@@ -899,23 +643,38 @@ def make_q_drift_table(paft_cache):
 # ─────────────────────────────────────────────────────────────
 # Table: S Asymmetry and Micro-Rotation
 # ─────────────────────────────────────────────────────────────
-
 def make_asymmetry_table(paft_cache):
-    """Generate table_asymmetry.tex"""
+    """Generate table_asymmetry.tex with gradient steps column."""
 
-    # Tasks ordered by training set size for the monotone scaling story
+    # Gradient steps per task: floor(N_train / batch_size) * epochs
+    # batch_size=32, no gradient accumulation.
+    # Epochs: 10 (CoLA/MRPC/RTE/STS-B), 5 (SST-2/QNLI), 3 (MNLI/QQP)
+    # Dataset sizes from Wang et al. (2018) official GLUE splits.
+    # Verified against results/glue/{task}/{method}/config.json.
+    TASK_STEPS = {
+        "rte":   7_780,
+        "mrpc": 11_460,
+        "stsb": 17_960,
+        "cola": 26_720,
+        "sst2": 10_520,
+        "qnli": 16_365,
+        "qqp":  34_110,
+        "mnli": 36_816,
+    }
+
+    # Task metadata: (key, display, N_train, grad_steps)
     tasks_ordered = [
-        ("mrpc",  "MRPC",   3_668),
-        ("rte",   "RTE",    2_490),
-        ("cola",  "CoLA",   8_551),
-        ("stsb",  "STS-B",  5_749),
-        ("sst2",  "SST-2",  67_349),
-        ("qnli",  "QNLI",   104_743),
-        ("mnli",  "MNLI",   392_702),
-        ("qqp",   "QQP",    363_849),
+        ("rte",  "RTE",   2_490,   TASK_STEPS["rte"]),
+        ("mrpc", "MRPC",  3_668,   TASK_STEPS["mrpc"]),
+        ("stsb", "STS-B", 5_749,   TASK_STEPS["stsb"]),
+        ("cola", "CoLA",  8_551,   TASK_STEPS["cola"]),
+        ("sst2", "SST-2", 67_349,  TASK_STEPS["sst2"]),
+        ("qnli", "QNLI",  104_743, TASK_STEPS["qnli"]),
+        ("qqp",  "QQP",   363_849, TASK_STEPS["qqp"]),
+        ("mnli", "MNLI",  392_702, TASK_STEPS["mnli"]),
     ]
 
-    # Sort by N ascending to show monotone scaling
+    # Sort by gradient steps ascending
     tasks_ordered = sorted(tasks_ordered, key=lambda x: x[2])
 
     methods = ["hybrid_paft", "safe_hybrid_paft"]
@@ -923,35 +682,36 @@ def make_asymmetry_table(paft_cache):
     lines = []
     lines.append(r"\begin{table}[t]")
     lines.append(r"\centering")
+    lines.append(r"\small")
+    lines.append(r"\setlength{\tabcolsep}{4pt}")
     lines.append(
         r"\caption{Symmetry ratio "
         r"$\|\mathbf{M} - \mathbf{M}^\top\|_F / \|\mathbf{M}\|_F$ "
         r"for hybrid-PAFT variants, ordered by training set size $N$. "
         r"Values above $0.05$ indicate meaningful asymmetry, "
         r"corresponding to a learned micro-rotation $\mathbf{Q}'$ "
-        r"within the per-head subspace. "
-        r"The monotone scaling with $N$ reveals a systematic "
-        r"geometric signature of task complexity.}"
+        r"within the per-head subspace.}"
     )
     lines.append(r"\label{tab:asymmetry}")
-    lines.append(r"\begin{tabular}{lrcccc}")
+    lines.append(r"\begin{tabular}{lrrcccc}")
     lines.append(r"\toprule")
     lines.append(
         r"\textbf{Task} & "
         r"$N$ & "
+        r"\textbf{Steps} & "
         r"\multicolumn{2}{c}{\textbf{hybrid-PAFT}} & "
         r"\multicolumn{2}{c}{\textbf{safe-hybrid-PAFT}} \\"
     )
-    lines.append(r"\cmidrule(lr){3-4} \cmidrule(lr){5-6}")
-    lines.append(
-        r" & & "
-        r"$M_V$ asym. & $M_O$ asym. & "
-        r"$M_V$ asym. & $M_O$ asym. \\"
-    )
+    lines.append(r"\cmidrule(lr){4-5} \cmidrule(lr){6-7}")
+    lines.append(r" & & & $M_V$ & $M_O$ & $M_V$ & $M_O$ \\")
     lines.append(r"\midrule")
 
-    for task_key, task_display, n in tasks_ordered:
-        cells = [f"\\textsc{{{task_display}}}", f"{n:,}"]
+    for task_key, task_display, n, steps in tasks_ordered:
+        cells = [
+            f"\\textsc{{{task_display}}}",
+            f"{n:,}",
+            f"{steps:,}",
+        ]
         for method in methods:
             entry = paft_cache.get(task_key, {}).get(method, {})
             sv = entry.get("S_V_asymmetry_mean")
@@ -1118,6 +878,7 @@ def make_llama_geometric_table():
         return "\n".join(lines)
 
     # Main paper table
+    # NOTE for prose (this caption is no longer auto-generated into the
     main_caption = (
         r"Geometric health of $\mathbf{W}_{V,h}$ for LLaMA-3.2-3B "
         r"after fine-tuning. $\operatorname{sr}$: stable rank. "
@@ -1139,10 +900,10 @@ def make_llama_geometric_table():
     # Appendix table (all three tasks)
     app_caption = (
         r"Full geometric health of $\mathbf{W}_{V,h}$ for "
-        r"LLaMA-3.2-3B across all three commonsense tasks. "
-        r"ARC-Challenge ($N{=}1{,}119$) shows minimal adaptation "
-        r"due to small dataset size. See Table~\ref{tab:llama_geometric} "
-        r"for BoolQ and HellaSwag results."
+        r"LLaMA-3.2-3B across all three commonsense tasks "
+        r"(ARC-Challenge: $N{=}1{,}119$). "
+        r"See Table~\ref{tab:llama_geometric} for BoolQ and "
+        r"HellaSwag results."
     )
     app_tex = build_table(
         tasks_all,
@@ -1156,7 +917,7 @@ def make_llama_geometric_table():
 # Analysis Dump
 # ─────────────────────────────────────────────────────────────
 
-def make_analysis_dump(cache, llama):
+def make_analysis_dump(cache, llama, paft_cache=None):
     """Write clean analysis_dump.txt with all key numbers."""
 
     lines = []
@@ -1242,13 +1003,59 @@ def make_analysis_dump(cache, llama):
     lines.append(f"\n\nKEY NUMBERS FOR PAPER")
     lines.append("─" * 80)
 
-    # Q drift
-    lines.append("Q drift (all PAFT variants): 0.00e+00")
-    lines.append("(Verified: frozen Q buffer receives no gradient by construction)")
+    # Q drift — computed from paft_cache, same source table_q_drift.tex uses,
+    # instead of asserted. Do not assume it's exactly zero; report what the
+    # data actually says.
+    paft_methods = ["pure_paft", "hybrid_paft", "safe_pure_paft", "safe_hybrid_paft"]
+    if paft_cache:
+        all_drift_vals = []
+        for task_data in paft_cache.values():
+            for method in paft_methods:
+                entry = task_data.get(method, {})
+                for key in ("Q_V_drift_max", "Q_O_drift_max"):
+                    v = entry.get(key)
+                    if v is not None:
+                        all_drift_vals.append(v)
+        if all_drift_vals:
+            max_drift = max(all_drift_vals)
+            lines.append(f"Q drift (max over all PAFT variants, tasks, projections): {max_drift:.2e}")
+            if max_drift < 1e-8:
+                lines.append("(Consistent with exact invariance: frozen Q buffer receives no gradient by construction)")
+            else:
+                lines.append("(NONZERO — does not match the 'exact invariance' claim; check before using in the paper)")
+        else:
+            lines.append("Q drift: no Q_V_drift_max/Q_O_drift_max entries found in paft_cache.json")
+    else:
+        lines.append("Q drift: paft_cache.json not loaded — cannot compute")
 
-    # sr correlation
-    lines.append("\nPearson r between sr(W_eff) and task score:")
-    lines.append("(Run correlation analysis separately — see paft_cache.json)")
+    # sr correlation — real Pearson r per task (mirrors table_correlation.py),
+    # not a placeholder pointer to "run it separately."
+    lines.append("\nPearson r between sr(W_eff) and task score (per task, methods excluding frozen):")
+    try:
+        from scipy.stats import pearsonr
+        task_rs = []
+        for task in GLUE_TASKS_ORDERED:
+            task_data = cache.get(task, {})
+            scores_, srs_ = [], []
+            for method, entry in task_data.items():
+                if "frozen" in method:
+                    continue
+                s = entry.get("task_score")
+                sr = entry.get("sr_Weff_final")
+                if s is not None and sr is not None:
+                    scores_.append(s)
+                    srs_.append(sr)
+            if len(scores_) < 3:
+                continue
+            r_val, p_val = pearsonr(srs_, scores_)
+            task_rs.append(r_val)
+            lines.append(f"  {TASK_NAMES.get(task, task):<8} r={r_val:+.4f}  p={p_val:.2e}  (n={len(scores_)})")
+        if task_rs:
+            lines.append(f"  Mean across tasks: r={np.mean(task_rs):+.4f}")
+        else:
+            lines.append("  Insufficient data to compute correlation for any task.")
+    except ImportError:
+        lines.append("  [SKIP] scipy not available — install scipy to compute this")
 
     out = "\n".join(lines)
     path = RESULTS_DIR / "analysis_dump.txt"
@@ -1275,10 +1082,14 @@ def main():
         paft_cache = {}
 
     print("\nGenerating tables...")
-    make_glue_table(cache)
+    # make_glue_table, make_stable_rank_table, make_all_metrics_table
+    # removed — see comments above their old locations. Run those tables
+    # via the standalone scripts instead:
+    #   python3 -m analysis.tables.table_syntax_semantics
+    #   python3 -m analysis.tables.table_stable_rank
+    #   python3 -m analysis.tables.table_all_metrics
+    #   python3 -m analysis.tables.table_wO_metrics
     make_llama_table(llama)
-    make_stable_rank_table(cache)
-    make_all_metrics_table(cache)
     make_training_dynamics_table(cache)
     make_per_layer_tables(cache)
     make_sr_per_task_table(cache)
@@ -1286,7 +1097,7 @@ def main():
     make_q_drift_table(paft_cache)
     make_asymmetry_table(paft_cache)
     make_llama_geometric_table()
-    make_analysis_dump(cache, llama)
+    make_analysis_dump(cache, llama, paft_cache)
 
     print("\nAll outputs generated successfully.")
     print(f"Tables: {RESULTS_DIR}/table_*.tex")

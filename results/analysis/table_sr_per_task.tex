@@ -1,7 +1,7 @@
 \begin{table}[t]
 \centering
 \small
-\caption{Final $\operatorname{sr}(\mathbf{W}_{\text{eff}})$ for every method and GLUE task. Lower values indicate greater geometric damage. Pretrained baseline: $\operatorname{sr} = 34.745$ for all tasks.}
+\caption{Final $\operatorname{sr}(\mathbf{W}_{\text{eff}})$ for every method and GLUE task. Lower values indicate greater geometric damage. All methods share the same pretrained baseline.}
 \label{tab:sr_per_task}
 \begin{tabular}{lcccccccc}
 \toprule
@@ -18,7 +18,7 @@ safe-hybrid-PAFT (Ours) & 34.156 & 34.296 & 34.478 & 34.382 & 32.329 & 30.525 & 
 \midrule
 LoRA $r{=}8$ & 31.235 & 34.046 & 33.960 & 33.566 & 21.786 & 19.958 & 16.898 & 13.127 \\
 LoRA $r{=}64$ & 28.299 & 32.408 & 32.914 & 29.924 & 14.689 & 16.398 & 16.326 & 13.350 \\
-PoLAR $r{=}8$ & 32.203 & 33.541 & 33.824 & 33.779 & 26.308 & 24.519 & 23.205 & 19.938 \\
+PoLAR $r{=}8$ & 31.660 & 33.355 & 33.913 & 33.307 & 26.308 & 24.519 & 23.205 & 19.938 \\
 \midrule
 Full fine-tuning & 34.739 & 34.743 & 34.744 & 34.742 & 34.753 & 34.741 & 34.786 & 34.780 \\
 \bottomrule

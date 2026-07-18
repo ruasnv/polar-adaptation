@@ -1,27 +1,28 @@
 \begin{table}[t]
 \centering
-\small
-\caption{Multi-metric geometric profile of $\mathbf{W}_{\text{eff}}$ averaged across GLUE tasks. $\Delta\operatorname{sr}\%$: change in stable rank from pretrained baseline. $\Delta H$: change in spectral entropy. $\Delta\text{ER}\%$: change in effective rank. $\kappa$: condition number ($\sigma_{\max}/\sigma_{\min}$). Isotropy: $\sigma_{\min}/\sigma_{\max} \in [0,1]$.}
+\caption{Multi-metric geometric profile averaged across GLUE tasks. $\Delta sr$: percentage change in $sr(W_\mathrm{eff})$. $\Delta H$, $\Delta\mathrm{ER}$: change in spectral entropy and effective rank relative to the frozen (pretrained) baseline. $\kappa = \sigma_\mathrm{max}/\sigma_\mathrm{min}$; Isotropy is a separate per-head average of $\sigma_\mathrm{min}/\sigma_\mathrm{max}$, not the reciprocal of $\kappa$.}
 \label{tab:all_metrics}
 \setlength{\tabcolsep}{5pt}
-\begin{tabular}{lccccc}
+\renewcommand{\arraystretch}{1.10}
+\begin{tabular}{lrrrrr}
 \toprule
-\textbf{Method} & $\Delta\operatorname{sr}\%$ & $\Delta H$ & $\Delta\text{ER}\%$ & $\kappa$ & Isotropy \\
+\textbf{Method} & $\Delta sr$ (\%) & $\Delta H$ & $\Delta\mathrm{ER}$ (\%) & $\kappa$ & Isotropy \\
 \midrule
-Frozen & +0.00\% & +0.000 & +0.00\% & 1.225 & 0.8165 \\
-BitFit & +0.00\% & +0.000 & +0.00\% & 1.225 & 0.8165 \\
+Frozen & +0.0\% & +0.000 & +0.0\% & 2.55e+00 & 0.3921 \\
 \midrule
-SVF & -5.67\% & -0.001 & -0.14\% & 1.253 & 0.7983 \\
-pure-PAFT (Ours) & -40.17\% & -0.019 & -1.83\% & 1.530 & 0.6535 \\
-hybrid-PAFT (Ours) & -10.33\% & -0.002 & -0.16\% & 1.259 & 0.7944 \\
-safe-pure-PAFT (Ours) & -4.37\% & -0.001 & -0.07\% & 1.241 & 0.8059 \\
-safe-hybrid-PAFT (Ours) & -7.72\% & -0.001 & -0.13\% & 1.250 & 0.8003 \\
+BitFit & +0.0\% & +0.000 & +0.0\% & 2.55e+00 & 0.3921 \\
+SVF & -5.7\% & -0.013 & -1.3\% & 2.42e+00 & 0.4137 \\
 \midrule
-LoRA $r{=}8$ & -26.40\% & -0.003 & -0.34\% & 1.295 & 0.7723 \\
-LoRA $r{=}64$ & -33.69\% & -0.008 & -0.75\% & 1.346 & 0.7429 \\
-PoLAR $r{=}8$ & -18.22\% & -0.002 & -0.20\% & 1.261 & 0.7930 \\
+pure-PAFT (Ours) & -40.2\% & -0.221 & -18.8\% & 1.22e+02 & 0.0450 \\
+hybrid-PAFT (Ours) & -10.3\% & -0.024 & -2.4\% & 3.04e+00 & 0.3352 \\
+safe-pure-PAFT (Ours) & -4.4\% & -0.013 & -1.3\% & 2.84e+00 & 0.3569 \\
+safe-hybrid-PAFT (Ours) & -7.7\% & -0.021 & -2.0\% & 2.90e+00 & 0.3495 \\
 \midrule
-Full fine-tuning & +0.02\% & +0.000 & +0.00\% & 1.225 & 0.8165 \\
+LoRA $r{=}8$ & -26.4\% & -0.035 & -3.2\% & 3.23e+00 & 0.3241 \\
+LoRA $r{=}64$ & -33.7\% & -0.066 & -5.8\% & 3.45e+00 & 0.3041 \\
+PoLAR $r{=}8$ & -18.6\% & -0.026 & -2.5\% & 2.86e+00 & 0.3540 \\
+\midrule
+Full FT & +0.0\% & -0.000 & -0.0\% & 2.55e+00 & 0.3928 \\
 \bottomrule
 \end{tabular}
 \end{table}

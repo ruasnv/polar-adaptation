@@ -23,11 +23,11 @@
         "source": "final"
       },
       "pure_paft": {
-        "accuracy": 0.6590214067278287,
+        "accuracy": 0.6614678899082569,
         "source": "final"
       },
       "hybrid_paft": {
-        "accuracy": 0.8373088685015291,
+        "accuracy": 0.8434250764525993,
         "source": "final"
       },
       "lora_r8": {
@@ -36,14 +36,6 @@
       },
       "polar_r8": {
         "accuracy": 0.6963302752293578,
-        "source": "final"
-      },
-      "lora_r64": {
-        "accuracy": 0.7489296636085627,
-        "source": "final"
-      },
-      "bitfit": {
-        "accuracy": 0.5440366972477064,
         "source": "final"
       }
     },

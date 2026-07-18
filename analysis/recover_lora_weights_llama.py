@@ -154,12 +154,12 @@ def _compute_geometric_health(adapted: dict) -> dict:
 
 # ── Recovery ───────────────────────────────────────────────────────────────────
 
-def recover_run(run_dir: Path, method: str) -> bool:
+def recover_run(run_dir: Path, method: str, force: bool = False) -> bool:
     merged_geo = run_dir / "final" / "geometric_health_merged.pt"
-    if merged_geo.exists():
+    if merged_geo.exists() and not force:
         g = torch.load(merged_geo, map_location="cpu")
         sr = g["global"]["W_V"]["V_stable_rank"]
-        log.info(f"  SKIP (already recovered)  sr={sr:.3f}")
+        log.info(f"  SKIP (already recovered)  sr={sr:.3f} (use --force to recompute)")
         return True
 
     adapter_path = run_dir / "adapter_final.pt"
@@ -225,10 +225,20 @@ def recover_run(run_dir: Path, method: str) -> bool:
 # ── Main ───────────────────────────────────────────────────────────────────────
 
 def main():
+    from analysis.utils import setup_run_log
+    setup_run_log("recover_lora_weights_llama")
+
     global DEFAULT_MODEL
     p = argparse.ArgumentParser()
     p.add_argument("--results_dir", default="results/llama", type=Path)
     p.add_argument("--model_name",  default=DEFAULT_MODEL)
+    p.add_argument(
+        "--force", action="store_true",
+        help="Recompute and overwrite geometric_health_merged.pt even if it "
+             "already exists. Needed after any fix to the merge logic, since "
+             "existing output files otherwise silently short-circuit "
+             "recomputation.",
+    )
     args = p.parse_args()
 
     DEFAULT_MODEL = args.model_name
@@ -248,7 +258,7 @@ def main():
                 continue
 
             log.info(f"Recovering {task}/{method}")
-            if recover_run(method_dir, method):
+            if recover_run(method_dir, method, force=args.force):
                 ok += 1
             else:
                 fail += 1

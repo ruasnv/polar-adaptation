@@ -4,7 +4,7 @@ Shared utilities for all analysis scripts.
 model loading, HF model extraction, test data loaders — used by every script.
 """
 from __future__ import annotations
-import json, sys
+import json, sys, logging, datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -13,6 +13,85 @@ from transformers import AutoTokenizer
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
+
+
+class _Tee:
+    """Writes to multiple streams at once, flushing after every write so
+    the file stays current even if the process crashes mid-run — a
+    diagnostic log that's empty exactly when something goes wrong defeats
+    the purpose. Used to mirror print() output into a log file without
+    losing the live terminal view.
+
+    Implements isatty() and a generic __getattr__ passthrough because
+    replacing sys.stdout isn't just about write()/flush() — libraries
+    (transformers' loading report, tqdm, rich, etc.) introspect stdout for
+    things like isatty() (to decide whether to emit ANSI color codes) or
+    fileno(). Without forwarding those to the real terminal stream, this
+    wrapper crashes any code that checks them.
+    """
+    def __init__(self, *streams):
+        self._streams = streams
+
+    def write(self, data):
+        for s in self._streams:
+            s.write(data)
+            s.flush()
+
+    def flush(self):
+        for s in self._streams:
+            s.flush()
+
+    def isatty(self):
+        # Report the REAL terminal's tty-ness (first stream = sys.__stdout__),
+        # not the log file's — this is what callers actually want to know.
+        return self._streams[0].isatty()
+
+    def __getattr__(self, name):
+        # Forward anything else (fileno, encoding, mode, ...) to the real
+        # terminal stream so libraries that inspect stdout beyond
+        # write/flush/isatty keep working transparently.
+        return getattr(self._streams[0], name)
+
+
+def setup_run_log(script_name: str, log_dir: str | Path = "results/analysis/logs") -> Path:
+    """
+    Capture this run's full output — both logging.*() calls AND bare
+    print() — to a timestamped file under log_dir, in addition to the
+    terminal. Call once near the top of a script's main().
+
+    Why this exists: several analysis scripts print diagnostics that reveal
+    silent computation failures (e.g. build_paft_cache.py's "writing null,
+    not 0.0" warnings, or build_cache.py's per-entry fallback-to-null
+    warnings). Grepping those after the fact is how several real bugs got
+    confirmed fixed in this codebase — but only if the output was actually
+    captured, which requires remembering to `tee` manually. This makes that
+    automatic so it can't be forgotten.
+
+    Implementation note: this adds a logging.FileHandler to the root logger
+    rather than reassigning sys.stderr, because logging.StreamHandler (the
+    one logging.basicConfig() installs by default) captures a reference to
+    sys.stderr at construction time — reassigning sys.stderr afterward does
+    NOT redirect a handler that already grabbed the old reference. Adding a
+    second handler works regardless of when basicConfig() ran. Bare print()
+    calls, by contrast, look up sys.stdout freshly on every call, so
+    reassigning sys.stdout for those does work.
+
+    Returns the log file path (also printed to confirm where it went).
+    """
+    log_dir = Path(log_dir)
+    log_dir.mkdir(parents=True, exist_ok=True)
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    log_path = log_dir / f"{script_name}_{timestamp}.log"
+
+    file_handler = logging.FileHandler(log_path)
+    file_handler.setFormatter(logging.Formatter("%(asctime)s  %(message)s", datefmt="%H:%M:%S"))
+    logging.getLogger().addHandler(file_handler)
+
+    f = open(log_path, "a")
+    sys.stdout = _Tee(sys.__stdout__, f)
+
+    print(f"[setup_run_log] Full output for this run is also being saved to {log_path}")
+    return log_path
 
 def get_hf_model(method):
     """

@@ -17,6 +17,7 @@ import sys
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+from analysis.fit_decay_law import STEPS as TASK_STEPS
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from analysis.plot_style import (apply_style, COLORS, MARKERS, LINESTYLES,
@@ -25,19 +26,6 @@ from analysis.plot_style import (apply_style, COLORS, MARKERS, LINESTYLES,
 apply_style()
 
 OUT_DIR = Path("results/analysis/figures")
-
-# Total gradient steps per task (batch_size=32, 3 epochs, standard GLUE splits)
-# Ordered ascending — this becomes the x-axis
-TASK_STEPS = {
-    "rte":  234,
-    "mrpc": 345,
-    "stsb": 540,
-    "cola": 804,
-    "sst2": 6_315,
-    "qnli": 9_822,
-    "mnli": 36_816,
-    "qqp":  34_113,
-}
 
 # x-axis order: ascending gradient steps
 TASK_ORDER = sorted(TASK_STEPS.keys(), key=lambda t: TASK_STEPS[t])

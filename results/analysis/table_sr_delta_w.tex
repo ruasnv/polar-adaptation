@@ -1,7 +1,7 @@
 \begin{table}[t]
 \centering
 \small
-\caption{Stable rank of the weight update $\operatorname{sr}(\Delta\mathbf{W}_V)$ per GLUE task. High $\operatorname{sr}(\Delta\mathbf{W})$ alongside low $\operatorname{sr}(\mathbf{W}_{\text{eff}})$ (as in PoLAR) empirically confirms Proposition~\ref{prop:instability}. N/A: method does not produce an additive update.}
+\caption{Stable rank of the weight update $\operatorname{sr}(\Delta\mathbf{W}_V)$ per GLUE task. N/A: method does not produce an additive update.}
 \label{tab:sr_delta_w}
 \begin{tabular}{lcccccccc}
 \toprule
@@ -10,17 +10,17 @@
 Frozen & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A \\
 BitFit & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A \\
 \midrule
-SVF & 48.16 & 48.98 & 47.63 & 48.89 & 48.96 & 48.93 & 48.81 & 49.01 \\
-pure-PAFT (Ours) & 29.08 & 29.36 & 28.26 & 30.43 & 31.05 & 29.68 & 29.36 & 31.52 \\
-hybrid-PAFT (Ours) & 19.55 & 16.86 & 17.98 & 18.27 & 21.79 & 24.94 & 28.63 & 28.71 \\
-safe-pure-PAFT (Ours) & 30.41 & 28.67 & 29.37 & 30.11 & 32.61 & 33.71 & 36.29 & 36.45 \\
-safe-hybrid-PAFT (Ours) & 23.99 & 21.00 & 24.64 & 22.39 & 25.25 & 27.96 & 31.42 & 30.38 \\
+SVF & 26.46 & 26.37 & 26.10 & 26.75 & 26.43 & 26.31 & 26.47 & 27.13 \\
+pure-PAFT (Ours) & 9.68 & 9.61 & 9.45 & 10.17 & 10.72 & 10.18 & 10.71 & 10.88 \\
+hybrid-PAFT (Ours) & 5.30 & 4.23 & 4.82 & 4.34 & 5.40 & 6.91 & 9.17 & 8.48 \\
+safe-pure-PAFT (Ours) & 10.01 & 9.48 & 9.38 & 10.18 & 11.22 & 12.00 & 14.40 & 13.40 \\
+safe-hybrid-PAFT (Ours) & 6.81 & 5.57 & 6.79 & 5.77 & 6.86 & 8.44 & 10.57 & 9.46 \\
 \midrule
-LoRA $r{=}8$ & 6.55 & 7.49 & 7.02 & 6.55 & 7.37 & 8.88 & 9.67 & 9.85 \\
-LoRA $r{=}64$ & 9.86 & 9.08 & 9.70 & 9.23 & 9.86 & 13.64 & 17.72 & 17.26 \\
-PoLAR $r{=}8$ & 16.51 & 13.78 & 15.16 & 13.72 & 15.81 & 16.97 & 17.94 & 16.64 \\
+LoRA $r{=}8$ & 1.17 & 1.34 & 1.24 & 1.15 & 1.24 & 1.55 & 1.82 & 1.71 \\
+LoRA $r{=}64$ & 1.87 & 1.75 & 1.83 & 1.63 & 1.72 & 2.81 & 4.15 & 3.63 \\
+PoLAR $r{=}8$ & 3.48 & 2.91 & 3.30 & 3.07 & 3.52 & 3.84 & 4.15 & 3.73 \\
 \midrule
-Full fine-tuning & 26.22 & 21.30 & 22.99 & 18.81 & 25.77 & 30.06 & 35.17 & 30.65 \\
+Full fine-tuning & 7.79 & 5.44 & 6.45 & 4.53 & 7.01 & 10.45 & 13.21 & 10.82 \\
 \bottomrule
 \end{tabular}
 \end{table}

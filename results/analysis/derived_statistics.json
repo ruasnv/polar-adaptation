@@ -1,0 +1,170 @@
+{
+  "training_dynamics_sst2": {
+    "safe_hybrid_paft": {
+      "sr_init": 34.74536437134572,
+      "sr_ep1": 33.8060404697201,
+      "sr_final": 32.32943026338995,
+      "last_epoch": "epoch_5",
+      "drop_ep1": 0.9393,
+      "drop_ep1_pct": 2.7,
+      "drop_rest": 1.4766,
+      "drop_rest_pct": 4.25,
+      "stabilised": "yes",
+      "all_epochs": {
+        "init": 34.7454,
+        "epoch_1": 33.806,
+        "epoch_2": 32.9935,
+        "epoch_3": 32.6107,
+        "epoch_4": 32.3708,
+        "epoch_5": 32.3294,
+        "final": 32.3294
+      }
+    },
+    "hybrid_paft": {
+      "sr_init": 34.74536437134572,
+      "sr_ep1": 32.8228919861016,
+      "sr_final": 31.2380703923572,
+      "last_epoch": "epoch_5",
+      "drop_ep1": 1.9225,
+      "drop_ep1_pct": 5.53,
+      "drop_rest": 1.5848,
+      "drop_rest_pct": 4.56,
+      "stabilised": "yes",
+      "all_epochs": {
+        "init": 34.7454,
+        "epoch_1": 32.8229,
+        "epoch_2": 31.8185,
+        "epoch_3": 31.2381,
+        "epoch_4": 30.9776,
+        "epoch_5": 31.2381,
+        "final": 31.2381
+      }
+    },
+    "safe_pure_paft": {
+      "sr_init": 34.745363456137284,
+      "sr_ep1": 34.61138248443752,
+      "sr_final": 33.83771198637723,
+      "last_epoch": "epoch_5",
+      "drop_ep1": 0.134,
+      "drop_ep1_pct": 0.39,
+      "drop_rest": 0.7737,
+      "drop_rest_pct": 2.23,
+      "stabilised": "no",
+      "all_epochs": {
+        "init": 34.7454,
+        "epoch_1": 34.6114,
+        "epoch_2": 34.3007,
+        "epoch_3": 33.9884,
+        "epoch_4": 33.8637,
+        "epoch_5": 33.8377,
+        "final": 33.8377
+      }
+    },
+    "pure_paft": {
+      "sr_init": 34.745363456137284,
+      "sr_ep1": 23.067921376086634,
+      "sr_final": 18.355566807976537,
+      "last_epoch": "epoch_5",
+      "drop_ep1": 11.6774,
+      "drop_ep1_pct": 33.61,
+      "drop_rest": 4.7124,
+      "drop_rest_pct": 13.56,
+      "stabilised": "yes",
+      "all_epochs": {
+        "init": 34.7454,
+        "epoch_1": 23.0679,
+        "epoch_2": 20.065,
+        "epoch_3": 18.8124,
+        "epoch_4": 18.3556,
+        "epoch_5": 18.3556,
+        "final": 18.3556
+      }
+    },
+    "polar_r8": {
+      "sr_init": 34.745363902459935,
+      "sr_ep1": 31.212449271422777,
+      "sr_final": 26.307739608161828,
+      "last_epoch": "epoch_5",
+      "drop_ep1": 3.5329,
+      "drop_ep1_pct": 10.17,
+      "drop_rest": 4.9047,
+      "drop_rest_pct": 14.12,
+      "stabilised": "yes",
+      "all_epochs": {
+        "init": 34.7454,
+        "epoch_1": 31.2124,
+        "epoch_2": 28.4981,
+        "epoch_3": 27.1828,
+        "epoch_4": 26.5672,
+        "epoch_5": 26.3077,
+        "final": 26.3077
+      }
+    },
+    "svf": {
+      "sr_init": 34.74536455695871,
+      "sr_ep1": 33.31140090969689,
+      "sr_final": 32.41849225756,
+      "last_epoch": "epoch_5",
+      "drop_ep1": 1.434,
+      "drop_ep1_pct": 4.13,
+      "drop_rest": 0.8929,
+      "drop_rest_pct": 2.57,
+      "stabilised": "yes",
+      "all_epochs": {
+        "init": 34.7454,
+        "epoch_1": 33.3114,
+        "epoch_2": 32.6611,
+        "epoch_3": 32.4185,
+        "epoch_4": 32.4536,
+        "epoch_5": 32.4185,
+        "final": 32.4185
+      }
+    },
+    "bitfit": {
+      "sr_init": 34.745363902459935,
+      "sr_ep1": 34.745363902459935,
+      "sr_final": 34.745363902459935,
+      "last_epoch": "epoch_5",
+      "drop_ep1": 0.0,
+      "drop_ep1_pct": 0.0,
+      "drop_rest": 0.0,
+      "drop_rest_pct": 0.0,
+      "stabilised": "no",
+      "all_epochs": {
+        "init": 34.7454,
+        "epoch_1": 34.7454,
+        "epoch_2": 34.7454,
+        "epoch_3": 34.7454,
+        "epoch_4": 34.7454,
+        "epoch_5": 34.7454,
+        "final": 34.7454
+      }
+    },
+    "full_ft": {
+      "sr_init": 34.745363902459935,
+      "sr_ep1": 34.746755575198684,
+      "sr_final": 34.75334772430352,
+      "last_epoch": "epoch_5",
+      "drop_ep1": -0.0014,
+      "drop_ep1_pct": -0.0,
+      "drop_rest": -0.0066,
+      "drop_rest_pct": -0.02,
+      "stabilised": "yes",
+      "all_epochs": {
+        "init": 34.7454,
+        "epoch_1": 34.7468,
+        "epoch_2": 34.7531,
+        "epoch_3": 34.7535,
+        "epoch_4": 34.7529,
+        "epoch_5": 34.7533,
+        "final": 34.7533
+      }
+    }
+  },
+  "notes": {
+    "drop_ep1_pct": "% of sr_init lost in first epoch",
+    "drop_rest_pct": "% of sr_init lost in epochs 2 to last",
+    "stabilised": "True if drop_rest < drop_ep1 * n_remaining (decelerating)",
+    "lora_excluded": "LoRA epoch checkpoints contain adapter weights only, not merged W_eff"
+  }
+}

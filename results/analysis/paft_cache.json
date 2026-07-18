@@ -125,8 +125,8 @@
       "Q_O_drift_mean": 0.0,
       "Q_O_drift_max": 0.0,
       "Q_any_drift_max": 0.0,
-      "S_V_asymmetry_mean": 0.0,
-      "S_O_asymmetry_mean": 0.0,
+      "S_V_asymmetry_mean": null,
+      "S_O_asymmetry_mean": null,
       "per_layer": [
         {
           "layer": 0,
@@ -134,8 +134,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 5.778928756713867,
           "delta_lam_O_magnitude": 5.562891006469727,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 1,
@@ -143,8 +143,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 6.001543998718262,
           "delta_lam_O_magnitude": 6.037684440612793,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 2,
@@ -152,8 +152,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 6.455046653747559,
           "delta_lam_O_magnitude": 6.215270042419434,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 3,
@@ -161,8 +161,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 6.902535915374756,
           "delta_lam_O_magnitude": 6.639260768890381,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 4,
@@ -170,8 +170,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.055659294128418,
           "delta_lam_O_magnitude": 7.080428123474121,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 5,
@@ -179,8 +179,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 6.970341205596924,
           "delta_lam_O_magnitude": 7.2700676918029785,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 6,
@@ -188,8 +188,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.794727802276611,
           "delta_lam_O_magnitude": 7.345407485961914,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 7,
@@ -197,8 +197,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.8300347328186035,
           "delta_lam_O_magnitude": 7.838328838348389,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 8,
@@ -206,8 +206,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 8.154579162597656,
           "delta_lam_O_magnitude": 8.651508331298828,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 9,
@@ -215,8 +215,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.645626544952393,
           "delta_lam_O_magnitude": 8.0943603515625,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 10,
@@ -224,8 +224,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 6.553516864776611,
           "delta_lam_O_magnitude": 7.307626724243164,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 11,
@@ -233,8 +233,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.534748554229736,
           "delta_lam_O_magnitude": 7.571261882781982,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         }
       ]
     },
@@ -363,8 +363,8 @@
       "Q_O_drift_mean": 0.0,
       "Q_O_drift_max": 0.0,
       "Q_any_drift_max": 0.0,
-      "S_V_asymmetry_mean": 0.0,
-      "S_O_asymmetry_mean": 0.0,
+      "S_V_asymmetry_mean": null,
+      "S_O_asymmetry_mean": null,
       "per_layer": [
         {
           "layer": 0,
@@ -372,8 +372,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 0.919883131980896,
           "delta_lam_O_magnitude": 0.9449084997177124,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 1,
@@ -381,8 +381,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 0.9180788397789001,
           "delta_lam_O_magnitude": 0.9747357368469238,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 2,
@@ -390,8 +390,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.0189406871795654,
           "delta_lam_O_magnitude": 1.0054268836975098,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 3,
@@ -399,8 +399,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.0054436922073364,
           "delta_lam_O_magnitude": 1.0212719440460205,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 4,
@@ -408,8 +408,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 0.9990106225013733,
           "delta_lam_O_magnitude": 1.0189182758331299,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 5,
@@ -417,8 +417,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.0067063570022583,
           "delta_lam_O_magnitude": 1.054567575454712,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 6,
@@ -426,8 +426,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.0923233032226562,
           "delta_lam_O_magnitude": 1.0669361352920532,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 7,
@@ -435,8 +435,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.092572808265686,
           "delta_lam_O_magnitude": 1.141923427581787,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 8,
@@ -444,8 +444,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.1414276361465454,
           "delta_lam_O_magnitude": 1.1331011056900024,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 9,
@@ -453,8 +453,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.098359227180481,
           "delta_lam_O_magnitude": 1.0836503505706787,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 10,
@@ -462,8 +462,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.0169609785079956,
           "delta_lam_O_magnitude": 1.0893454551696777,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 11,
@@ -471,8 +471,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.0406161546707153,
           "delta_lam_O_magnitude": 1.0526231527328491,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         }
       ]
     }
@@ -603,8 +603,8 @@
       "Q_O_drift_mean": 0.0,
       "Q_O_drift_max": 0.0,
       "Q_any_drift_max": 0.0,
-      "S_V_asymmetry_mean": 0.0,
-      "S_O_asymmetry_mean": 0.0,
+      "S_V_asymmetry_mean": null,
+      "S_O_asymmetry_mean": null,
       "per_layer": [
         {
           "layer": 0,
@@ -612,8 +612,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 6.967096328735352,
           "delta_lam_O_magnitude": 6.9424357414245605,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 1,
@@ -621,8 +621,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.075135231018066,
           "delta_lam_O_magnitude": 7.1579461097717285,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 2,
@@ -630,8 +630,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.342321395874023,
           "delta_lam_O_magnitude": 7.511200428009033,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 3,
@@ -639,8 +639,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.735072135925293,
           "delta_lam_O_magnitude": 7.598315238952637,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 4,
@@ -648,8 +648,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 8.018056869506836,
           "delta_lam_O_magnitude": 7.693757057189941,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 5,
@@ -657,8 +657,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 8.07083511352539,
           "delta_lam_O_magnitude": 8.069862365722656,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 6,
@@ -666,8 +666,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 8.259848594665527,
           "delta_lam_O_magnitude": 7.784635066986084,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 7,
@@ -675,8 +675,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 8.223628044128418,
           "delta_lam_O_magnitude": 8.215958595275879,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 8,
@@ -684,8 +684,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.796560287475586,
           "delta_lam_O_magnitude": 7.900053024291992,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 9,
@@ -693,8 +693,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.98931360244751,
           "delta_lam_O_magnitude": 8.195269584655762,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 10,
@@ -702,8 +702,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.6157145500183105,
           "delta_lam_O_magnitude": 8.026609420776367,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 11,
@@ -711,8 +711,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.895206451416016,
           "delta_lam_O_magnitude": 7.518264293670654,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         }
       ]
     },
@@ -841,8 +841,8 @@
       "Q_O_drift_mean": 0.0,
       "Q_O_drift_max": 0.0,
       "Q_any_drift_max": 0.0,
-      "S_V_asymmetry_mean": 0.0,
-      "S_O_asymmetry_mean": 0.0,
+      "S_V_asymmetry_mean": null,
+      "S_O_asymmetry_mean": null,
       "per_layer": [
         {
           "layer": 0,
@@ -850,8 +850,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.2626911401748657,
           "delta_lam_O_magnitude": 1.2502431869506836,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 1,
@@ -859,8 +859,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.2711513042449951,
           "delta_lam_O_magnitude": 1.3263963460922241,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 2,
@@ -868,8 +868,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.316673994064331,
           "delta_lam_O_magnitude": 1.3898181915283203,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 3,
@@ -877,8 +877,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.4036810398101807,
           "delta_lam_O_magnitude": 1.3924822807312012,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 4,
@@ -886,8 +886,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.3947360515594482,
           "delta_lam_O_magnitude": 1.3721904754638672,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 5,
@@ -895,8 +895,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.418372392654419,
           "delta_lam_O_magnitude": 1.4278367757797241,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 6,
@@ -904,8 +904,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.3808567523956299,
           "delta_lam_O_magnitude": 1.3668370246887207,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 7,
@@ -913,8 +913,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.379181146621704,
           "delta_lam_O_magnitude": 1.340402364730835,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 8,
@@ -922,8 +922,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.3376377820968628,
           "delta_lam_O_magnitude": 1.3805745840072632,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 9,
@@ -931,8 +931,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.3667645454406738,
           "delta_lam_O_magnitude": 1.3999756574630737,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 10,
@@ -940,8 +940,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.2319763898849487,
           "delta_lam_O_magnitude": 1.320907711982727,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 11,
@@ -949,8 +949,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.3160996437072754,
           "delta_lam_O_magnitude": 1.2679195404052734,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         }
       ]
     }
@@ -1081,8 +1081,8 @@
       "Q_O_drift_mean": 0.0,
       "Q_O_drift_max": 0.0,
       "Q_any_drift_max": 0.0,
-      "S_V_asymmetry_mean": 0.0,
-      "S_O_asymmetry_mean": 0.0,
+      "S_V_asymmetry_mean": null,
+      "S_O_asymmetry_mean": null,
       "per_layer": [
         {
           "layer": 0,
@@ -1090,8 +1090,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 13.749517440795898,
           "delta_lam_O_magnitude": 14.565937995910645,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 1,
@@ -1099,8 +1099,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 16.28327751159668,
           "delta_lam_O_magnitude": 16.402616500854492,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 2,
@@ -1108,8 +1108,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 17.227062225341797,
           "delta_lam_O_magnitude": 18.16978645324707,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 3,
@@ -1117,8 +1117,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 19.363588333129883,
           "delta_lam_O_magnitude": 20.331716537475586,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 4,
@@ -1126,8 +1126,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 21.073741912841797,
           "delta_lam_O_magnitude": 21.16708755493164,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 5,
@@ -1135,8 +1135,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 19.076162338256836,
           "delta_lam_O_magnitude": 20.14322280883789,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 6,
@@ -1144,8 +1144,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 18.298185348510742,
           "delta_lam_O_magnitude": 19.42029571533203,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 7,
@@ -1153,8 +1153,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 18.94805908203125,
           "delta_lam_O_magnitude": 19.075557708740234,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 8,
@@ -1162,8 +1162,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 18.48786735534668,
           "delta_lam_O_magnitude": 19.192405700683594,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 9,
@@ -1171,8 +1171,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 23.537485122680664,
           "delta_lam_O_magnitude": 23.98532485961914,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 10,
@@ -1180,8 +1180,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 22.2536563873291,
           "delta_lam_O_magnitude": 22.984516143798828,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 11,
@@ -1189,8 +1189,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 24.48023223876953,
           "delta_lam_O_magnitude": 23.346601486206055,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         }
       ]
     },
@@ -1319,8 +1319,8 @@
       "Q_O_drift_mean": 0.0,
       "Q_O_drift_max": 0.0,
       "Q_any_drift_max": 0.0,
-      "S_V_asymmetry_mean": 0.0,
-      "S_O_asymmetry_mean": 0.0,
+      "S_V_asymmetry_mean": null,
+      "S_O_asymmetry_mean": null,
       "per_layer": [
         {
           "layer": 0,
@@ -1328,8 +1328,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 5.152651309967041,
           "delta_lam_O_magnitude": 5.420109748840332,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 1,
@@ -1337,8 +1337,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 6.0568084716796875,
           "delta_lam_O_magnitude": 6.248565196990967,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 2,
@@ -1346,8 +1346,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 6.960760593414307,
           "delta_lam_O_magnitude": 7.005420684814453,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 3,
@@ -1355,8 +1355,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.8211870193481445,
           "delta_lam_O_magnitude": 7.680197715759277,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 4,
@@ -1364,8 +1364,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.842637538909912,
           "delta_lam_O_magnitude": 7.784448623657227,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 5,
@@ -1373,8 +1373,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.400676727294922,
           "delta_lam_O_magnitude": 7.514895915985107,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 6,
@@ -1382,8 +1382,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.230217456817627,
           "delta_lam_O_magnitude": 7.327887058258057,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 7,
@@ -1391,8 +1391,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 6.739591598510742,
           "delta_lam_O_magnitude": 7.026566028594971,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 8,
@@ -1400,8 +1400,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 6.4874162673950195,
           "delta_lam_O_magnitude": 6.495185375213623,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 9,
@@ -1409,8 +1409,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.786325454711914,
           "delta_lam_O_magnitude": 8.014416694641113,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 10,
@@ -1418,8 +1418,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.351337432861328,
           "delta_lam_O_magnitude": 7.4246745109558105,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 11,
@@ -1427,8 +1427,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.752767562866211,
           "delta_lam_O_magnitude": 7.501303195953369,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         }
       ]
     }
@@ -1559,8 +1559,8 @@
       "Q_O_drift_mean": 0.0,
       "Q_O_drift_max": 0.0,
       "Q_any_drift_max": 0.0,
-      "S_V_asymmetry_mean": 0.0,
-      "S_O_asymmetry_mean": 0.0,
+      "S_V_asymmetry_mean": null,
+      "S_O_asymmetry_mean": null,
       "per_layer": [
         {
           "layer": 0,
@@ -1568,8 +1568,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 5.996996879577637,
           "delta_lam_O_magnitude": 5.718904495239258,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 1,
@@ -1577,8 +1577,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 6.170079708099365,
           "delta_lam_O_magnitude": 6.220882415771484,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 2,
@@ -1586,8 +1586,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 6.35433292388916,
           "delta_lam_O_magnitude": 6.228230953216553,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 3,
@@ -1595,8 +1595,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 6.602425575256348,
           "delta_lam_O_magnitude": 6.75514554977417,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 4,
@@ -1604,8 +1604,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 6.848293304443359,
           "delta_lam_O_magnitude": 6.9233245849609375,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 5,
@@ -1613,8 +1613,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.074551582336426,
           "delta_lam_O_magnitude": 7.023141860961914,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 6,
@@ -1622,8 +1622,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.520913124084473,
           "delta_lam_O_magnitude": 7.055558204650879,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 7,
@@ -1631,8 +1631,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.9922380447387695,
           "delta_lam_O_magnitude": 7.573747158050537,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 8,
@@ -1640,8 +1640,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 8.38871955871582,
           "delta_lam_O_magnitude": 8.4611177444458,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 9,
@@ -1649,8 +1649,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 8.83797550201416,
           "delta_lam_O_magnitude": 8.497803688049316,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 10,
@@ -1658,8 +1658,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 8.050311088562012,
           "delta_lam_O_magnitude": 8.482386589050293,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 11,
@@ -1667,8 +1667,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.2628703117370605,
           "delta_lam_O_magnitude": 7.362478256225586,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         }
       ]
     },
@@ -1797,8 +1797,8 @@
       "Q_O_drift_mean": 0.0,
       "Q_O_drift_max": 0.0,
       "Q_any_drift_max": 0.0,
-      "S_V_asymmetry_mean": 0.0,
-      "S_O_asymmetry_mean": 0.0,
+      "S_V_asymmetry_mean": null,
+      "S_O_asymmetry_mean": null,
       "per_layer": [
         {
           "layer": 0,
@@ -1806,8 +1806,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.0309900045394897,
           "delta_lam_O_magnitude": 1.0471562147140503,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 1,
@@ -1815,8 +1815,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.0317004919052124,
           "delta_lam_O_magnitude": 1.0113179683685303,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 2,
@@ -1824,8 +1824,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 0.972403883934021,
           "delta_lam_O_magnitude": 0.9771031737327576,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 3,
@@ -1833,8 +1833,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.0379652976989746,
           "delta_lam_O_magnitude": 1.022961974143982,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 4,
@@ -1842,8 +1842,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.0594983100891113,
           "delta_lam_O_magnitude": 1.0536326169967651,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 5,
@@ -1851,8 +1851,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 0.9789329767227173,
           "delta_lam_O_magnitude": 1.054832100868225,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 6,
@@ -1860,8 +1860,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.071481466293335,
           "delta_lam_O_magnitude": 1.0578988790512085,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 7,
@@ -1869,8 +1869,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.1514747142791748,
           "delta_lam_O_magnitude": 1.148858904838562,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 8,
@@ -1878,8 +1878,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.1781630516052246,
           "delta_lam_O_magnitude": 1.214596152305603,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 9,
@@ -1887,8 +1887,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.1485497951507568,
           "delta_lam_O_magnitude": 1.1613378524780273,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 10,
@@ -1896,8 +1896,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.1093579530715942,
           "delta_lam_O_magnitude": 1.1116634607315063,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 11,
@@ -1905,8 +1905,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 1.1561684608459473,
           "delta_lam_O_magnitude": 1.2347848415374756,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         }
       ]
     }
@@ -2037,8 +2037,8 @@
       "Q_O_drift_mean": 0.0,
       "Q_O_drift_max": 0.0,
       "Q_any_drift_max": 0.0,
-      "S_V_asymmetry_mean": 0.0,
-      "S_O_asymmetry_mean": 0.0,
+      "S_V_asymmetry_mean": null,
+      "S_O_asymmetry_mean": null,
       "per_layer": [
         {
           "layer": 0,
@@ -2046,8 +2046,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 5.725043296813965,
           "delta_lam_O_magnitude": 5.824261665344238,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 1,
@@ -2055,8 +2055,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 5.945218086242676,
           "delta_lam_O_magnitude": 5.871580123901367,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 2,
@@ -2064,8 +2064,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 5.7914719581604,
           "delta_lam_O_magnitude": 6.073624134063721,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 3,
@@ -2073,8 +2073,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 6.219131946563721,
           "delta_lam_O_magnitude": 6.3199310302734375,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 4,
@@ -2082,8 +2082,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 6.788949012756348,
           "delta_lam_O_magnitude": 6.866686820983887,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 5,
@@ -2091,8 +2091,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.03447151184082,
           "delta_lam_O_magnitude": 7.070703983306885,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 6,
@@ -2100,8 +2100,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.355975151062012,
           "delta_lam_O_magnitude": 7.141665935516357,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 7,
@@ -2109,8 +2109,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.284694194793701,
           "delta_lam_O_magnitude": 7.509161949157715,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 8,
@@ -2118,8 +2118,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.7017292976379395,
           "delta_lam_O_magnitude": 7.5662665367126465,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 9,
@@ -2127,8 +2127,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 8.066247940063477,
           "delta_lam_O_magnitude": 8.344865798950195,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 10,
@@ -2136,8 +2136,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 6.960123062133789,
           "delta_lam_O_magnitude": 7.889077663421631,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 11,
@@ -2145,8 +2145,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.611612319946289,
           "delta_lam_O_magnitude": 8.592829704284668,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         }
       ]
     },
@@ -2275,8 +2275,8 @@
       "Q_O_drift_mean": 0.0,
       "Q_O_drift_max": 0.0,
       "Q_any_drift_max": 0.0,
-      "S_V_asymmetry_mean": 0.0,
-      "S_O_asymmetry_mean": 0.0,
+      "S_V_asymmetry_mean": null,
+      "S_O_asymmetry_mean": null,
       "per_layer": [
         {
           "layer": 0,
@@ -2284,8 +2284,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 0.7396731376647949,
           "delta_lam_O_magnitude": 0.7490184307098389,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 1,
@@ -2293,8 +2293,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 0.7770482897758484,
           "delta_lam_O_magnitude": 0.7642938494682312,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 2,
@@ -2302,8 +2302,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 0.8092371821403503,
           "delta_lam_O_magnitude": 0.8256778120994568,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 3,
@@ -2311,8 +2311,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 0.7992877960205078,
           "delta_lam_O_magnitude": 0.809756875038147,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 4,
@@ -2320,8 +2320,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 0.8480955958366394,
           "delta_lam_O_magnitude": 0.8387784957885742,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 5,
@@ -2329,8 +2329,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 0.898160457611084,
           "delta_lam_O_magnitude": 0.8403941988945007,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 6,
@@ -2338,8 +2338,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 0.9026570916175842,
           "delta_lam_O_magnitude": 0.8614925146102905,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 7,
@@ -2347,8 +2347,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 0.9129551649093628,
           "delta_lam_O_magnitude": 0.9047026634216309,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 8,
@@ -2356,8 +2356,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 0.9396683573722839,
           "delta_lam_O_magnitude": 0.8576179146766663,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 9,
@@ -2365,8 +2365,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 0.9673380851745605,
           "delta_lam_O_magnitude": 1.0163174867630005,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 10,
@@ -2374,8 +2374,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 0.9886122941970825,
           "delta_lam_O_magnitude": 1.0035524368286133,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 11,
@@ -2383,8 +2383,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 0.8615242838859558,
           "delta_lam_O_magnitude": 0.9079568386077881,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         }
       ]
     }
@@ -2515,8 +2515,8 @@
       "Q_O_drift_mean": 0.0,
       "Q_O_drift_max": 0.0,
       "Q_any_drift_max": 0.0,
-      "S_V_asymmetry_mean": 0.0,
-      "S_O_asymmetry_mean": 0.0,
+      "S_V_asymmetry_mean": null,
+      "S_O_asymmetry_mean": null,
       "per_layer": [
         {
           "layer": 0,
@@ -2524,8 +2524,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 11.373590469360352,
           "delta_lam_O_magnitude": 11.351028442382812,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 1,
@@ -2533,8 +2533,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 12.73194408416748,
           "delta_lam_O_magnitude": 13.069697380065918,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 2,
@@ -2542,8 +2542,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 13.859417915344238,
           "delta_lam_O_magnitude": 14.206831932067871,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 3,
@@ -2551,8 +2551,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 15.157281875610352,
           "delta_lam_O_magnitude": 15.215934753417969,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 4,
@@ -2560,8 +2560,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 15.954248428344727,
           "delta_lam_O_magnitude": 16.415903091430664,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 5,
@@ -2569,8 +2569,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 15.785197257995605,
           "delta_lam_O_magnitude": 15.56191635131836,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 6,
@@ -2578,8 +2578,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 14.209294319152832,
           "delta_lam_O_magnitude": 14.072834968566895,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 7,
@@ -2587,8 +2587,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 14.726526260375977,
           "delta_lam_O_magnitude": 15.381853103637695,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 8,
@@ -2596,8 +2596,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 16.581470489501953,
           "delta_lam_O_magnitude": 16.55459976196289,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 9,
@@ -2605,8 +2605,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 19.551618576049805,
           "delta_lam_O_magnitude": 19.790523529052734,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 10,
@@ -2614,8 +2614,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 18.55751609802246,
           "delta_lam_O_magnitude": 19.167400360107422,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 11,
@@ -2623,8 +2623,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 17.003190994262695,
           "delta_lam_O_magnitude": 17.909128189086914,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         }
       ]
     },
@@ -2753,8 +2753,8 @@
       "Q_O_drift_mean": 0.0,
       "Q_O_drift_max": 0.0,
       "Q_any_drift_max": 0.0,
-      "S_V_asymmetry_mean": 0.0,
-      "S_O_asymmetry_mean": 0.0,
+      "S_V_asymmetry_mean": null,
+      "S_O_asymmetry_mean": null,
       "per_layer": [
         {
           "layer": 0,
@@ -2762,8 +2762,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 3.010350465774536,
           "delta_lam_O_magnitude": 3.116877317428589,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 1,
@@ -2771,8 +2771,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 3.2984724044799805,
           "delta_lam_O_magnitude": 3.4378631114959717,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 2,
@@ -2780,8 +2780,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 3.7132606506347656,
           "delta_lam_O_magnitude": 3.795112371444702,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 3,
@@ -2789,8 +2789,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 4.118254661560059,
           "delta_lam_O_magnitude": 4.027486324310303,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 4,
@@ -2798,8 +2798,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 4.152966022491455,
           "delta_lam_O_magnitude": 4.128641605377197,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 5,
@@ -2807,8 +2807,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 4.004036903381348,
           "delta_lam_O_magnitude": 4.102752208709717,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 6,
@@ -2816,8 +2816,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 3.789559841156006,
           "delta_lam_O_magnitude": 3.9338388442993164,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 7,
@@ -2825,8 +2825,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 3.8621299266815186,
           "delta_lam_O_magnitude": 3.947089672088623,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 8,
@@ -2834,8 +2834,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 3.9322891235351562,
           "delta_lam_O_magnitude": 3.9735796451568604,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 9,
@@ -2843,8 +2843,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 4.762967109680176,
           "delta_lam_O_magnitude": 4.791208267211914,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 10,
@@ -2852,8 +2852,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 4.408723831176758,
           "delta_lam_O_magnitude": 4.305513381958008,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 11,
@@ -2861,8 +2861,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 4.0812859535217285,
           "delta_lam_O_magnitude": 4.010128021240234,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         }
       ]
     }
@@ -2993,8 +2993,8 @@
       "Q_O_drift_mean": 0.0,
       "Q_O_drift_max": 0.0,
       "Q_any_drift_max": 0.0,
-      "S_V_asymmetry_mean": 0.0,
-      "S_O_asymmetry_mean": 0.0,
+      "S_V_asymmetry_mean": null,
+      "S_O_asymmetry_mean": null,
       "per_layer": [
         {
           "layer": 0,
@@ -3002,8 +3002,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 10.809270858764648,
           "delta_lam_O_magnitude": 10.789695739746094,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 1,
@@ -3011,8 +3011,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 11.747684478759766,
           "delta_lam_O_magnitude": 11.607993125915527,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 2,
@@ -3020,8 +3020,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 11.006786346435547,
           "delta_lam_O_magnitude": 11.691967964172363,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 3,
@@ -3029,8 +3029,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 13.283185958862305,
           "delta_lam_O_magnitude": 13.093743324279785,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 4,
@@ -3038,8 +3038,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 14.240617752075195,
           "delta_lam_O_magnitude": 13.991762161254883,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 5,
@@ -3047,8 +3047,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 13.778258323669434,
           "delta_lam_O_magnitude": 13.968147277832031,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 6,
@@ -3056,8 +3056,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 14.035171508789062,
           "delta_lam_O_magnitude": 13.265219688415527,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 7,
@@ -3065,8 +3065,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 14.829216957092285,
           "delta_lam_O_magnitude": 14.276679039001465,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 8,
@@ -3074,8 +3074,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 15.452884674072266,
           "delta_lam_O_magnitude": 15.035562515258789,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 9,
@@ -3083,8 +3083,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 16.523977279663086,
           "delta_lam_O_magnitude": 16.50729751586914,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 10,
@@ -3092,8 +3092,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 15.407015800476074,
           "delta_lam_O_magnitude": 16.088842391967773,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 11,
@@ -3101,8 +3101,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 13.174357414245605,
           "delta_lam_O_magnitude": 12.923762321472168,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         }
       ]
     },
@@ -3231,8 +3231,8 @@
       "Q_O_drift_mean": 0.0,
       "Q_O_drift_max": 0.0,
       "Q_any_drift_max": 0.0,
-      "S_V_asymmetry_mean": 0.0,
-      "S_O_asymmetry_mean": 0.0,
+      "S_V_asymmetry_mean": null,
+      "S_O_asymmetry_mean": null,
       "per_layer": [
         {
           "layer": 0,
@@ -3240,8 +3240,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 2.5507869720458984,
           "delta_lam_O_magnitude": 2.6577229499816895,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 1,
@@ -3249,8 +3249,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 2.85086989402771,
           "delta_lam_O_magnitude": 2.8452467918395996,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 2,
@@ -3258,8 +3258,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 2.8193016052246094,
           "delta_lam_O_magnitude": 2.915062189102173,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 3,
@@ -3267,8 +3267,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 3.011643886566162,
           "delta_lam_O_magnitude": 3.0747995376586914,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 4,
@@ -3276,8 +3276,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 3.15466046333313,
           "delta_lam_O_magnitude": 3.0750303268432617,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 5,
@@ -3285,8 +3285,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 3.00168776512146,
           "delta_lam_O_magnitude": 3.0394461154937744,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 6,
@@ -3294,8 +3294,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 3.003929376602173,
           "delta_lam_O_magnitude": 3.073721408843994,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 7,
@@ -3303,8 +3303,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 2.889432907104492,
           "delta_lam_O_magnitude": 2.9149224758148193,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 8,
@@ -3312,8 +3312,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 2.9879255294799805,
           "delta_lam_O_magnitude": 3.0676846504211426,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 9,
@@ -3321,8 +3321,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 3.082280397415161,
           "delta_lam_O_magnitude": 3.129143238067627,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 10,
@@ -3330,8 +3330,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 2.961305618286133,
           "delta_lam_O_magnitude": 3.0195226669311523,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 11,
@@ -3339,8 +3339,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 3.136228084564209,
           "delta_lam_O_magnitude": 2.989586353302002,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         }
       ]
     }
@@ -3471,8 +3471,8 @@
       "Q_O_drift_mean": 0.0,
       "Q_O_drift_max": 0.0,
       "Q_any_drift_max": 0.0,
-      "S_V_asymmetry_mean": 0.0,
-      "S_O_asymmetry_mean": 0.0,
+      "S_V_asymmetry_mean": null,
+      "S_O_asymmetry_mean": null,
       "per_layer": [
         {
           "layer": 0,
@@ -3480,8 +3480,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 12.002330780029297,
           "delta_lam_O_magnitude": 11.03438663482666,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 1,
@@ -3489,8 +3489,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 13.745122909545898,
           "delta_lam_O_magnitude": 13.834906578063965,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 2,
@@ -3498,8 +3498,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 14.98409366607666,
           "delta_lam_O_magnitude": 15.080883026123047,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 3,
@@ -3507,8 +3507,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 16.751317977905273,
           "delta_lam_O_magnitude": 17.869487762451172,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 4,
@@ -3516,8 +3516,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 18.440162658691406,
           "delta_lam_O_magnitude": 18.15502166748047,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 5,
@@ -3525,8 +3525,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 15.938729286193848,
           "delta_lam_O_magnitude": 16.427833557128906,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 6,
@@ -3534,8 +3534,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 15.472551345825195,
           "delta_lam_O_magnitude": 16.29456901550293,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 7,
@@ -3543,8 +3543,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 16.269962310791016,
           "delta_lam_O_magnitude": 17.17517852783203,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 8,
@@ -3552,8 +3552,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 16.993854522705078,
           "delta_lam_O_magnitude": 18.071523666381836,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 9,
@@ -3561,8 +3561,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 23.412166595458984,
           "delta_lam_O_magnitude": 24.794450759887695,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 10,
@@ -3570,8 +3570,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 25.119922637939453,
           "delta_lam_O_magnitude": 24.264101028442383,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 11,
@@ -3579,8 +3579,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 25.037025451660156,
           "delta_lam_O_magnitude": 25.492101669311523,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         }
       ]
     },
@@ -3709,8 +3709,8 @@
       "Q_O_drift_mean": 0.0,
       "Q_O_drift_max": 0.0,
       "Q_any_drift_max": 0.0,
-      "S_V_asymmetry_mean": 0.0,
-      "S_O_asymmetry_mean": 0.0,
+      "S_V_asymmetry_mean": null,
+      "S_O_asymmetry_mean": null,
       "per_layer": [
         {
           "layer": 0,
@@ -3718,8 +3718,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 4.915716171264648,
           "delta_lam_O_magnitude": 5.0439934730529785,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 1,
@@ -3727,8 +3727,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 6.023032188415527,
           "delta_lam_O_magnitude": 6.201643466949463,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 2,
@@ -3736,8 +3736,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 6.985986232757568,
           "delta_lam_O_magnitude": 6.964544773101807,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 3,
@@ -3745,8 +3745,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.677951335906982,
           "delta_lam_O_magnitude": 7.64680290222168,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 4,
@@ -3754,8 +3754,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 8.027684211730957,
           "delta_lam_O_magnitude": 7.910251140594482,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 5,
@@ -3763,8 +3763,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.263028621673584,
           "delta_lam_O_magnitude": 7.267341613769531,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 6,
@@ -3772,8 +3772,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.046241760253906,
           "delta_lam_O_magnitude": 7.215731143951416,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 7,
@@ -3781,8 +3781,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 6.649546146392822,
           "delta_lam_O_magnitude": 6.8106369972229,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 8,
@@ -3790,8 +3790,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 6.734833717346191,
           "delta_lam_O_magnitude": 6.724919319152832,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 9,
@@ -3799,8 +3799,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 8.461404800415039,
           "delta_lam_O_magnitude": 8.407973289489746,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 10,
@@ -3808,8 +3808,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 7.937228679656982,
           "delta_lam_O_magnitude": 7.823521614074707,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         },
         {
           "layer": 11,
@@ -3817,8 +3817,8 @@
           "Q_O_drift": 0.0,
           "delta_lam_V_magnitude": 8.140717506408691,
           "delta_lam_O_magnitude": 7.973514556884766,
-          "S_V_asymmetry_ratio": 0.0,
-          "S_O_asymmetry_ratio": 0.0
+          "S_V_asymmetry_ratio": null,
+          "S_O_asymmetry_ratio": null
         }
       ]
     }

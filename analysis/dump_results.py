@@ -90,7 +90,26 @@ def main():
 
     # ── 2. sr(W_eff) before/after ──────────────────────────────────────────
     section("TABLE 2: STABLE RANK — INIT vs FINAL (task average)")
-    print("  Mean sr(W_eff) before and after fine-tuning. All methods start from the same pretrained sr=34.745.")
+    # Pull the pretrained sr from the actual data rather than hardcoding it as
+    # prose — a hardcoded number here would silently go stale (and mislead a
+    # reader) if the base checkpoint or task set ever changes.
+    _pretrained_vals = [
+        d["sr_Weff_init"]
+        for t in tasks_available
+        for d in glue.get(t, {}).values()
+        if d.get("sr_Weff_init") is not None
+    ]
+    if _pretrained_vals and max(_pretrained_vals) - min(_pretrained_vals) < 0.01:
+        print(f"  Mean sr(W_eff) before and after fine-tuning. "
+              f"All methods start from the same pretrained sr={_pretrained_vals[0]:.3f}.")
+    elif _pretrained_vals:
+        print(f"  Mean sr(W_eff) before and after fine-tuning. "
+              f"WARNING: pretrained sr_Weff_init varies across entries "
+              f"({min(_pretrained_vals):.3f}–{max(_pretrained_vals):.3f}) — "
+              f"methods are not starting from the same baseline, check the cache.")
+    else:
+        print("  Mean sr(W_eff) before and after fine-tuning. "
+              "(No sr_Weff_init values found in cache.)")
     print(f"{'Method':<22}  {'sr_init':>8}  {'sr_final':>9}  {'delta':>8}  {'delta%':>8}")
     sep()
     for method in METHOD_ORDER:
@@ -210,7 +229,7 @@ def main():
             epochs = sst2[method]["per_epoch"]
             row = f"{method:<22}"
             for ep in epochs:
-                row += f"  {ep.get('sr_Weff', 0):>5.2f}"
+                row += f"  {fmt(ep.get('sr_Weff'), 2):>5}"
             print(row)
     print()
 
@@ -229,8 +248,8 @@ def main():
                 continue
             row = f"  {method:<22}"
             for rec in layers[:12]:
-                v = rec.get("sr_Weff_final", 0)
-                row += f"  {v:>5.2f}"
+                v = rec.get("sr_Weff_final")
+                row += f"  {fmt(v, 2):>5}"
             print(row)
     print()
 
@@ -327,6 +346,25 @@ def main():
                 issues.append(f"  LORA UNCHANGED: {task}/{lm} sr_final≈sr_init ({sr_f:.4f}) "
                                f"— recovery may have failed")
 
+    # Check: LoRA per-epoch series looks different from pretrained at every
+    # epoch, not just at sr_Weff_final. Catches the case where an individual
+    # epoch checkpoint silently fell back to base-weight sr during merging
+    # (see compute_lora_epoch_sr.py) even though the final epoch is fine.
+    for task in tasks_available:
+        for lm in ["lora_r8", "lora_r64"]:
+            d = glue.get(task, {}).get(lm, {})
+            sr_i = d.get("sr_Weff_init")
+            per_epoch = d.get("per_epoch", [])
+            if sr_i is None or not per_epoch:
+                continue
+            for rec in per_epoch:
+                sr_ep = rec.get("sr_Weff")
+                ep_n  = rec.get("epoch")
+                if sr_ep is not None and abs(sr_ep - sr_i) < 0.01:
+                    issues.append(f"  LORA EPOCH UNCHANGED: {task}/{lm} epoch {ep_n} "
+                                   f"sr≈pretrained ({sr_ep:.4f}) — merge likely fell "
+                                   f"back to base weight for this checkpoint")
+
     if not issues:
         print("  All checks passed.")
     else:
@@ -337,7 +375,6 @@ def main():
 
     # ── 10. Training dynamics derived statistics ──────────────────────────
     section("TABLE 10: TRAINING DYNAMICS — DERIVED STATISTICS (SST-2)")
-    print("  sr(W_eff) per epoch from disk checkpoints. Shows how fast each method degrades geometry during training.")
     print("  sr(W_eff) per epoch from disk checkpoints (SST-2). Shows how fast each method degrades geometry during training.")
     print("  Computed from epoch checkpoints in results/glue/sst2/")
     print("  Epoch 0 = init (pretrained). Rate = drop / sr_init * 100.")

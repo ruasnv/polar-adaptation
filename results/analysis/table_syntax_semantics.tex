@@ -1,0 +1,29 @@
+\begin{table}[t]
+\centering
+\caption{GLUE task performance (\%). CoLA: Matthews correlation; STS-B: Pearson; MRPC/QQP: F1; others: accuracy. \textbf{Bold}: best overall. \underline{Underline}: best PAFT variant.}
+\label{tab:glue_performance}
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{lcccccccc}
+\toprule
+\textbf{Method} & \textbf{CoLA} & \textbf{MRPC} & \textbf{RTE} & \textbf{STS-B} & \textbf{SST-2} & \textbf{QNLI} & \textbf{MNLI} & \textbf{QQP} \\
+ & \scriptsize MCC & \scriptsize F1 & \scriptsize Acc & \scriptsize Pearson & \scriptsize Acc & \scriptsize Acc & \scriptsize Acc & \scriptsize F1 \\
+\midrule
+Frozen & 51.0 & 81.2 & 67.5 & 70.9 & 82.1 & 74.8 & 64.9 & 75.0 \\
+\midrule
+BitFit & 68.1 & 92.4 & 83.0 & 91.6 & 95.5 & 93.7 & 89.3 & 86.3 \\
+SVF & 69.5 & 90.1 & 82.3 & 91.0 & 94.8 & 92.7 & 88.6 & 85.3 \\
+\midrule
+pure-PAFT (Ours) & 65.1 & 89.6 & 76.2 & 90.7 & 94.0 & 92.3 & 87.0 & 85.2 \\
+hybrid-PAFT (Ours) & 69.9 & 91.3 & 81.6 & 91.0 & 95.2 & 93.8 & 90.0 & 88.1 \\
+safe-pure-PAFT (Ours) & 68.1 & 93.0 & 84.5 & 91.6 & 95.5 & 93.7 & 89.6 & 86.8 \\
+safe-hybrid-PAFT (Ours) & 69.7 & 93.2 & 83.8 & 91.7 & 95.6 & 94.0 & 90.1 & 88.5 \\
+\midrule
+LoRA $r{=}8$ & 67.8 & 93.8 & 83.8 & 91.5 & 96.0 & 94.3 & 90.4 & 87.7 \\
+LoRA $r{=}64$ & 69.3 & 93.5 & 86.6 & 91.7 & 95.9 & 94.2 & 90.2 & 89.0 \\
+PoLAR $r{=}8$ & 69.6 & 93.1 & 86.6 & 91.4 & 95.9 & 94.1 & 90.2 & 88.1 \\
+\midrule
+Full FT & 70.7 & 92.8 & 85.2 & 91.2 & 96.3 & 93.9 & 90.3 & 89.6 \\
+\bottomrule
+\end{tabular}
+\end{table}

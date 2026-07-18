@@ -311,9 +311,11 @@ def compare_methods_stable_rank(
     results = {}
     for method_name, W_eff_layers in methods_W_eff.items():
         results[method_name] = summarize_stable_rank(W_eff_layers, W_init_per_layer)
+        def _f(v):
+            return f"{v:.2f}" if isinstance(v, (int, float)) else str(v)
         logger.info(
-            f"{method_name}: sr(W_eff)={results[method_name].get('stable_rank_Weff', 'N/A'):.2f}  "
-            f"sr(ΔW)={results[method_name].get('stable_rank_delta_W', 'N/A'):.2f}"
+            f"{method_name}: sr(W_eff)={_f(results[method_name].get('stable_rank', 'N/A'))}  "
+            f"sr(ΔW)={_f(results[method_name].get('stable_rank_delta_W', 'N/A'))}"
         )
     return results
 

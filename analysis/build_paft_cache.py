@@ -16,6 +16,9 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s  %(message)s", datef
 
 
 def main():
+    from analysis.utils import setup_run_log
+    setup_run_log("build_paft_cache")
+
     root = Path("results/glue")
     out_cache = Path("results/analysis/paft_cache.json")
     out_cache.parent.mkdir(parents=True, exist_ok=True)
@@ -72,7 +75,11 @@ def main():
                     drifts_O.append(drift_O)
 
                     # ── Eigenvalue shift magnitude (lam_V and lam_O) ──────────────────
-                    delta_lam_V_mag = 0.0
+                    # None = key doesn't exist (expected: hybrid variants don't use
+                    # this parameterization). A caught exception is NOT the same as
+                    # "no shift" — it must also stay None, and must be logged, or a
+                    # real failure silently reads as "zero shift" in the tables.
+                    delta_lam_V_mag = None
                     if "lam_V" in init_snap and "lam_V" in final_snap:
                         try:
                             delta_lam_V_mag = float(
@@ -82,10 +89,12 @@ def main():
                                     p=2
                                 ).item()
                             )
-                        except Exception:
-                            pass
+                        except Exception as ex:
+                            log.error(f"  {task}/{method} layer {layer_idx}: "
+                                      f"delta_lam_V computation failed ({ex}) — "
+                                      f"writing null, not 0.0")
 
-                    delta_lam_O_mag = 0.0
+                    delta_lam_O_mag = None
                     if "lam_O" in init_snap and "lam_O" in final_snap:
                         try:
                             delta_lam_O_mag = float(
@@ -95,8 +104,10 @@ def main():
                                     p=2
                                 ).item()
                             )
-                        except Exception:
-                            pass
+                        except Exception as ex:
+                            log.error(f"  {task}/{method} layer {layer_idx}: "
+                                      f"delta_lam_O computation failed ({ex}) — "
+                                      f"writing null, not 0.0")
 
                     # ── S asymmetry (hybrid-PAFT only) ────────────────────────────────
                     # Measures whether S_adapted drifted from the symmetric manifold.
@@ -109,8 +120,13 @@ def main():
                     #   > 0.10 → real asymmetry, micro-rotation Q' is non-trivial
                     #
                     # pure-PAFT uses diag(lam) which is always symmetric — skip.
-                    s_asym_V = 0.0
-                    s_asym_O = 0.0
+                    #
+                    # IMPORTANT: None (not 0.0) is the "computation didn't happen"
+                    # value. 0.0 is this paper's own threshold for "perfectly
+                    # symmetric" — the exact result the hypothesis wants — so a
+                    # silently swallowed exception must never be able to produce it.
+                    s_asym_V = None
+                    s_asym_O = None
 
                     if is_hybrid and "S_V" in final_snap:
                         try:
@@ -123,8 +139,10 @@ def main():
                             total_frob = sum(frob_norms)
                             s_asym_V = (sum(asym_norms) / total_frob) \
                                        if total_frob > 1e-12 else 0.0
-                        except Exception:
-                            pass
+                        except Exception as ex:
+                            log.error(f"  {task}/{method} layer {layer_idx}: "
+                                      f"S_V asymmetry computation failed ({ex}) — "
+                                      f"writing null, not 0.0")
 
                     if is_hybrid and "S_O" in final_snap:
                         try:
@@ -137,8 +155,10 @@ def main():
                             total_frob = sum(frob_norms)
                             s_asym_O = (sum(asym_norms) / total_frob) \
                                        if total_frob > 1e-12 else 0.0
-                        except Exception:
-                            pass
+                        except Exception as ex:
+                            log.error(f"  {task}/{method} layer {layer_idx}: "
+                                      f"S_O asymmetry computation failed ({ex}) — "
+                                      f"writing null, not 0.0")
 
                     per_layer_info.append({
                         "layer":                  layer_idx,
@@ -150,6 +170,10 @@ def main():
                         "S_O_asymmetry_ratio":    s_asym_O,
                     })
 
+                def _mean_or_none(vals):
+                    vals = [v for v in vals if v is not None]
+                    return float(np.mean(vals)) if vals else None
+
                 paft_cache[task][method] = {
                     # Q drift — should be 0.00e+00 for all PAFT variants
                     "Q_V_drift_mean":     float(np.mean(drifts_V)),
@@ -159,13 +183,15 @@ def main():
                     "Q_any_drift_max":    float(max(np.max(drifts_V),
                                                     np.max(drifts_O))),
                     # S asymmetry — non-zero only for hybrid variants if
-                    # training pushed S off the symmetric manifold
-                    "S_V_asymmetry_mean": float(np.mean(
+                    # training pushed S off the symmetric manifold. null if
+                    # the per-layer computation never succeeded for any layer
+                    # (do not silently report this as symmetric).
+                    "S_V_asymmetry_mean": _mean_or_none(
                         [r["S_V_asymmetry_ratio"] for r in per_layer_info]
-                    )),
-                    "S_O_asymmetry_mean": float(np.mean(
+                    ),
+                    "S_O_asymmetry_mean": _mean_or_none(
                         [r["S_O_asymmetry_ratio"] for r in per_layer_info]
-                    )),
+                    ),
                     "per_layer":          per_layer_info,
                 }
 

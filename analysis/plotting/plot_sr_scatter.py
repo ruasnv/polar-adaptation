@@ -157,8 +157,8 @@ def main():
             ax.plot((1 - d, 1 + d), (y0 - d * sign, y0 + d * sign), **kw)
 
     # ── Labels ────────────────────────────────────────────────────────────────
-    ax_bot.set_xlabel(r"$sr(\Delta W_V)$ — update structural complexity", fontsize=9)
-    ylabel = r"$sr(W_\mathrm{eff})$ — geometric health"
+    ax_bot.set_xlabel(r"$sr(\Delta W_V)$", fontsize=9)
+    ylabel = r"$sr(W_\mathrm{eff})$"
     if needs_break:
         fig.text(0.02, 0.5, ylabel, va="center", rotation="vertical", fontsize=9)
     else:

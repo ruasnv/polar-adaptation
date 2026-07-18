@@ -14,6 +14,7 @@ Writes to:
 
 import json
 import glob
+import argparse
 import torch
 import numpy as np
 from pathlib import Path
@@ -155,11 +156,18 @@ def compute_merged_sr(
             B = adapter[lora_b_key].float()  # [768, rank]
             W_eff = W0 + scale * (B @ A)    # [768, 768]
         else:
+            # Do NOT silently fall back to the base weight — that computes
+            # sr(W_0), not sr(W_eff), and writes it into per-epoch data
+            # indistinguishably from a real merged-weight measurement. This
+            # is what produced the flat-at-pretrained-value bug that
+            # patch_metrics_cache.py had to detect and patch after the fact.
+            # Skip the layer instead; it will be missing from per_layer_V,
+            # and callers must treat that as missing data, not zero shift.
             print(
-                f"  Warning: LoRA keys not found for layer {layer_idx}, "
-                f"using base weight"
+                f"  Warning: LoRA keys not found for layer {layer_idx} — "
+                f"skipping this layer (NOT substituting base weight)"
             )
-            W_eff = W0
+            continue
 
         per_head, mean_sr = analyze_full_matrix_per_head(W_eff)
         per_layer_V.append({
@@ -169,7 +177,13 @@ def compute_merged_sr(
         })
         all_sr_V.append(mean_sr)
 
-    mean_sr_V = float(np.mean(all_sr_V)) if all_sr_V else 0.0
+    n_total = N_LAYERS
+    n_ok    = len(all_sr_V)
+    if n_ok < n_total:
+        print(f"  Warning: only {n_ok}/{n_total} layers had usable LoRA adapter "
+              f"weights for this checkpoint — result is a partial average, "
+              f"not all-layer coverage")
+    mean_sr_V = float(np.mean(all_sr_V)) if all_sr_V else None
 
     return {
         "mean_sr_V":    mean_sr_V,
@@ -185,6 +199,21 @@ def compute_merged_sr(
 # ─────────────────────────────────────────────────────────────
 
 def main():
+    from analysis.utils import setup_run_log
+    setup_run_log("compute_lora_epoch_sr")
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--force", action="store_true",
+        help="Recompute and overwrite geometric_health_merged.pt even if it "
+             "already exists. Use this after any fix to the merge/skip logic "
+             "in this script — existing output files silently short-circuit "
+             "recomputation otherwise, so a code fix has no effect on disk "
+             "until stale files are regenerated.",
+    )
+    args = parser.parse_args()
+    print(f"Mode: {'FORCE (overwriting existing files)' if args.force else 'normal (skip existing files)'}")
+
     print(f"Loading base model: {BASE_MODEL}")
     base_model = AutoModel.from_pretrained(BASE_MODEL)
     base_state = base_model.state_dict()
@@ -223,8 +252,8 @@ def main():
 
                 out_path = epoch_dir / "geometric_health_merged.pt"
 
-                if out_path.exists():
-                    print(f"  Epoch {epoch}: already exists — skipping")
+                if out_path.exists() and not args.force:
+                    print(f"  Epoch {epoch}: already exists — skipping (use --force to recompute)")
                     total_skipped += 1
                     continue
 
@@ -241,7 +270,8 @@ def main():
                 torch.save(result, out_path)
                 total_written += 1
 
-                print(f"sr(W_V)={result['mean_sr_V']:.3f}")
+                sr_display = f"{result['mean_sr_V']:.3f}" if result['mean_sr_V'] is not None else "None (all layers skipped)"
+                print(f"sr(W_V)={sr_display}")
 
     print(
         f"\nDone. "

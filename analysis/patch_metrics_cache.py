@@ -17,7 +17,13 @@ from pathlib import Path
 RESULTS_DIR  = Path("results/glue")
 CACHE_PATH   = Path("results/analysis/metrics_cache.json")
 TASKS        = ["cola", "mrpc", "rte", "stsb", "sst2", "qnli", "mnli", "qqp"]
-METHODS      = ["lora_r8", "lora_r64", "polar_r8"]
+METHODS      = ["lora_r8", "lora_r64"]  # polar_r8 removed: nothing writes
+                                          # geometric_health_merged.pt for it —
+                                          # PoLAR uses the unmerged
+                                          # geometric_health.pt directly (see
+                                          # plot_training_dynamics.py's
+                                          # LORA_METHODS set). Including it
+                                          # here was a silent no-op every run.
 
 
 def get_epoch_dirs(method_dir: Path) -> dict:
@@ -83,12 +89,17 @@ def main():
                 skipped += 1
                 continue
 
-            # Check if old values were wrong (flat at pretrained 34.745)
+            # Check if old values were wrong (flat at the pretrained value).
+            # Read the pretrained sr from this entry's own sr_Weff_init rather
+            # than a hardcoded constant — a magic number here would silently
+            # stop matching reality if the base checkpoint ever changes, and
+            # nothing would warn you.
             old_per_epoch = entry.get("per_epoch", [])
+            pretrained_sr = entry.get("sr_Weff_init")
             had_wrong = False
-            if isinstance(old_per_epoch, list) and old_per_epoch:
+            if pretrained_sr is not None and isinstance(old_per_epoch, list) and old_per_epoch:
                 had_wrong = any(
-                    abs(v.get("sr_Weff", 0) - 34.745) < 0.01
+                    abs(v.get("sr_Weff", -1e9) - pretrained_sr) < 0.01
                     for v in old_per_epoch
                 )
 

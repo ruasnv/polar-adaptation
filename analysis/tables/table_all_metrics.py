@@ -134,12 +134,13 @@ def main():
     lines.append(r"\begin{table}[t]")
     lines.append(r"\centering")
     lines.append(
-        r"\caption{Multi-metric geometric profile averaged across GLUE tasks. "
-        r"$\Delta sr$: percentage change in $sr(W_\mathrm{eff})$. "
-        r"$\Delta H$, $\Delta\mathrm{ER}$: change in spectral entropy and effective rank "
-        r"relative to the frozen (pretrained) baseline. "
-        r"$\kappa = \sigma_\mathrm{max}/\sigma_\mathrm{min}$. "
-        r"Isotropy $= 1/\kappa$.}"
+        r"\caption{Multi-metric geometric profile averaged across GLUE "
+        r"tasks. $\Delta sr$: percentage change in $sr(W_\mathrm{eff})$. "
+        r"$\Delta H$, $\Delta\mathrm{ER}$: change in spectral entropy and "
+        r"effective rank relative to the frozen (pretrained) baseline. "
+        r"$\kappa = \sigma_\mathrm{max}/\sigma_\mathrm{min}$; Isotropy is "
+        r"a separate per-head average of $\sigma_\mathrm{min}/"
+        r"\sigma_\mathrm{max}$, not the reciprocal of $\kappa$.}"
     )
     lines.append(r"\label{tab:all_metrics}")
     lines.append(r"\setlength{\tabcolsep}{5pt}")

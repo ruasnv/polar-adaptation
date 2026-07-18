@@ -1,0 +1,8 @@
+{
+  "accuracy": 0.6614678899082569,
+  "final_loss": 1.7619422591233285,
+  "final_accuracy": 0.6590214067278287,
+  "task": "boolq",
+  "method": "pure_paft",
+  "trainable_params": 28672
+}

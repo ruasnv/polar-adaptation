@@ -96,10 +96,10 @@ def _compute_geometric_health(adapted: dict) -> dict:
     }
 
 
-def recover_run(run_dir: Path, task: str) -> bool:
+def recover_run(run_dir: Path, task: str, force: bool = False) -> bool:
     merged_path = run_dir / "final" / "adapted_weights_merged.pt"
-    if merged_path.exists():
-        log.info(f"  SKIP (already recovered): {run_dir.name}")
+    if merged_path.exists() and not force:
+        log.info(f"  SKIP (already recovered): {run_dir.name} (use --force to recompute)")
         return True
 
     hf_dir = run_dir / "hf_checkpoints"
@@ -147,8 +147,18 @@ def recover_run(run_dir: Path, task: str) -> bool:
 
 
 def main():
+    from analysis.utils import setup_run_log
+    setup_run_log("recover_lora_weight")
+
     p = argparse.ArgumentParser()
     p.add_argument("--results_dir", default="results", type=Path)
+    p.add_argument(
+        "--force", action="store_true",
+        help="Recompute and overwrite adapted_weights_merged.pt / "
+             "geometric_health_merged.pt even if they already exist. Needed "
+             "after any fix to the merge logic, since existing output files "
+             "otherwise silently short-circuit recomputation.",
+    )
     args = p.parse_args()
 
     results_dir = args.results_dir
@@ -169,7 +179,7 @@ def main():
                 continue
 
             log.info(f"Recovering {task}/{method}")
-            if recover_run(method_dir, task):
+            if recover_run(method_dir, task, force=args.force):
                 ok += 1
             else:
                 fail += 1

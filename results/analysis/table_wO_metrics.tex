@@ -1,0 +1,23 @@
+\begin{table}[t]
+\centering
+\caption{Multi-metric geometric profile of $W_O$ (output projection), averaged across GLUE tasks, restricted to methods whose training mechanism actually reaches $W_O$; Frozen, BitFit, and LoRA are omitted since their $W_O$ delta would be a structural zero rather than a measurement. $\Delta sr_O$: percentage change in $sr(W_{O,\mathrm{eff}})$. $\Delta H_O$, $\Delta\mathrm{ER}_O$: change in spectral entropy and effective rank of $W_O$ relative to the frozen baseline. $\kappa_O = \sigma_\mathrm{max}/\sigma_\mathrm{min}$ of $W_O$; Isotropy$_O$ is a separate per-head average of $\sigma_\mathrm{min}/\sigma_\mathrm{max}$, not the reciprocal of $\kappa_O$.}
+\label{tab:wO_metrics}
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.10}
+\begin{tabular}{lrrrrr}
+\toprule
+\textbf{Method} & $\Delta sr_O$ (\%) & $\Delta H_O$ & $\Delta\mathrm{ER}_O$ (\%) & $\kappa_O$ & Isotropy$_O$ \\
+\midrule
+SVF & +2.6\% & -0.009 & -0.9\% & 2.11e+00 & 0.4740 \\
+\midrule
+pure-PAFT (Ours) & -28.5\% & -0.221 & -18.8\% & 6.84e+02 & 0.0383 \\
+hybrid-PAFT (Ours) & -6.2\% & -0.025 & -2.4\% & 2.45e+00 & 0.4155 \\
+safe-pure-PAFT (Ours) & -2.2\% & -0.015 & -1.5\% & 2.48e+00 & 0.4146 \\
+safe-hybrid-PAFT (Ours) & -3.7\% & -0.020 & -2.0\% & 2.36e+00 & 0.4293 \\
+\midrule
+PoLAR $r{=}8$ & -6.2\% & -0.017 & -1.6\% & 2.18e+00 & 0.4602 \\
+\midrule
+Full FT & +0.0\% & -0.000 & -0.0\% & 2.08e+00 & 0.4809 \\
+\bottomrule
+\end{tabular}
+\end{table}

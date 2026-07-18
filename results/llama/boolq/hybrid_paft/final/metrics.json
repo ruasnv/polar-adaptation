@@ -1,8 +1,9 @@
 {
+  "epoch": 1,
+  "train_loss": 1.4047617465447306,
   "accuracy": 0.8434250764525993,
-  "final_loss": 1.181922190792236,
-  "final_accuracy": 0.8373088685015291,
   "task": "boolq",
   "method": "hybrid_paft",
-  "trainable_params": 3670016
+  "trainable_params": 3670016,
+  "_epoch_fairness_note": "metrics.json corrected to reflect the minimum common epoch across methods on this task (epoch fairness fix), not the original run's actual final epoch."
 }

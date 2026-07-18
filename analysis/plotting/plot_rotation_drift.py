@@ -102,7 +102,7 @@ def main():
         ax.set_ylim(-0.05, 0.5)
         ax.text(
             5.5, 0.25,
-            r"All values $= 0.0$" "\n(exact invariance by construction)",
+            r"All values $= 0.0$",
             ha="center", fontsize=8, color="#252525",
             bbox=dict(facecolor="white", edgecolor="#cccccc",
                       boxstyle="round,pad=0.3"),
