@@ -61,36 +61,61 @@ def main():
 
     for m_idx, method in enumerate(methods):
         entry   = task_data[method]
-        init_sr = entry.get("sr_Weff_init")
-        if init_sr is None or init_sr == 0:
-            continue
+        # NOTE: entry.get("sr_Weff_init") is the TASK-AVERAGED scalar — using
+        # it as the baseline for every layer's delta was the bug here. Every
+        # layer has a real, different natural baseline sr even at pretrained
+        # init (layer 0 vs layer 9 can differ by ~20%), so subtracting one
+        # shared average conflated real training-induced change with each
+        # layer's ordinary deviation from the task-wide mean. This produced
+        # nonzero, layer-varying "damage" even for Frozen/BitFit, which never
+        # touch W_V at all — caught via a raw-file audit that confirmed their
+        # per-layer sr is bit-identical between init and final.
         per_layer = entry.get("per_layer", [])
         for layer_entry in per_layer:
             l_idx = int(layer_entry["layer"])
             if l_idx >= N_LAYERS:
                 continue
             final_sr = layer_entry.get("sr_Weff_final")
-            if final_sr is not None:
-                matrix[m_idx, l_idx] = (final_sr - init_sr) / init_sr * 100.0
+            layer_init_sr = layer_entry.get("sr_Weff_init")
+            if final_sr is not None and layer_init_sr is not None and layer_init_sr != 0:
+                matrix[m_idx, l_idx] = (final_sr - layer_init_sr) / layer_init_sr * 100.0
 
     # ── Figure ────────────────────────────────────────────────────────────────
     fig, ax = plt.subplots(figsize=(6.5, 0.38 * len(methods) + 1.0))
 
-    # Symmetric diverging colormap centred at 0
-    vmax = np.nanpercentile(np.abs(matrix), 95)  # robust to LoRA outliers
-    vmax = max(vmax, 5.0)                          # minimum scale
+    # Symmetric diverging colormap centred at 0.
+    #
+    # Linear vmin/vmax (the old approach) sets the color scale from a single
+    # percentile across ALL methods. Since fixing the per-layer baseline bug,
+    # most methods now correctly show small, near-zero deltas while pure-PAFT
+    # shows a genuinely large one (~-15 to -30%) — one outlier method was
+    # setting the scale for everyone else, crushing every other method's
+    # real (but smaller) signal into near-white. A symmetric-log norm gives
+    # linear, readable resolution near zero (where most real data lives) and
+    # compresses — rather than gets dominated by — the few large outlier
+    # values, so small real effects stay visible instead of disappearing.
+    vmax = np.nanpercentile(np.abs(matrix), 95)
+    vmax = max(vmax, 5.0)
+    # linthresh: the +/- range treated as linear before switching to log.
+    # Set from the data itself (smallest meaningful nonzero deltas) rather
+    # than a fixed guess, so it adapts if the typical effect size changes.
+    nonzero_abs = np.abs(matrix[np.isfinite(matrix) & (matrix != 0)])
+    linthresh = max(float(np.nanpercentile(nonzero_abs, 25)), 0.1) if nonzero_abs.size else 1.0
 
     cmap = mpl.cm.RdBu_r
     cmap.set_bad("#f0f0f0")   # NaN cells in light grey
 
+    norm = mpl.colors.SymLogNorm(
+        linthresh=linthresh, vmin=-vmax, vmax=vmax, base=10,
+    )
+
     im = ax.imshow(
-        matrix, cmap=cmap, aspect="auto",
-        vmin=-vmax, vmax=vmax,
+        matrix, cmap=cmap, aspect="auto", norm=norm,
     )
 
     # ── Colorbar ──────────────────────────────────────────────────────────────
     cbar = fig.colorbar(im, ax=ax, pad=0.02, fraction=0.03)
-    cbar.set_label(r"$\Delta sr(W_\mathrm{eff})$ (%)", fontsize=8)
+    cbar.set_label(r"$\Delta sr(W_\mathrm{eff})$ (%, symmetric-log scale)", fontsize=8)
     cbar.ax.tick_params(labelsize=7)
 
     # ── Axes ──────────────────────────────────────────────────────────────────

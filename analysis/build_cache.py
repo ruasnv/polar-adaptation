@@ -279,8 +279,10 @@ def main():
                             cond_numbers.append(cond_layer)
 
                         layer_final_sr = list_final_v[layer] if layer < len(list_final_v) else sr_final_v
+                        layer_init_sr = list_init_v[layer] if layer < len(list_init_v) else sr_init_v
                         layer_record = {
                             "layer": layer,
+                            "sr_Weff_init": layer_init_sr,
                             "sr_Weff_final": layer_final_sr,
                             "sr_deltaW": sr_dw
                         }

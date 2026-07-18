@@ -54,19 +54,25 @@ TASK_LABELS = {
 
 def plot_panel(ax, task_data, task, add_legend_labels=False, show_xlabel=True):
     """Plot one task panel. Returns True if any data was plotted."""
-    init_sr = next(
-        (v["sr_Weff_init"] for v in task_data.values() if "sr_Weff_init" in v),
-        None,
-    )
-    if init_sr is None:
+    # NOTE: previously used a single task-averaged sr_Weff_init as the
+    # baseline for every layer's delta — that conflated real training-
+    # induced change with each layer's natural deviation from the task-wide
+    # mean (layers have real, different baseline sr even at pretrained
+    # init). This produced nonzero, layer-varying lines for methods that
+    # never touch W_V at all (Frozen/BitFit), caught via a raw-file audit
+    # showing their per-layer sr is bit-identical between init and final.
+    # Fix: use each layer's own sr_Weff_init (now stored per-layer in the
+    # cache), not one shared scalar.
+    has_any_data = any("sr_Weff_init" in v for v in task_data.values())
+    if not has_any_data:
         return False
 
     # Optional pure_paft background line
     if SHOW_PURE_PAFT and "pure_paft" in task_data:
         per_layer = task_data["pure_paft"].get("per_layer", [])
         if per_layer:
-            x = [l["layer"] for l in per_layer]
-            y = [l["sr_Weff_final"] - init_sr for l in per_layer]
+            x = [l["layer"] for l in per_layer if "sr_Weff_init" in l]
+            y = [l["sr_Weff_final"] - l["sr_Weff_init"] for l in per_layer if "sr_Weff_init" in l]
             ax.plot(x, y,
                     color=COLORS.get("pure_paft", "#3182bd"),
                     linestyle="--", linewidth=0.8, alpha=0.40,
@@ -81,8 +87,10 @@ def plot_panel(ax, task_data, task, add_legend_labels=False, show_xlabel=True):
         if not per_layer:
             continue
 
-        x = [l["layer"] for l in per_layer]
-        y = [l["sr_Weff_final"] - init_sr for l in per_layer]
+        x = [l["layer"] for l in per_layer if "sr_Weff_init" in l]
+        y = [l["sr_Weff_final"] - l["sr_Weff_init"] for l in per_layer if "sr_Weff_init" in l]
+        if not x:
+            continue
 
         ax.plot(
             x, y,

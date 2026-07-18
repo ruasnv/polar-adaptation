@@ -2,56 +2,56 @@ geometric_heatmaps.pdf verification data — task=stsb, all methods in plot's ow
 Computed as Delta_sr(%) = (sr_final - sr_init) / sr_init * 100, same formula geometric_heatmaps.py itself uses.
 
 ── safe_hybrid_paft ──
-  sr_Weff_init = 34.7454
+  sr_Weff_init (task-averaged, NOT used as the per-layer baseline below) = 34.7454
   all 12 layers present
-  L00=-10.13%  L01=-12.92%  L02=-2.43%  L03=+0.33%  L04=+0.71%  L05=+4.01%  L06=-0.81%  L07=-4.43%  L08=+0.45%  L09=+9.09%  L10=+3.25%  L11=+0.32%
+  L00=-0.73%  L01=-0.45%  L02=-1.29%  L03=-0.13%  L04=-0.96%  L05=-0.92%  L06=-1.06%  L07=-0.20%  L08=-1.25%  L09=-0.77%  L10=-1.45%  L11=-3.13%
 
 ── hybrid_paft ──
-  sr_Weff_init = 34.7454
+  sr_Weff_init (task-averaged, NOT used as the per-layer baseline below) = 34.7454
   all 12 layers present
-  L00=-10.54%  L01=-13.22%  L02=-3.22%  L03=-0.06%  L04=+0.22%  L05=+3.37%  L06=-2.91%  L07=-6.57%  L08=-1.54%  L09=+6.20%  L10=+0.23%  L11=-4.66%
+  L00=-1.18%  L01=-0.80%  L02=-2.09%  L03=-0.52%  L04=-1.44%  L05=-1.53%  L06=-3.15%  L07=-2.43%  L08=-3.21%  L09=-3.40%  L10=-4.33%  L11=-7.94%
 
 ── safe_pure_paft ──
-  sr_Weff_init = 34.7454
+  sr_Weff_init (task-averaged, NOT used as the per-layer baseline below) = 34.7454
   all 12 layers present
-  L00=-9.51%  L01=-11.02%  L02=-3.94%  L03=+0.02%  L04=+0.08%  L05=+5.27%  L06=-0.01%  L07=-2.05%  L08=+1.97%  L09=+11.80%  L10=+3.47%  L11=+2.95%
+  L00=-0.05%  L01=+1.72%  L02=-2.82%  L03=-0.44%  L04=-1.59%  L05=+0.28%  L06=-0.26%  L07=+2.29%  L08=+0.24%  L09=+1.69%  L10=-1.24%  L11=-0.59%
 
 ── pure_paft ──
-  sr_Weff_init = 34.7454
+  sr_Weff_init (task-averaged, NOT used as the per-layer baseline below) = 34.7454
   all 12 layers present
-  L00=-34.29%  L01=-29.90%  L02=-22.13%  L03=-23.27%  L04=-21.80%  L05=-19.33%  L06=-27.24%  L07=-29.54%  L08=-36.88%  L09=-21.80%  L10=-27.08%  L11=-27.23%
+  L00=-27.41%  L01=-19.86%  L02=-21.22%  L03=-23.62%  L04=-23.10%  L05=-23.15%  L06=-27.42%  L07=-26.42%  L08=-37.95%  L09=-28.87%  L10=-30.40%  L11=-29.73%
 
 ── polar_r8 ──
-  sr_Weff_init = 34.7454
+  sr_Weff_init (task-averaged, NOT used as the per-layer baseline below) = 34.7454
   all 12 layers present
-  L00=-15.79%  L01=-24.63%  L02=-3.94%  L03=-1.56%  L04=+0.20%  L05=+3.26%  L06=-1.56%  L07=-6.18%  L08=-3.52%  L09=+7.53%  L10=-1.58%  L11=-1.89%
+  L00=-6.98%  L01=-13.84%  L02=-2.82%  L03=-2.01%  L04=-1.46%  L05=-1.64%  L06=-1.81%  L07=-2.03%  L08=-5.15%  L09=-2.20%  L10=-6.06%  L11=-5.27%
 
 ── lora_r64 ──
-  sr_Weff_init = 34.7454
+  sr_Weff_init (task-averaged, NOT used as the per-layer baseline below) = 34.7454
   all 12 layers present
-  L00=-19.23%  L01=-23.91%  L02=-36.72%  L03=-21.13%  L04=-9.01%  L05=-14.16%  L06=-7.02%  L07=-16.28%  L08=-4.72%  L09=+5.33%  L10=-1.95%  L11=-17.73%
+  L00=-10.79%  L01=-13.01%  L02=-35.98%  L03=-21.50%  L04=-10.53%  L05=-18.23%  L06=-7.25%  L07=-12.58%  L08=-6.33%  L09=-4.20%  L10=-6.41%  L11=-20.56%
 
 ── lora_r8 ──
-  sr_Weff_init = 34.7454
+  sr_Weff_init (task-averaged, NOT used as the per-layer baseline below) = 34.7454
   all 12 layers present
-  L00=-13.27%  L01=-14.19%  L02=-15.66%  L03=-0.78%  L04=+0.86%  L05=+2.87%  L06=-3.11%  L07=-4.90%  L08=+1.08%  L09=+6.89%  L10=+1.57%  L11=-2.06%
+  L00=-4.20%  L01=-1.90%  L02=-14.68%  L03=-1.24%  L04=-0.82%  L05=-2.01%  L06=-3.35%  L07=-0.69%  L08=-0.64%  L09=-2.78%  L10=-3.05%  L11=-5.43%
 
 ── bitfit ──
-  sr_Weff_init = 34.7454
+  sr_Weff_init (task-averaged, NOT used as the per-layer baseline below) = 34.7454
   all 12 layers present
-  L00=-9.47%  L01=-12.52%  L02=-1.15%  L03=+0.46%  L04=+1.69%  L05=+4.98%  L06=+0.25%  L07=-4.24%  L08=+1.72%  L09=+9.94%  L10=+4.77%  L11=+3.57%
+  L00=+0.00%  L01=+0.00%  L02=+0.00%  L03=+0.00%  L04=+0.00%  L05=+0.00%  L06=+0.00%  L07=+0.00%  L08=+0.00%  L09=+0.00%  L10=+0.00%  L11=+0.00%
 
 ── svf ──
-  sr_Weff_init = 34.7454
+  sr_Weff_init (task-averaged, NOT used as the per-layer baseline below) = 34.7454
   all 12 layers present
-  L00=-7.39%  L01=-11.56%  L02=-1.78%  L03=-3.73%  L04=-1.84%  L05=+3.27%  L06=-0.22%  L07=-2.25%  L08=+0.82%  L09=-0.30%  L10=-1.22%  L11=-2.61%
+  L00=+2.30%  L01=+1.10%  L02=-0.64%  L03=-4.17%  L04=-3.47%  L05=-1.63%  L06=-0.47%  L07=+2.08%  L08=-0.89%  L09=-9.32%  L10=-5.72%  L11=-5.96%
 
 ── full_ft ──
-  sr_Weff_init = 34.7454
+  sr_Weff_init (task-averaged, NOT used as the per-layer baseline below) = 34.7454
   all 12 layers present
-  L00=-9.46%  L01=-12.48%  L02=-1.15%  L03=+0.50%  L04=+1.60%  L05=+4.99%  L06=+0.22%  L07=-4.30%  L08=+1.71%  L09=+9.95%  L10=+4.75%  L11=+3.57%
+  L00=+0.00%  L01=+0.05%  L02=+0.00%  L03=+0.03%  L04=-0.09%  L05=+0.02%  L06=-0.03%  L07=-0.07%  L08=-0.01%  L09=+0.01%  L10=-0.02%  L11=+0.00%
 
 ── frozen ──
-  sr_Weff_init = 34.7454
+  sr_Weff_init (task-averaged, NOT used as the per-layer baseline below) = 34.7454
   all 12 layers present
-  L00=-9.47%  L01=-12.52%  L02=-1.15%  L03=+0.46%  L04=+1.69%  L05=+4.98%  L06=+0.25%  L07=-4.24%  L08=+1.72%  L09=+9.94%  L10=+4.77%  L11=+3.57%
+  L00=+0.00%  L01=+0.00%  L02=+0.00%  L03=+0.00%  L04=+0.00%  L05=+0.00%  L06=+0.00%  L07=+0.00%  L08=+0.00%  L09=+0.00%  L10=+0.00%  L11=+0.00%

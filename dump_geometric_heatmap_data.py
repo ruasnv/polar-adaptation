@@ -66,15 +66,16 @@ def main():
 
     for method in methods_present:
         entry = task_data[method]
-        init_sr = entry.get("sr_Weff_init")
+        task_avg_init_sr = entry.get("sr_Weff_init")
         per_layer = entry.get("per_layer", [])
 
         lines.append(f"── {method} ──")
-        if init_sr is None:
+        if task_avg_init_sr is None:
             lines.append("  no sr_Weff_init — cannot compute any Delta_sr for this method")
             lines.append("")
             continue
-        lines.append(f"  sr_Weff_init = {init_sr:.4f}")
+        lines.append(f"  sr_Weff_init (task-averaged, NOT used as the per-layer "
+                      f"baseline below) = {task_avg_init_sr:.4f}")
 
         if not per_layer:
             lines.append("  per_layer is EMPTY — no per-layer data available at all "
@@ -83,14 +84,31 @@ def main():
             lines.append("")
             continue
 
+        # NOTE: uses each layer's OWN sr_Weff_init, not the task-averaged
+        # scalar above. Using the task average here was the bug that
+        # produced impossible nonzero, layer-varying values for Frozen/
+        # BitFit — every layer has a real, different baseline sr even at
+        # pretrained init, so subtracting one shared average conflated
+        # that natural variation with real training-induced change.
         row = {}
+        skipped_no_layer_init = 0
         for rec in per_layer:
             layer = rec.get("layer")
             final_sr = rec.get("sr_Weff_final")
+            layer_init_sr = rec.get("sr_Weff_init")
             if layer is None or final_sr is None:
                 continue
-            delta_pct = (final_sr - init_sr) / init_sr * 100.0
+            if layer_init_sr is None:
+                skipped_no_layer_init += 1
+                continue
+            delta_pct = (final_sr - layer_init_sr) / layer_init_sr * 100.0
             row[layer] = delta_pct
+
+        if skipped_no_layer_init:
+            lines.append(f"  WARNING: {skipped_no_layer_init} layer(s) have no per-layer "
+                         f"sr_Weff_init — cache needs rebuilding with the current "
+                         f"build_cache.py (this field was added after some caches "
+                         f"were last generated)")
 
         missing_layers = [l for l in range(N_LAYERS) if l not in row]
         if missing_layers:
