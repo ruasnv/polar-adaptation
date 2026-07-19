@@ -302,8 +302,8 @@ def make_training_dynamics_table(cache):
     lines.append(r"\centering")
     lines.append(
         r"\caption{$\operatorname{sr}(\mathbf{W}_{\text{eff}})$ per "
-        r"training epoch on SST-2. Epoch 0 is the pretrained "
-        r"initialisation. LoRA values computed by merging adapter "
+        r"training epoch on SST-2. "
+        r"LoRA values computed by merging adapter "
         r"weights with the frozen base model at each checkpoint.}"
     )
     lines.append(r"\label{tab:training_dynamics}")

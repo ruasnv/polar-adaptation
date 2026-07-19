@@ -73,8 +73,16 @@ def load_sr_from_pt(path: Path, is_merged: bool) -> float | None:
 
 def load_epoch_sr(method: str) -> tuple[list[int], list[float]]:
     """
-    Load sr(W_eff) from init + epoch_1..N checkpoints.
-    Epoch 0 = init (pretrained weights, before any training).
+    Load sr(W_eff) from epoch_1..N checkpoints.
+
+    Does NOT include epoch 0 (pretrained init) as a separate point — every
+    method starts from the same shared pretrained checkpoint, so an
+    epoch-0 point would be numerically identical across every curve
+    (redundant clutter of overlapping markers at x=0) and that same value
+    is already shown persistently by the Frozen reference line across the
+    whole plot. This also matches table_training_dynamics.tex, which
+    starts at Epoch 1.
+
     Uses merged checkpoints for LoRA methods.
     """
     method_dir = GLUE_ROOT / method
@@ -83,13 +91,6 @@ def load_epoch_sr(method: str) -> tuple[list[int], list[float]]:
 
     use_merged = method in LORA_METHODS
     epochs, sr_vals = [], []
-
-    # Epoch 0: init checkpoint (always unmerged — pretrained weights)
-    init_path = method_dir / "init" / "geometric_health.pt"
-    sr_init = load_sr_from_pt(init_path, is_merged=False)
-    if sr_init is not None:
-        epochs.append(0)
-        sr_vals.append(sr_init)
 
     # Epoch 1..N
     epoch_dirs = sorted(

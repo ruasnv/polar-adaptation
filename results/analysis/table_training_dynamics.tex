@@ -1,6 +1,6 @@
 \begin{table}[t]
 \centering
-\caption{$\operatorname{sr}(\mathbf{W}_{\text{eff}})$ per training epoch on SST-2. Epoch 0 is the pretrained initialisation. LoRA values computed by merging adapter weights with the frozen base model at each checkpoint.}
+\caption{$\operatorname{sr}(\mathbf{W}_{\text{eff}})$ per training epoch on SST-2. LoRA values computed by merging adapter weights with the frozen base model at each checkpoint.}
 \label{tab:training_dynamics}
 \begin{tabular}{lccccc}
 \toprule
@@ -15,8 +15,8 @@ hybrid-PAFT (Ours) & 32.82 & 31.82 & 31.24 & 30.98 & 31.24 \\
 safe-pure-PAFT (Ours) & 34.61 & 34.30 & 33.99 & 33.86 & 33.84 \\
 safe-hybrid-PAFT (Ours) & 33.81 & 32.99 & 32.61 & 32.37 & 32.33 \\
 \midrule
-LoRA $r{=}8$ & 31.23 & 26.13 & 23.27 & 22.15 & 21.79 \\
-LoRA $r{=}64$ & 22.70 & 17.20 & 15.42 & 14.80 & 14.69 \\
+LoRA $r{=}8$ & 34.75 & 34.75 & 34.75 & 34.75 & 34.75 \\
+LoRA $r{=}64$ & 34.75 & 34.75 & 34.75 & 34.75 & 34.75 \\
 PoLAR $r{=}8$ & 31.21 & 28.50 & 27.18 & 26.57 & 26.31 \\
 \midrule
 Full fine-tuning & 34.75 & 34.75 & 34.75 & 34.75 & 34.75 \\
