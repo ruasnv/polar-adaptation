@@ -24,10 +24,10 @@ from pathlib import Path
 import numpy as np
 import torch
 
-sys.path.insert(0, ".")
+sys.path.insert(0, "..")
 from analysis.build_cache import per_head_layer_metrics
 
-CACHE_PATH = Path("results/analysis/metrics_cache.json")
+CACHE_PATH = Path("../results/analysis/metrics_cache.json")
 
 
 def main():

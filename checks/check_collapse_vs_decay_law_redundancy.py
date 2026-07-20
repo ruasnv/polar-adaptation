@@ -16,8 +16,8 @@ Usage:
 import json
 from pathlib import Path
 
-CACHE_PATH = Path("results/analysis/metrics_cache.json")
-DECAY_PATH = Path("results/analysis/decay_law_results.json")
+CACHE_PATH = Path("../results/analysis/metrics_cache.json")
+DECAY_PATH = Path("../results/analysis/decay_law_results.json")
 
 STEPS = {
     "rte":  780, "mrpc": 1150, "stsb": 1800, "cola": 2670,

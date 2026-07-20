@@ -16,7 +16,7 @@ Usage:
 import json
 from pathlib import Path
 
-CACHE_PATH = Path("results/analysis/metrics_cache.json")
+CACHE_PATH = Path("../results/analysis/metrics_cache.json")
 OUT_PATH = Path("layer_profiles_delta_data.txt")
 TASKS = ["cola", "mrpc", "qqp"]
 METHODS = ["safe_hybrid_paft", "hybrid_paft", "polar_r8", "full_ft"]

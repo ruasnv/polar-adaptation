@@ -33,7 +33,7 @@ import numpy as np
 import torch
 from scipy.linalg import subspace_angles
 
-RESULTS_DIR = Path("results/glue")
+RESULTS_DIR = Path("../results/glue")
 
 # Keep it small — a handful of task pairs, matching the earlier proposed
 # small scope (mix of a large task and small tasks).

@@ -28,12 +28,12 @@ from pathlib import Path
 import torch
 from transformers import AutoModel
 
-sys.path.insert(0, ".")
+sys.path.insert(0, "..")
 from analysis.compute_lora_epoch_sr import (
     get_checkpoint_epoch_map, compute_merged_sr, METHOD_CONFIG, BASE_MODEL,
 )
 
-CACHE_PATH = Path("results/analysis/metrics_cache.json")
+CACHE_PATH = Path("../results/analysis/metrics_cache.json")
 FLAGGED = [("mrpc", "lora_r8", 1), ("rte", "lora_r8", 1)]
 
 

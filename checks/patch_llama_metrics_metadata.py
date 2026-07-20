@@ -19,7 +19,7 @@ from pathlib import Path
 # (task, method) pairs that were actually fixed by fix_llama_epoch_fairness.py
 FIXED = [("boolq", "pure_paft"), ("boolq", "hybrid_paft")]
 
-RESULTS_DIR = Path("results/llama")
+RESULTS_DIR = Path("../results/llama")
 
 
 def main():

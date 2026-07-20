@@ -16,7 +16,7 @@ from pathlib import Path
 
 from safetensors.torch import load_file
 
-sys.path.insert(0, ".")
+sys.path.insert(0, "..")
 from analysis.compute_lora_epoch_sr import get_checkpoint_epoch_map
 
 FLAGGED = [

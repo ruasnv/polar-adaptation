@@ -23,7 +23,7 @@ Usage:
 import json
 from pathlib import Path
 
-CACHE_PATH = Path("results/analysis/metrics_cache.json")
+CACHE_PATH = Path("../results/analysis/metrics_cache.json")
 OUT_PATH = Path("geometric_heatmap_stsb_data.txt")
 TASK = "stsb"
 N_LAYERS = 12

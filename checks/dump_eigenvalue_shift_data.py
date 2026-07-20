@@ -22,7 +22,7 @@ from collections import defaultdict
 
 import numpy as np
 
-CACHE_PATH = Path("results/analysis/paft_cache.json")
+CACHE_PATH = Path("../results/analysis/paft_cache.json")
 OUT_PATH = Path("eigenvalue_shift_data.txt")
 N_LAYERS = 12
 
